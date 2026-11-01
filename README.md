@@ -2,6 +2,23 @@
   <img alt="TOMBSTONE: cryptographic deletion receipts with a headstone and linked hashes" src="docs/assets/tombstone-banner.svg" width="950">
 </p>
 
+<!-- Live GitHub Actions status: these badges report the latest main-branch workflow results. -->
+<p align="center">
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/c99-fingerprint.yml"><img alt="C99 core — GCC, Clang and sanitizers" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/c99-fingerprint.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/rust-cli.yml"><img alt="Rust CLI and C99 FFI" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/rust-cli.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/rust-tui.yml"><img alt="ncurses TUI and terminal checks" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/rust-tui.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/rust-gtk.yml"><img alt="GTK4 desktop and D-Bus smoke" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/rust-gtk.yml/badge.svg?branch=main"></a>
+</p>
+<p align="center">
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/hardening.yml"><img alt="Clang fuzzing, sanitizers and architecture replay" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/hardening.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/docs-check.yml"><img alt="Schema, receipts and documentation" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/docs-check.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/release-candidate.yml"><img alt="Reproducible source candidate and SHA-256 manifest" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/release-candidate.yml/badge.svg?branch=main"></a>
+</p>
+<p align="center">
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/releases/tag/v0.1.0"><img alt="Release v0.1.0" src="https://img.shields.io/github/v/release/QSOLKCB/TOMBSTONE?style=flat-square"></a>
+  <a href="LICENSE"><img alt="Apache-2.0 license" src="https://img.shields.io/github/license/QSOLKCB/TOMBSTONE?style=flat-square"></a>
+</p>
+
 <p align="center">
   <strong>Cryptographic deletion-event receipts without archiving deleted content.</strong><br>
   <em>The data is gone from the receipt. The tombstone has a checksum.</em>
@@ -9,7 +26,7 @@
 
 TOMBSTONE is a C99-first system for deterministic, independently checkable fingerprints of caller-supplied bytes, exact deletion-splice relationships and linked canonical receipt evidence.
 
-**Status:** Phases 0–6 are merged. **Phase 7 adds bounded C99 fuzzing, independent cross-compiler/architecture receipt replay, and a release evidence gate (pending PR review).** C99 alone owns SHA-256, witness validation, canonical receipt encoding and chain verification; Rust handles terminal and desktop interfaces. No immutable tag or security certification is created by this PR.
+**Status:** [v0.1.0 — Initial Public Release](https://github.com/QSOLKCB/TOMBSTONE/releases/tag/v0.1.0), with Phases 0–7 merged, bounded C99 fuzzing, independent GCC/Clang and Linux x86-64/ARM64 receipt replay, and [reproducible source release evidence](docs/release/v0.1.0/POST_MERGE_EVIDENCE.md). C99 alone owns SHA-256, witnessed-splice validation, canonical receipt encoding and chain verification; Rust supplies the CLI, TUI and optional GTK4 desktop. Verification is not security certification, historical deletion attestation or secure erasure.
 
 ## Interfaces
 
@@ -39,7 +56,7 @@ Run the bounded sanitizer-backed C99 fuzzers and use the GitHub Actions x86-64/A
 make fuzz               # Clang libFuzzer, AddressSanitizer and UBSan
 ```
 
-The [release gate](docs/RELEASE_GATE.md), [anchoring/privacy notes](docs/ANCHORING_PRIVACY.md) and [portability matrix](docs/PORTABILITY.md) explain the evidence required before any immutable tag. These tests do not prove deletion, confidentiality or erasure.
+The [release gate](docs/RELEASE_GATE.md), [v0.1.0 evidence record](docs/release/v0.1.0/POST_MERGE_EVIDENCE.md), [anchoring/privacy notes](docs/ANCHORING_PRIVACY.md) and [portability matrix](docs/PORTABILITY.md) document the completed checks and their limits. These tests do not prove deletion, confidentiality or erasure.
 
 ## Verify the engine and existing interfaces
 
