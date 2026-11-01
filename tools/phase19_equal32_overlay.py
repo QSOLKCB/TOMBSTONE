@@ -15,9 +15,13 @@ module=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 EXPECTED=module.EXPECTED_BLOB
 BEFORE='#include <string.h>\n'
-EXT=r"""/* Phase 19 external libc premise: the REAL equal32 calls memcmp.
- * The implementation of libc memcmp is NOT proved here.
+EXT=r"""/* Phase 19 proof-only external-call alias. The REAL equal32 C body is
+ * byte-for-byte unchanged; the preprocessor binds its memcmp call to an
+ * independently assumed specification, not Frama-C libc string.h contracts
+ * containing currently unsupported danglingness predicates.
+ * This does NOT prove real libc memcmp. It MUST be separately refined.
  */
+#define memcmp phase19_memcmp
 /*@
   requires n == 32;
   requires \valid_read(((const unsigned char*)s1)+(0 .. n-1));
@@ -27,7 +31,7 @@ EXT=r"""/* Phase 19 external libc premise: the REAL equal32 calls memcmp.
     (\forall integer i; 0 <= i < 32 ==>
       ((const unsigned char*)s1)[i] == ((const unsigned char*)s2)[i]);
 */
-extern int memcmp(const void *s1, const void *s2, size_t n);
+extern int phase19_memcmp(const void *s1, const void *s2, size_t n);
 """
 def render() -> str:
     data=module.SOURCE.read_bytes()
