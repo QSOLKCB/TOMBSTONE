@@ -18,6 +18,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Clang fuzzer and OpenSSL development libraries
         run: sudo apt-get update && sudo apt-get install -y clang libclang-rt-dev libssl-dev pkg-config
+      - name: Verify UBSan runtime failures cannot pass silently
+        run: sh tools/check_sanitizer_gate.sh clang
       - name: Fuzz the C99 parsers and splice verifier on synthetic data
         run: sh tools/run_fuzz.sh
 

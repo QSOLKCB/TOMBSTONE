@@ -10,9 +10,13 @@ case "$RUNS" in
   ''|*[!0-9]*) echo "FUZZ_RUNS must be a nonnegative integer" >&2; exit 2 ;;
 esac
 mkdir -p "$BUILD_DIR"
+# Fail-fast contract: an UBSan runtime report MUST fail the fuzz gate.
+sh "$ROOT/tools/check_sanitizer_gate.sh" "$CLANG"
+export UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1
 for target in receipt splice; do
     "$CLANG" -std=c99 -O1 -g -Wall -Wextra -Wpedantic -Werror \
         -fno-omit-frame-pointer -fsanitize=fuzzer,address,undefined \
+        -fno-sanitize-recover=undefined \
         -I"$ROOT/include" "$ROOT/src/crypto/fingerprint.c" \
         "$ROOT/src/core/deletion.c" "$ROOT/src/encoding/receipt.c" \
         "$ROOT/tests/fuzz/fuzz_$target.c" -lcrypto \

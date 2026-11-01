@@ -28,7 +28,7 @@ and not a security certification.** The maintainer owns the final tag decision.
 
 ## What these checks establish
 
-- `sh tools/run_fuzz.sh`: bounded deterministic Clang libFuzzer with ASan/UBSan
+- `sh tools/run_fuzz.sh`: bounded deterministic Clang libFuzzer with **nonrecovering UBSan** and ASan
   and public synthetic inputs, testing parser failure immutability, valid
   canonical roundtrips, splices and mutations. NOT a proof of bug absence.
 - `tools/check_portability.py`: independent hashlib plus restricted ASCII
@@ -57,3 +57,5 @@ security certification. No external trusted anchor is automatically produced.
 | Immutable tag | Not created |
 
 A green workflow is necessary but insufficient for a release.
+
+**Sanitizer gate regression:** `tools/check_sanitizer_gate.sh` deliberately triggers signed integer overflow in an isolated synthetic binary. It requires UBSan to report an error **and** return nonzero. `tools/run_fuzz.sh` also builds with `-fno-sanitize-recover=undefined` and sets `UBSAN_OPTIONS=halt_on_error=1`. This prevents recoverable undefined-behaviour reports from being mislabelled as passing fuzz runs.
