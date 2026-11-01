@@ -35,3 +35,19 @@ short secrets but would need explicit key management and a new protocol.
 Receipts omit deleted plaintext, original file paths and identities, but
 digests of low-entropy values may still disclose information by guessing.
 Treat such receipts as potentially sensitive metadata.
+
+## Phase 16 — Offline head-file verification
+
+The headless Rust CLI accepts `verify-chain ... --trusted-head-file PATH`,
+which loads at most 66 bytes from a **regular non-symlinked** file containing
+exactly 64 lowercase hex SHA-256 characters and an optional LF. That value
+is passed to the same authoritative C99 `tb_receipt_verify_chain` verifier
+used by `--trusted-head`. No anchor is created or written by TOMBSTONE;
+input paths are not emitted in diagnostic text. The caller must obtain
+its head from a **previously and independently retained** record. A text
+file saved next to the same rewritable chain is not independent custody.
+
+A matching head is not proof of a timestamp, signer, author, historical file
+operation or erasure. Filesystem links/metadata can race against hostile OS
+changes, and this opt-in path is not a secure provenance enclave. Compare
+[Phase 16 assumptions](PHASE16_TARGET_TRUST.md) and the trust ledger.
