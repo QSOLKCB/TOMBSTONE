@@ -1,0 +1,840 @@
+﻿2026-11-01T21:49:35.9442883Z Current runner version: '2.338.2'
+2026-11-01T21:49:35.9475982Z ##[group]Runner Image Provisioner
+2026-11-01T21:49:35.9477012Z Hosted Compute Agent
+2026-11-01T21:49:35.9477749Z Version: 20261021.618
+2026-11-01T21:49:35.9478791Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-01T21:49:35.9479723Z Build Date: 2026-10-21T00:45:21Z
+2026-11-01T21:49:35.9480733Z Worker ID: {59a04aa8-7fda-4177-950e-20c6d832c986}
+2026-11-01T21:49:35.9481864Z Region: eastus
+2026-11-01T21:49:35.9482637Z Cloud: Azure
+2026-11-01T21:49:35.9483363Z ##[endgroup]
+2026-11-01T21:49:35.9485213Z ##[group]Operating System
+2026-11-01T21:49:35.9486152Z Ubuntu
+2026-11-01T21:49:35.9486840Z 24.04.5
+2026-11-01T21:49:35.9487560Z LTS
+2026-11-01T21:49:35.9488263Z ##[endgroup]
+2026-11-01T21:49:35.9489114Z ##[group]Runner Image
+2026-11-01T21:49:35.9489921Z Image: ubuntu-24.04
+2026-11-01T21:49:35.9490649Z Version: 20261025.353.1
+2026-11-01T21:49:35.9492550Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-01T21:49:35.9494733Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-01T21:49:35.9496010Z ##[endgroup]
+2026-11-01T21:49:35.9497432Z ##[group]GITHUB_TOKEN Permissions
+2026-11-01T21:49:35.9500045Z Contents: read
+2026-11-01T21:49:35.9501101Z Metadata: read
+2026-11-01T21:49:35.9501901Z ##[endgroup]
+2026-11-01T21:49:35.9504494Z Secret source: Actions
+2026-11-01T21:49:35.9505839Z Cache mode: write
+2026-11-01T21:49:35.9507171Z Prepare workflow directory
+2026-11-01T21:49:35.9921765Z Prepare all required actions
+2026-11-01T21:49:35.9981872Z Getting action download info
+2026-11-01T21:49:36.1630734Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-01T21:49:36.2569989Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-01T21:49:36.5031609Z Complete job name: P19-03 rejects missing-cleanup
+2026-11-01T21:49:36.5773201Z ##[group]Run actions/checkout@v4
+2026-11-01T21:49:36.5773948Z with:
+2026-11-01T21:49:36.5774337Z   repository: QSOLKCB/TOMBSTONE
+2026-11-01T21:49:36.5777503Z   token: ***
+2026-11-01T21:49:36.5777895Z   ssh-strict: true
+2026-11-01T21:49:36.5778289Z   ssh-user: git
+2026-11-01T21:49:36.5778683Z   persist-credentials: true
+2026-11-01T21:49:36.5779111Z   clean: true
+2026-11-01T21:49:36.5779507Z   sparse-checkout-cone-mode: true
+2026-11-01T21:49:36.5779957Z   fetch-depth: 1
+2026-11-01T21:49:36.5780334Z   fetch-tags: false
+2026-11-01T21:49:36.5780722Z   show-progress: true
+2026-11-01T21:49:36.5781264Z   lfs: false
+2026-11-01T21:49:36.5781626Z   submodules: false
+2026-11-01T21:49:36.5782014Z   set-safe-directory: true
+2026-11-01T21:49:36.5782454Z   allow-unsafe-pr-checkout: false
+2026-11-01T21:49:36.5783051Z ##[endgroup]
+2026-11-01T21:49:36.8406565Z Syncing repository: QSOLKCB/TOMBSTONE
+2026-11-01T21:49:36.8408358Z ##[group]Getting Git version info
+2026-11-01T21:49:36.8409156Z Working directory is '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T21:49:36.8410108Z [command]/usr/bin/git version
+2026-11-01T21:49:36.8493314Z git version 2.56.0
+2026-11-01T21:49:36.8510387Z ##[endgroup]
+2026-11-01T21:49:36.8524134Z Temporarily overriding HOME='/home/runner/work/_temp/22cff8ad-b710-4368-9adb-456477d5d9b9' before making global git config changes
+2026-11-01T21:49:36.8525508Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T21:49:36.8528919Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T21:49:36.8579749Z Deleting the contents of '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T21:49:36.8583787Z ##[group]Initializing the repository
+2026-11-01T21:49:36.8588068Z [command]/usr/bin/git init /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T21:49:36.8683219Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-01T21:49:36.8684637Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-01T21:49:36.8685844Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-01T21:49:36.8686541Z hint: call:
+2026-11-01T21:49:36.8686928Z hint:
+2026-11-01T21:49:36.8687464Z hint: 	git config --global init.defaultBranch <name>
+2026-11-01T21:49:36.8688083Z hint:
+2026-11-01T21:49:36.8688627Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-01T21:49:36.8689471Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-01T21:49:36.8690136Z hint:
+2026-11-01T21:49:36.8690523Z hint: 	git branch -m <name>
+2026-11-01T21:49:36.8691154Z hint:
+2026-11-01T21:49:36.8691723Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-01T21:49:36.8702678Z Initialized empty Git repository in /home/runner/work/TOMBSTONE/TOMBSTONE/.git/
+2026-11-01T21:49:36.8712087Z [command]/usr/bin/git remote add origin https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T21:49:36.8756986Z ##[endgroup]
+2026-11-01T21:49:36.8757767Z ##[group]Disabling automatic garbage collection
+2026-11-01T21:49:36.8760214Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-01T21:49:36.8791592Z ##[endgroup]
+2026-11-01T21:49:36.8792313Z ##[group]Setting up auth
+2026-11-01T21:49:36.8797705Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T21:49:36.8832329Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T21:49:36.9171967Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T21:49:36.9203173Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T21:49:36.9440714Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T21:49:36.9475401Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T21:49:36.9711998Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-01T21:49:36.9758988Z ##[endgroup]
+2026-11-01T21:49:36.9760384Z ##[group]Fetching the repository
+2026-11-01T21:49:36.9773531Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +3394270823845a23de2930c0a6d5b0ea3f1d6b89:refs/remotes/pull/29/merge
+2026-11-01T21:49:37.1801060Z From https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T21:49:37.1802409Z  * [new ref]         3394270823845a23de2930c0a6d5b0ea3f1d6b89 -> pull/29/merge
+2026-11-01T21:49:37.1805323Z ##[endgroup]
+2026-11-01T21:49:37.1806563Z ##[group]Determining the checkout info
+2026-11-01T21:49:37.1807921Z ##[endgroup]
+2026-11-01T21:49:37.1813399Z [command]/usr/bin/git sparse-checkout disable
+2026-11-01T21:49:37.1871641Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-01T21:49:37.1900356Z ##[group]Checking out the ref
+2026-11-01T21:49:37.1904393Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/29/merge
+2026-11-01T21:49:37.2061236Z Note: switching to 'refs/remotes/pull/29/merge'.
+2026-11-01T21:49:37.2061840Z 
+2026-11-01T21:49:37.2062194Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-01T21:49:37.2063051Z changes and commit them, and you can discard any commits you make in this
+2026-11-01T21:49:37.2063893Z state without impacting any branches by switching back to a branch.
+2026-11-01T21:49:37.2064393Z 
+2026-11-01T21:49:37.2064728Z If you want to create a new branch to retain commits you create, you may
+2026-11-01T21:49:37.2065889Z do so (now or later) by using -c with the switch command. Example:
+2026-11-01T21:49:37.2066596Z 
+2026-11-01T21:49:37.2067019Z   git switch -c <new-branch-name>
+2026-11-01T21:49:37.2067876Z 
+2026-11-01T21:49:37.2068186Z Or undo this operation with:
+2026-11-01T21:49:37.2068678Z 
+2026-11-01T21:49:37.2068934Z   git switch -
+2026-11-01T21:49:37.2069276Z 
+2026-11-01T21:49:37.2069800Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-01T21:49:37.2070613Z 
+2026-11-01T21:49:37.2071708Z HEAD is now at 3394270 Merge dfcc419f8736d6095633e1d708d17519a72e623e into a548fdd0209fd199684f0446a636556597c6de8e
+2026-11-01T21:49:37.2074971Z ##[endgroup]
+2026-11-01T21:49:37.2114189Z [command]/usr/bin/git log -1 --format=%H
+2026-11-01T21:49:37.2138198Z 3394270823845a23de2930c0a6d5b0ea3f1d6b89
+2026-11-01T21:49:37.2411846Z ##[group]Run set -euo pipefail
+2026-11-01T21:49:37.2412495Z [36;1mset -euo pipefail[0m
+2026-11-01T21:49:37.2413056Z [36;1mpython3 tests/formal/test_phase19_bridge.py[0m
+2026-11-01T21:49:37.2413915Z [36;1mpython3 tools/phase19_bridge_overlay.py --mutant "$MUTANT" --output phase19-mutant.c[0m
+2026-11-01T21:49:37.2415108Z [36;1mgcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c phase19-mutant.c -o /tmp/phase19-mutant.o[0m
+2026-11-01T21:49:37.2416007Z [36;1mgit rev-parse HEAD[0m
+2026-11-01T21:49:37.2416492Z [36;1msha256sum phase19-mutant.c[0m
+2026-11-01T21:49:37.2439029Z shell: /usr/bin/bash -e {0}
+2026-11-01T21:49:37.2439517Z env:
+2026-11-01T21:49:37.2439918Z   MUTANT: missing-cleanup
+2026-11-01T21:49:37.2440369Z ##[endgroup]
+2026-11-01T21:49:37.2844437Z PASS: exact source, original theorem preservation, semantic mutant construction, adversarial WP log rejection
+2026-11-01T21:49:37.3184382Z GENERATED: missing-cleanup
+2026-11-01T21:49:37.3186078Z LIMIT: provider frame, allocation, deallocation, memcmp and formatter remain external premises
+2026-11-01T21:49:38.1826857Z 3394270823845a23de2930c0a6d5b0ea3f1d6b89
+2026-11-01T21:49:38.1846259Z fb08732861e5e8a9314e2ba563f732af76437e05c9ac97a19f1290b0b84df3d0  phase19-mutant.c
+2026-11-01T21:49:38.1934876Z ##[group]Run set -euo pipefail
+2026-11-01T21:49:38.1936119Z [36;1mset -euo pipefail[0m
+2026-11-01T21:49:38.1937416Z [36;1mdocker run --rm -v "$PWD:/repo:ro" -w /tmp \[0m
+2026-11-01T21:49:38.1939574Z [36;1m  framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \[0m
+2026-11-01T21:49:38.1944483Z [36;1m  sh -c 'frama-c -version && frama-c -wp -wp-verbose 2 -wp-report-json /tmp/p1903-report.json -wp-fct calculate_hash -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 10 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19-mutant.c && cat /tmp/p1903-report.json' \[0m
+2026-11-01T21:49:38.1948411Z [36;1m  2>&1 | tee "phase19-$MUTANT.log"[0m
+2026-11-01T21:49:38.1950308Z [36;1mpython3 tools/check_phase19_bridge_log.py calculate_hash "phase19-$MUTANT.log" --mutant "$MUTANT"[0m
+2026-11-01T21:49:38.1971566Z shell: /usr/bin/bash -e {0}
+2026-11-01T21:49:38.1972558Z env:
+2026-11-01T21:49:38.1973377Z   MUTANT: missing-cleanup
+2026-11-01T21:49:38.1974368Z ##[endgroup]
+2026-11-01T21:49:38.2969999Z Unable to find image 'framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36' locally
+2026-11-01T21:49:38.4989123Z docker.io/framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36: Pulling from framac/frama-c
+2026-11-01T21:49:38.4990899Z 01cedcff86f8: Pulling fs layer
+2026-11-01T21:49:38.4995129Z 9bf581ba34fd: Pulling fs layer
+2026-11-01T21:49:38.4995868Z 6c4bd78e0c43: Pulling fs layer
+2026-11-01T21:49:38.4996256Z 799649323729: Pulling fs layer
+2026-11-01T21:49:38.4996724Z 1ae4fb0c8a4a: Pulling fs layer
+2026-11-01T21:49:38.4996966Z b237ecdf51a3: Pulling fs layer
+2026-11-01T21:49:38.4997419Z b16ee2e05313: Pulling fs layer
+2026-11-01T21:49:38.4997732Z adb989234928: Pulling fs layer
+2026-11-01T21:49:38.4998064Z e3a01a28a7ad: Pulling fs layer
+2026-11-01T21:49:38.4998321Z ca0e54137564: Pulling fs layer
+2026-11-01T21:49:38.4998639Z e88b1a083917: Pulling fs layer
+2026-11-01T21:49:38.4998967Z d10f17e04c11: Pulling fs layer
+2026-11-01T21:49:38.4999241Z d38ea67f8871: Pulling fs layer
+2026-11-01T21:49:38.4999888Z 8153ec1c4f57: Pulling fs layer
+2026-11-01T21:49:38.5000463Z 0546e39b6053: Pulling fs layer
+2026-11-01T21:49:38.5001278Z 5ebdad05b03e: Pulling fs layer
+2026-11-01T21:49:38.5001812Z 6435672f1863: Pulling fs layer
+2026-11-01T21:49:38.5002154Z 5c5711f4465e: Pulling fs layer
+2026-11-01T21:49:38.5002487Z 7264e6096409: Pulling fs layer
+2026-11-01T21:49:38.5002806Z 2202cd0e879d: Pulling fs layer
+2026-11-01T21:49:38.5003153Z c31277fa0297: Pulling fs layer
+2026-11-01T21:49:38.5003490Z 4f4fb700ef54: Pulling fs layer
+2026-11-01T21:49:38.5003823Z 8e159597691d: Pulling fs layer
+2026-11-01T21:49:38.5004152Z c0ebccf77ab9: Pulling fs layer
+2026-11-01T21:49:38.5004509Z b7093a70d5d5: Pulling fs layer
+2026-11-01T21:49:38.5004877Z f2a57dfa5358: Pulling fs layer
+2026-11-01T21:49:38.5005222Z 93b66eaa292a: Pulling fs layer
+2026-11-01T21:49:38.5005559Z 0aba2ee32120: Pulling fs layer
+2026-11-01T21:49:38.5005938Z 60033bb88c74: Pulling fs layer
+2026-11-01T21:49:38.5006273Z 883b72a7df53: Pulling fs layer
+2026-11-01T21:49:38.5006520Z 9aaba240d281: Pulling fs layer
+2026-11-01T21:49:38.5006802Z fd24333fa18a: Pulling fs layer
+2026-11-01T21:49:38.5007108Z ab20f402dc6f: Pulling fs layer
+2026-11-01T21:49:38.5007321Z a3afc412b613: Pulling fs layer
+2026-11-01T21:49:38.5007528Z 0a2200cec51c: Pulling fs layer
+2026-11-01T21:49:38.5007736Z f9b5b03a559e: Pulling fs layer
+2026-11-01T21:49:38.5007944Z 2becab109f47: Pulling fs layer
+2026-11-01T21:49:38.5008150Z 3b4307789f50: Pulling fs layer
+2026-11-01T21:49:38.5008360Z 58571fc518c5: Pulling fs layer
+2026-11-01T21:49:38.5008573Z b71b8622ab3f: Pulling fs layer
+2026-11-01T21:49:38.5008784Z d06dd6319b47: Pulling fs layer
+2026-11-01T21:49:38.5008987Z 51a56fdb7118: Pulling fs layer
+2026-11-01T21:49:38.5009194Z 8f235d762bf6: Pulling fs layer
+2026-11-01T21:49:38.5009400Z 37173500316b: Pulling fs layer
+2026-11-01T21:49:38.5009612Z fa11cfb60409: Pulling fs layer
+2026-11-01T21:49:38.5010071Z 2fdcc8b83d1d: Pulling fs layer
+2026-11-01T21:49:38.5010279Z 8103ae60d4a2: Pulling fs layer
+2026-11-01T21:49:38.5010486Z 0ac2d6f63403: Pulling fs layer
+2026-11-01T21:49:38.5010702Z dca9c53526f0: Pulling fs layer
+2026-11-01T21:49:38.5011122Z d62b4203b486: Pulling fs layer
+2026-11-01T21:49:38.5011333Z 262d0301190b: Pulling fs layer
+2026-11-01T21:49:38.5011540Z ab4fd71ce45a: Pulling fs layer
+2026-11-01T21:49:38.5011744Z 721b47947ac4: Pulling fs layer
+2026-11-01T21:49:38.5011949Z 4fe137cf5212: Pulling fs layer
+2026-11-01T21:49:38.5012151Z d44046465503: Pulling fs layer
+2026-11-01T21:49:38.5012359Z 26d82a051384: Pulling fs layer
+2026-11-01T21:49:38.5012556Z 8153ec1c4f57: Waiting
+2026-11-01T21:49:38.5012742Z 0546e39b6053: Waiting
+2026-11-01T21:49:38.5012928Z 5ebdad05b03e: Waiting
+2026-11-01T21:49:38.5013108Z 6435672f1863: Waiting
+2026-11-01T21:49:38.5013294Z 5c5711f4465e: Waiting
+2026-11-01T21:49:38.5013472Z 7264e6096409: Waiting
+2026-11-01T21:49:38.5013650Z 2202cd0e879d: Waiting
+2026-11-01T21:49:38.5013838Z c31277fa0297: Waiting
+2026-11-01T21:49:38.5014032Z 4f4fb700ef54: Waiting
+2026-11-01T21:49:38.5014290Z 8e159597691d: Waiting
+2026-11-01T21:49:38.5014481Z c0ebccf77ab9: Waiting
+2026-11-01T21:49:38.5014727Z b7093a70d5d5: Waiting
+2026-11-01T21:49:38.5015012Z f2a57dfa5358: Waiting
+2026-11-01T21:49:38.5015284Z 93b66eaa292a: Waiting
+2026-11-01T21:49:38.5015552Z 0aba2ee32120: Waiting
+2026-11-01T21:49:38.5015829Z 60033bb88c74: Waiting
+2026-11-01T21:49:38.5016114Z 883b72a7df53: Waiting
+2026-11-01T21:49:38.5016378Z 9aaba240d281: Waiting
+2026-11-01T21:49:38.5016634Z fd24333fa18a: Waiting
+2026-11-01T21:49:38.5016913Z ab20f402dc6f: Waiting
+2026-11-01T21:49:38.5017191Z a3afc412b613: Waiting
+2026-11-01T21:49:38.5017467Z 0a2200cec51c: Waiting
+2026-11-01T21:49:38.5017741Z f9b5b03a559e: Waiting
+2026-11-01T21:49:38.5018025Z 2becab109f47: Waiting
+2026-11-01T21:49:38.5021049Z 3b4307789f50: Waiting
+2026-11-01T21:49:38.5021269Z 58571fc518c5: Waiting
+2026-11-01T21:49:38.5021465Z b71b8622ab3f: Waiting
+2026-11-01T21:49:38.5021656Z d06dd6319b47: Waiting
+2026-11-01T21:49:38.5021843Z 51a56fdb7118: Waiting
+2026-11-01T21:49:38.5022029Z 8f235d762bf6: Waiting
+2026-11-01T21:49:38.5022485Z 37173500316b: Waiting
+2026-11-01T21:49:38.5022665Z fa11cfb60409: Waiting
+2026-11-01T21:49:38.5022844Z 2fdcc8b83d1d: Waiting
+2026-11-01T21:49:38.5023018Z 8103ae60d4a2: Waiting
+2026-11-01T21:49:38.5023287Z 0ac2d6f63403: Waiting
+2026-11-01T21:49:38.5023539Z dca9c53526f0: Waiting
+2026-11-01T21:49:38.5023721Z 799649323729: Waiting
+2026-11-01T21:49:38.5023951Z d62b4203b486: Waiting
+2026-11-01T21:49:38.5024176Z 1ae4fb0c8a4a: Waiting
+2026-11-01T21:49:38.5024349Z 262d0301190b: Waiting
+2026-11-01T21:49:38.5024527Z b237ecdf51a3: Waiting
+2026-11-01T21:49:38.5024754Z ab4fd71ce45a: Waiting
+2026-11-01T21:49:38.5024971Z 721b47947ac4: Waiting
+2026-11-01T21:49:38.5025145Z 4fe137cf5212: Waiting
+2026-11-01T21:49:38.5025315Z d44046465503: Waiting
+2026-11-01T21:49:38.5025521Z 26d82a051384: Waiting
+2026-11-01T21:49:38.5025703Z adb989234928: Waiting
+2026-11-01T21:49:38.5025892Z e3a01a28a7ad: Waiting
+2026-11-01T21:49:38.5026072Z ca0e54137564: Waiting
+2026-11-01T21:49:38.5026254Z e88b1a083917: Waiting
+2026-11-01T21:49:38.5026435Z d10f17e04c11: Waiting
+2026-11-01T21:49:38.5026609Z d38ea67f8871: Waiting
+2026-11-01T21:49:38.5026782Z b16ee2e05313: Waiting
+2026-11-01T21:49:38.5994117Z 9bf581ba34fd: Download complete
+2026-11-01T21:49:38.5994484Z 6c4bd78e0c43: Verifying Checksum
+2026-11-01T21:49:38.5994729Z 6c4bd78e0c43: Download complete
+2026-11-01T21:49:38.6275429Z 1ae4fb0c8a4a: Verifying Checksum
+2026-11-01T21:49:38.6276021Z 1ae4fb0c8a4a: Download complete
+2026-11-01T21:49:38.6735300Z 799649323729: Verifying Checksum
+2026-11-01T21:49:38.6748517Z 799649323729: Download complete
+2026-11-01T21:49:38.7213988Z b16ee2e05313: Verifying Checksum
+2026-11-01T21:49:38.7218151Z b16ee2e05313: Download complete
+2026-11-01T21:49:38.7370277Z 01cedcff86f8: Verifying Checksum
+2026-11-01T21:49:38.7372397Z 01cedcff86f8: Download complete
+2026-11-01T21:49:38.7751579Z adb989234928: Verifying Checksum
+2026-11-01T21:49:38.7752868Z adb989234928: Download complete
+2026-11-01T21:49:38.8103995Z e3a01a28a7ad: Verifying Checksum
+2026-11-01T21:49:38.8104581Z e3a01a28a7ad: Download complete
+2026-11-01T21:49:38.8389684Z ca0e54137564: Verifying Checksum
+2026-11-01T21:49:38.8390159Z ca0e54137564: Download complete
+2026-11-01T21:49:38.8800917Z e88b1a083917: Download complete
+2026-11-01T21:49:38.9089134Z d10f17e04c11: Download complete
+2026-11-01T21:49:38.9493033Z 8153ec1c4f57: Verifying Checksum
+2026-11-01T21:49:38.9493631Z 8153ec1c4f57: Download complete
+2026-11-01T21:49:38.9604888Z d38ea67f8871: Verifying Checksum
+2026-11-01T21:49:38.9606074Z d38ea67f8871: Download complete
+2026-11-01T21:49:38.9782378Z 0546e39b6053: Verifying Checksum
+2026-11-01T21:49:38.9784550Z 0546e39b6053: Download complete
+2026-11-01T21:49:39.0118499Z 5ebdad05b03e: Verifying Checksum
+2026-11-01T21:49:39.0120117Z 5ebdad05b03e: Download complete
+2026-11-01T21:49:39.0311123Z 6435672f1863: Verifying Checksum
+2026-11-01T21:49:39.0311672Z 6435672f1863: Download complete
+2026-11-01T21:49:39.0401705Z 5c5711f4465e: Verifying Checksum
+2026-11-01T21:49:39.0402291Z 5c5711f4465e: Download complete
+2026-11-01T21:49:39.0568940Z 7264e6096409: Download complete
+2026-11-01T21:49:39.0675365Z 2202cd0e879d: Download complete
+2026-11-01T21:49:39.0907715Z c31277fa0297: Verifying Checksum
+2026-11-01T21:49:39.0909412Z c31277fa0297: Download complete
+2026-11-01T21:49:39.0925095Z 4f4fb700ef54: Verifying Checksum
+2026-11-01T21:49:39.0925544Z 4f4fb700ef54: Download complete
+2026-11-01T21:49:39.1293890Z c0ebccf77ab9: Verifying Checksum
+2026-11-01T21:49:39.1294528Z c0ebccf77ab9: Download complete
+2026-11-01T21:49:39.1315716Z 8e159597691d: Verifying Checksum
+2026-11-01T21:49:39.1316076Z 8e159597691d: Download complete
+2026-11-01T21:49:39.1563975Z b7093a70d5d5: Verifying Checksum
+2026-11-01T21:49:39.1565294Z b7093a70d5d5: Download complete
+2026-11-01T21:49:39.1589932Z f2a57dfa5358: Verifying Checksum
+2026-11-01T21:49:39.1591122Z f2a57dfa5358: Download complete
+2026-11-01T21:49:39.1877396Z 93b66eaa292a: Verifying Checksum
+2026-11-01T21:49:39.1881766Z 93b66eaa292a: Download complete
+2026-11-01T21:49:39.1911400Z 0aba2ee32120: Download complete
+2026-11-01T21:49:39.2153028Z 60033bb88c74: Verifying Checksum
+2026-11-01T21:49:39.2153604Z 60033bb88c74: Download complete
+2026-11-01T21:49:39.2251258Z 883b72a7df53: Verifying Checksum
+2026-11-01T21:49:39.2251927Z 883b72a7df53: Download complete
+2026-11-01T21:49:39.2338750Z b237ecdf51a3: Verifying Checksum
+2026-11-01T21:49:39.2339199Z b237ecdf51a3: Download complete
+2026-11-01T21:49:39.2399005Z 9aaba240d281: Verifying Checksum
+2026-11-01T21:49:39.2399392Z 9aaba240d281: Download complete
+2026-11-01T21:49:39.2590128Z fd24333fa18a: Verifying Checksum
+2026-11-01T21:49:39.2590537Z fd24333fa18a: Download complete
+2026-11-01T21:49:39.2651945Z ab20f402dc6f: Verifying Checksum
+2026-11-01T21:49:39.2652541Z ab20f402dc6f: Download complete
+2026-11-01T21:49:39.2730680Z a3afc412b613: Verifying Checksum
+2026-11-01T21:49:39.2733390Z a3afc412b613: Download complete
+2026-11-01T21:49:39.2944678Z f9b5b03a559e: Verifying Checksum
+2026-11-01T21:49:39.2945118Z f9b5b03a559e: Download complete
+2026-11-01T21:49:39.3227655Z 3b4307789f50: Verifying Checksum
+2026-11-01T21:49:39.3228332Z 3b4307789f50: Download complete
+2026-11-01T21:49:39.3508859Z 58571fc518c5: Verifying Checksum
+2026-11-01T21:49:39.3509502Z 58571fc518c5: Download complete
+2026-11-01T21:49:39.3805357Z b71b8622ab3f: Verifying Checksum
+2026-11-01T21:49:39.3806652Z b71b8622ab3f: Download complete
+2026-11-01T21:49:39.9708813Z 2becab109f47: Verifying Checksum
+2026-11-01T21:49:39.9709431Z 2becab109f47: Download complete
+2026-11-01T21:49:40.0014222Z 51a56fdb7118: Verifying Checksum
+2026-11-01T21:49:40.0019599Z 51a56fdb7118: Download complete
+2026-11-01T21:49:40.0409857Z 8f235d762bf6: Verifying Checksum
+2026-11-01T21:49:40.0410602Z 8f235d762bf6: Download complete
+2026-11-01T21:49:40.0769757Z 37173500316b: Verifying Checksum
+2026-11-01T21:49:40.0772318Z 37173500316b: Download complete
+2026-11-01T21:49:40.1524651Z 0a2200cec51c: Verifying Checksum
+2026-11-01T21:49:40.1525793Z 0a2200cec51c: Download complete
+2026-11-01T21:49:40.1599699Z fa11cfb60409: Verifying Checksum
+2026-11-01T21:49:40.1600118Z fa11cfb60409: Download complete
+2026-11-01T21:49:40.1787597Z 2fdcc8b83d1d: Verifying Checksum
+2026-11-01T21:49:40.1788050Z 2fdcc8b83d1d: Download complete
+2026-11-01T21:49:40.1861421Z 8103ae60d4a2: Download complete
+2026-11-01T21:49:40.1909351Z d06dd6319b47: Verifying Checksum
+2026-11-01T21:49:40.1909978Z d06dd6319b47: Download complete
+2026-11-01T21:49:40.2139335Z dca9c53526f0: Verifying Checksum
+2026-11-01T21:49:40.2141143Z dca9c53526f0: Download complete
+2026-11-01T21:49:40.2244079Z 0ac2d6f63403: Verifying Checksum
+2026-11-01T21:49:40.2244849Z 0ac2d6f63403: Download complete
+2026-11-01T21:49:40.2521262Z 262d0301190b: Verifying Checksum
+2026-11-01T21:49:40.2522838Z 262d0301190b: Download complete
+2026-11-01T21:49:40.2893875Z ab4fd71ce45a: Verifying Checksum
+2026-11-01T21:49:40.2894375Z ab4fd71ce45a: Download complete
+2026-11-01T21:49:40.3184312Z 721b47947ac4: Verifying Checksum
+2026-11-01T21:49:40.3185227Z 721b47947ac4: Download complete
+2026-11-01T21:49:40.3532161Z d44046465503: Verifying Checksum
+2026-11-01T21:49:40.3533199Z d44046465503: Download complete
+2026-11-01T21:49:40.3857041Z 26d82a051384: Verifying Checksum
+2026-11-01T21:49:40.3857500Z 26d82a051384: Download complete
+2026-11-01T21:49:41.0440352Z 01cedcff86f8: Pull complete
+2026-11-01T21:49:42.0594202Z 4fe137cf5212: Verifying Checksum
+2026-11-01T21:49:42.0594661Z 4fe137cf5212: Download complete
+2026-11-01T21:49:42.1737875Z d62b4203b486: Verifying Checksum
+2026-11-01T21:49:42.1738193Z d62b4203b486: Download complete
+2026-11-01T21:49:51.9714479Z 9bf581ba34fd: Pull complete
+2026-11-01T21:49:51.9790395Z 6c4bd78e0c43: Pull complete
+2026-11-01T21:49:52.2009975Z 799649323729: Pull complete
+2026-11-01T21:49:52.2115237Z 1ae4fb0c8a4a: Pull complete
+2026-11-01T21:49:59.0564925Z b237ecdf51a3: Pull complete
+2026-11-01T21:49:59.2289137Z b16ee2e05313: Pull complete
+2026-11-01T21:49:59.4325418Z adb989234928: Pull complete
+2026-11-01T21:49:59.6632627Z e3a01a28a7ad: Pull complete
+2026-11-01T21:49:59.8815382Z ca0e54137564: Pull complete
+2026-11-01T21:50:00.0703069Z e88b1a083917: Pull complete
+2026-11-01T21:50:00.2592251Z d10f17e04c11: Pull complete
+2026-11-01T21:50:00.4536309Z d38ea67f8871: Pull complete
+2026-11-01T21:50:00.4747948Z 8153ec1c4f57: Pull complete
+2026-11-01T21:50:00.4843014Z 0546e39b6053: Pull complete
+2026-11-01T21:50:00.4915991Z 5ebdad05b03e: Pull complete
+2026-11-01T21:50:00.4992411Z 6435672f1863: Pull complete
+2026-11-01T21:50:00.5057603Z 5c5711f4465e: Pull complete
+2026-11-01T21:50:00.5173978Z 7264e6096409: Pull complete
+2026-11-01T21:50:00.5243827Z 2202cd0e879d: Pull complete
+2026-11-01T21:50:00.5317659Z c31277fa0297: Pull complete
+2026-11-01T21:50:00.5800730Z 4f4fb700ef54: Pull complete
+2026-11-01T21:50:00.5882289Z 8e159597691d: Pull complete
+2026-11-01T21:50:00.5955637Z c0ebccf77ab9: Pull complete
+2026-11-01T21:50:00.6027798Z b7093a70d5d5: Pull complete
+2026-11-01T21:50:00.6113742Z f2a57dfa5358: Pull complete
+2026-11-01T21:50:00.6185137Z 93b66eaa292a: Pull complete
+2026-11-01T21:50:00.6261543Z 0aba2ee32120: Pull complete
+2026-11-01T21:50:00.6332047Z 60033bb88c74: Pull complete
+2026-11-01T21:50:00.6421796Z 883b72a7df53: Pull complete
+2026-11-01T21:50:00.6501950Z 9aaba240d281: Pull complete
+2026-11-01T21:50:00.6579366Z fd24333fa18a: Pull complete
+2026-11-01T21:50:00.6652473Z ab20f402dc6f: Pull complete
+2026-11-01T21:50:00.6741524Z a3afc412b613: Pull complete
+2026-11-01T21:50:35.5370092Z 0a2200cec51c: Pull complete
+2026-11-01T21:50:35.5459459Z f9b5b03a559e: Pull complete
+2026-11-01T21:50:37.1423740Z 2becab109f47: Pull complete
+2026-11-01T21:50:37.1511726Z 3b4307789f50: Pull complete
+2026-11-01T21:50:37.1581136Z 58571fc518c5: Pull complete
+2026-11-01T21:50:37.1659299Z b71b8622ab3f: Pull complete
+2026-11-01T21:50:43.2903681Z d06dd6319b47: Pull complete
+2026-11-01T21:50:43.3018645Z 51a56fdb7118: Pull complete
+2026-11-01T21:50:43.3294953Z 8f235d762bf6: Pull complete
+2026-11-01T21:50:43.3408224Z 37173500316b: Pull complete
+2026-11-01T21:50:43.6925924Z fa11cfb60409: Pull complete
+2026-11-01T21:50:43.7003743Z 2fdcc8b83d1d: Pull complete
+2026-11-01T21:50:43.7149001Z 8103ae60d4a2: Pull complete
+2026-11-01T21:50:43.8386097Z 0ac2d6f63403: Pull complete
+2026-11-01T21:50:43.8461114Z dca9c53526f0: Pull complete
+2026-11-01T21:51:19.1199165Z d62b4203b486: Pull complete
+2026-11-01T21:51:19.1293258Z 262d0301190b: Pull complete
+2026-11-01T21:51:19.2145905Z ab4fd71ce45a: Pull complete
+2026-11-01T21:51:21.8986525Z 721b47947ac4: Pull complete
+2026-11-01T21:51:40.6922578Z 4fe137cf5212: Pull complete
+2026-11-01T21:51:40.6993712Z d44046465503: Pull complete
+2026-11-01T21:52:06.9744700Z 26d82a051384: Pull complete
+2026-11-01T21:52:06.9776814Z Digest: sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T21:52:06.9783235Z Status: Downloaded newer image for framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T21:52:07.2154039Z 32.1 (Germanium)
+2026-11-01T21:52:07.4063039Z [kernel] Parsing /repo/phase19-mutant.c (with preprocessing)
+2026-11-01T21:52:07.5597507Z [wp] Running WP plugin...
+2026-11-01T21:52:07.5640456Z [rte:annot] annotating function calculate_hash
+2026-11-01T21:52:07.5643033Z [kernel:annot:missing-spec] /repo/include/tombstone/fingerprint.h:52: Warning: 
+2026-11-01T21:52:07.5645847Z   Neither code nor explicit exits and terminates for function tb_sha256_new,
+2026-11-01T21:52:07.5646580Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-01T21:52:07.5647277Z [kernel:annot:missing-spec] /repo/include/tombstone/fingerprint.h:53: Warning: 
+2026-11-01T21:52:07.5647971Z   Neither code nor explicit exits and terminates for function tb_sha256_update,
+2026-11-01T21:52:07.5648647Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-01T21:52:07.5649338Z [kernel:annot:missing-spec] /repo/include/tombstone/fingerprint.h:54: Warning: 
+2026-11-01T21:52:07.5650050Z   Neither code nor explicit exits and terminates for function tb_sha256_final,
+2026-11-01T21:52:07.5650725Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-01T21:52:07.6419106Z [wp] 48 goals scheduled
+2026-11-01T21:52:19.5799334Z [wp] [Timeout] bytes_calculate_hash_ensures_cleanup (Qed 316ms) (Alt-Ergo)
+2026-11-01T21:52:19.5813963Z [wp] Proved goals:   47 / 48
+2026-11-01T21:52:19.5814301Z   Qed:              39 (9ms-33ms-420ms)
+2026-11-01T21:52:19.5814554Z   Alt-Ergo 2.5.4:    8 (16ms-56ms-163ms)
+2026-11-01T21:52:19.5814788Z   Timeout:           1
+2026-11-01T21:52:19.5835153Z [wp:pedantic-assigns] /repo/phase19-mutant.c:20: Warning: 
+2026-11-01T21:52:19.5835685Z   No \from specification for assigned pointer '*out_ctx'.
+2026-11-01T21:52:19.5836118Z   Callers assumptions might be imprecise.
+2026-11-01T21:52:19.5836494Z [wp:pedantic-assigns] /repo/phase19-mutant.c:20: Warning: 
+2026-11-01T21:52:19.5836825Z   No \from specification for assigned pointer 'p19_owner'.
+2026-11-01T21:52:19.5837146Z   Callers assumptions might be imprecise.
+2026-11-01T21:52:19.5839121Z [wp] /repo/include/tombstone/fingerprint.h:52: Warning: 
+2026-11-01T21:52:19.5839591Z   Memory model hypotheses for function 'tb_sha256_new':
+2026-11-01T21:52:19.5839945Z   /*@
+2026-11-01T21:52:19.5840187Z      behavior wp_bytes:
+2026-11-01T21:52:19.5840543Z        requires \separated(out_ctx, &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5842109Z        ensures \separated(out_ctx, &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5842706Z      */
+2026-11-01T21:52:19.5842991Z   tb_status tb_sha256_new(tb_sha256_ctx **out_ctx);
+2026-11-01T21:52:19.5843436Z [wp] /repo/include/tombstone/fingerprint.h:53: Warning: 
+2026-11-01T21:52:19.5843946Z   Memory model hypotheses for function 'tb_sha256_update':
+2026-11-01T21:52:19.5844340Z   /*@
+2026-11-01T21:52:19.5844574Z      behavior wp_bytes:
+2026-11-01T21:52:19.5844978Z        requires \separated(ctx + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5845818Z        requires \separated(data + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5846311Z      */
+2026-11-01T21:52:19.5846649Z   tb_status tb_sha256_update(tb_sha256_ctx *ctx, void const *data,
+2026-11-01T21:52:19.5847102Z                              size_t length);
+2026-11-01T21:52:19.5847495Z [wp] /repo/include/tombstone/fingerprint.h:54: Warning: 
+2026-11-01T21:52:19.5847956Z   Memory model hypotheses for function 'tb_sha256_final':
+2026-11-01T21:52:19.5848318Z   /*@
+2026-11-01T21:52:19.5848479Z      behavior wp_bytes:
+2026-11-01T21:52:19.5848727Z        requires \separated(ctx + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5849096Z        requires \separated(out + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5849406Z        requires
+2026-11-01T21:52:19.5849649Z          \separated(out + (0 .. 31), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5849932Z      */
+2026-11-01T21:52:19.5850166Z   tb_status tb_sha256_final(tb_sha256_ctx *ctx, unsigned char out[32]);
+2026-11-01T21:52:19.5850525Z [wp:pedantic-assigns] /repo/phase19-mutant.c:211: Warning: 
+2026-11-01T21:52:19.5851061Z   No \from specification for assigned pointer 'p19_owner'.
+2026-11-01T21:52:19.5851504Z   Callers assumptions might be imprecise.
+2026-11-01T21:52:19.5851873Z [wp] /repo/phase19-mutant.c:221: Warning: 
+2026-11-01T21:52:19.5852142Z   Memory model hypotheses for function 'calculate_hash':
+2026-11-01T21:52:19.5852391Z   /*@
+2026-11-01T21:52:19.5852576Z      behavior wp_bytes:
+2026-11-01T21:52:19.5852836Z        requires \separated(out + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5853123Z        requires
+2026-11-01T21:52:19.5853353Z          \separated(out + (0 .. 31), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5853689Z        requires \separated(r + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:19.5853967Z      */
+2026-11-01T21:52:19.5854228Z   static tb_status calculate_hash(tb_receipt_v1 const *r, unsigned char out[32]);
+2026-11-01T21:52:19.5994438Z [ { "goal": "bytes_calculate_hash_terminates",
+2026-11-01T21:52:19.5995145Z     "property": "calculate_hash_terminates", "file": "", "line": 0,
+2026-11-01T21:52:19.5996360Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.5996861Z     "verdict": "valid",
+2026-11-01T21:52:19.5997221Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.5997638Z     "proved": 1 },
+2026-11-01T21:52:19.5997915Z   { "goal": "bytes_calculate_hash_ensures",
+2026-11-01T21:52:19.5998416Z     "property": "calculate_hash_ensures", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.5998973Z     "line": 212, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.5999401Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.5999885Z     "provers": [ { "prover": "qed", "time": 0.359, "success": 0 },
+2026-11-01T21:52:19.6000405Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0396, "success": 1 } ],
+2026-11-01T21:52:19.6000961Z     "proved": 1 },
+2026-11-01T21:52:19.6001338Z   { "goal": "bytes_calculate_hash_ensures_failure_preserves_output",
+2026-11-01T21:52:19.6001879Z     "property": "calculate_hash_ensures_failure_preserves_output",
+2026-11-01T21:52:19.6002388Z     "file": "/repo/phase19-mutant.c", "line": 215,
+2026-11-01T21:52:19.6002732Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6003011Z     "verdict": "valid",
+2026-11-01T21:52:19.6003335Z     "provers": [ { "prover": "qed", "time": 0.42, "success": 0 },
+2026-11-01T21:52:19.6003691Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.143, "success": 1 } ],
+2026-11-01T21:52:19.6004034Z     "proved": 1 },
+2026-11-01T21:52:19.6004273Z   { "goal": "bytes_calculate_hash_ensures_cleanup",
+2026-11-01T21:52:19.6004714Z     "property": "calculate_hash_ensures_cleanup",
+2026-11-01T21:52:19.6005121Z     "file": "/repo/phase19-mutant.c", "line": 217,
+2026-11-01T21:52:19.6005452Z     "function": "calculate_hash", "smoke": false, "passed": false,
+2026-11-01T21:52:19.6005983Z     "verdict": "timeout",
+2026-11-01T21:52:19.6006328Z     "provers": [ { "prover": "qed", "time": 0.316, "success": 0 },
+2026-11-01T21:52:19.6006950Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-01T21:52:19.6007465Z     "timeout": 1 },
+2026-11-01T21:52:19.6007888Z   { "goal": "bytes_calculate_hash_ensures_caller_receipt",
+2026-11-01T21:52:19.6008453Z     "property": "calculate_hash_ensures_caller_receipt",
+2026-11-01T21:52:19.6008945Z     "file": "/repo/phase19-mutant.c", "line": 218,
+2026-11-01T21:52:19.6009599Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6010130Z     "verdict": "valid",
+2026-11-01T21:52:19.6010560Z     "provers": [ { "prover": "qed", "time": 0.416, "success": 0 },
+2026-11-01T21:52:19.6011485Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.163, "success": 1 } ],
+2026-11-01T21:52:19.6012187Z     "proved": 1 },
+2026-11-01T21:52:19.6012707Z   { "goal": "bytes_calculate_hash_exits", "property": "calculate_hash_exits",
+2026-11-01T21:52:19.6013212Z     "file": "", "line": 0, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6013571Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6013980Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6014410Z     "proved": 1 },
+2026-11-01T21:52:19.6014742Z   { "goal": "bytes_calculate_hash_assigns_normal_part01",
+2026-11-01T21:52:19.6015217Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6015701Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6016052Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6016409Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6016727Z     "proved": 1 },
+2026-11-01T21:52:19.6017030Z   { "goal": "bytes_calculate_hash_assigns_normal_part02",
+2026-11-01T21:52:19.6017442Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6017789Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6018150Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6018570Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6018932Z     "proved": 1 },
+2026-11-01T21:52:19.6019135Z   { "goal": "bytes_calculate_hash_assigns_normal_part03",
+2026-11-01T21:52:19.6019512Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6019920Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6020352Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6020661Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6022069Z     "proved": 1 },
+2026-11-01T21:52:19.6022287Z   { "goal": "bytes_calculate_hash_assigns_normal_part04",
+2026-11-01T21:52:19.6022707Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6023040Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6023379Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6023638Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6023890Z     "proved": 1 },
+2026-11-01T21:52:19.6024183Z   { "goal": "bytes_calculate_hash_assigns_normal_part05",
+2026-11-01T21:52:19.6024501Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6024887Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6025182Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6025424Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6025738Z     "proved": 1 },
+2026-11-01T21:52:19.6025960Z   { "goal": "bytes_calculate_hash_assigns_normal_part06",
+2026-11-01T21:52:19.6026273Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6109512Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6110237Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6110671Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6111337Z     "proved": 1 },
+2026-11-01T21:52:19.6111723Z   { "goal": "bytes_calculate_hash_assigns_normal_part07",
+2026-11-01T21:52:19.6112297Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6112868Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6113285Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6113674Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6114068Z     "proved": 1 },
+2026-11-01T21:52:19.6114385Z   { "goal": "bytes_calculate_hash_assigns_normal_part08",
+2026-11-01T21:52:19.6114878Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6115391Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6115828Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6116229Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6116645Z     "proved": 1 },
+2026-11-01T21:52:19.6116960Z   { "goal": "bytes_calculate_hash_assigns_normal_part09",
+2026-11-01T21:52:19.6117483Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6118014Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6118405Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6118797Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6119199Z     "proved": 1 },
+2026-11-01T21:52:19.6119515Z   { "goal": "bytes_calculate_hash_assigns_normal_part10",
+2026-11-01T21:52:19.6120004Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6120542Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6121089Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6121496Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6122133Z     "proved": 1 },
+2026-11-01T21:52:19.6122449Z   { "goal": "bytes_calculate_hash_assigns_normal_part11",
+2026-11-01T21:52:19.6122928Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6123438Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6123826Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6124197Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6124580Z     "proved": 1 },
+2026-11-01T21:52:19.6124872Z   { "goal": "bytes_calculate_hash_assigns_normal_part12",
+2026-11-01T21:52:19.6125360Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6125861Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6126253Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6126640Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6127025Z     "proved": 1 },
+2026-11-01T21:52:19.6127330Z   { "goal": "bytes_calculate_hash_assigns_normal_part13",
+2026-11-01T21:52:19.6127821Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6128354Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6128735Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6129110Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6129520Z     "proved": 1 },
+2026-11-01T21:52:19.6129827Z   { "goal": "bytes_calculate_hash_assigns_normal_part14",
+2026-11-01T21:52:19.6130345Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6131054Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6131469Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6132069Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6132457Z     "proved": 1 },
+2026-11-01T21:52:19.6132750Z   { "goal": "bytes_calculate_hash_assigns_exit_part1",
+2026-11-01T21:52:19.6133225Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6133761Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6134152Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6134541Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6134934Z     "proved": 1 },
+2026-11-01T21:52:19.6135243Z   { "goal": "bytes_calculate_hash_assigns_exit_part2",
+2026-11-01T21:52:19.6135756Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6136301Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6159023Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6159410Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6159712Z     "proved": 1 },
+2026-11-01T21:52:19.6159942Z   { "goal": "bytes_calculate_hash_assigns_exit_part3",
+2026-11-01T21:52:19.6160296Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6160653Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6161200Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6161568Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6161930Z     "proved": 1 },
+2026-11-01T21:52:19.6162219Z   { "goal": "bytes_calculate_hash_assigns_exit_part4",
+2026-11-01T21:52:19.6162689Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6163186Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6163456Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6163716Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6164183Z     "proved": 1 },
+2026-11-01T21:52:19.6164506Z   { "goal": "bytes_calculate_hash_assigns_exit_part5",
+2026-11-01T21:52:19.6165153Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6165485Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6165835Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6166107Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6166471Z     "proved": 1 },
+2026-11-01T21:52:19.6166676Z   { "goal": "bytes_calculate_hash_assigns_exit_part6",
+2026-11-01T21:52:19.6167043Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6167428Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6167813Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6168177Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6168485Z     "proved": 1 },
+2026-11-01T21:52:19.6168802Z   { "goal": "bytes_calculate_hash_assigns_exit_part7",
+2026-11-01T21:52:19.6169258Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6169810Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6170221Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6170627Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6171161Z     "proved": 1 },
+2026-11-01T21:52:19.6171365Z   { "goal": "bytes_calculate_hash_assigns_exit_part8",
+2026-11-01T21:52:19.6171678Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6172015Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6172276Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6172532Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6172791Z     "proved": 1 },
+2026-11-01T21:52:19.6173200Z   { "goal": "bytes_calculate_hash_assigns_exit_part9",
+2026-11-01T21:52:19.6173518Z     "property": "calculate_hash_assigns", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6173850Z     "line": 211, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6174210Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6174599Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6174893Z     "proved": 1 },
+2026-11-01T21:52:19.6175203Z   { "goal": "bytes_calculate_hash_call_good_receipt_requires",
+2026-11-01T21:52:19.6175553Z     "property": "good_receipt_requires", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6175881Z     "line": 227, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6176258Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6176684Z     "provers": [ { "prover": "qed", "time": 0.00873, "success": 0 },
+2026-11-01T21:52:19.6177201Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0156, "success": 1 } ],
+2026-11-01T21:52:19.6177644Z     "proved": 1 },
+2026-11-01T21:52:19.6177981Z   { "goal": "bytes_calculate_hash_call_format_json_requires",
+2026-11-01T21:52:19.6178538Z     "property": "format_json_requires", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6179099Z     "line": 228, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6179515Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6179906Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6180301Z     "proved": 1 },
+2026-11-01T21:52:19.6180625Z   { "goal": "bytes_calculate_hash_call_format_json_requires_2",
+2026-11-01T21:52:19.6181325Z     "property": "format_json_requires_2", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6181847Z     "line": 228, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6182245Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6182634Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6183025Z     "proved": 1 },
+2026-11-01T21:52:19.6183371Z   { "goal": "bytes_calculate_hash_call_format_json_requires_3",
+2026-11-01T21:52:19.6183916Z     "property": "format_json_requires_3", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6184689Z     "line": 228, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6185103Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6185529Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6185955Z     "proved": 1 },
+2026-11-01T21:52:19.6186312Z   { "goal": "bytes_calculate_hash_call_format_json_requires_4",
+2026-11-01T21:52:19.6186850Z     "property": "format_json_requires_4", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6187408Z     "line": 228, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6187797Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6188190Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6188457Z     "proved": 1 },
+2026-11-01T21:52:19.6188821Z   { "goal": "bytes_calculate_hash_call_format_json_requires_5",
+2026-11-01T21:52:19.6189400Z     "property": "format_json_requires_5", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6189915Z     "line": 228, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6190340Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6190605Z     "provers": [ { "prover": "qed", "time": 0.013, "success": 0 },
+2026-11-01T21:52:19.6191131Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0196, "success": 1 } ],
+2026-11-01T21:52:19.6191423Z     "proved": 1 },
+2026-11-01T21:52:19.6191635Z   { "goal": "bytes_calculate_hash_call_tb_sha256_new_requires",
+2026-11-01T21:52:19.6192259Z     "property": "tb_sha256_new_requires", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6192804Z     "line": 230, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6193231Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6193891Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6194295Z     "proved": 1 },
+2026-11-01T21:52:19.6194628Z   { "goal": "bytes_calculate_hash_call_tb_sha256_new_requires_2",
+2026-11-01T21:52:19.6195327Z     "property": "tb_sha256_new_requires_2", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6195909Z     "line": 230, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6196342Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6196743Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6197106Z     "proved": 1 },
+2026-11-01T21:52:19.6197402Z   { "goal": "bytes_calculate_hash_call_tb_sha256_new_requires_3",
+2026-11-01T21:52:19.6197905Z     "property": "tb_sha256_new_requires_3", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6198391Z     "line": 230, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6198783Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6199202Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6199601Z     "proved": 1 },
+2026-11-01T21:52:19.6199950Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_requires",
+2026-11-01T21:52:19.6200408Z     "property": "tb_sha256_update_requires",
+2026-11-01T21:52:19.6201088Z     "file": "/repo/phase19-mutant.c", "line": 232,
+2026-11-01T21:52:19.6201551Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6201952Z     "verdict": "valid",
+2026-11-01T21:52:19.6202314Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6202706Z     "proved": 1 },
+2026-11-01T21:52:19.6203072Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_requires_2",
+2026-11-01T21:52:19.6203432Z     "property": "tb_sha256_update_requires_2",
+2026-11-01T21:52:19.6203697Z     "file": "/repo/phase19-mutant.c", "line": 232,
+2026-11-01T21:52:19.6203995Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6204355Z     "verdict": "valid",
+2026-11-01T21:52:19.6204704Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6205090Z     "proved": 1 },
+2026-11-01T21:52:19.6205645Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_requires_3",
+2026-11-01T21:52:19.6206118Z     "property": "tb_sha256_update_requires_3",
+2026-11-01T21:52:19.6206452Z     "file": "/repo/phase19-mutant.c", "line": 232,
+2026-11-01T21:52:19.6206879Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6207174Z     "verdict": "valid",
+2026-11-01T21:52:19.6207431Z     "provers": [ { "prover": "qed", "time": 0.0236, "success": 0 },
+2026-11-01T21:52:19.6207896Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.022, "success": 1 } ],
+2026-11-01T21:52:19.6208259Z     "proved": 1 },
+2026-11-01T21:52:19.6208661Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_2_requires",
+2026-11-01T21:52:19.6209119Z     "property": "tb_sha256_update_requires_4",
+2026-11-01T21:52:19.6209518Z     "file": "/repo/phase19-mutant.c", "line": 233,
+2026-11-01T21:52:19.6209922Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6210193Z     "verdict": "valid",
+2026-11-01T21:52:19.6210497Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6210922Z     "proved": 1 },
+2026-11-01T21:52:19.6211271Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_2_requires_2",
+2026-11-01T21:52:19.6211664Z     "property": "tb_sha256_update_requires_5",
+2026-11-01T21:52:19.6211915Z     "file": "/repo/phase19-mutant.c", "line": 233,
+2026-11-01T21:52:19.6212303Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6212576Z     "verdict": "valid",
+2026-11-01T21:52:19.6212810Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6213168Z     "proved": 1 },
+2026-11-01T21:52:19.6213403Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_2_requires_3",
+2026-11-01T21:52:19.6213739Z     "property": "tb_sha256_update_requires_6",
+2026-11-01T21:52:19.6214199Z     "file": "/repo/phase19-mutant.c", "line": 233,
+2026-11-01T21:52:19.6214580Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6214908Z     "verdict": "valid",
+2026-11-01T21:52:19.6215134Z     "provers": [ { "prover": "qed", "time": 0.0208, "success": 0 },
+2026-11-01T21:52:19.6215559Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0198, "success": 1 } ],
+2026-11-01T21:52:19.6215847Z     "proved": 1 },
+2026-11-01T21:52:19.6216068Z   { "goal": "bytes_calculate_hash_call_tb_sha256_final_requires",
+2026-11-01T21:52:19.6216527Z     "property": "tb_sha256_final_requires", "file": "/repo/phase19-mutant.c",
+2026-11-01T21:52:19.6216881Z     "line": 234, "function": "calculate_hash", "smoke": false,
+2026-11-01T21:52:19.6217267Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:19.6217532Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6217866Z     "proved": 1 },
+2026-11-01T21:52:19.6218103Z   { "goal": "bytes_calculate_hash_call_tb_sha256_final_requires_2",
+2026-11-01T21:52:19.6218390Z     "property": "tb_sha256_final_requires_2",
+2026-11-01T21:52:19.6218742Z     "file": "/repo/phase19-mutant.c", "line": 234,
+2026-11-01T21:52:19.6219151Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6219563Z     "verdict": "valid",
+2026-11-01T21:52:19.6219895Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6220290Z     "proved": 1 },
+2026-11-01T21:52:19.6220624Z   { "goal": "bytes_calculate_hash_call_tb_sha256_final_requires_3",
+2026-11-01T21:52:19.6221179Z     "property": "tb_sha256_final_requires_3",
+2026-11-01T21:52:19.6221525Z     "file": "/repo/phase19-mutant.c", "line": 234,
+2026-11-01T21:52:19.6221807Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6222160Z     "verdict": "valid",
+2026-11-01T21:52:19.6222407Z     "provers": [ { "prover": "qed", "time": 0.0285, "success": 0 },
+2026-11-01T21:52:19.6222736Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.022, "success": 1 } ],
+2026-11-01T21:52:19.6223116Z     "proved": 1 },
+2026-11-01T21:52:19.6223503Z   { "goal": "bytes_calculate_hash_call_tb_sha256_final_requires_4",
+2026-11-01T21:52:19.6223884Z     "property": "tb_sha256_final_requires_4",
+2026-11-01T21:52:19.6224132Z     "file": "/repo/phase19-mutant.c", "line": 234,
+2026-11-01T21:52:19.6224447Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T21:52:19.6224775Z     "verdict": "valid",
+2026-11-01T21:52:19.6225001Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:19.6225357Z     "proved": 1 } ]
+2026-11-01T21:52:19.7119975Z FAIL: P19-03 WP gate: missing/duplicate original WP JSON report
+2026-11-01T21:52:19.7176406Z ##[error]Process completed with exit code 1.
+2026-11-01T21:52:19.7270550Z ##[group]Run actions/upload-artifact@v4
+2026-11-01T21:52:19.7271019Z with:
+2026-11-01T21:52:19.7271261Z   name: phase19-bridge-missing-cleanup
+2026-11-01T21:52:19.7271511Z   path: phase19-*.log
+phase19-mutant.c
+
+2026-11-01T21:52:19.7271735Z   retention-days: 30
+2026-11-01T21:52:19.7271938Z   if-no-files-found: warn
+2026-11-01T21:52:19.7272154Z   compression-level: 6
+2026-11-01T21:52:19.7272340Z   overwrite: false
+2026-11-01T21:52:19.7272524Z   include-hidden-files: false
+2026-11-01T21:52:19.7272731Z ##[endgroup]
+2026-11-01T21:52:19.8793866Z (node:2578) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-01T21:52:19.8794537Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-01T21:52:19.8849096Z With the provided path, there will be 2 files uploaded
+2026-11-01T21:52:19.8853386Z Artifact name is valid!
+2026-11-01T21:52:19.8853923Z Root directory input is valid!
+2026-11-01T21:52:20.0801509Z Beginning upload of artifact content to blob storage
+2026-11-01T21:52:20.1041899Z (node:2578) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-01T21:52:20.1315064Z Uploaded bytes 8821
+2026-11-01T21:52:20.1434673Z Finished uploading artifact content to blob storage!
+2026-11-01T21:52:20.1435487Z SHA256 digest of uploaded artifact zip is 6310938cdacf15e90fd45b33fba5bfdfd77e23eb156664ccb2f790ea677aac49
+2026-11-01T21:52:20.1436913Z Finalizing artifact upload
+2026-11-01T21:52:20.5669142Z Artifact phase19-bridge-missing-cleanup.zip successfully finalized. Artifact ID 13102737293
+2026-11-01T21:52:20.5670265Z Artifact phase19-bridge-missing-cleanup has been successfully uploaded! Final size is 8821 bytes. Artifact ID is 13102737293
+2026-11-01T21:52:20.5676986Z Artifact download URL: https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41353978018/artifacts/13102737293
+2026-11-01T21:52:20.5903144Z Post job cleanup.
+2026-11-01T21:52:20.6677551Z [command]/usr/bin/git version
+2026-11-01T21:52:20.6714069Z git version 2.56.0
+2026-11-01T21:52:20.6745543Z Temporarily overriding HOME='/home/runner/work/_temp/fe4df00d-238e-4276-a283-ff15f8c3b781' before making global git config changes
+2026-11-01T21:52:20.6746629Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T21:52:20.6750069Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T21:52:20.6785559Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T21:52:20.6817196Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T21:52:20.7029901Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T21:52:20.7056195Z http.https://github.com/.extraheader
+2026-11-01T21:52:20.7066152Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-01T21:52:20.7097780Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T21:52:20.7305735Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T21:52:20.7336336Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T21:52:20.7671613Z Cleaning up orphan processes
+2026-11-01T21:52:20.8048759Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

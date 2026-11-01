@@ -168,3 +168,11 @@ frame. The original 40-goal record cannot establish that stronger claim.
 Native failure injection checks cleanup on 13 finite paths; it does not close
 the universal heap-lifetime obligation. P19-03 remains blocked by the private
 provider-state effect absent from the original Phase 18 frame.
+
+The [P19-03 follow-up](PHASE19_BRIDGE.md) introduces a separately named
+caller-memory composition with a shared helper/chain contract environment and
+a linear ownership/call-protocol model. It preserves the original Phase 18
+theorem. The new frame permits private provider effects, so it does not prove
+the old literal global frame. Backend separation, allocation/deallocation,
+`good_receipt`, `format_json` and real SHA remain explicit open premises.
+Solver evidence and exact-head review are required before accepting this new scope.

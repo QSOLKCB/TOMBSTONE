@@ -1,0 +1,130 @@
+{
+  "format": "tombstone.phase19.bridge-evidence",
+  "version": 1,
+  "scope": "CONDITIONAL_CALLER_FRAME_AND_CALL_PROTOCOL",
+  "pr": 29,
+  "head_sha": "dfcc419f8736d6095633e1d708d17519a72e623e",
+  "ci_checkout_sha": "3394270823845a23de2930c0a6d5b0ea3f1d6b89",
+  "base_sha": "a548fdd0209fd199684f0446a636556597c6de8e",
+  "run_id": 41353978018,
+  "workflow_conclusion": "failure",
+  "workflow_failure": "MULTILINE_JSON_REPORT_GATE",
+  "solver_result": "EXECUTED_COMPLETE_UNDER_EXPLICIT_PREMISES",
+  "original_phase18_global_frame": "NOT_DISCHARGED",
+  "actual_provider_refinement": "OPEN",
+  "good_receipt": "ASSUMED",
+  "format_json": "ASSUMED",
+  "libc_memcmp": "ASSUMED",
+  "model_block_separation": "ASSUMED",
+  "review": "REQUIRED_ON_FINAL_EXACT_HEAD",
+  "issue_28": "OPEN",
+  "tool": {
+    "name": "Frama-C/WP",
+    "version": "32.1",
+    "prover": "Alt-Ergo 2.5.4",
+    "model": "Bytes",
+    "rte": true,
+    "container": "framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36"
+  },
+  "source_blobs": {
+    "include/tombstone/deletion.h": "37c14d5f99cf731f19accbc8c16b0e558c2fb260",
+    "include/tombstone/fingerprint.h": "620a7ecbeb5db90446bac329f6b321828fdfa16e",
+    "include/tombstone/receipt.h": "d77d60aa6cedc7b966ed2e44aa81815d5211be16",
+    "machine/examples/explicit-delete-v1.json": "3f3e1ba5f273bd266bcd764f10cd4e669f0dfc2d",
+    "machine/examples/observed-transition-v1.json": "79dc897ad9192ed9eda8912213130c6556b72017",
+    "machine/examples/unchanged-v1.json": "b712f23459b77ba7bb7fc9551df8af82ddc1ef33",
+    "machine/formal/phase18-unbounded-wp-v1.json": "7b7899797d6d2b663fe0837a22913de0877fc2ac",
+    "src/crypto/fingerprint.c": "5d9e60f88305fd108405908269a023cdff8cb8ee",
+    "src/crypto/fingerprint_hacl.c": "a66d6a2aeb0064fbde04bd2fef34dface64e1c61",
+    "src/encoding/receipt.c": "6fe3e8014e9c38ea42c43b9133f026967a4158e3",
+    "tests/formal/test_phase19_faults.c": "f399dae3028b5379adba8ab19806c0c88ee2ec84",
+    "tools/phase18_wp_overlay.py": "b5efcbe605f8a33d2eea9f6d412f320198aff759",
+    "tools/phase19_bridge_native.py": "ea4c5b4edb3b3f0584962db40bf21d129f248968",
+    "tools/phase19_bridge_overlay.py": "5ad88e201593ab2871044828e61a8d56f0783474",
+    "tools/phase19_calculate_hash_overlay.py": "96441be54854339ae54ce104009d4ddb8a68164d",
+    "tools/phase19_equal32_overlay.py": "f5e3df395de2d7aff3a91c8c6566427721033eca",
+    "tools/phase19_hash_errors_overlay.py": "f81e02848c33c3c8e6b3ed2d0880630b48ac93c0"
+  },
+  "solver_jobs": [
+    {
+      "target": "equal32",
+      "job_id": 124989970722,
+      "proved": 11,
+      "total": 11,
+      "path": "formal/evidence/phase19-bridge/run-41353978018-job-124989970722.log",
+      "sha256": "51005b10966223ca56fa8fa0c8a9d2153d0bbd9f383843f9d5ba006307534e45",
+      "generated_sha256": "7a6131552abe3a2472b32487cb5299f0806b41430dde805dd2e661049dab16f4"
+    },
+    {
+      "target": "calculate_hash",
+      "job_id": 124989970640,
+      "proved": 51,
+      "total": 51,
+      "path": "formal/evidence/phase19-bridge/run-41353978018-job-124989970640.log",
+      "sha256": "dcf8ec0c673d991ac7bd9aa708f27996352eeda0f9b7b159dfbfde00b62c0ef6",
+      "generated_sha256": "7a6131552abe3a2472b32487cb5299f0806b41430dde805dd2e661049dab16f4"
+    },
+    {
+      "target": "tb_receipt_verify_chain",
+      "job_id": 124989970790,
+      "proved": 62,
+      "total": 62,
+      "path": "formal/evidence/phase19-bridge/run-41353978018-job-124989970790.log",
+      "sha256": "7f21390d2894af158acddf14a730d67d93fa9b66aec614e691ca1279afa0215d",
+      "generated_sha256": "7a6131552abe3a2472b32487cb5299f0806b41430dde805dd2e661049dab16f4"
+    },
+    {
+      "target": "missing-cleanup",
+      "job_id": 124989970788,
+      "proved": 47,
+      "total": 48,
+      "path": "formal/evidence/phase19-bridge/run-41353978018-job-124989970788.log",
+      "sha256": "9ce47d090b37c108d20927c4584415ff43c605c2d921d673052d669a733fc0a6",
+      "generated_sha256": "fb08732861e5e8a9314e2ba563f732af76437e05c9ac97a19f1290b0b84df3d0"
+    },
+    {
+      "target": "double-cleanup",
+      "job_id": 124989970470,
+      "proved": 51,
+      "total": 53,
+      "path": "formal/evidence/phase19-bridge/run-41353978018-job-124989970470.log",
+      "sha256": "b9df2afe70a13656c11bb0b9afa98e436cb4d22406846dd19fa7bef8c5b267d9",
+      "generated_sha256": "922b8fbcde84f9af197d99dfe2bcc993f9d30ca207cda6506e39a2d91e61ad9f"
+    },
+    {
+      "target": "caller-corruption",
+      "job_id": 124989970735,
+      "proved": 51,
+      "total": 55,
+      "path": "formal/evidence/phase19-bridge/run-41353978018-job-124989970735.log",
+      "sha256": "34227159bf58a38be43acc62388fbb8a712fb89409b9b24ad78053b5956d1a72",
+      "generated_sha256": "17e352152110ed45fbbb64c6ab5cd874e5a6276417dca386d855a3430ff98cfc"
+    }
+  ],
+  "other_jobs": [
+    {
+      "target": "native-gcc",
+      "job_id": 124989970718,
+      "run_id": 41353978018,
+      "conclusion": "success",
+      "path": "formal/evidence/phase19-bridge/run-41353978018-job-124989970718.log",
+      "sha256": "666a353aed56e5c82de634215be0bf6a5f0d601d3997ce2b2296ed83e3720295"
+    },
+    {
+      "target": "native-clang",
+      "job_id": 124989970721,
+      "run_id": 41353978018,
+      "conclusion": "success",
+      "path": "formal/evidence/phase19-bridge/run-41353978018-job-124989970721.log",
+      "sha256": "fbd9c95ef1c0add7b6992917b3b282e07b3bf4fac9471be81f9dcaa28a216cbf"
+    },
+    {
+      "target": "original-phase18-54-of-54",
+      "job_id": 124989970502,
+      "run_id": 41353978025,
+      "conclusion": "success",
+      "path": "formal/evidence/phase19-bridge/run-41353978025-job-124989970502.log",
+      "sha256": "9b3ee7b810cefd5a4572eb21df09e1e8f8a0f01fceaedba78f714427d01f035d"
+    }
+  ]
+}

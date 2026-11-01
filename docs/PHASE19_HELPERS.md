@@ -8,7 +8,7 @@ The production `src/encoding/receipt.c` Git blob is still `6fe3e8014e9c38ea42c43
 
 - **P19-01 — actual `equal32`:** `tools/phase19_equal32_overlay.py` derives a proof translation unit from the actual production C99 and Phase 18 ACSL. An explicit proof-only `memcmp`-to-`phase19_memcmp` alias binds the unchanged body to a modeled 32-byte equality contract; this bypasses unsupported Frama-C libc allocation/danglingness predicates and **must not** be confused with proof of actual libc `memcmp`. The compiler and actual libc implementation are not proved. Frama-C/WP must discharge nonzero all-goal and RTE checks of the real `equal32` body; timeouts remain failures. This is not a proof of `memcmp` internals.
 - **P19-02 — actual `calculate_hash`:** `tools/phase19_calculate_hash_overlay.py` inserts modular contracts for `good_receipt`, `format_json` and streaming SHA entrypoints; the latter use an explicit abstract private-state footprint. That is a **strong external-provider assumption** pending refinement against real OpenSSL/HACL state allocation, mutations, error statuses and cleanup. It does not prove the SHA algorithm, valid returned digest, full canonical formatter or hash-domain correctness. The actual C function is not replaced.
-- **P19-03 — full chain refinement bridge:** Phase 18 already established 54/54 WP goals conditionally on `equal32` and `calculate_hash` contracts. Re-run those goals at the final new head and explicitly link independently discharged helper obligations. A green helper proof does not imply a proven provider or complete JSON engine.
+- **P19-03 — chain composition:** the separate [caller-frame and ownership proof](PHASE19_BRIDGE.md), PR #29, checks equality, the actual helper, and the actual chain under one shared contract environment (11/11, 51/51, 62/62 executed goals). It preserves and independently reruns Phase 18 (54/54), without claiming to discharge that theorem's stronger literal global frame. Provider/heap refinement and complete JSON remain open; exact-head CI and fresh review are required.
 
 Native `tests/formal/test_phase19_native.c` executes real production C99 helper logic with live OpenSSL and checks every possible single differing byte position (0–31), no mutation of its input buffers, a successful hash calculation and invalid-receipt early failure without writing its output. Finite tests do not constitute an unbounded theorem.
 
@@ -80,6 +80,7 @@ record for that attempt, not current-head review approval. The local sanitizer
 attempt could not complete because LeakSanitizer could not inspect `/proc` in
 the execution environment; sanitizer coverage comes from the separate CI jobs.
 
-The PR remains draft while the stronger Phase 18 bridge and exact-head
-independent review are outstanding. A successful rerun of the unchanged
+PR #27 merged after exact-head review at `897a736d694ddcb9344ce9179cc473138e9247a5`.
+The separate [P19-03 follow-up](PHASE19_BRIDGE.md) addresses caller-memory
+composition and ownership; the literal global-frame/provider refinement remains open. A successful rerun of the unchanged
 54-goal Phase 18 workflow still assumes its original helper frame.
