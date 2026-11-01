@@ -79,3 +79,7 @@ GCC/Clang receipt parity are *executed evidence only when the exact-head CI
 jobs pass*, not a proof of these properties for all permitted inputs.
 Executed Phase 13 [run 41321354704](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704) used CBMC 6.11.0 to check 584/584 bounded properties on the **actual adapter source** under a synthetic HACL boundary. The verified conditions are bounded status, failure-no-write and state transitions, NOT SHA-256 algorithmic correctness. The exact two proof-source blobs and conditions are in `machine/formal/phase13-adapter-cbmc-v1.json`, with an offline identity gate. The upstream F* proof and KaRaMeL extraction have **not** been independently rerun at the exact revision. The unbounded Frama-C/real-provider/ABI refinement and compiler evidence are still open.
 The published `v0.1.0` SHA-256 baseline is immutable.
+
+### Phase 13 executed checks and residual proof boundary
+
+At [run 41321354704](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704), all four x86-64/ARM64 GCC/Clang HACL/OpenSSL parity jobs and direct-source CBMC adapter checks passed. CBMC verified 0/195, 0/195, and 0/194 failed properties for bounded one-shot, streaming and invalid-input harnesses under a synthetic, explicitly **modeled** HACL provider. Real upstream SHA-256 and the adapter's unbounded correctness were **not formally proved by these local checks**. See `machine/formal/phase13-hacl-evidence-v1.json` and the source-pinning check.

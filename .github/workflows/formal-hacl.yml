@@ -26,6 +26,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y gcc clang pkg-config libssl-dev
       - name: Verify pinned upstream HACL source and license
         run: python3 tools/check_hacl_source.py
+      - name: Verify reference proof source identities and accepted trust boundary
+        run: python3 tools/check_phase13_evidence.py
       - name: Run original and HACL C99 engines against identical fixtures
         run: |
           set -euo pipefail
