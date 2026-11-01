@@ -54,12 +54,11 @@ TOMBSTONE_SHA256_BACKEND=hacl cargo test --workspace --offline --locked
 The Phase 13 workflow also checks allocation and update failure injection,
 SHA-256 padding/chunk boundaries, >1 MiB of binary streaming input, and all
 three frozen v1 receipt fixtures with an independent Python hash oracle and
-OpenSSL. These are bounded executed tests **only after their CI runs finish**.
+OpenSSL. These are executed bounded tests for the referenced run, and must be rerun at each revised PR head.
 A `uint32_t` backend chunk interface cannot be meaningfully exercised using
 invalid large pointers; no >4 GiB memory test or unconditional length-conversion
 proof is claimed.
 
-**Outstanding Phase 13 acceptance gates:** separate CBMC/Frama-C adapter
-contract proof, reproduced F* proof origin and toolchain versions/receipts,
-and an exact-head review (with every CI check green). These are not replaced
-by normal test success. Phase 14 and later retain their own boundaries.
+**Executed bounded CBMC:** [run 41321354704](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704), job 124892079267, checked the actual C99 adapter under explicit **synthetic** HACL allocation, update-status and digest models. All **584 of 584** properties succeeded across `check_one_shot` (195), `check_stream` (195) and `check_invalid` (194), with mandatory loop unwinding and pointer/overflow/bounds checking. Exact source and overlay Git blobs are pinned in `machine/formal/phase13-adapter-cbmc-v1.json` and checked by `tools/check_formal_evidence.py`. A source edit invalidates that proof receipt. **This does not prove actual HACL digest correctness, unbounded adapter behaviour or the composed binary.**
+
+**Outstanding Phase 13 acceptance gates:** unbounded Frama-C/ABI refinement connecting real HACL to C99 API, reproduced exact F* proof/extraction toolchain evidence, target compiler semantics, and independent exact-head Codex review with all CI green. These are not replaced by normal test success or the bounded CBMC model. Phase 14 and later retain their own boundaries.
