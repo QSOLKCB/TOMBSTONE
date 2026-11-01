@@ -22,7 +22,7 @@ jobs:
           sha256sum phase20-receipt.c
           docker run --rm -v "$PWD:/repo:ro" -w /tmp \
             framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
-            frama-c -wp -wp-fct format_json -wp-rte -wp-model Bytes -wp-prover none -wp-print \
+            frama-c -wp -wp-fct format_json -wp-rte -wp-model Bytes -wp-prover none -wp-literals -wp-print \
               -cpp-extra-args="-I/repo/include" /repo/phase20-receipt.c
   native:
     name: Actual formatter fault and byte checks — ${{ matrix.cc }} / ${{ matrix.backend }}
@@ -72,16 +72,6 @@ jobs:
           done
           git rev-parse HEAD
           sha256sum phase20-*.c
-      - name: Load explicit Z3 4.12.2 proof dependency
-        if: matrix.group == 'formatters' || matrix.group == 'negative'
-        run: |
-          set -euo pipefail
-          curl --fail --location --retry 3 https://github.com/Z3Prover/z3/releases/download/z3-4.12.2/z3-4.12.2-x64-glibc-2.31.zip -o phase20-z3.zip
-          printf '%s\n' 'a198851a7403d8b25bab920bd4a4792efe1af5c28a5a932d840af0472d3a83eb  phase20-z3.zip' | sha256sum --check --strict
-          sha256sum phase20-z3.zip
-          unzip -q phase20-z3.zip -d phase20-provers
-          printf '%s\n' '4f490bb1b8f4d71dea98cbd4a7b56a3fdf261ba8ca30a65f22a359d51e70ebd8  phase20-provers/z3-4.12.2-x64-glibc-2.31/bin/z3' | sha256sum --check --strict
-          sha256sum phase20-provers/z3-4.12.2-x64-glibc-2.31/bin/z3
       - name: Run every target with RTE and original structured reports
         env:
           GROUP: ${{ matrix.group }}
@@ -90,10 +80,6 @@ jobs:
           docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-results:/out" -e GROUP -w /tmp \
             framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
             sh -c '
-              if [ -d /repo/phase20-provers ]; then
-                export PATH=/repo/phase20-provers/z3-4.12.2-x64-glibc-2.31/bin:$PATH
-                why3 config detect || exit 1
-              fi
               case "$GROUP" in
                 validators) targets="zero32 equal32 good_evidence good_receipt";;
                 formatters) targets="hex32 format_json";;
@@ -114,7 +100,7 @@ jobs:
                   accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;
                   bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;
                 esac
-                if [ "$function" = format_json ]; then provers=alt-ergo; fi
+                if [ "$function" = format_json ]; then split="-wp-literals -wp-status"; fi
                 (frama-c -version && frama-c -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover "$provers" -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1
               done
               cat /out/*.log
