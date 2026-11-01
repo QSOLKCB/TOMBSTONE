@@ -1,0 +1,43 @@
+name: Rust TUI Phase 5
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tui:
+    name: ncurses TUI, C99 parity and terminal checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm toolchain
+        run: rustc --version && cargo --version
+      - name: Install native OpenSSL and ncurses
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev libncurses-dev
+      - name: Run all Rust FFI, CLI and TUI tests offline
+        run: cargo test --workspace --locked --offline
+      - name: Build separate TUI release executable
+        run: cargo build -p tombstone-tui --release --locked --offline
+      - name: Test headless rejection
+        run: |
+          target/release/tombstone-tui --help
+          if target/release/tombstone-tui >out.txt 2>err.txt; then
+            echo 'FAIL: non-TTY launch unexpectedly succeeded'
+            exit 1
+          fi
+          test ! -s out.txt
+          grep -q 'interactive terminal' err.txt
+      - name: Exercise actual ncurses in a pseudo-terminal
+        run: python3 tools/check_tui_pty.py target/release/tombstone-tui
+      - name: Verify original CLI still works without TUI
+        run: |
+          cargo build -p tombstone-cli --release --locked --offline
+          target/release/tombstone verify machine/examples/explicit-delete-v1.json
+      - name: Run original C99 regressions
+        run: make test && make docs-check
