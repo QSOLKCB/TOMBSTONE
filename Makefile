@@ -14,7 +14,7 @@ else ifeq ($(SHA256_BACKEND),openssl)
 BUILD_DIR ?= build
 FINGERPRINT_SOURCE := src/crypto/fingerprint.c
 EXTRA_OBJ :=
-HASH_LIBS := $(OPENSSL_LIBS)
+HASH_LIBS = $(OPENSSL_LIBS)
 else
 $(error Unsupported SHA256_BACKEND: $(SHA256_BACKEND))
 endif
