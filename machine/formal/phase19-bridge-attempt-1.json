@@ -1,0 +1,85 @@
+{
+  "format": "tombstone.phase19.bridge-attempt",
+  "version": 1,
+  "attempt": 1,
+  "base_commit": "a548fdd0209fd199684f0446a636556597c6de8e",
+  "pr": 29,
+  "head_sha": "2fd2b5e3d00e8c6a17ee3dc2bbae8013d1c4804f",
+  "ci_checkout_sha": "6621da5aac3b7a4454f1424b625d4614eddaf783",
+  "run_id": 41353401932,
+  "conclusion": "FAILED_EVIDENCE_GATE",
+  "reason": "DEFAULT_WP_OUTPUT_OMITTED_VALID_GOAL_INVENTORY",
+  "proof_scope": "CALLER_FRAME_AND_LINEAR_CALL_PROTOCOL_UNDER_EXPLICIT_PROVIDER_PREMISES",
+  "original_phase18_global_frame": "NOT_DISCHARGED",
+  "actual_provider_refinement": "OPEN",
+  "source_blobs": {
+    "src/encoding/receipt.c": "6fe3e8014e9c38ea42c43b9133f026967a4158e3",
+    "include/tombstone/receipt.h": "d77d60aa6cedc7b966ed2e44aa81815d5211be16",
+    "include/tombstone/deletion.h": "37c14d5f99cf731f19accbc8c16b0e558c2fb260",
+    "include/tombstone/fingerprint.h": "620a7ecbeb5db90446bac329f6b321828fdfa16e",
+    "tools/phase18_wp_overlay.py": "b5efcbe605f8a33d2eea9f6d412f320198aff759",
+    "tools/phase19_calculate_hash_overlay.py": "96441be54854339ae54ce104009d4ddb8a68164d",
+    "tools/phase19_equal32_overlay.py": "f5e3df395de2d7aff3a91c8c6566427721033eca",
+    "tools/phase19_hash_errors_overlay.py": "f81e02848c33c3c8e6b3ed2d0880630b48ac93c0",
+    "tools/phase19_bridge_overlay.py": "5ad88e201593ab2871044828e61a8d56f0783474",
+    "tools/check_phase19_bridge_log.py": "3e93d2e3d0527cbee6223c9be5df540600f13ecb",
+    ".github/workflows/phase19-bridge-wp.yml": "6c3635c0d42a984452b79869b1856241ff205c5e"
+  },
+  "logs": [
+    {
+      "job_id": 124988236484,
+      "target": "tb_receipt_verify_chain",
+      "proved": 62,
+      "total": 62,
+      "job_conclusion": "failure",
+      "path": "formal/evidence/phase19-bridge/run-41353401932-job-124988236484.log",
+      "sha256": "a438fd80790f7e941a73aa714992cdb303a2772198acd8726380c7b6e88b6031"
+    },
+    {
+      "job_id": 124988236584,
+      "target": "calculate_hash",
+      "proved": 51,
+      "total": 51,
+      "job_conclusion": "failure",
+      "path": "formal/evidence/phase19-bridge/run-41353401932-job-124988236584.log",
+      "sha256": "65f9ad161879814f4e12e3d3621a87a65df9bcd5a70d4ea75c6151dc3b98c249"
+    },
+    {
+      "job_id": 124988236615,
+      "target": "equal32",
+      "proved": 11,
+      "total": 11,
+      "job_conclusion": "failure",
+      "path": "formal/evidence/phase19-bridge/run-41353401932-job-124988236615.log",
+      "sha256": "77dbcb363d9efff1ad6e090af272e7afcf29f9a678c7e61e8662cac7240f318b"
+    },
+    {
+      "job_id": 124988236609,
+      "target": "missing-cleanup",
+      "proved": 47,
+      "total": 48,
+      "job_conclusion": "failure",
+      "path": "formal/evidence/phase19-bridge/run-41353401932-job-124988236609.log",
+      "sha256": "b61e34ea1428082a8cda09bfc2ef1d6f7856b9a425135556b6b1853fc763f0ac"
+    },
+    {
+      "job_id": 124988236542,
+      "target": "double-cleanup",
+      "proved": 51,
+      "total": 53,
+      "job_conclusion": "failure",
+      "path": "formal/evidence/phase19-bridge/run-41353401932-job-124988236542.log",
+      "sha256": "be86538af3311941bb42e923b60254cd57cd73bc325c76017a5bdf7e44b3b5a2"
+    },
+    {
+      "job_id": 124988236614,
+      "target": "caller-corruption",
+      "proved": 51,
+      "total": 55,
+      "job_conclusion": "failure",
+      "path": "formal/evidence/phase19-bridge/run-41353401932-job-124988236614.log",
+      "sha256": "c7974bc5359a6c79c6fdf1cbb7f176ae239842b4936265c0bb84a6acd8841cbc"
+    }
+  ],
+  "review": "NOT_RUN"
+}

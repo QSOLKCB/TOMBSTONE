@@ -8,6 +8,24 @@ on:
 permissions:
   contents: read
 jobs:
+  native-controls:
+    name: P19-03 concrete controls (${{ matrix.cc }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y gcc clang libssl-dev
+      - name: Execute positive helper paths and designated semantic counterexamples
+        env:
+          CC: ${{ matrix.cc }}
+        run: |
+          set -euo pipefail
+          python3 tests/formal/test_phase19_bridge.py
+          python3 tools/phase19_bridge_native.py --cc "$CC"
   composition:
     name: P19-03 actual ${{ matrix.target }}
     runs-on: ubuntu-24.04
@@ -35,7 +53,7 @@ jobs:
           set -euo pipefail
           docker run --rm -v "$PWD:/repo:ro" -w /tmp -e TARGET \
             framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
-            sh -c 'frama-c -version && frama-c -wp -wp-fct "$TARGET" -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 35 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19-bridge.c' \
+            sh -c 'frama-c -version && frama-c -wp -wp-verbose 2 -wp-report-json /tmp/p1903-report.json -wp-fct "$TARGET" -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 35 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19-bridge.c && cat /tmp/p1903-report.json' \
             2>&1 | tee "phase19-bridge-$TARGET.log"
           python3 tools/check_phase19_bridge_log.py "$TARGET" "phase19-bridge-$TARGET.log"
       - uses: actions/upload-artifact@v4
@@ -73,7 +91,7 @@ jobs:
           set -euo pipefail
           docker run --rm -v "$PWD:/repo:ro" -w /tmp \
             framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
-            sh -c 'frama-c -version && frama-c -wp -wp-fct calculate_hash -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 10 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19-mutant.c' \
+            sh -c 'frama-c -version && frama-c -wp -wp-verbose 2 -wp-report-json /tmp/p1903-report.json -wp-fct calculate_hash -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 10 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19-mutant.c && cat /tmp/p1903-report.json' \
             2>&1 | tee "phase19-$MUTANT.log"
           python3 tools/check_phase19_bridge_log.py calculate_hash "phase19-$MUTANT.log" --mutant "$MUTANT"
       - uses: actions/upload-artifact@v4

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Source fidelity, theorem preservation, and adversarial evidence gate tests."""
 from pathlib import Path
+import json
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -39,6 +40,8 @@ def report(target):
     text += f"[wp] {len(ids)} goals scheduled\n"
     text += "".join(f"[wp] [Qed] {goal} : Valid (1ms)\n" for goal in ids)
     text += f"[wp] Proved goals: {len(ids)} / {len(ids)}\n"
+    text += json.dumps([{"goal": goal, "function": target, "smoke": False,
+                        "verdict": "valid", "passed": True} for goal in ids], separators=(",", ":")) + "\n"
     return text, ids
 
 
@@ -48,9 +51,9 @@ for target in gate.TARGETS:
     bad = ["", good + good, good.replace("32.1", "33.0"),
            good.replace("[rte:annot]", "[skipped]"),
            good.replace(ids[-1], ids[0]),
-           good.replace("[Qed]", "[Timeout]", 1),
+           good.replace('"verdict":"valid"', '"verdict":"timeout"', 1),
            good + "[wp:warning] unsupported allocation\n",
-           good.replace(" : Valid", " : Unknown", 1)]
+           good.replace('"smoke":false', '"smoke":true', 1)]
     for text in bad:
         reject(lambda: gate.validate(text, target))
     reject(lambda: gate.validate(good, target, inventory={target: []}))
@@ -61,7 +64,10 @@ for mutant, goal in [("missing-cleanup", "ensures_cleanup"),
     bad = good.replace(f"[Qed] bytes_calculate_hash_{goal} : Valid (1ms)",
                        f"[Timeout] bytes_calculate_hash_{goal} (10s)")
     bad = bad.replace("Proved goals: 3 / 3", "Proved goals: 2 / 3")
+    bad = bad.replace('"goal":"bytes_calculate_hash_' + goal + '","function":"calculate_hash","smoke":false,"verdict":"valid","passed":true',
+                      '"goal":"bytes_calculate_hash_' + goal + '","function":"calculate_hash","smoke":false,"verdict":"timeout","passed":false')
     gate.validate(bad, "calculate_hash", mutant)
     reject(lambda: gate.validate(good, "calculate_hash", mutant))
     reject(lambda: gate.validate(bad + "[kernel:abort] syntax error", "calculate_hash", mutant))
+    reject(lambda: gate.validate(bad, "calculate_hash", mutant, diagnostics={mutant: ["missing warning"]}))
 print("PASS: exact source, original theorem preservation, semantic mutant construction, adversarial WP log rejection")

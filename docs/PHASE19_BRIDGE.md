@@ -75,6 +75,19 @@ inspection and finite fault tests do not discharge their universal premises.
 No axiom says that the chain succeeds, that input receipts are already valid,
 that the digest is correct, or that cleanup happens without calling `free`.
 
+The executed Bytes model additionally emits **whole-block separation** premises:
+the blocks containing `r`, `out`, the receipt array, trusted head, provider
+context and update data are disjoint from the three private model variables
+where those parameters occur. This is stronger than separating just the
+specified byte ranges. It is part of this conditional theorem's assumption
+boundary and still requires a real-provider refinement. Assigned owner/context
+pointers have unspecified `from` dependencies; WP reports imprecision, not a
+proved allocator relationship. External functions also use Frama-C's generated
+exit/termination clauses. These are not new total-correctness claims.
+The full emitted diagnostics are preserved and compared to
+`machine/formal/phase19-bridge-diagnostics-v1.json`; an unexpected or changed
+diagnostic fails CI. No warning-suppression flag is used.
+
 ## Evidence and acceptance
 
 The new `phase19-bridge-wp.yml` runs three positive targets with Frama-C 32.1,
@@ -84,10 +97,21 @@ unchanged positive target is failure. On a mutant, a timeout is evidence only
 that the specified bad obligation was not proved, not a solver counterexample;
 parser errors or missing goals are never accepted as semantic rejection.
 
-At the initial implementation commit these new solver results are **NOT_RUN**.
-Full original logs, exact PR/checkout identities and the final goal inventory
-will be recorded after execution. Passing local generator/compilation tests
-does not promote this status. All existing proof gates remain required.
+The first execution at head `2fd2b5e3d00e8c6a17ee3dc2bbae8013d1c4804f`,
+run `41353401932`, reported 11/11 equality, 51/51 hash, and 62/62 chain goals.
+Missing cleanup left the cleanup postcondition unproved (47/48), duplicate
+cleanup left free's two preconditions unproved (51/53), and caller corruption
+left the caller-receipt postcondition and three safety/frame goals unproved
+(51/55). The workflow **failed** because default WP output omitted individual
+valid-goal records required by the new gate. This result is preserved, not
+relabelled as green. The follow-up requests Frama-C's original JSON goal report.
+
+The native control runner executes the unchanged 13-case helper harness and
+requires a designated assertion failure from each compiled semantic mutant.
+For caller corruption only, a test guard enables the write after fixture
+parsing, so setup can complete before the caller-memory assertion is tested.
+This guard is not in the positive source or formal mutant. GCC passed locally;
+GCC/Clang CI and complete structured solver evidence remain required.
 
 Require fresh independent review of the final exact PR head and all current
 CI before an owner merge. Review of #27 does not transfer. Keep issue #28 open
