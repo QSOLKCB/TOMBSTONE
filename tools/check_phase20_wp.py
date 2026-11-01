@@ -23,7 +23,7 @@ def parse(text,target):
         raise ValueError("wrong/missing version")
     if re.findall(r"\[rte:annot\] annotating function (\w+)",text) != [function]:
         raise ValueError("wrong/missing RTE target")
-    if re.search(r"\[.*(?:error|abort).*\]|unsupported|Missing RTE",text,re.I):
+    if re.search(r"\[.*(?:error|abort).*\]|unsupported|Missing RTE|User Error:|Frama-C aborted|Prover .*not found",text,re.I):
         raise ValueError("unsupported or failed tool execution")
     summary = re.findall(r"\[wp\] Proved goals:\s*(\d+)\s*/\s*(\d+)",text)
     if len(summary) != 1:
