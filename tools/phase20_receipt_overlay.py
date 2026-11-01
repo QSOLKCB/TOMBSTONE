@@ -22,18 +22,18 @@ PREDICATES = r"""/*@
     e->deleted_size <= TB_EVIDENCE_MAX_BYTES &&
     e->deleted_offset <= TB_EVIDENCE_MAX_BYTES &&
     ((e->kind == TB_EVIDENCE_UNCHANGED &&
-      e->before_size == e->after_size && p20_equal(e->before_sha256,e->after_sha256) &&
-      e->deleted_size == 0 && e->deleted_offset == 0 && p20_zero(e->deleted_sha256)) ||
+      e->before_size == e->after_size && p20_equal(&e->before_sha256[0],&e->after_sha256[0]) &&
+      e->deleted_size == 0 && e->deleted_offset == 0 && p20_zero(&e->deleted_sha256[0])) ||
      (e->kind == TB_EVIDENCE_OBSERVED_TRANSITION &&
-      (e->before_size != e->after_size || !p20_equal(e->before_sha256,e->after_sha256)) &&
-      e->deleted_size == 0 && e->deleted_offset == 0 && p20_zero(e->deleted_sha256)) ||
+      (e->before_size != e->after_size || !p20_equal(&e->before_sha256[0],&e->after_sha256[0])) &&
+      e->deleted_size == 0 && e->deleted_offset == 0 && p20_zero(&e->deleted_sha256[0])) ||
      (e->kind == TB_EVIDENCE_EXPLICIT_DELETE &&
       0 < e->deleted_size <= e->before_size &&
       e->after_size == (integer)e->before_size - e->deleted_size &&
       e->deleted_offset <= (integer)e->before_size - e->deleted_size));
   predicate p20_receipt{L}(tb_receipt_v1 *r) =
     (r->has_previous == 0 || r->has_previous == 1) &&
-    (r->has_previous != 0 || p20_zero(r->previous_hash)) && p20_evidence(&r->evidence);
+    (r->has_previous != 0 || p20_zero(&r->previous_hash[0])) && p20_evidence(&r->evidence);
   predicate p20_cstr{L}(char *s, integer bound) =
     \exists integer k; 0 <= k < bound && \valid_read(s+(0 .. k)) && s[k] == '\0';
   predicate p20_text{L}(char *a, char *b, integer n) =
@@ -104,7 +104,7 @@ static const char p20_fmt_receipt[] __attribute__((unused)) =
   "\"kind\":\"%s\",\"previous_receipt_hash\":%s%s,\"version\":1}";
 /*@
   requires n > 0 && \valid(dst+(0 .. n-1));
-  requires p20_text(fmt,p20_fmt_deleted,sizeof(p20_fmt_deleted));
+  requires p20_text(fmt,&p20_fmt_deleted[0],sizeof(p20_fmt_deleted));
   requires p20_cstr(hex,65);
   requires \separated(dst+(0 .. n-1), fmt+(..), hex+(..));
   assigns dst[0 .. n-1];
@@ -114,8 +114,8 @@ extern int p20_snprintf_deleted(char *dst,size_t n,const char *fmt,
                                 uint64_t offset,const char *hex,uint64_t size);
 /*@
   requires n > 0 && \valid(dst+(0 .. n-1));
-  requires p20_text(fmt,p20_fmt_previous,sizeof(p20_fmt_previous)) ||
-           p20_text(fmt,p20_fmt_hash,sizeof(p20_fmt_hash));
+  requires p20_text(fmt,&p20_fmt_previous[0],sizeof(p20_fmt_previous)) ||
+           p20_text(fmt,&p20_fmt_hash[0],sizeof(p20_fmt_hash));
   requires p20_cstr(hex,65);
   requires \separated(dst+(0 .. n-1), fmt+(..), hex+(..));
   assigns dst[0 .. n-1];
@@ -124,7 +124,7 @@ extern int p20_snprintf_deleted(char *dst,size_t n,const char *fmt,
 extern int p20_snprintf_string(char *dst,size_t n,const char *fmt,const char *hex);
 /*@
   requires n > 0 && \valid(dst+(0 .. n-1));
-  requires p20_text(fmt,p20_fmt_receipt,sizeof(p20_fmt_receipt));
+  requires p20_text(fmt,&p20_fmt_receipt[0],sizeof(p20_fmt_receipt));
   requires p20_cstr(after,65) && p20_cstr(before,65);
   requires p20_cstr(deleted,192) && p20_cstr(kind,20);
   requires p20_cstr(previous,96) && p20_cstr(own,96);
@@ -192,6 +192,11 @@ HEX_LOOP = r"""    /*@
 """
 
 
+HEX_BOUNDS = r"""        /*@ assert byte_range: 0 <= (integer)digest[i] <= 255;
+            assert high_nibble: 0 <= (digest[i] >> 4) <= 15; */
+"""
+
+
 def render_hex(backend):
     path = ROOT / ("src/crypto/fingerprint.c" if backend == "openssl" else "src/crypto/fingerprint_hacl.c")
     data = path.read_bytes()
@@ -202,8 +207,11 @@ def render_hex(backend):
     marker = "    for (i = 0u;" if backend == "openssl" else "    for (i = 0;"
     if body.count(marker) != 1:
         raise ValueError("actual hex loop marker drift")
-    overlay = HEX + body.replace(marker,HEX_LOOP+marker,1)
-    if overlay.replace(HEX,"",1).replace(HEX_LOOP,"",1) != body:
+    byte_marker = "        out[2u * i]" if backend == "openssl" else "        out[2u*i]"
+    if body.count(byte_marker) != 1:
+        raise ValueError("actual hex write marker drift")
+    overlay = HEX + body.replace(marker,HEX_LOOP+marker,1).replace(byte_marker,HEX_BOUNDS+byte_marker,1)
+    if overlay.replace(HEX,"",1).replace(HEX_LOOP,"",1).replace(HEX_BOUNDS,"",1) != body:
         raise ValueError("hex body changed")
     return '#include "tombstone/fingerprint.h"\n' + overlay
 

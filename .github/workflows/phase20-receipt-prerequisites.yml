@@ -8,6 +8,22 @@ on:
 permissions:
   contents: read
 jobs:
+  native:
+    name: Actual formatter fault and byte checks — ${{ matrix.cc }} / ${{ matrix.backend }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+        backend: [openssl, hacl]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Frozen oracle, buffer boundaries and semantic mutations
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          python3 tools/check_hacl_source.py
+          python3 tests/formal/run_phase20_native.py --cc ${{ matrix.cc }} --backend ${{ matrix.backend }}
   wp:
     name: Actual C99 prerequisites — ${{ matrix.group }}
     runs-on: ubuntu-24.04
