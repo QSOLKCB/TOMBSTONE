@@ -1,0 +1,45 @@
+name: Phase 13 — HACL SHA2-256 parity (${{ matrix.compiler }} and ${{ matrix.runner }})
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    name: SHA-256 backend and receipt parity (${{ matrix.compiler }} / ${{ matrix.runner }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install C99 compilers and original OpenSSL dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc clang pkg-config libssl-dev
+      - name: Verify pinned upstream HACL source and license
+        run: python3 tools/check_hacl_source.py
+      - name: Run original and HACL C99 engines against identical fixtures
+        run: |
+          set -euo pipefail
+          make SHA256_BACKEND=openssl CC=${{ matrix.compiler }} test
+          make SHA256_BACKEND=hacl CC=${{ matrix.compiler }} test
+      - name: Build independent Rust CLI binaries
+        run: |
+          set -euo pipefail
+          TOMBSTONE_SHA256_BACKEND=hacl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$${{ matrix.runner }}_TEMP/hacl" cargo build -p tombstone-cli --release --offline --locked
+          TOMBSTONE_SHA256_BACKEND=openssl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$${{ matrix.runner }}_TEMP/openssl" cargo build -p tombstone-cli --release --offline --locked
+      - name: Independently check exact receipt fixtures and digest parity
+        run: |
+          python3 tools/check_portability.py \
+            "$${{ matrix.runner }}_TEMP/hacl/release/tombstone" \
+            "$${{ matrix.runner }}_TEMP/openssl/release/tombstone"
+      - name: Test complete HACL Rust FFI and CLI workspace
+        run: TOMBSTONE_SHA256_BACKEND=hacl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$${{ matrix.runner }}_TEMP/hacl-tests" cargo test --workspace --offline --locked
