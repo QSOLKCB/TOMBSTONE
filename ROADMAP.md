@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–10 are merged. v0.1.0 is an immutable source release. Phase 11 is an open development PR with executed Frama-C/WP verification of the actual public C99 wrapper and both private hash-staging helpers: 18/18, 23/23, and 47/47 goals discharged. Independent exact-head review remains required before merging. The external SHA-256 provider contract is an assumption, not a verified cryptographic implementation.**
+**Phases 0–11 are merged. v0.1.0 remains an immutable source release. Phase 12 is a DRAFT PR testing the actual C99/OpenSSL SHA provider's error/output/resource boundary through GCC/Clang injected failures. The SHA-256 algorithm and external EVP internals are still not formally verified; see the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md).**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -15,14 +15,27 @@
 | **8 — Direct C99 bounded verification** | CBMC on actual C99 splice and observation | Mandatory unwind checks, symbolic inputs ≤4 bytes | Merged |
 | **9 — Unbounded splice relation proof** | Production C99 splice helper with ACSL contracts and loop invariants | Frama-C/WP: 35/35 executed; exact-head review | Merged |
 | **10 — Public witness validation proof** | Actual C99 prehash argument/length/mismatch decision helper; synthetic SHA failure tests | Frama-C/WP 25/25, exact-head review | Merged |
-| **11 — Whole-wrapper modular proof** | Actual public `tb_witness_delete` plus `fingerprints` helper under external SHA-256 contract | Separate Frama-C/WP checks of each source function; all nonzero goals, RTE and original CI | Three production-source WP targets proved 88/88; exact-head review and merge pending |
-| **Later proof expansion** | Real SHA-256/OpenSSL provider, ABI/compiled code, receipt chain, VST/CompCert | Separate complete proofs and explicit assumptions | Planned |
+| **11 — Whole-wrapper modular proof** | Actual public `tb_witness_delete`, `fingerprints` and `witness_stage` under assumed SHA provider contract | Frama-C/WP 18/18, 23/23, 47/47 (88/88), exact-head review | Merged |
+| **12 — Actual SHA provider boundary** | Actual C99 SHA wrapper + real EVP with test-only failure injection, source identity ledger | GCC + Clang negative/positive outcomes, exact-head CI/review | Draft PR — executed evidence, no SHA theorem |
+| **13 — Verified SHA digest primitive** | Select, validate and integrate a machine-checked SHA-256 implementation or proof of the exact provider | Algorithm correctness theorem, ABI/refinement, vectors, side-by-side replay | Planned; OpenSSL presently trusted |
+| **14 — Canonical receipts and chains** | Formalize actual C99 v1 JSON encode/parse/chain invariants | Parser bounds, canonical bytes, chain links, tamper rejection | Planned |
+| **15 — Rust and compiler refinement** | FFI ownership/ABI and target-specific verified compilation | No C/Rust semantic gap for declared platforms | Planned |
+| **16 — Platform and provenance closure** | Trusted heads, witness signatures, target models, irreversible event caveats | Independent anchors where applicable; explicit unresolved physics/hardware premises | Planned |
 
-## Phase 11 — Whole-wrapper modular source proof attempt
+
+## Phase 12 — Provider boundary under live OpenSSL
+
+- Production `src/crypto/fingerprint.c` remains unchanged and is pinned by its Git blob SHA in `machine/formal/phase12-provider-boundary-v1.json`.
+- The Linux/GNU linker `--wrap` harness compiles **that actual C99 file** and calls genuine OpenSSL EVP on positive paths while injecting failures at each external allocation/init/update/final boundary, including the incorrect digest-length case.
+- It verifies observed return statuses, unchanged caller digest on errors, cleanup of contexts allocated on each reachable injected path, streaming failure-state handling and actual NIST digests. Executed successfully on **GCC and Clang** at [run 41316764004](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41316764004).
+- This is *adversarial execution evidence*, not an unbounded proof of OpenSSL or SHA-256 correctness. Phase 13 must close the algorithm/provider assumption before making that claim.
+- The ordered programme, explicit nonclaims and platform assumptions are in [docs/ASSUMPTION_LEDGER.md](docs/ASSUMPTION_LEDGER.md).
+
+## Phase 11 — Whole-wrapper modular source proof (completed)
 
 - Development source refactors the existing local evidence construction into a private production `witness_stage` helper, preserving the public C ABI and API semantics. A verification-only translation unit includes the actual development `src/core/deletion.c` and adds ACSL contracts to the real `fingerprints` and `witness_stage` helpers.
 - Three **separate** Frama-C/WP targets were successfully executed: `fingerprints` 18/18, `witness_stage` 23/23, and `tb_witness_delete` 47/47 at [run 41314458282](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41314458282). Phase 9's splice relation and Phase 10's prehash status checker remain required independent proofs.
-- The external `tb_sha256_bytes` contract is **assumed**; it is not an OpenSSL or SHA-256 proof. No successful whole-wrapper claim is made until both Phase 11 proof logs discharge 100% of nonzero goals, with RTE obligations enabled.
+- The external `tb_sha256_bytes` contract is **assumed**; it is not an OpenSSL or SHA-256 proof. All three Phase 11 WP targets discharged nonzero goals; the assumption remains open for Phase 12/13.
 - Preserved negative evidence: the original full-wrapper run 41307132302 proved 35/64 with 29 timeouts; Phase 11 run 41312320907 proved `fingerprints` 18/18 but the wrapper only 49/61 (12 timeouts); staging runs 41312928221 and 41314042829 were incomplete. After the live production refactor, run 41314458282 passed all three proof targets. Timeout, unproved memory-framing or a missing solver report is a hard stop.
 - Preserve the published v0.1.0 tag, source archive, ABI, input-retention policy, receipt format and original test vectors.
 
