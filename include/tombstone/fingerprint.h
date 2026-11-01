@@ -20,7 +20,8 @@ typedef enum tb_status {
     TB_ERR_LENGTH = 2,
     TB_ERR_MEMORY = 3,
     TB_ERR_CRYPTO = 4,
-    TB_ERR_STATE = 5
+    TB_ERR_STATE = 5,
+    TB_ERR_MISMATCH = 6 /* Phase 2: witnessed splice does not match */
 } tb_status;
 
 typedef struct tb_sha256_ctx tb_sha256_ctx;

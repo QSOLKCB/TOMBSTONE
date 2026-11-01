@@ -1,6 +1,6 @@
 # Security and privacy model
 
-**Scope today:** Phase 1 implements a pure C99 SHA-256 fingerprint library using OpenSSL EVP, alongside illustrative documentation fixtures. Deletion witnessing, receipts, secure erasure and user interfaces are not implemented. The new library accepts caller-supplied byte buffers, not filenames, and does not delete or save data. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
+**Scope today:** Phase 1 implements C99 SHA-256 through OpenSSL EVP. Phase 2 adds caller-supplied, exact byte-splice verification and observed-transition classification (review pending), returning only in-memory digests/lengths/offset. Neither library function opens files, deletes data, logs removed bytes nor serializes receipts. Secure erasure, historic attestation, receipt chains and user interfaces are not implemented. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
 
 ## Nonclaims
 
@@ -9,6 +9,10 @@
 - A hash of a predictable secret (PIN, short token, common phrase) can be brute-forced by guesses. A plain SHA-256 digest may disclose whether a guessed value was deleted.
 - Receipt chains offer tamper evidence against changes *relative to an independently trusted hash head*. An attacker can rewrite an unanchored chain wholesale.
 - Editors, swap, journals, storage snapshots, backups and caller memory may retain plaintext long after receipt creation.
+
+## Phase 2 limitations
+
+Witnessing verifies a mathematical splice identity, **not an externally authenticated edit event**. The caller supplies before/after/deleted bytes and an offset. Repeated bytes may make multiple offsets equally valid. The API never deduces deleted bytes from snapshots. Results are not confidential: SHA-256 of a short predictable secret can be guessed. Input pointers remain caller-owned and may still appear in swap, backups or editor history. Outputs and inputs must be disjoint; C99 cannot validate arbitrary caller pointer extents.
 
 ## Planned controls
 

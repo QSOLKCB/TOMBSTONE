@@ -2,7 +2,7 @@
 
 ## Boundary and maturity
 
-This is a staged target design. **Phase 1 has implemented the C99 SHA-256 fingerprint core** using OpenSSL EVP. No production deletion witnessing, receipt engine, Rust interface or GTK UI exists yet. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
+This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprinting and exact deletion-splice verification**. Phase 2 is proposed in this PR pending review; there is no receipt serializer, filesystem edit facility, Rust interface or GTK UI. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
 
 \`\`\`text
              Human terminal        Agents/scripts          Optional desktop
@@ -32,11 +32,11 @@ This is a staged target design. **Phase 1 has implemented the C99 SHA-256 finger
 
 **Phase 1 implemented:** `include/tombstone/fingerprint.h` provides a versioned public C ABI for one-shot/streaming SHA-256, hexadecimal output and explicit argument, state, allocation and length errors. `src/crypto/fingerprint.c` delegates cryptography to OpenSSL EVP. Tests and reproducible archive builds run in GitHub Actions. This implementation has no file I/O, no direct deletion, and no receipt parser.
 
+**Phase 2 implemented (pending PR review):** `include/tombstone/deletion.h` and `src/core/deletion.c` classify full before/after buffers and validate caller-provided exact deletion splices, returning only hashes, sizes and the verified claimed offset. The output is an in-memory C99 struct, **not** JSON. An observed transition never infers a removed span; multiple offsets can satisfy repeated-byte cases.
+
 **Later phases must add:**
 
-- Binary-safe buffers with explicit lengths; no assumptions about NUL terminators, encodings, or platform newline conventions.
-- Defined ownership and allocation/error handling at the C ABI boundary. Use C99-compatible headers and an explicit ABI version when implemented.
-- A small wrapper around a vetted SHA-256 implementation/backend, backed by known-answer vectors; do not invent a new hash primitive.
+- Additional adversarial hardening and cross-platform ABI evidence beyond the implemented binary-safe APIs.
 - Deterministic receipt serialization and independent input validation. Reject duplicate JSON keys and unknown versions.
 - No network access, telemetry, implicit content retention or automatic filesystem deletion.
 
@@ -55,7 +55,7 @@ This is a staged target design. **Phase 1 has implemented the C99 SHA-256 finger
 | \`observed-transition\` | Before/after bytes or trustworthy fingerprints | An observed change, **not** a proven removal |
 | \`unchanged\` | Identical before/after byte contents | No detected change; **not** a deletion |
 
-An arbitrary diff is not a trustworthy statement of which exact bytes a person deleted: insertions, replacements and repeated substrings permit ambiguities. Source attribution and independent witnessing require separate mechanisms.
+Phase 2 validates `before == prefix || removed || suffix` and `after == prefix || suffix` for a **caller-supplied** offset; it does not prove a real-world edit occurred. An arbitrary diff is not a trustworthy statement of which exact bytes a person deleted: insertions, replacements and repeated substrings permit ambiguities. Source attribution and independent witnessing require separate mechanisms.
 
 ### Candidate receipt v1
 
@@ -79,8 +79,8 @@ Persist only receipt metadata: event kind, digests, byte lengths, optional verif
 \`\`\`text
 docs/                      human explanations, threat model, decisions, asset
 machine/                   JSON Schema and machine-readable example receipts
-include/tombstone/         proposed public C99 API headers
-src/{core,crypto,encoding}/ C99 engine implementation targets
+include/tombstone/         public C99 fingerprint and deletion-evidence headers
+src/{core,crypto,encoding}/ implemented splice and crypto core; encoding planned
 bindings/rust/             Rust FFI adapter target
 apps/{cli,tui,gtk}/        Rust interface targets (GTK optional)
 tests/{unit,integration,fixtures}/ validation targets + public toy fixture

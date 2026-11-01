@@ -7,31 +7,29 @@
   <em>The data is gone from the receipt. The tombstone has a checksum.</em>
 </p>
 
-TOMBSTONE is a **C99-first** project for deterministic, independently checkable evidence about file transitions and, when removed bytes are actually witnessed, explicit deletion events.
+TOMBSTONE is a **C99-first** project for deterministic, independently checkable evidence about file transitions and explicit caller-witnessed deletion splices.
 
-**Implementation status:** Phase 0 documentation is established. Phase 1 provides a working **binary-safe C99 SHA-256 fingerprint library**, backed by OpenSSL EVP, with a minimal versioned public C ABI. **Deletion witnessing, receipts, strict JSON verification, Rust CLI/TUI and GTK are still planned.** The receipt v1 schema is a proposal, not a released protocol.
+**Implementation status:** Phases 0–1 are merged; **Phase 2 is implemented in this PR, pending review**. The native C99 library can hash binary buffers, distinguish identical from changed buffers, and verify a caller-supplied exact deletion span and offset against before/after bytes. **No filesystem deletion, JSON receipt serializer, chain verifier, Rust CLI/TUI, or GTK exists yet.** The versioned machine receipt schema remains a proposal for Phase 3.
 
-- **C99 logic:** SHA-256 fingerprinting implemented; deletion/receipt logic follows in later phases.
-- **Rust CLI + TUI:** planned interfaces for agents and humans using the C99 core.
-- **Optional GTK4:** future desktop GUI, not a requirement of the engine.
-- **Separate documentation:** human prose in root Markdown and [docs](docs/INDEX.md), candidate machine contract in [machine/](machine/README.md).
+- **C99 engine:** OpenSSL EVP SHA-256 (Phase 1) and exact-splice witnessing/observed transitions (Phase 2).
+- **Evidence boundary:** a verified splice establishes a mathematical relationship among supplied buffers—not who performed an edit, whether it happened historically, or whether bytes were securely erased.
+- **Rust CLI + TUI:** planned agent/human interfaces; **GTK4** remains optional.
+- **Document separation:** human prose in root Markdown and [docs](docs/INDEX.md), machine schemas/examples in [machine/](machine/README.md).
 
-## Build and verify the Phase 1 C99 library
+## Build and test
 
-Requires a C99 compiler, GNU Make, GNU ar, \`pkg-config\` and OpenSSL development headers/library (e.g. \`libssl-dev\` on Ubuntu).
+Requires C99 compiler, GNU Make, GNU ar, pkg-config, and OpenSSL development libraries (Ubuntu: \`build-essential pkg-config libssl-dev\`).
 
 \`\`\`sh
-make                  # creates build/libtombstone.a
-make test             # C99 vectors, binary bytes, streaming, error handling, public link
-make reproducibility  # two independent identical static-library builds
-make sanitizer-test   # ASan and UBSan
-make docs-check       # original documentation/receipt fixture checks
+make                  # build/libtombstone.a
+make test             # Phase 1 SHA-256 plus Phase 2 splice and negative tests
+make sanitizer-test   # ASan + UBSan (GCC)
+make reproducibility  # compare two independent deterministic static archives
+make docs-check       # original machine receipt toy fixtures (not a verifier)
 \`\`\`
 
-Public C ABI: [include/tombstone/fingerprint.h](include/tombstone/fingerprint.h). See the [API guide](docs/FINGERPRINT_API.md) and [getting started](GETTING_STARTED.md).
+Public headers: [fingerprint.h](include/tombstone/fingerprint.h), [deletion.h](include/tombstone/deletion.h). See [Phase 2 API guide](docs/DELETION_WITNESS.md), [fingerprint API](docs/FINGERPRINT_API.md), and [getting started](GETTING_STARTED.md).
 
-**Important:** A before/after SHA-256 comparison cannot reveal which bytes were deleted. Fingerprints are not proof of secure erasure or confidentiality; a hash of predictable data may be guessable.
+**Privacy warning:** SHA-256 is not encryption. Fingerprints of short, guessable removed data can be brute-forced. No real deleted content is retained in the output evidence structure; callers are responsible for their own buffers, editor histories and backups.
 
-Project instructions: [ARCHITECTURE.md](ARCHITECTURE.md), [INVARIANTS.md](INVARIANTS.md), [AGENTS.md](AGENTS.md), [ROADMAP.md](ROADMAP.md), [SECURITY.md](SECURITY.md).
-
-Existing repository license: [Apache-2.0](LICENSE).
+Governance: [ARCHITECTURE.md](ARCHITECTURE.md), [INVARIANTS.md](INVARIANTS.md), [AGENTS.md](AGENTS.md), [ROADMAP.md](ROADMAP.md), [SECURITY.md](SECURITY.md). License: [Apache-2.0](LICENSE).

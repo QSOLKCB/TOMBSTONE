@@ -1,5 +1,7 @@
 # Receipt format v1 — candidate design, not released
 
+Phase 2 returns `tb_evidence_v1` (in-memory C99) with before/after hashes and optional verified removed-span hash and offset. It does **not** create JSON receipts; the following Phase 3 contract is still a proposal.
+
 The machine source of truth is [the JSON Schema](../machine/schemas/receipt-v1.schema.json), and the separately stored [JSON examples](../machine/examples/) are illustrative test vectors. This page is human prose, **not a second machine contract**.
 
 ## Record fields
