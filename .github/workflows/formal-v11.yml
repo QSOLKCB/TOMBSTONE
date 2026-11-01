@@ -35,6 +35,14 @@ jobs:
             sh -c 'frama-c -version && frama-c -wp -wp-fct fingerprints -wp-prover alt-ergo -wp-timeout 30 -wp-rte -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/formal/framac/witness_wrapper_v11.c' \
             2>&1 | tee phase11-fingerprints.log
           python3 tools/check_wp_proofs.py phase11-fingerprints.log
+      - name: Prove production witness staging helper (all three SHA paths)
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct witness_stage -wp-prover alt-ergo -wp-timeout 30 -wp-rte -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/formal/framac/witness_wrapper_v11.c' \
+            2>&1 | tee phase11-stage.log
+          python3 tools/check_wp_proofs.py phase11-stage.log
       - name: Prove actual public witnessed-delete wrapper
         run: |
           set -euo pipefail
@@ -51,5 +59,6 @@ jobs:
           path: |
             phase11-fingerprints.log
             phase11-wrapper.log
+            phase11-stage.log
           if-no-files-found: warn
           retention-days: 30

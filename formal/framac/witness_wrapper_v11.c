@@ -39,6 +39,35 @@ static tb_status fingerprints(const void *before, size_t before_size,
                               const void *after, size_t after_size,
                               tb_evidence_v1 *temp);
 
+/* Stage proof: the actual private C99 function, under the independently
+ * discharged fingerprints contract and still-assumed SHA provider contract.
+ */
+/*@
+  requires \valid(tmp);
+  requires before_size == 0 ||
+    \valid_read(((const char *)before)+(0 .. before_size-1));
+  requires after_size == 0 ||
+    \valid_read(((const char *)after)+(0 .. after_size-1));
+  requires removed_size == 0 ||
+    \valid_read(((const char *)removed)+(0 .. removed_size-1));
+  requires \separated(tmp, ((const char *)before)+(0 .. before_size-1));
+  requires \separated(tmp, ((const char *)after)+(0 .. after_size-1));
+  requires \separated(tmp, ((const char *)removed)+(0 .. removed_size-1));
+  assigns *tmp;
+  ensures \result == TB_OK || \result == TB_ERR_CRYPTO ||
+          \result == TB_ERR_MEMORY;
+  ensures \result == TB_OK ==>
+    (tmp->kind == TB_EVIDENCE_EXPLICIT_DELETE &&
+     tmp->before_size == before_size &&
+     tmp->after_size == after_size &&
+     tmp->deleted_size == removed_size &&
+     tmp->deleted_offset == offset);
+*/
+static tb_status witness_stage(const void *before, size_t before_size,
+                               const void *removed, size_t removed_size,
+                               size_t offset, const void *after,
+                               size_t after_size, tb_evidence_v1 *tmp);
+
 /* Exact byte identity is mandatory for any successful or hash-reached
  * return. This is an INTENDED contract; full-wrapper WP is not yet proved.
  */

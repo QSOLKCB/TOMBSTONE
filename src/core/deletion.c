@@ -181,6 +181,28 @@ static tb_status witness_header_status(const void *before, size_t before_size,
     return TB_OK;
 }
 
+/* The production witness staging path keeps all SHA writes in local
+ * evidence until every provider operation succeeds. Caller outputs are
+ * published only by tb_witness_delete after this function returns TB_OK.
+ */
+static tb_status witness_stage(const void *before, size_t before_size,
+                               const void *removed, size_t removed_size,
+                               size_t offset, const void *after,
+                               size_t after_size, tb_evidence_v1 *tmp)
+{
+    tb_status st;
+    memset(tmp, 0, sizeof(*tmp));
+    tmp->kind = TB_EVIDENCE_EXPLICIT_DELETE;
+    tmp->before_size = before_size;
+    tmp->after_size = after_size;
+    tmp->deleted_size = removed_size;
+    tmp->deleted_offset = offset;
+
+    st = fingerprints(before, before_size, after, after_size, tmp);
+    if (st != TB_OK) return st;
+    return tb_sha256_bytes(removed, removed_size, tmp->deleted_sha256);
+}
+
 tb_status tb_witness_delete(const void *before, size_t before_size,
                             const void *removed, size_t removed_size,
                             size_t offset,
@@ -203,21 +225,9 @@ tb_status tb_witness_delete(const void *before, size_t before_size,
         return TB_ERR_MISMATCH;
     }
 
-    memset(&tmp, 0, sizeof(tmp));
-    tmp.kind = TB_EVIDENCE_EXPLICIT_DELETE;
-    tmp.before_size = before_size;
-    tmp.after_size = after_size;
-    tmp.deleted_size = removed_size;
-    tmp.deleted_offset = offset;
-
-    st = fingerprints(before, before_size, after, after_size, &tmp);
-    if (st != TB_OK) {
-        return st;
-    }
-    st = tb_sha256_bytes(removed, removed_size, tmp.deleted_sha256);
-    if (st != TB_OK) {
-        return st;
-    }
+    st = witness_stage(before, before_size, removed, removed_size,
+                       offset, after, after_size, &tmp);
+    if (st != TB_OK) return st;
     *out = tmp;
     return TB_OK;
 }
