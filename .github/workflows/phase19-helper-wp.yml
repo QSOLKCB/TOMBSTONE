@@ -1,0 +1,42 @@
+name: Phase 19 — actual C99 helper refinements
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  actual-equal32-wp:
+    name: Actual C99 equal32 WP under documented libc memcmp semantics
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate exact source and generate ACSL proof
+        run: |
+          set -euo pipefail
+          python3 tools/phase19_equal32_overlay.py --output phase19_equal32.c
+          python3 tests/formal/test_phase19_overlay.py
+          python3 tools/check_phase18_receipt.py
+          python3 tools/check_phase17_evidence.py
+          python3 tools/check_phase14_evidence.py
+          gcc -std=c99 -Werror -Wall -Wextra -Wpedantic -Iinclude -c phase19_equal32.c -o /tmp/phase19-equal32.o
+      - name: Prove actual equal32 function, require every goal
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct equal32 -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 35 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19_equal32.c' \
+            2>&1 | tee phase19-equal32.log
+          python3 tools/check_wp_proofs.py phase19-equal32.log
+          grep -q 'function equal32' phase19-equal32.log || grep -q 'equal32' phase19-equal32.log
+      - name: Archive full WP proof or failure logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tombstone-phase19-equal32
+          path: phase19-equal32.log
+          if-no-files-found: warn
+          retention-days: 30
