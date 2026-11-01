@@ -10,7 +10,7 @@ HACL_COMPAT_FLAGS := -Wno-pedantic
 EXTRA_OBJ := $(BUILD_DIR)/hacl_sha2.o
 HASH_LIBS :=
 HACL_ROOT := vendor/hacl-star
-HACL_INC := -I$(HACL_ROOT)/dist/gcc-compatible -I$(HACL_ROOT)/dist/karamel/include -I$(HACL_ROOT)/dist/karamel/krmllib/dist/minimal
+HACL_INC := -D_DEFAULT_SOURCE -I$(HACL_ROOT)/dist/gcc-compatible -I$(HACL_ROOT)/dist/karamel/include -I$(HACL_ROOT)/dist/karamel/krmllib/dist/minimal
 else ifeq ($(SHA256_BACKEND),openssl)
 BUILD_DIR ?= build
 FINGERPRINT_SOURCE := src/crypto/fingerprint.c
