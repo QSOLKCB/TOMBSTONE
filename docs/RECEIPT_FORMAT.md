@@ -1,6 +1,6 @@
-# Receipt format v1 — candidate design, not released
+# Receipt format v1 — implemented C99 profile, pending release review
 
-Phase 2 returns `tb_evidence_v1` (in-memory C99) with before/after hashes and optional verified removed-span hash and offset. It does **not** create JSON receipts; the following Phase 3 contract is still a proposal.
+Phase 2 returns `tb_evidence_v1`; Phase 3 now creates, parses and verifies the following constrained C99 receipt-v1 JSON format and its hash links (pending review). See [RECEIPT_ENGINE.md](RECEIPT_ENGINE.md). This is **not** proof of historical deletion.
 
 The machine source of truth is [the JSON Schema](../machine/schemas/receipt-v1.schema.json), and the separately stored [JSON examples](../machine/examples/) are illustrative test vectors. This page is human prose, **not a second machine contract**.
 
@@ -26,6 +26,6 @@ The illustrative chain is deliberately ordered: \`explicit-delete-v1.json\` (gen
 
 ## Validation layers
 
-JSON Schema checks shape; cryptographic logic checks raw digests; splice verification checks that \`before == prefix || deleted || suffix\` and \`after == prefix || suffix\`; chain verification checks previous hashes. The docs fixture script checks only known illustrative data and constrained canonical hash calculations; it does not implement full RFC 8785 or general JSON Schema processing and **must not be shipped as a verifier**.
+JSON Schema checks shape; cryptographic logic checks raw digests; splice verification checks that \`before == prefix || deleted || suffix\` and \`after == prefix || suffix\`; chain verification checks previous hashes. The C99 receipt engine validates and hashes the restricted v1 schema; the independent Python docs checker remains illustrative and **must not be shipped as a verifier**.
 
 A receipt is evidence of an assertion under the witnessing system. Without trusted observation or a separately anchored chain it is not standalone proof of the claimed real-world action.

@@ -18,9 +18,9 @@ Follow [ARCHITECTURE.md](ARCHITECTURE.md), [INVARIANTS.md](INVARIANTS.md) and [R
 
 Review the **exact head SHA**; report only actionable correctness/security defects with minimal reproduction, expected vs actual results and whether executed or reasoned. Do not re-report fixed findings. Propose small PRs with tests and clear rollback. Do not merge merely because another PR passed review.
 
-## C99 Phases 1–2 engine and test commands
+## C99 Phases 1–3 engine and test commands
 
-\`make\` builds the native static archive. Requires OpenSSL development headers and pkg-config. C99 SHA-256 resides in `src/crypto/fingerprint.c`; verified splice and classification in `src/core/deletion.c`. Public headers are `include/tombstone/fingerprint.h` and `include/tombstone/deletion.h`.
+\`make\` builds the native static archive. Requires OpenSSL development headers and pkg-config. C99 SHA-256 resides in `src/crypto/fingerprint.c`; verified splice and classification in `src/core/deletion.c`. Public headers additionally include `include/tombstone/receipt.h`; JSON encoding and parser live in `src/encoding/receipt.c`.
 
 \`\`\`sh
 make
@@ -32,6 +32,6 @@ make docs-check
 
 **Implemented:** C99 one-shot/streamed SHA-256, exact-splice verification with required nonempty removed span and offset, and observed-change/no-op classification without deletion inference. Return only SHA-256, sizes and offset; failure leaves output untouched.
 
-**Not implemented:** historical proof of editing, filesystem deletion, canonical serialized receipts, Rust CLI/TUI or GTK. Never claim that before/after hashes prove removed bytes.
+**Not implemented:** historical proof of editing, filesystem deletion, Rust CLI/TUI or GTK. Canonical v1 JSON and hash-link verification are implemented; a trusted head from outside the local chain remains required to detect wholesale rewriting. Never claim that before/after hashes prove removed bytes.
 
 Review the **exact head SHA** and distinguish executed tests from inferred results. Keep each future milestone narrow, evidence-gated and independently reviewable.

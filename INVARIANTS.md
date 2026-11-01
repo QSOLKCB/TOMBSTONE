@@ -1,6 +1,6 @@
 # Invariants — design requirements
 
-**Status:** Phase 1 implements TMB-001 and Phase 2 implements the **in-memory byte verification portions** of TMB-002–005, TMB-009 and TMB-014, pending review. Durable receipt and chain requirements remain for Phase 3. \`make docs-check\` checks illustrative fixtures, not the real engine; \`make test\`, \`make sanitizer-test\` and \`make reproducibility\` exercise the new library.
+**Status:** Phase 1 implements TMB-001 and Phase 2 implements the **in-memory byte verification portions** of TMB-002–005, TMB-009 and TMB-014, pending review. Phase 3 implements receipt encoding, parsing, hash checks and chain validation (pending review); no external anchoring or real-world event authentication is implemented. \`make docs-check\` checks illustrative fixtures, not the real engine; \`make test\`, \`make sanitizer-test\` and \`make reproducibility\` exercise the new library.
 
 | ID | Requirement | Required future validation |
 | --- | --- | --- |
@@ -20,4 +20,4 @@
 | TMB-014 | The SHA-256 empty-input digest is valid but never by itself evidence of a deletion. | Empty vs no-op tests |
 | TMB-015 | A chain can be rewritten in full without a trusted external anchor. | Threat model and anchoring checks |
 
-**Boundary:** JSON Schema handles syntax and basic conditional structure, not splice equality, signature authenticity, hash correctness, or chain integrity. Phase 2 tests byte-exact splice relationships and reports `TB_ERR_MISMATCH` on false witnesses; Phase 3 still needs executable receipt and chain checks. A historical diff must never be promoted to a witnessed deletion.
+**Boundary:** JSON Schema handles syntax and basic conditional structure, not splice equality, signature authenticity, hash correctness, or chain integrity. Phase 2 tests byte-exact splice relationships and reports `TB_ERR_MISMATCH` on false witnesses; Phase 3 now provides executable receipt and chain checks for the v1 format. A historical diff must never be promoted to a witnessed deletion.

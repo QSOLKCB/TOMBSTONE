@@ -1,4 +1,4 @@
-# TOMBSTONE Phases 1-2: C99 SHA-256 fingerprinting and witnessed splices.
+# TOMBSTONE Phases 1-3: C99 SHA-256, witnessed splices, canonical receipts.
 CC = cc
 AR = ar
 PKG_CONFIG ?= pkg-config
@@ -10,8 +10,8 @@ OPENSSL_CFLAGS := $(shell $(PKG_CONFIG) --cflags openssl)
 OPENSSL_LIBS := $(shell $(PKG_CONFIG) --libs openssl)
 
 LIB := $(BUILD_DIR)/libtombstone.a
-OBJ := $(BUILD_DIR)/fingerprint.o $(BUILD_DIR)/deletion.o
-TEST_UNIT := $(BUILD_DIR)/test_fingerprint $(BUILD_DIR)/test_deletion
+OBJ := $(BUILD_DIR)/fingerprint.o $(BUILD_DIR)/deletion.o $(BUILD_DIR)/receipt.o
+TEST_UNIT := $(BUILD_DIR)/test_fingerprint $(BUILD_DIR)/test_deletion $(BUILD_DIR)/test_receipt
 TEST_INTEGRATION := $(BUILD_DIR)/test_public_link $(BUILD_DIR)/test_deletion_link
 TESTS := $(TEST_UNIT) $(TEST_INTEGRATION)
 
@@ -25,6 +25,9 @@ $(BUILD_DIR)/fingerprint.o: src/crypto/fingerprint.c include/tombstone/fingerpri
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(OPENSSL_CFLAGS) -Iinclude -c $< -o $@
 
 $(BUILD_DIR)/deletion.o: src/core/deletion.c include/tombstone/deletion.h include/tombstone/fingerprint.h | $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(OPENSSL_CFLAGS) -Iinclude -c $< -o $@
+
+$(BUILD_DIR)/receipt.o: src/encoding/receipt.c include/tombstone/receipt.h include/tombstone/deletion.h include/tombstone/fingerprint.h | $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(OPENSSL_CFLAGS) -Iinclude -c $< -o $@
 
 $(LIB): $(OBJ)
@@ -42,9 +45,13 @@ $(BUILD_DIR)/test_public_link: tests/integration/test_public_link.c $(LIB)
 $(BUILD_DIR)/test_deletion_link: tests/integration/test_deletion_link.c $(LIB)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(OPENSSL_CFLAGS) -Iinclude $< $(LIB) $(LDFLAGS) $(OPENSSL_LIBS) -o $@
 
+$(BUILD_DIR)/test_receipt: tests/unit/test_receipt.c $(LIB)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(OPENSSL_CFLAGS) -Iinclude $< $(LIB) $(LDFLAGS) $(OPENSSL_LIBS) -o $@
+
 test: $(TESTS)
 	$(BUILD_DIR)/test_fingerprint
 	$(BUILD_DIR)/test_deletion
+	$(BUILD_DIR)/test_receipt
 	$(BUILD_DIR)/test_public_link
 	$(BUILD_DIR)/test_deletion_link
 
