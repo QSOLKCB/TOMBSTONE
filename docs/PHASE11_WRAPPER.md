@@ -31,7 +31,7 @@ digest bytes and leaves those bytes unchanged on a provider error. It permits
 `TB_OK`, `TB_ERR_CRYPTO` and `TB_ERR_MEMORY`. We do NOT establish its hash
 algorithm's correctness, OpenSSL EVP semantics or absence of side channels.
 
-If full-wrapper WP cannot discharge **every** nonzero obligation, the PR
+If any of the THREE WP targets fails to discharge **every** nonzero obligation, the PR
 remains a draft; record proof timeouts and proved/total counts. In particular,
 a manually asserted helper contract is not enough unless that helper's own
 proof is executed, reviewed and green.
@@ -42,3 +42,9 @@ splice WP and Phase 10 prehash WP both passed on their exact source commits.
 The published `v0.1.0` tag, canonical receipt wire format, public C ABI,
 Rust clients, source archive and SHA-256 manifest remain untouched. No
 automatic merge, release tag or blanket “formally verified” badge.
+
+## Executed negative evidence
+
+- Phase 11 first run [41311888973](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41311888973): `fingerprints` 14/18; four timed-out memory preconditions; wrapper not executed.
+- Second run [41312320907](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41312320907): `fingerprints` 18/18, whole wrapper **49/61** with twelve timed-out properties (memory framing and helper call preconditions). The successful helper did **not** certify the wrapper.
+- The source refactor into `witness_stage` is an attempt to reduce the remaining complexity. Results cannot be claimed before exact-head CI completes.

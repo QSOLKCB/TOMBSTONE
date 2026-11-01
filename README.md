@@ -50,7 +50,7 @@ The GUI offers fingerprint, observed-transition, witnessed-deletion, receipt ins
 
 ## Phase 11 — Whole-wrapper modular proof attempt
 
-The [Phase 11 draft](docs/PHASE11_WRAPPER.md) attempts to prove the actual public C99 `tb_witness_delete` function compositionally, with separate Frama-C/WP verification of the existing `fingerprints` helper under an explicit assumed SHA-256 provider contract. **This remains unproved until both source-level proof gates discharge every nonzero obligation.** It is not a proof of the OpenSSL provider or of compiled binaries.
+The [Phase 11 draft](docs/PHASE11_WRAPPER.md) attempts to prove the actual public C99 `tb_witness_delete` function compositionally, with separate Frama-C/WP verification of the existing `fingerprints` helper and a new private production `witness_stage` helper under an explicit assumed SHA-256 provider contract. **This remains unproved until all three source-level proof gates discharge every nonzero obligation.** It is not a proof of the OpenSSL provider or of compiled binaries.
 
 ## Phase 10 — Public C99 wrapper proof boundary
 

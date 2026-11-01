@@ -20,10 +20,10 @@
 
 ## Phase 11 — Whole-wrapper modular source proof attempt
 
-- A verification-only translation unit includes the unmodified production `src/core/deletion.c`; it adds an ACSL contract for the real `fingerprints` private helper and reuses the public wrapper contract from Phase 10.
-- Two **separate** Frama-C/WP targets must succeed: `fingerprints` and `tb_witness_delete`. Phase 9's splice relation and Phase 10's prehash status checker remain required independent proofs.
+- Development source refactors the existing local evidence construction into a private production `witness_stage` helper, preserving the public C ABI and API semantics. A verification-only translation unit includes the actual development `src/core/deletion.c` and adds ACSL contracts to the real `fingerprints` and `witness_stage` helpers.
+- Three **separate** Frama-C/WP targets must succeed: `fingerprints`, `witness_stage` and `tb_witness_delete`. Phase 9's splice relation and Phase 10's prehash status checker remain required independent proofs.
 - The external `tb_sha256_bytes` contract is **assumed**; it is not an OpenSSL or SHA-256 proof. No successful whole-wrapper claim is made until both Phase 11 proof logs discharge 100% of nonzero goals, with RTE obligations enabled.
-- Past negative evidence remains: whole-wrapper run 41307132302 proved 35/64 with 29 timeouts. Timeout, unproved memory-framing or a missing solver report is a hard stop.
+- Negative evidence: full-wrapper run 41307132302 proved 35/64 with 29 timeouts; Phase 11 run 41312320907 proved `fingerprints` 18/18 but public wrapper only 49/61 (12 timeouts). Timeout, unproved memory-framing or a missing solver report is a hard stop.
 - Preserve the published v0.1.0 tag, source archive, ABI, input-retention policy, receipt format and original test vectors.
 
 ## Phase 10 scope and proof boundaries
