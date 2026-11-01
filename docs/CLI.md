@@ -44,6 +44,8 @@ tombstone verify-chain \
 
 **Exit codes:** \`0\` success, \`2\` command/argument error or input above 64 MiB, \`3\` C99 evidence/format/hash/chain verification error, \`4\` file or stdout I/O error. Error text is sent to stderr; stdout remains empty on failure. The tool does not include file paths or raw input bytes in diagnostic output.
 
+**Command-line encoding:** Arguments are read with `args_os()` and validated before any command is executed. Phase 4 accepts UTF-8 argument text only, including filenames. On Unix, filenames or option values containing invalid UTF-8 are **rejected with exit status 2** and a generic `tombstone: command arguments must be valid UTF-8` diagnostic; neither the raw bytes nor the filename are printed. A future OS-native path implementation may broaden filename support without changing receipt semantics. Raw **file contents** and stdin remain binary-safe.
+
 **Input constraints:** each file or stdin input is capped at 64 MiB, to avoid unbounded memory allocation. A single \`-\` can be supplied per command and reads raw stdin bytes; receipts passed to \`verify\` are checked by the C99 parser, which also enforces its own 16 KiB JSON bound. Digests for \`--previous\` and \`--trusted-head\` must be exactly 64 **lowercase** hexadecimal characters. Paths are deliberately excluded from all receipt metadata.
 
 ## Trust boundaries

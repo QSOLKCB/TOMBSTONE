@@ -174,7 +174,21 @@ fn run(args: &[String]) -> Result<(), CliError> {
 }
 
 fn main() {
-    let args: Vec<String> = env::args().skip(1).collect();
+    // env::args() panics when any Unix argument contains non-UTF-8 bytes,
+    // and Rust's panic message can disclose the supplied pathname on stderr.
+    // This version of the CLI explicitly supports only UTF-8 arguments;
+    // reject others *without ever rendering their values*.
+    let args: Vec<String> = match env::args_os()
+        .skip(1)
+        .map(|argument| argument.into_string())
+        .collect::<Result<Vec<_>, _>>()
+    {
+        Ok(arguments) => arguments,
+        Err(_) => {
+            eprintln!("tombstone: command arguments must be valid UTF-8");
+            process::exit(2);
+        }
+    };
     if let Err(error) = run(&args) {
         eprintln!("tombstone: {}", error.message);
         process::exit(error.status);

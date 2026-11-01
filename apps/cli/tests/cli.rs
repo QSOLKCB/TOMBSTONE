@@ -108,3 +108,42 @@ fn malformed_json_is_rejected_in_c99() {
     assert!(result.stdout.is_empty());
     assert!(!result.stderr.is_empty());
 }
+
+#[cfg(unix)]
+#[test]
+fn non_utf8_arguments_are_rejected_without_disclosing_paths() {
+    use std::ffi::OsString;
+    use std::os::unix::ffi::OsStringExt;
+
+    // Exact P1 regression: the supplied Unix filename contains a raw 0xff.
+    // The prior env::args() panicked (status 101) and printed the pathname.
+    let sensitive = OsString::from_vec(b"/tmp/private-customer-\xff".to_vec());
+    let result = Command::new(env!("CARGO_BIN_EXE_tombstone"))
+        .arg("hash")
+        .arg(&sensitive)
+        .output()
+        .unwrap();
+    assert_eq!(result.status.code(), Some(2));
+    assert!(result.stdout.is_empty());
+    assert_eq!(
+        result.stderr,
+        b"tombstone: command arguments must be valid UTF-8\n"
+    );
+
+    // Apply the same path-independent behavior to invalid option values.
+    let bad_option = OsString::from_vec(b"private-anchor-\xff".to_vec());
+    let result = Command::new(env!("CARGO_BIN_EXE_tombstone"))
+        .arg("observe")
+        .arg(fixture("tests/fixtures/before.txt"))
+        .arg(fixture("tests/fixtures/after.txt"))
+        .arg("--previous")
+        .arg(bad_option)
+        .output()
+        .unwrap();
+    assert_eq!(result.status.code(), Some(2));
+    assert!(result.stdout.is_empty());
+    assert_eq!(
+        result.stderr,
+        b"tombstone: command arguments must be valid UTF-8\n"
+    );
+}
