@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–14 are merged. The immutable v0.1.0 source release remains unchanged; the unbounded HACL* adapter/provider proof (#15) and full receipt-engine proof (#16) are still open. Phase 15 is a draft effort to measure real C/Rust ABI agreement and compiler-target reproducibility, not a verified binary proof. See the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md).**
+**Phases 0–15 are merged; v0.1.0 remains an immutable source release. Phase 16 is a draft target-model/external-chain-head milestone. Outstanding SHA, receipt, FFI/compiler and physical-event premises remain explicit in the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md); no release or universal hardware/erasure proof is asserted.**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -19,9 +19,16 @@
 | **12 — Actual SHA provider boundary** | Actual C99 SHA wrapper + real EVP with test-only failure injection, source identity ledger | GCC + Clang negative/positive outcomes, exact-head CI/review | Merged in PR #14 — executed failure evidence, no SHA theorem |
 | **13 — Verified SHA digest primitive** | Pinned generated HACL* SHA2-256 as optional backend; existing API and receipt wire bytes | Immutable upstream identity, fault tests, GCC/Clang x86-64/ARM64, exact parity; separate adapter/refinement proof remains required | PR #19 merged; residual provider refinement tracked in #15 |
 | **14 — Canonical receipts and chains** | Actual C99 decimal-overflow and duplicate-bit WP obligations, bounded parser model, encoder/chain adversarial replay | Nonzero complete WP/CBMC goals, GCC/Clang x86-64/ARM64, frozen v1 blob identities | PR #20 merged; full parser/chain proof still open in #16 |
-| **15 — Rust and compiler refinement** | Measured C99/Rust ABI, error/output parity, 64 MiB caps and two isolated release builds | GCC/Clang x86-64/ARM64 × OpenSSL/HACL execution, identical binary receipts, independent exact-head review | Draft implementation; source-to-binary formal refinement remains open in #17 |
-| **16 — Platform and provenance closure** | Trusted heads, witness signatures, target models, irreversible event caveats | Independent anchors where applicable; explicit unresolved physics/hardware premises | Planned |
+| **15 — Rust and compiler refinement** | Measured C99/Rust ABI, error/output parity, 64 MiB caps and two isolated release builds | GCC/Clang x86-64/ARM64 × OpenSSL/HACL execution, identical binary receipts, independent exact-head review | PR #21 merged; full source-to-binary refinement still open in #17 |
+| **16 — Platform and provenance closure** | Explicit C99 target model, externally supplied offline head file, source-linked proof/trust ledger and physical-event distinctions | Negative custody/claim-inflation tests, Linux GCC/Clang x86-64/ARM64, exact-head review | Draft PR #22; no built-in signing, real-world identity/time or secure-erasure proof |
 
+
+## Phase 16 — Target assumptions and independent evidence boundary
+
+- A test-only C99 probe enforces the declared Linux 8-bit-byte, little-endian, 64-bit pointer/`size_t` ABI; the offline machine ledger pins all pre-existing C99 source blobs, frozen v1 receipts, released source reference and A01–A09 proof/test/trust classifications.
+- Optional `verify-chain ... --trusted-head-file path` reads a strictly formatted, separately retained 32-byte SHA-256 commitment and delegates verification to the **unchanged C99** chain engine. It never creates a trusted anchor or silently trusts a chain-derived head.
+- Adversarial regressions require locally consistent rewritten chains to fail against a separately supplied earlier head, and reject malformed heads, ambiguous options, symlinks and attempts to promote conditional evidence into hardware/identity/erasure claims.
+- **Residual boundary:** external custody, identity, chronology, filesystem event sensing, physical storage erasure, compiler and firmware/hardware correctness remain unproved. No signer/key lifecycle is introduced. See [Phase 16 target-trust contract](docs/PHASE16_TARGET_TRUST.md) and issue #18.
 
 ## Phase 15 — Rust FFI ABI and target-specific build evidence
 

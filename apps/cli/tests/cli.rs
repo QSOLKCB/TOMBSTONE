@@ -182,3 +182,101 @@ fn phase15_exact_64_mib_file_cap_and_no_data_on_failure() {
     std::fs::remove_file(&path).unwrap();
     at_limit
 }
+
+
+#[test]
+fn phase16_external_head_file_fail_closed_and_rewrite_control() {
+    use std::fs;
+    use std::time::{SystemTime, UNIX_EPOCH};
+
+    const HEAD: &str = "84c0b5f9e478c284553822fb95fe31a72ce71a35070e963d67c328fb777f25e6";
+    let stamp = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos();
+    let dir = std::env::temp_dir().join(format!(
+        "tombstone-phase16-anchor-{}-{stamp}", std::process::id()
+    ));
+    fs::create_dir(&dir).unwrap();
+    let anchor = dir.join("retained-head");
+    let anchor_name = anchor.to_str().unwrap();
+    let receipts = [
+        fixture("machine/examples/explicit-delete-v1.json"),
+        fixture("machine/examples/observed-transition-v1.json"),
+        fixture("machine/examples/unchanged-v1.json"),
+    ];
+    let verify = |path: &str| {
+        command(&[
+            "verify-chain", &receipts[0], &receipts[1], &receipts[2],
+            "--trusted-head-file", path,
+        ])
+    };
+    let good = fs::write(&anchor, format!("{HEAD}\n"));
+    good.unwrap();
+    let accepted = verify(anchor_name);
+    assert!(accepted.status.success(), "{:?}", accepted.status);
+    assert!(accepted.stderr.is_empty());
+    assert!(string(&accepted.stdout).contains("\"trusted_head_checked\":true"));
+    assert!(string(&accepted.stdout).contains(HEAD));
+
+    fs::write(&anchor, HEAD).unwrap();
+    assert!(verify(anchor_name).status.success(), "newline is optional");
+
+    for payload in [
+        "0".repeat(64), "A".repeat(64), HEAD[..63].to_owned(),
+        format!("{HEAD}\r\n"), format!(" {HEAD}"), format!("{HEAD}\n\n"),
+        format!("{HEAD}x"), "☃".repeat(32),
+    ] {
+        fs::write(&anchor, payload.as_bytes()).unwrap();
+        let actual = verify(anchor_name);
+        assert!(!actual.status.success(), "bad or mismatched anchor accepted");
+        assert!(actual.stdout.is_empty(), "invalid trusted head emitted success");
+        assert!(string(&actual.stderr).starts_with("tombstone: "));
+        assert!(!string(&actual.stderr).contains(anchor_name), "anchor path disclosed");
+    }
+    fs::write(&anchor, HEAD).unwrap();
+    let missing = verify(dir.join("missing-head").to_str().unwrap());
+    assert_eq!(missing.status.code(), Some(4));
+    assert!(missing.stdout.is_empty());
+
+    let stdin_anchor = verify("-");
+    assert_eq!(stdin_anchor.status.code(), Some(2));
+    assert!(stdin_anchor.stdout.is_empty());
+
+    let combined = command(&[
+        "verify-chain", &receipts[0], &receipts[1], &receipts[2],
+        "--trusted-head", HEAD, "--trusted-head-file", anchor_name,
+    ]);
+    assert_eq!(combined.status.code(), Some(2), "two anchors must be rejected");
+    assert!(combined.stdout.is_empty());
+
+    let dir_as_anchor = verify(dir.to_str().unwrap());
+    assert_eq!(dir_as_anchor.status.code(), Some(2));
+    assert!(dir_as_anchor.stdout.is_empty());
+
+    #[cfg(unix)]
+    {
+        let link = dir.join("anchor-symlink");
+        std::os::unix::fs::symlink(&anchor, &link).unwrap();
+        let rejected = verify(link.to_str().unwrap());
+        assert_eq!(rejected.status.code(), Some(2));
+        assert!(rejected.stdout.is_empty());
+    }
+
+    // Full-chain rewrite of independently valid receipts is possible.
+    // It MUST fail when compared against an externally retained head.
+    let forged = dir.join("new-genesis.json");
+    let observe = command(&[
+        "observe", &fixture("tests/fixtures/after.txt"),
+        &fixture("tests/fixtures/before.txt"),
+    ]);
+    assert!(observe.status.success());
+    fs::write(&forged, &observe.stdout).unwrap();
+    let rewritten = forged.to_str().unwrap();
+    let local_only = command(&["verify-chain", rewritten]);
+    assert!(local_only.status.success(), "locally coherent genesis is valid unanchored");
+    let externally_checked = command(&[
+        "verify-chain", rewritten, "--trusted-head-file", anchor_name,
+    ]);
+    assert_eq!(externally_checked.status.code(), Some(3));
+    assert!(externally_checked.stdout.is_empty());
+    assert!(string(&externally_checked.stderr).starts_with("tombstone: "));
+    fs::remove_dir_all(&dir).unwrap();
+}

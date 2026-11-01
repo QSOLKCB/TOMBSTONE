@@ -1,0 +1,63 @@
+name: Phase 16 — supported target, external anchor and trust boundaries
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  target-anchor:
+    name: Trust model and external anchor (${{ matrix.compiler }} / ${{ matrix.runner }} / ${{ matrix.backend }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+        compiler: [gcc, clang]
+        backend: [openssl, hacl]
+    env:
+      CC: ${{ matrix.compiler }}
+      TOMBSTONE_SHA256_BACKEND: ${{ matrix.backend }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install C99 and Rust native test dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc clang pkg-config libssl-dev libncurses-dev
+      - name: Fail closed on claim inflation and modified evidence
+        run: |
+          set -euo pipefail
+          python3 tools/check_phase16_model.py
+          python3 tests/phase16/test_model_gate.py
+      - name: Execute C99 compiler target model probe
+        run: |
+          set -euo pipefail
+          "$CC" -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude \
+            tests/phase16/target_probe.c -o "$RUNNER_TEMP/phase16-target-probe"
+          "$RUNNER_TEMP/phase16-target-probe" > "$RUNNER_TEMP/phase16-target-probe.txt"
+          python3 tools/check_phase16_model.py \
+            --probe "$RUNNER_TEMP/phase16-target-probe.txt" \
+            --output "$RUNNER_TEMP/phase16-target-evidence.json"
+      - name: Rust CLI offline anchor and rewritten-chain negative controls
+        run: |
+          set -euo pipefail
+          CARGO_TARGET_DIR="$RUNNER_TEMP/phase16-tests" \
+            cargo test -p tombstone-ffi -p tombstone-cli --offline --locked
+      - name: Verify unchanged C99 engine with selected crypto provider
+        run: |
+          set -euo pipefail
+          make SHA256_BACKEND="$TOMBSTONE_SHA256_BACKEND" CC="$CC" test
+      - name: Retain target observation without claiming physical proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tombstone-phase16-${{ matrix.compiler }}-${{ matrix.runner }}-${{ matrix.backend }}
+          path: |
+            ${{ runner.temp }}/phase16-target-probe.txt
+            ${{ runner.temp }}/phase16-target-evidence.json
+          if-no-files-found: warn
+          retention-days: 30

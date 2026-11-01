@@ -119,3 +119,22 @@ CompCert/ABI source-to-machine theorem. Do not assert proof of Rust pointer
 provenance, optimizer, linker, native crypto or hardware from executed tests.
 Require independent exact-head Codex review and all executed CI checks before
 merging; keep issue #17 open for remaining formal refinement.
+
+## Phase 16 physical-world and target-model boundaries
+
+See [docs/PHASE16_TARGET_TRUST.md](docs/PHASE16_TARGET_TRUST.md) and issue #18.
+The C99 core, v1 schema, source baseline and frozen JSON receipts are immutable
+for this phase. `--trusted-head-file` is a Rust CLI transport-only feature:
+parse a small strict lowercase hex file, and pass the bytes to the existing
+C99 chain verifier. Never derive or automatically endorse the anchor from
+receipts under review. Fail closed on syntax, size, wrong head, ambiguous
+options and invalid file types; prevent stdout/path leakage on errors.
+
+The offline A01–A09 trust ledger must distinguish conditional proof, executed
+testing, environmental trust and evidence requiring a real-world witness.
+Probe exactly Linux x86-64/AArch64 8-bit-byte little-endian 64-bit C99
+models with GCC/Clang. Never promote Git hash matching into proof of hardware,
+signer identity, clock correctness, filesystem deletion or storage erasure.
+A separately signed or timestamped external statement needs its own custody,
+key/identity/revocation model, not merely a new flag. Exact-head CI, no
+unproved claims and independent Codex review before merge; no automatic tag.
