@@ -1,0 +1,87 @@
+name: Phase 20 — actual receipt validation and formatter contracts
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  wp:
+    name: Actual C99 prerequisites — ${{ matrix.group }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [validators, formatters, composition, hex, negative]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preserve previous proofs and generate exact-source units
+        env:
+          GROUP: ${{ matrix.group }}
+        run: |
+          set -euo pipefail
+          python3 tools/check_phase18_receipt.py
+          python3 tools/check_phase19_bridge_evidence.py
+          python3 tests/formal/test_phase20_overlay.py
+          mkdir phase20-results
+          chmod 777 phase20-results
+          python3 tools/phase20_receipt_overlay.py --output phase20-receipt.c
+          for backend in openssl hacl; do
+            python3 tools/phase20_receipt_overlay.py --hex-backend "$backend" --output "phase20-hex-$backend.c"
+          done
+          for mutant in accept-invalid bad-size error-size; do
+            python3 tools/phase20_receipt_overlay.py --mutant "$mutant" --output "phase20-$mutant.c"
+          done
+          for source in phase20-*.c; do
+            gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c "$source" -o /tmp/phase20-check.o
+          done
+          git rev-parse HEAD
+          sha256sum phase20-*.c
+      - name: Run every target with RTE and original structured reports
+        env:
+          GROUP: ${{ matrix.group }}
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-results:/out" -e GROUP -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c '
+              case "$GROUP" in
+                validators) targets="zero32 equal32 good_evidence good_receipt";;
+                formatters) targets="hex32 format_json";;
+                composition) targets="calculate_hash tb_receipt_verify_chain";;
+                hex) targets="hex-openssl hex-hacl";;
+                negative) targets="accept-invalid bad-size error-size";;
+              esac
+              status=0
+              for target in $targets; do
+                source=/repo/phase20-receipt.c
+                function=$target
+                timeout=35
+                case "$target" in
+                  hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex;;
+                  accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;
+                  bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=10;;
+                esac
+                (frama-c -version && frama-c -wp -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1
+              done
+              cat /out/*.log
+              exit "$status"
+            '
+      - name: Fail closed on partial proofs, missing inventories or unexpected diagnostics
+        run: |
+          set -euo pipefail
+          for log in phase20-results/*.log; do
+            target=$(basename "$log" .log)
+            python3 tools/check_phase20_wp.py "$target" "$log"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase20-${{ matrix.group }}
+          path: |
+            phase20-results/
+            phase20-*.c
+          retention-days: 30

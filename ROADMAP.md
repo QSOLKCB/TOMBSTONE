@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–18 are merged; v0.1.0 remains immutable. Phase 19 helper proofs merged in PR #27. P19-03 now targets caller-memory composition and ownership in a separate follow-up; see docs/PHASE19_BRIDGE.md. Source and provider assumptions remain explicit; actual WP evidence is required before declaring closure.**
+**Phases 0–18 are merged; v0.1.0 remains immutable. Phase 19 helper proofs merged in PR #27. P19-03 caller-memory composition merged in PR #29. Phase 20 targets actual receipt validation and formatter contracts; see docs/PHASE20_RECEIPT_PREREQUISITES.md. Source and provider assumptions remain explicit; actual WP evidence is required before declaring closure.**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -23,8 +23,14 @@
 | **16 — Platform and provenance closure** | Explicit C99 target model, externally supplied offline head file, source-linked proof/trust ledger and physical-event distinctions | Negative custody/claim-inflation tests, Linux GCC/Clang x86-64/ARM64, exact-head review | PR #22 merged; physical and identity/time claims remain external |
 | **17 — Direct receipt-chain verification gates** | Real C99 prehash rejection, all six frozen-fixture chain permutations and trusted-head controls | CBMC exact-source 3 targets, GCC/Clang x86-64/ARM64 × both SHA providers | PR #24 merged; prehash proof is bounded |
 | **18 — Unbounded receipt-chain WP** | Unchanged C99 verifier under explicitly assumed calculate_hash/equal32 contracts | Frama-C 32.1: 54/54 goals under RTE, unbounded invariants and source/frame gate; exact-head review | PR #26 merged; SHA/JSON/physical assumptions still open |
-| **19 — Real helper refinement** | Prove actual equal32 and calculate_hash contracts; connect conditional chain result | Exact-source Frama-C/WP with RTE, real libc/SHA assumptions, native controls and review | PR #27 merged; P19-03 follow-up PR #29; issue #28 remains open |
+| **19 — Real helper refinement** | Prove actual equal32 and calculate_hash contracts; connect conditional chain result | Exact-source Frama-C/WP with RTE, real libc/SHA assumptions, native controls and review | PR #27 and #29 merged; conditional caller-memory composition; issue #28 remains open |
 
+
+## Phase 20 — Receipt validator and formatter prerequisites
+
+- Check actual `good_receipt` and `format_json`, their internal validators and both actual hex encoders, while preserving the shared Phase 19 composition contracts.
+- Require exact-source WP with RTE, explicit libc format/string/frame premises, semantic controls, full execution evidence and fresh exact-head review. Canonical-byte meaning and actual streaming SHA-provider refinement remain separate obligations.
+- See [Phase 20 scope](docs/PHASE20_RECEIPT_PREREQUISITES.md). Initial execution status is NOT_RUN; no inherited proof acceptance.
 
 ## Phase 19 — Actual C99 helper refinement
 
