@@ -55,3 +55,31 @@ jobs:
             "$RUNNER_TEMP/openssl/release/tombstone"
       - name: Test complete HACL Rust FFI and CLI workspace
         run: TOMBSTONE_SHA256_BACKEND=hacl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$RUNNER_TEMP/hacl-tests" cargo test --workspace --offline --locked
+
+  adapter_cbmc:
+    name: Bounded C99 HACL adapter status / no-write proof (provider modeled)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm exact production adapter/model compiles as Linux C99
+        run: |
+          gcc -std=c99 -D_DEFAULT_SOURCE -Wno-pedantic -Wall -Wextra -Werror \
+            -Iinclude -Ivendor/hacl-star/dist/gcc-compatible \
+            -Ivendor/hacl-star/dist/karamel/include \
+            -Ivendor/hacl-star/dist/karamel/krmllib/dist/minimal \
+            -c formal/cbmc/hacl_adapter_harness.c -o /tmp/hacl-adapter-model.o
+      - name: Check all nonvacuous bounded properties and loop unwinding
+        run: |
+          set -euo pipefail
+          for target in check_one_shot check_stream check_invalid; do
+            timeout 300 docker run --rm --entrypoint cbmc -v "$PWD:/repo:ro" -w /repo \
+              ghcr.io/diffblue/cbmc:6.11.0 \
+              --function "$target" --unwind 96 --unwinding-assertions \
+              --bounds-check --pointer-check --signed-overflow-check --unsigned-overflow-check \
+              -D_DEFAULT_SOURCE -I include \
+              -I vendor/hacl-star/dist/gcc-compatible \
+              -I vendor/hacl-star/dist/karamel/include \
+              -I vendor/hacl-star/dist/karamel/krmllib/dist/minimal \
+              formal/cbmc/hacl_adapter_harness.c
+          done
