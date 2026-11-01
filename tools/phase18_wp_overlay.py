@@ -97,10 +97,6 @@ def main() -> None:
     data = render(content.decode("utf-8"))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(data, encoding="utf-8")
-    if git_blob(args.output.read_text(encoding="utf-8")
-                .replace(next(iter(ANNOTATIONS.values())), "").encode("utf-8")) == EXPECTED_BLOB:
-        # The other overlay assertions are already enforced by render().
-        pass
     print("PASS: ACSL overlay generated from pinned, unchanged real C99 chain verifier")
     print("LIMIT: assumed calculate_hash/equal32 contracts require separate verification")
 
