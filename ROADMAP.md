@@ -14,7 +14,7 @@
 | **7 — Hardening/release gate** | Bounded C99 fuzzing, compiler/arch replay and release evidence | CI and independently reviewed frozen source | Merged; v0.1.0 released |
 | **8 — Direct C99 bounded verification** | CBMC on actual C99 splice and observation | Mandatory unwind checks, symbolic inputs ≤4 bytes | Merged |
 | **9 — Unbounded splice relation proof** | Production C99 splice helper with ACSL contracts and loop invariants | Frama-C/WP: 35/35 executed; exact-head review | Merged |
-| **10 — Public witness validation proof** | Actual C99 prehash argument/length/mismatch decision helper; synthetic SHA failure tests | Frama-C/WP all nonzero goals discharged, C99/CBMC regression parity, exact-head review | In PR; proof outcome pending |
+| **10 — Public witness validation proof** | Actual C99 prehash argument/length/mismatch decision helper; synthetic SHA failure tests | Frama-C/WP all nonzero goals discharged, C99/CBMC regression parity, exact-head review | In PR; production prehash WP 24/24 executed, exact-head review pending |
 | **11 — Whole-wrapper modular proof** | Public `tb_witness_delete` wrapper under explicit SHA provider contract; all output/error postconditions | Decomposed Frama-C/WP including call contracts and RTE | Planned — unproved |
 | **Later proof expansion** | Wrapper error paths, hash provider, ABI/compiled code, receipt chain, VST/CompCert | Separate complete proofs and explicit assumptions | Planned |
 

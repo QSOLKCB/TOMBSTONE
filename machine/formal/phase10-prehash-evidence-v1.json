@@ -1,0 +1,39 @@
+{
+  "format": "tombstone.formal-proof-evidence",
+  "version": 1,
+  "phase": 10,
+  "subject": "production C99 prehash public witness error decision path",
+  "source_path": "src/core/deletion.c",
+  "source_git_blob_sha": "b152e484cc8f14a2cfa38c559c929b474ef2b460",
+  "proved_function": "witness_header_status",
+  "check_type": "unbounded Frama-C/WP with RTE",
+  "github_run_id": 41308068838,
+  "github_run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41308068838",
+  "reference_commit": "b2e351ba4e4b4d965337739f3cb4f5baa0dc7e04",
+  "framac_version": "32.1 Germanium",
+  "prover": "Alt-Ergo 2.5.4 and Qed",
+  "goals_total": 24,
+  "goals_proved": 24,
+  "qed_goals": 19,
+  "alt_ergo_goals": 5,
+  "native_failure_regression": "all three hash-provider call sites passed under synthetic error injection",
+  "assumptions": [
+    "C99 numeric types follow specified target semantics",
+    "The helper does not dereference caller pointers; status depends only on pointer nullness and size_t",
+    "The public wrapper uses the helper result and does not bypass the guard"
+  ],
+  "excluded_claims": [
+    "complete public tb_witness_delete wrapper functional proof",
+    "actual OpenSSL/SHA-256 cryptographic proof",
+    "Rust/compiled machine correctness",
+    "authenticated historical deletion or secure erasure"
+  ],
+  "full_wrapper_exploration": {
+    "run_id": 41307132302,
+    "goals_proved": 35,
+    "goals_total": 64,
+    "outstanding": 29,
+    "result": "INCOMPLETE — solver timeouts, not a successful proof"
+  },
+  "final_pr_head_must_rerun": true
+}
