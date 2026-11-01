@@ -69,7 +69,7 @@ HASH_CONTRACT=OLD_HASH_CONTRACT.replace(
     "  assigns out[0 .. 31];",
     """  requires \\separated(r, &model_private_provider_state);
   requires \\separated(out+(0 .. 31), &model_private_provider_state);
-  assigns out[0 .. 31];"""
+  assigns out[0 .. 31], model_private_provider_state;"""
 )
 
 GOOD=r"""/*@
