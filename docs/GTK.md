@@ -33,3 +33,7 @@ Source bytes remain binary-safe and are limited by the shared workflow layer to 
 Linux CI checks GTK build/activation in Xvfb, original golden receipt hashes, C99 parity, anchored/reordered-chain rejection, create-new save and non-UTF-8 argument privacy. CLI/TUI/C99 workflows remain independently runnable without GTK.
 
 See [architecture](../ARCHITECTURE.md), [security](../SECURITY.md) and [roadmap](../ROADMAP.md).
+
+## Multi-instance activation safety
+
+GTK routes a second process launch to the existing application. Its activation handler now presents the existing GtkApplication window rather than building another window or overwriting the shared widget pointers. When no window exists, a new one can be constructed. The `--smoke-test` path performs a second application activation on the GTK main loop and verifies that exactly one window exists and the existing-window branch executed, in addition to the C99 fingerprint check. This avoids cross-window input confusion and potential use-after-free when windows are closed out of order.

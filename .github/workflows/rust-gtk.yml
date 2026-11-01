@@ -24,8 +24,10 @@ jobs:
         run: cargo test --manifest-path apps/gtk/Cargo.toml --offline --locked
       - name: Build native desktop application
         run: cargo build --manifest-path apps/gtk/Cargo.toml --release --offline --locked
-      - name: Exercise GTK4 application activation and C99 fingerprint under Xvfb
-        run: xvfb-run -a apps/gtk/target/release/tombstone-gtk --smoke-test
+      - name: Exercise GTK4 activation, repeated activation, and C99 SHA-256 under Xvfb
+        run: |
+          xvfb-run -a apps/gtk/target/release/tombstone-gtk --smoke-test | tee gtk-smoke.txt
+          grep -q 'repeat activation reused one window' gtk-smoke.txt
       - name: Verify C99 tests and separate root Rust workspace
         run: |
           make test

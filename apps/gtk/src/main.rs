@@ -39,6 +39,8 @@ struct AppState {
     last_receipt: Option<String>,
     smoke: bool,
     smoke_ok: bool,
+    smoke_reused: bool,
+    app: *mut c_void,
 }
 impl AppState {
     fn new(smoke: bool) -> Self {
@@ -51,6 +53,7 @@ impl AppState {
             inspect: ptr::null_mut(), chain: ptr::null_mut(),
             trusted: ptr::null_mut(), save_path: ptr::null_mut(),
             output: ptr::null_mut(), last_receipt: None, smoke, smoke_ok: false,
+            smoke_reused: false, app: ptr::null_mut(),
         }
     }
 
@@ -144,6 +147,7 @@ impl AppState {
 extern "C" {
     fn gtk_application_new(id: *const c_char, flags: c_int) -> *mut c_void;
     fn gtk_application_window_new(app: *mut c_void) -> *mut c_void;
+    fn gtk_application_get_windows(app: *mut c_void) -> *mut c_void;
     fn gtk_window_set_title(window: *mut c_void, text: *const c_char);
     fn gtk_window_set_default_size(window: *mut c_void, width: c_int, height: c_int);
     fn gtk_window_set_child(window: *mut c_void, child: *mut c_void);
@@ -191,6 +195,16 @@ extern "C" {
 extern "C" {
     fn g_application_run(app: *mut c_void, argc: c_int, argv: *mut *mut c_char) -> c_int;
     fn g_application_quit(app: *mut c_void);
+    fn g_application_activate(app: *mut c_void);
+}
+
+// GTK returns a borrowed GList; use GLib's public accessor rather than
+// depending on the native GList memory layout.
+#[link(name = "glib-2.0")]
+extern "C" {
+    fn g_list_nth_data(list: *mut c_void, n: u32) -> *mut c_void;
+    fn g_idle_add(callback: unsafe extern "C" fn(*mut c_void) -> c_int,
+                  data: *mut c_void) -> u32;
 }
 
 fn c(text: &str) -> CString {
@@ -266,8 +280,19 @@ unsafe extern "C" fn clicked_save(_: *mut c_void, data: *mut c_void) {
     }
 }
 
+// On a second launch, GtkApplication routes activation to the existing process.
+// Reuse its live window; otherwise the shared AppState would be repointed to
+// widgets owned by the new window, potentially leaving dangling pointers.
 unsafe extern "C" fn activate(app: *mut c_void, data: *mut c_void) {
     let state = &mut *(data as *mut AppState);
+    let existing = g_list_nth_data(gtk_application_get_windows(app), 0);
+    if !existing.is_null() {
+        if state.smoke { state.smoke_reused = true; }
+        gtk_window_present(existing);
+        return;
+    }
+    // Any previous window has been destroyed; no old widgets are active.
+    state.last_receipt = None;
     let window = gtk_application_window_new(app);
     gtk_window_set_title(window, c("TOMBSTONE — cryptographic evidence").as_ptr());
     gtk_window_set_default_size(window, 1000, 720);
@@ -339,8 +364,31 @@ A verified splice proves only a mathematical relationship among supplied byte bu
             .and_then(|digest| engine::to_hex(&digest))
             .map(|digest| digest == HASH_ABC)
             .unwrap_or(false);
-        g_application_quit(app);
+        // Schedule a second activation AFTER this callback returns. That
+        // exercises the real GTK activation route without re-entrant &mut
+        // references to AppState. The callback verifies one window remains.
+        state.app = app;
+        if g_idle_add(smoke_repeat_activation, data) == 0 {
+            state.smoke_ok = false;
+            g_application_quit(app);
+        }
     }
+}
+
+// Called on the GTK main loop after the initial activate callback returns.
+unsafe extern "C" fn smoke_repeat_activation(data: *mut c_void) -> c_int {
+    // Read the raw pointer BEFORE reactivating, with no Rust reference held
+    // across g_application_activate's synchronous nested callback.
+    let app = (*(data as *mut AppState)).app;
+    g_application_activate(app);
+    let state = &mut *(data as *mut AppState);
+    let windows = gtk_application_get_windows(app);
+    let first = g_list_nth_data(windows, 0);
+    let second = g_list_nth_data(windows, 1);
+    state.smoke_ok = state.smoke_ok && state.smoke_reused
+        && !first.is_null() && second.is_null();
+    g_application_quit(app);
+    0 // remove the idle callback
 }
 
 fn main() {
@@ -379,7 +427,7 @@ fn main() {
         g_object_unref(app);
         if smoke {
             if code == 0 && state.smoke_ok {
-                println!("PASS: GTK4 application activated and C99 SHA-256 checked");
+                println!("PASS: GTK4 activated, repeat activation reused one window, and C99 SHA-256 checked");
                 return;
             }
             eprintln!("tombstone-gtk: GTK/C99 desktop smoke check failed");
