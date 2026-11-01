@@ -74,3 +74,18 @@ The public C99 wrapper's contracts are in `formal/framac/witness_wrapper.c`; the
 ## Assumption-closure programme (Phase 12 onward)
 
 Maintain [docs/ASSUMPTION_LEDGER.md](docs/ASSUMPTION_LEDGER.md) as the authoritative evidence-vs-assumption map. Phase 12's `tests/formal/test_provider_faults.c` links the actual `src/crypto/fingerprint.c` with real libcrypto and uses GNU `--wrap` **only in test builds** to inject external failures. Its executed GCC/Clang outcomes are *not* a proof of OpenSSL SHA-256 implementation correctness, allocator safety, or all C99 executions. Never upgrade a claim from **observed in tests** to **proved for all inputs** without separately executed formal obligations; preserve source blob identities, negative evidence and immutable `v0.1.0`.
+
+## Phase 13 optional verified-primitive candidate
+
+HACL* SHA2-256 C is vendored under `vendor/hacl-star/` at the exact SHA
+`f557259007db9933442dde10aa995c1b00bd3446` (MIT). Run
+`python3 tools/check_hacl_source.py` before `make SHA256_BACKEND=hacl test`
+and `TOMBSTONE_SHA256_BACKEND=hacl cargo test --workspace --offline --locked`.
+Never modify a vendored file without re-pinning every upstream blob and
+reviewing the provenance. Keep OpenSSL the default. The adapter,
+`src/crypto/fingerprint_hacl.c`, is not automatically covered by upstream
+F* verification. Require HACL allocator/error injection, CI parity on actual
+x86-64/ARM64 with GCC/Clang, sanitizers, documented upstream F* origin,
+explicit C/FFI/ABI refinement obligations, and exact-head independent review.
+Do not merge or describe the result as an end-to-end formal SHA proof on
+upstream proof reputation or green unit tests alone.
