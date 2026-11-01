@@ -155,3 +155,7 @@ to manufacture a pass. Existing v0.1.0 release and all v1 bytes
 remain immutable. External custody, physical deletion, provider and
 compiler proofs remain separately open. Require exact-head independent
 Codex review and green CI; do not auto-merge or tag.
+
+## Phase 18 unbounded C99 chain modular proof
+
+Generate the ACSL proof unit from the *exact, unchanged* src/encoding/receipt.c Git blob. Stripping only proof comments must reproduce the byte-identical production source; never introduce a separate toy chain. Require Frama-C/WP 32.1 with RTE, real public tb_receipt_verify_chain, arbitrary valid count, unbounded loop invariants, nonzero complete goals and exact-head reviewer approval. The equal32 and calculate_hash contracts are explicitly **assumed** and are NOT cryptographic proofs. Keep full JSON parsing/encoding, actual SHA-provider refinement, source-to-machine semantics, independent head custody and physical-event claims unresolved. The Phase 18 machine proof receipt and negative source/assumption tests are mandatory. Preserve all frozen v1 bytes and original v0.1.0; no automatic merge or tag.

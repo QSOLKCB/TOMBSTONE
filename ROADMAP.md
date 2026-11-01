@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–16 are merged; v0.1.0 remains an immutable source release. Phase 17 is a focused direct-C99 chain rejection and retained-head evidence milestone (PR #24 / issue #23). Outstanding SHA, full-receipt, FFI/compiler and physical-event premises remain explicit in the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md); no release or universal hardware/erasure proof is asserted.**
+**Phases 0–17 are merged; the original v0.1.0 source release is immutable. Phase 18 has an executed 54/54-goal *conditional* unbounded Frama-C/WP proof of the actual C99 receipt-chain loop (draft PR #26). SHA-provider and digest-equality contracts remain explicitly assumed; full receipt/parser, compiler, anchor custody and physical-event obligations remain in the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md).**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -21,8 +21,15 @@
 | **14 — Canonical receipts and chains** | Actual C99 decimal-overflow and duplicate-bit WP obligations, bounded parser model, encoder/chain adversarial replay | Nonzero complete WP/CBMC goals, GCC/Clang x86-64/ARM64, frozen v1 blob identities | PR #20 merged; full parser/chain proof still open in #16 |
 | **15 — Rust and compiler refinement** | Measured C99/Rust ABI, error/output parity, 64 MiB caps and two isolated release builds | GCC/Clang x86-64/ARM64 × OpenSSL/HACL execution, identical binary receipts, independent exact-head review | PR #21 merged; full source-to-binary refinement still open in #17 |
 | **16 — Platform and provenance closure** | Explicit C99 target model, externally supplied offline head file, source-linked proof/trust ledger and physical-event distinctions | Negative custody/claim-inflation tests, Linux GCC/Clang x86-64/ARM64, exact-head review | PR #22 merged; physical and identity/time claims remain external |
-| **17 — Direct receipt-chain verification gates** | Real C99 pre-hash reject proof targets, exhaustive frozen-fixture chain order and retained-head negative controls | CBMC exact-source 3 targets, GCC/Clang x86-64/ARM64 × both SHA providers, historical pins and exact-head review | Draft PR #24; full unbounded chain/crypto proof remains open |
+| **17 — Direct receipt-chain verification gates** | Real C99 prehash rejection, all six frozen-fixture chain permutations and trusted-head controls | CBMC exact-source 3 targets, GCC/Clang x86-64/ARM64 × both SHA providers | PR #24 merged; prehash proof is bounded |
+| **18 — Unbounded receipt-chain WP** | Unchanged C99 verifier under explicitly assumed calculate_hash/equal32 contracts | Frama-C 32.1: 54/54 goals under RTE, unbounded invariants and source/frame gate; exact-head review | Draft PR #26; conditional chain theorem executed; SHA/JSON/physical premises still open |
 
+
+## Phase 18 — Conditional unbounded C99 receipt-chain proof
+
+- Executed [Frama-C/WP run 41334542042](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41334542042) discharged **54/54** goals with RTE on the unchanged production C99 chain verifier for arbitrary valid nonempty chain counts. A generated ACSL overlay strips exactly back to the original source blob.
+- On success, the modular theorem guarantees genesis, every predecessor's 32-byte equality, and optional trusted-head byte equality; it proves no caller-memory writes.
+- **Assumed, not proved:** equal32 byte equivalence and calculate_hash status/output frame. Real SHA-256 digest correctness is neither assumed nor established. Full parser/encoder, crypto provider, machine code, OS and historical-event premises remain open. Evidence is preserved in machine/formal/phase18-unbounded-wp-v1.json. See [Phase 18 scope](docs/PHASE18_CHAIN_WP.md) and [issue #25](https://github.com/QSOLKCB/TOMBSTONE/issues/25).
 
 ## Phase 17 — Incremental A05 chain integrity
 

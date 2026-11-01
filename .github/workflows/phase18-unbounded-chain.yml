@@ -1,0 +1,103 @@
+name: Phase 18 — unbounded production C99 receipt-chain WP
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  overlay-integrity:
+    name: Exact C99 source and assumed-contract overlay negative controls
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconstruct the real C99 translation unit with only ACSL annotations
+        run: |
+          set -euo pipefail
+          python3 tools/phase18_wp_overlay.py --output "$RUNNER_TEMP/receipt_v18.c"
+          python3 tests/formal/test_phase18_overlay.py
+          python3 tests/formal/test_phase18_wp_gate.py
+          python3 tools/check_phase18_receipt.py
+          python3 tests/formal/test_phase18_receipt.py
+          python3 tools/check_phase14_evidence.py
+          python3 tools/check_phase17_evidence.py
+          python3 tools/check_phase16_model.py
+          gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude \
+            -c "$RUNNER_TEMP/receipt_v18.c" -o "$RUNNER_TEMP/receipt_v18.o"
+
+  unbounded-wp:
+    name: Real tb_receipt_verify_chain — arbitrary valid count, conditional SHA
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require exact source and generate verification-only ACSL
+        run: |
+          set -euo pipefail
+          python3 tools/phase18_wp_overlay.py --output "$PWD/receipt_v18_proof.c"
+          python3 tests/formal/test_phase18_overlay.py
+          python3 tests/formal/test_phase18_wp_gate.py
+          python3 tools/check_phase18_receipt.py
+          python3 tests/formal/test_phase18_receipt.py
+          python3 tools/check_phase14_evidence.py
+          python3 tools/check_phase17_evidence.py
+      - name: Run unbounded Frama-C/WP with RTE and no missing goals
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct tb_receipt_verify_chain -wp-model Bytes -wp-prover alt-ergo -wp-timeout 35 -wp-rte -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/receipt_v18_proof.c' \
+            2>&1 | tee phase18-chain.log
+          python3 tools/check_wp_proofs.py phase18-chain.log
+          python3 tools/check_phase18_wp_log.py phase18-chain.log
+      - name: Preserve exact solver evidence including timeouts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tombstone-phase18-unbounded-wp
+          path: phase18-chain.log
+          if-no-files-found: warn
+          retention-days: 30
+
+  native-boundaries:
+    name: Existing actual C99 chain regressions — ${{ matrix.cc }} / ${{ matrix.backend }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+        backend: [openssl, hacl]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc clang pkg-config libssl-dev
+      - name: Recheck unchanged production and historical receipt bytes
+        run: |
+          python3 tools/check_phase14_evidence.py
+          python3 tools/check_phase17_evidence.py
+          python3 tools/check_phase16_model.py
+      - name: Replay actual C99 chain and receipt suite
+        env:
+          CC: ${{ matrix.cc }}
+          SHA256_BACKEND: ${{ matrix.backend }}
+        run: |
+          set -euo pipefail
+          make CC="$CC" SHA256_BACKEND="$SHA256_BACKEND" test
+          if [[ "$SHA256_BACKEND" == "hacl" ]]; then
+            archive=build/hacl/libtombstone.a
+            libraries=""
+          else
+            archive=build/libtombstone.a
+            libraries="$(pkg-config --libs openssl)"
+          fi
+          "$CC" -std=c99 -O2 -Wall -Wextra -Wpedantic -Werror -Iinclude \
+            tests/formal/test_chain_v17.c "$archive" $libraries \
+            -o "$RUNNER_TEMP/phase18-chain"
+          "$RUNNER_TEMP/phase18-chain"

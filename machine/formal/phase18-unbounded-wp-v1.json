@@ -1,0 +1,65 @@
+{
+  "format": "tombstone.phase18.modular-wp-evidence",
+  "version": 1,
+  "phase": 18,
+  "scope": "unbounded-valid-nonempty-public-C99-chain-loop-under-assumed-calculate_hash-and-equal32",
+  "checked_commit_sha": "a22c9dc00a74389720b88ef7ee05f18f82ca4848",
+  "github_run_id": 41334542042,
+  "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41334542042",
+  "job_id": 124931454486,
+  "source": {
+    "path": "src/encoding/receipt.c",
+    "git_blob_sha": "6fe3e8014e9c38ea42c43b9133f026967a4158e3"
+  },
+  "overlay_generator": {
+    "path": "tools/phase18_wp_overlay.py",
+    "git_blob_sha": "b5efcbe605f8a33d2eea9f6d412f320198aff759",
+    "byte_identity": "strip the four generated ACSL annotations to obtain unchanged production source"
+  },
+  "wp_log_gate": {
+    "path": "tools/check_phase18_wp_log.py",
+    "git_blob_sha": "d467838d8ff0179b714636846f63870863f7922d"
+  },
+  "checker": {
+    "name": "Frama-C/WP",
+    "version": "32.1",
+    "provers": {
+      "Qed": 38,
+      "Alt-Ergo 2.5.4": 16
+    },
+    "proved": 54,
+    "total": 54,
+    "wp_rte": true,
+    "model": "Bytes",
+    "function": "tb_receipt_verify_chain",
+    "unbounded": true
+  },
+  "preconditions": [
+    "count >= 1 and count <= SIZE_MAX / sizeof(tb_receipt_v1)",
+    "valid read-only array of count receipt-v1 records",
+    "null trusted head or 32-byte readable trusted head",
+    "no undefined C behavior"
+  ],
+  "conclusions": [
+    "On TB_OK the genesis has no predecessor",
+    "On TB_OK each later receipt has a predecessor flag and matching predecessor hash bytes",
+    "On TB_OK the supplied trusted head, if any, equals the final recorded hash bytes",
+    "No writes to caller-owned receipt or trusted-head memory"
+  ],
+  "assumptions": [
+    "equal32 is pure and returns true iff its two readable 32-byte inputs have identical bytes; its memcmp implementation NOT separately proved in this milestone",
+    "calculate_hash reads one receipt, writes only its separate 32-byte output and returns one of listed statuses; no correctness of the 32-byte SHA result is assumed or proved",
+    "C caller memory valid, object and size_t semantics as defined by explicit target platform model"
+  ],
+  "exclusions": [
+    "No proof of SHA-256, OpenSSL, HACL* or true digest value",
+    "No proof of full canonical receipt parser or JSON encoder or hash-domain refinement",
+    "No assertion of independent anchor custody, authorship, timestamps, real deletion or physical erasure",
+    "No proof of GCC, Clang, Rust, system libraries, kernel, firmware or hardware",
+    "Null/invalid-count argument paths are separately covered by Phase 17 and not within Phase 18 valid-input contract"
+  ],
+  "release": {
+    "tag": "v0.1.0",
+    "changed": false
+  }
+}
