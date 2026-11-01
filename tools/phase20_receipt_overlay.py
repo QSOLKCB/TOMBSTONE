@@ -12,11 +12,11 @@ import phase19_bridge_overlay as bridge
 
 ROOT = Path(__file__).resolve().parents[1]
 PREDICATES = r"""/*@
-  predicate p20_zero{L}(const unsigned char *p) =
+  predicate p20_zero{L}(unsigned char *p) =
     \forall integer k; 0 <= k < 32 ==> p[k] == 0;
-  predicate p20_equal{L}(const unsigned char *a, const unsigned char *b) =
+  predicate p20_equal{L}(unsigned char *a, unsigned char *b) =
     \forall integer k; 0 <= k < 32 ==> a[k] == b[k];
-  predicate p20_evidence{L}(const tb_evidence_v1 *e) =
+  predicate p20_evidence{L}(tb_evidence_v1 *e) =
     e->before_size <= TB_EVIDENCE_MAX_BYTES &&
     e->after_size <= TB_EVIDENCE_MAX_BYTES &&
     e->deleted_size <= TB_EVIDENCE_MAX_BYTES &&
@@ -31,12 +31,12 @@ PREDICATES = r"""/*@
       0 < e->deleted_size <= e->before_size &&
       e->after_size == (integer)e->before_size - e->deleted_size &&
       e->deleted_offset <= (integer)e->before_size - e->deleted_size));
-  predicate p20_receipt{L}(const tb_receipt_v1 *r) =
+  predicate p20_receipt{L}(tb_receipt_v1 *r) =
     (r->has_previous == 0 || r->has_previous == 1) &&
     (r->has_previous != 0 || p20_zero(r->previous_hash)) && p20_evidence(&r->evidence);
-  predicate p20_cstr{L}(const char *s, integer bound) =
+  predicate p20_cstr{L}(char *s, integer bound) =
     \exists integer k; 0 <= k < bound && \valid_read(s+(0 .. k)) && s[k] == '\0';
-  predicate p20_text{L}(const char *a, const char *b, integer n) =
+  predicate p20_text{L}(char *a, char *b, integer n) =
     \valid_read(a+(0 .. n-1)) && \valid_read(b+(0 .. n-1)) &&
     (\forall integer k; 0 <= k < n ==> a[k] == b[k]);
 */
