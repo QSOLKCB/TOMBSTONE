@@ -23,7 +23,7 @@
 | **16 — Platform and provenance closure** | Explicit C99 target model, externally supplied offline head file, source-linked proof/trust ledger and physical-event distinctions | Negative custody/claim-inflation tests, Linux GCC/Clang x86-64/ARM64, exact-head review | PR #22 merged; physical and identity/time claims remain external |
 | **17 — Direct receipt-chain verification gates** | Real C99 prehash rejection, all six frozen-fixture chain permutations and trusted-head controls | CBMC exact-source 3 targets, GCC/Clang x86-64/ARM64 × both SHA providers | PR #24 merged; prehash proof is bounded |
 | **18 — Unbounded receipt-chain WP** | Unchanged C99 verifier under explicitly assumed calculate_hash/equal32 contracts | Frama-C 32.1: 54/54 goals under RTE, unbounded invariants and source/frame gate; exact-head review | PR #26 merged; SHA/JSON/physical assumptions still open |
-| **19 — Real helper refinement** | Prove actual equal32 and calculate_hash contracts; connect conditional chain result | Exact-source Frama-C/WP with RTE, real libc/SHA assumptions, native controls and review | PR #27 merged; P19-03 follow-up; issue #28 remains open |
+| **19 — Real helper refinement** | Prove actual equal32 and calculate_hash contracts; connect conditional chain result | Exact-source Frama-C/WP with RTE, real libc/SHA assumptions, native controls and review | PR #27 merged; P19-03 follow-up PR #29; issue #28 remains open |
 
 
 ## Phase 19 — Actual C99 helper refinement

@@ -23,6 +23,15 @@ NEGATIVE = {
 }
 
 
+def unique_pairs(items):
+    result = {}
+    for key, value in items:
+        if key in result:
+            raise ValueError("duplicate structured evidence key")
+        result[key] = value
+    return result
+
+
 def warnings(text):
     """Retain full diagnostics, normalizing only the generated path and line."""
     blocks = re.findall(r"(?m)^\[[^\]\n]+\] [^\n]*Warning:\s*\n(?:[ \t]+[^\n]*(?:\n|$))+", text)
@@ -47,14 +56,16 @@ def parse(text, target):
     proved, total = map(int, summary[0])
     if not 0 < proved <= total or re.findall(r"\[wp\]\s+(\d+) goals? scheduled", text) != [str(total)]:
         raise ValueError("zero, partial inventory or ambiguous scheduling")
-    reports = [line for line in text.splitlines() if line.startswith('[{"goal":')]
+    reports = list(re.finditer(r'(?m)^\[\s*\{\s*"goal"\s*:', text))
     if len(reports) != 1:
         raise ValueError("missing/duplicate original WP JSON report")
-    goals = json.loads(reports[0])
+    goals, _ = json.JSONDecoder(object_pairs_hook=unique_pairs).raw_decode(text[reports[0].start():])
     if not isinstance(goals, list) or not goals:
         raise ValueError("empty structured proof report")
     valid, failed = [], []
     for goal in goals:
+        if not isinstance(goal, dict):
+            raise ValueError("malformed structured goal")
         if goal.get("function") != target or goal.get("smoke") is not False:
             raise ValueError("unexpected function or smoke goal in proof inventory")
         verdict = goal.get("verdict")
@@ -98,8 +109,8 @@ def main():
     parser.add_argument("--mutant", choices=NEGATIVE)
     args = parser.parse_args()
     try:
-        inventory = json.loads(INVENTORY.read_text()) if INVENTORY.exists() else None
-        diagnostics = json.loads(DIAGNOSTICS.read_text())
+        inventory = json.loads(INVENTORY.read_text(), object_pairs_hook=unique_pairs)
+        diagnostics = json.loads(DIAGNOSTICS.read_text(), object_pairs_hook=unique_pairs)
         counts = validate(args.log.read_text(), args.target, args.mutant, inventory, diagnostics)
     except (OSError, ValueError, KeyError) as error:
         raise SystemExit("FAIL: P19-03 WP gate: " + str(error)) from error

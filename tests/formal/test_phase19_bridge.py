@@ -52,6 +52,9 @@ for target in gate.TARGETS:
            good.replace("[rte:annot]", "[skipped]"),
            good.replace(ids[-1], ids[0]),
            good.replace('"verdict":"valid"', '"verdict":"timeout"', 1),
+           good.replace('"verdict":"valid"', '"verdict":"timeout","verdict":"valid"', 1),
+           good.replace('"passed":true', '"passed":1', 1),
+           good.replace('"verdict":"valid"', '"verdict":"none"', 1),
            good + "[wp:warning] unsupported allocation\n",
            good.replace('"smoke":false', '"smoke":true', 1)]
     for text in bad:

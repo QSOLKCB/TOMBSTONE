@@ -25,6 +25,8 @@ jobs:
         run: |
           set -euo pipefail
           python3 tests/formal/test_phase19_bridge.py
+          python3 tools/check_phase19_bridge_evidence.py
+          python3 tests/formal/test_phase19_bridge_evidence.py
           python3 tools/phase19_bridge_native.py --cc "$CC"
   composition:
     name: P19-03 actual ${{ matrix.target }}

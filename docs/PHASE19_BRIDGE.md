@@ -22,9 +22,17 @@ explicit precondition. The successful-path genesis, predecessor flags, all
 verbatim from Phase 18, with the same arbitrary valid nonempty chain bound.
 Explicit byte-preservation postconditions and cleanup are added. Projecting
 away P gives the caller-visible no-write property. This does **not** prove
-Phase 18's stronger literal global `assigns \\nothing` / output-only frame.
+Phase 18's stronger literal global `assigns \nothing` / output-only frame.
 In particular, freeing a context does not restore arbitrary allocator or
 OpenSSL global state; the model never assumes that it does.
+
+Within the modeled memory, the projection follows directly from the checked
+frame: the helper's output is a fresh automatic array in the chain, and every
+other permitted write is in P, disjoint from caller blocks. The chain proof
+also checks explicit byte equalities for the complete receipt array and head.
+Mapping the real provider heap, allocator metadata, thread-local state and
+library globals into P is still an external refinement obligation. This is
+not equivalence of timing, allocation counts or other provider APIs.
 
 The original Phase 18 overlay, machine receipt, checker, and workflow remain
 unchanged and run independently. The new composition cannot be substituted
@@ -111,7 +119,24 @@ requires a designated assertion failure from each compiled semantic mutant.
 For caller corruption only, a test guard enables the write after fixture
 parsing, so setup can complete before the caller-memory assertion is tested.
 This guard is not in the positive source or formal mutant. GCC passed locally;
-GCC/Clang CI and complete structured solver evidence remain required.
+both GCC and Clang also passed in run `41353978018`.
+
+That second run at head `dfcc419f8736d6095633e1d708d17519a72e623e`
+checked out merge candidate `3394270823845a23de2930c0a6d5b0ea3f1d6b89`.
+It reproduced all six solver results above and supplied full goal-by-goal
+JSON. Its evidence gate still failed because the reader expected compact
+JSON and Frama-C emitted multiline JSON. The corrected reader validates the
+original retained reports locally, and fresh CI is required on its final head.
+Both workflow failures remain recorded as failures.
+
+`machine/formal/phase19-bridge-evidence-v1.json` binds that executed snapshot
+to the actual source, headers, overlays, live provider test source, generated
+proof hashes, raw job logs, model diagnostics and exact goal inventories.
+The offline evidence gate rejects scope promotion, missing targets, changed
+inputs/logs and relabelling a failed workflow. The unchanged original Phase 18
+theorem separately passed 54/54 in run `41353978025`. These records describe
+past executions, not final-head CI or independent review approval. See
+[PR #29](https://github.com/QSOLKCB/TOMBSTONE/pull/29) for current checks.
 
 Require fresh independent review of the final exact PR head and all current
 CI before an owner merge. Review of #27 does not transfer. Keep issue #28 open

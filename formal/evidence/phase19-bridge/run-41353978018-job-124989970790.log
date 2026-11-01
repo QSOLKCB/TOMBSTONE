@@ -1,0 +1,949 @@
+﻿2026-11-01T21:49:36.8875988Z Current runner version: '2.338.2'
+2026-11-01T21:49:36.8897231Z ##[group]Runner Image Provisioner
+2026-11-01T21:49:36.8897934Z Hosted Compute Agent
+2026-11-01T21:49:36.8898529Z Version: 20261021.618
+2026-11-01T21:49:36.8899097Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-01T21:49:36.8899735Z Build Date: 2026-10-21T00:45:21Z
+2026-11-01T21:49:36.8900640Z Worker ID: {ad32d73f-43d5-4905-ab2d-e9474e4d3058}
+2026-11-01T21:49:36.8901247Z Region: westus
+2026-11-01T21:49:36.8901788Z Cloud: Azure
+2026-11-01T21:49:36.8902261Z ##[endgroup]
+2026-11-01T21:49:36.8903448Z ##[group]Operating System
+2026-11-01T21:49:36.8904024Z Ubuntu
+2026-11-01T21:49:36.8904480Z 24.04.5
+2026-11-01T21:49:36.8904960Z LTS
+2026-11-01T21:49:36.8905416Z ##[endgroup]
+2026-11-01T21:49:36.8905872Z ##[group]Runner Image
+2026-11-01T21:49:36.8906506Z Image: ubuntu-24.04
+2026-11-01T21:49:36.8907002Z Version: 20261025.353.1
+2026-11-01T21:49:36.8908100Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-01T21:49:36.8909298Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-01T21:49:36.8910356Z ##[endgroup]
+2026-11-01T21:49:36.8911259Z ##[group]GITHUB_TOKEN Permissions
+2026-11-01T21:49:36.8912885Z Contents: read
+2026-11-01T21:49:36.8913395Z Metadata: read
+2026-11-01T21:49:36.8913974Z ##[endgroup]
+2026-11-01T21:49:36.8915664Z Secret source: Actions
+2026-11-01T21:49:36.8916547Z Cache mode: write
+2026-11-01T21:49:36.8917142Z Prepare workflow directory
+2026-11-01T21:49:36.9177457Z Prepare all required actions
+2026-11-01T21:49:36.9215914Z Getting action download info
+2026-11-01T21:49:37.2564679Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-01T21:49:37.3416953Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-01T21:49:37.5660468Z Complete job name: P19-03 actual tb_receipt_verify_chain
+2026-11-01T21:49:37.6319495Z ##[group]Run actions/checkout@v4
+2026-11-01T21:49:37.6320288Z with:
+2026-11-01T21:49:37.6320669Z   repository: QSOLKCB/TOMBSTONE
+2026-11-01T21:49:37.6323900Z   token: ***
+2026-11-01T21:49:37.6324259Z   ssh-strict: true
+2026-11-01T21:49:37.6324629Z   ssh-user: git
+2026-11-01T21:49:37.6325000Z   persist-credentials: true
+2026-11-01T21:49:37.6325404Z   clean: true
+2026-11-01T21:49:37.6325774Z   sparse-checkout-cone-mode: true
+2026-11-01T21:49:37.6326204Z   fetch-depth: 1
+2026-11-01T21:49:37.6326561Z   fetch-tags: false
+2026-11-01T21:49:37.6326924Z   show-progress: true
+2026-11-01T21:49:37.6327286Z   lfs: false
+2026-11-01T21:49:37.6327622Z   submodules: false
+2026-11-01T21:49:37.6327990Z   set-safe-directory: true
+2026-11-01T21:49:37.6328401Z   allow-unsafe-pr-checkout: false
+2026-11-01T21:49:37.6328970Z ##[endgroup]
+2026-11-01T21:49:37.9682821Z Syncing repository: QSOLKCB/TOMBSTONE
+2026-11-01T21:49:37.9684953Z ##[group]Getting Git version info
+2026-11-01T21:49:37.9685680Z Working directory is '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T21:49:37.9686538Z [command]/usr/bin/git version
+2026-11-01T21:49:37.9777068Z git version 2.56.0
+2026-11-01T21:49:37.9792342Z ##[endgroup]
+2026-11-01T21:49:37.9805375Z Temporarily overriding HOME='/home/runner/work/_temp/a91757b0-6091-4378-97ca-7c54c0d68b85' before making global git config changes
+2026-11-01T21:49:37.9809844Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T21:49:37.9811533Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T21:49:37.9854801Z Deleting the contents of '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T21:49:37.9858220Z ##[group]Initializing the repository
+2026-11-01T21:49:37.9862370Z [command]/usr/bin/git init /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T21:49:37.9961020Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-01T21:49:37.9964268Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-01T21:49:37.9965481Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-01T21:49:37.9966266Z hint: call:
+2026-11-01T21:49:37.9966945Z hint:
+2026-11-01T21:49:37.9967605Z hint: 	git config --global init.defaultBranch <name>
+2026-11-01T21:49:37.9968277Z hint:
+2026-11-01T21:49:37.9969309Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-01T21:49:37.9970453Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-01T21:49:37.9971423Z hint:
+2026-11-01T21:49:37.9972640Z hint: 	git branch -m <name>
+2026-11-01T21:49:37.9973405Z hint:
+2026-11-01T21:49:37.9974296Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-01T21:49:37.9976483Z Initialized empty Git repository in /home/runner/work/TOMBSTONE/TOMBSTONE/.git/
+2026-11-01T21:49:37.9984767Z [command]/usr/bin/git remote add origin https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T21:49:38.0024772Z ##[endgroup]
+2026-11-01T21:49:38.0025487Z ##[group]Disabling automatic garbage collection
+2026-11-01T21:49:38.0028004Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-01T21:49:38.0060461Z ##[endgroup]
+2026-11-01T21:49:38.0061157Z ##[group]Setting up auth
+2026-11-01T21:49:38.0061758Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T21:49:38.0090971Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T21:49:38.2147648Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T21:49:38.2177505Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T21:49:38.2374280Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T21:49:38.2402557Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T21:49:38.2593943Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-01T21:49:38.2626254Z ##[endgroup]
+2026-11-01T21:49:38.2626901Z ##[group]Fetching the repository
+2026-11-01T21:49:38.2642493Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +3394270823845a23de2930c0a6d5b0ea3f1d6b89:refs/remotes/pull/29/merge
+2026-11-01T21:49:38.9955838Z From https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T21:49:38.9958951Z  * [new ref]         3394270823845a23de2930c0a6d5b0ea3f1d6b89 -> pull/29/merge
+2026-11-01T21:49:38.9963185Z ##[endgroup]
+2026-11-01T21:49:38.9964743Z ##[group]Determining the checkout info
+2026-11-01T21:49:38.9966532Z ##[endgroup]
+2026-11-01T21:49:38.9974794Z [command]/usr/bin/git sparse-checkout disable
+2026-11-01T21:49:39.0019763Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-01T21:49:39.0047607Z ##[group]Checking out the ref
+2026-11-01T21:49:39.0048704Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/29/merge
+2026-11-01T21:49:39.0192519Z Note: switching to 'refs/remotes/pull/29/merge'.
+2026-11-01T21:49:39.0193432Z 
+2026-11-01T21:49:39.0193978Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-01T21:49:39.0195376Z changes and commit them, and you can discard any commits you make in this
+2026-11-01T21:49:39.0196709Z state without impacting any branches by switching back to a branch.
+2026-11-01T21:49:39.0197504Z 
+2026-11-01T21:49:39.0198056Z If you want to create a new branch to retain commits you create, you may
+2026-11-01T21:49:39.0199262Z do so (now or later) by using -c with the switch command. Example:
+2026-11-01T21:49:39.0200280Z 
+2026-11-01T21:49:39.0200810Z   git switch -c <new-branch-name>
+2026-11-01T21:49:39.0201589Z 
+2026-11-01T21:49:39.0201968Z Or undo this operation with:
+2026-11-01T21:49:39.0202591Z 
+2026-11-01T21:49:39.0202991Z   git switch -
+2026-11-01T21:49:39.0203506Z 
+2026-11-01T21:49:39.0204208Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-01T21:49:39.0205234Z 
+2026-11-01T21:49:39.0206364Z HEAD is now at 3394270 Merge dfcc419f8736d6095633e1d708d17519a72e623e into a548fdd0209fd199684f0446a636556597c6de8e
+2026-11-01T21:49:39.0210534Z ##[endgroup]
+2026-11-01T21:49:39.0240361Z [command]/usr/bin/git log -1 --format=%H
+2026-11-01T21:49:39.0262407Z 3394270823845a23de2930c0a6d5b0ea3f1d6b89
+2026-11-01T21:49:39.0516592Z ##[group]Run set -euo pipefail
+2026-11-01T21:49:39.0517709Z [36;1mset -euo pipefail[0m
+2026-11-01T21:49:39.0518788Z [36;1mpython3 tools/check_phase18_receipt.py[0m
+2026-11-01T21:49:39.0520088Z [36;1mpython3 tools/check_phase19_evidence.py[0m
+2026-11-01T21:49:39.0521556Z [36;1mpython3 tests/formal/test_phase19_bridge.py[0m
+2026-11-01T21:49:39.0523176Z [36;1mpython3 tools/phase19_bridge_overlay.py --output phase19-bridge.c[0m
+2026-11-01T21:49:39.0525413Z [36;1mgcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c phase19-bridge.c -o /tmp/phase19-bridge.o[0m
+2026-11-01T21:49:39.0527293Z [36;1mgit rev-parse HEAD[0m
+2026-11-01T21:49:39.0528307Z [36;1msha256sum phase19-bridge.c[0m
+2026-11-01T21:49:39.0550456Z shell: /usr/bin/bash -e {0}
+2026-11-01T21:49:39.0551502Z ##[endgroup]
+2026-11-01T21:49:39.0831852Z PASS: 54/54 conditional unbounded WP proof receipt pinned to exact source, checkers, CI job
+2026-11-01T21:49:39.0834545Z LIMIT: prior evidence does not prove a new commit or the actual SHA-256 provider
+2026-11-01T21:49:39.1079090Z PASS: actual-source helper WP proof receipt 11/11 + 40/40 is source-pinned, conditional, and bridge-blocked
+2026-11-01T21:49:39.1081797Z LIMIT: this is a prior exact-run record, not provider correctness or new-head proof
+2026-11-01T21:49:39.1419941Z PASS: exact source, original theorem preservation, semantic mutant construction, adversarial WP log rejection
+2026-11-01T21:49:39.1704522Z GENERATED: exact actual equal32/hash/chain with shared caller-frame contracts
+2026-11-01T21:49:39.1706707Z LIMIT: provider frame, allocation, deallocation, memcmp and formatter remain external premises
+2026-11-01T21:49:39.7512488Z 3394270823845a23de2930c0a6d5b0ea3f1d6b89
+2026-11-01T21:49:39.7529732Z 7a6131552abe3a2472b32487cb5299f0806b41430dde805dd2e661049dab16f4  phase19-bridge.c
+2026-11-01T21:49:39.7586039Z ##[group]Run set -euo pipefail
+2026-11-01T21:49:39.7586357Z [36;1mset -euo pipefail[0m
+2026-11-01T21:49:39.7586680Z [36;1mdocker run --rm -v "$PWD:/repo:ro" -w /tmp -e TARGET \[0m
+2026-11-01T21:49:39.7587160Z [36;1m  framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \[0m
+2026-11-01T21:49:39.7588159Z [36;1m  sh -c 'frama-c -version && frama-c -wp -wp-verbose 2 -wp-report-json /tmp/p1903-report.json -wp-fct "$TARGET" -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 35 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19-bridge.c && cat /tmp/p1903-report.json' \[0m
+2026-11-01T21:49:39.7589002Z [36;1m  2>&1 | tee "phase19-bridge-$TARGET.log"[0m
+2026-11-01T21:49:39.7589400Z [36;1mpython3 tools/check_phase19_bridge_log.py "$TARGET" "phase19-bridge-$TARGET.log"[0m
+2026-11-01T21:49:39.7607556Z shell: /usr/bin/bash -e {0}
+2026-11-01T21:49:39.7607797Z env:
+2026-11-01T21:49:39.7608016Z   TARGET: tb_receipt_verify_chain
+2026-11-01T21:49:39.7608303Z ##[endgroup]
+2026-11-01T21:49:39.8567758Z Unable to find image 'framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36' locally
+2026-11-01T21:49:40.7301690Z docker.io/framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36: Pulling from framac/frama-c
+2026-11-01T21:49:40.7410289Z 01cedcff86f8: Pulling fs layer
+2026-11-01T21:49:40.7410767Z 9bf581ba34fd: Pulling fs layer
+2026-11-01T21:49:40.7411365Z 6c4bd78e0c43: Pulling fs layer
+2026-11-01T21:49:40.7411664Z 799649323729: Pulling fs layer
+2026-11-01T21:49:40.7412356Z 1ae4fb0c8a4a: Pulling fs layer
+2026-11-01T21:49:40.7412651Z b237ecdf51a3: Pulling fs layer
+2026-11-01T21:49:40.7412947Z b16ee2e05313: Pulling fs layer
+2026-11-01T21:49:40.7413147Z adb989234928: Pulling fs layer
+2026-11-01T21:49:40.7413352Z e3a01a28a7ad: Pulling fs layer
+2026-11-01T21:49:40.7413557Z ca0e54137564: Pulling fs layer
+2026-11-01T21:49:40.7413801Z e88b1a083917: Pulling fs layer
+2026-11-01T21:49:40.7414036Z d10f17e04c11: Pulling fs layer
+2026-11-01T21:49:40.7414245Z d38ea67f8871: Pulling fs layer
+2026-11-01T21:49:40.7414435Z 8153ec1c4f57: Pulling fs layer
+2026-11-01T21:49:40.7414666Z 0546e39b6053: Pulling fs layer
+2026-11-01T21:49:40.7414891Z 5ebdad05b03e: Pulling fs layer
+2026-11-01T21:49:40.7415084Z 6435672f1863: Pulling fs layer
+2026-11-01T21:49:40.7415273Z 5c5711f4465e: Pulling fs layer
+2026-11-01T21:49:40.7415467Z 7264e6096409: Pulling fs layer
+2026-11-01T21:49:40.7415656Z 2202cd0e879d: Pulling fs layer
+2026-11-01T21:49:40.7415851Z c31277fa0297: Pulling fs layer
+2026-11-01T21:49:40.7416058Z 4f4fb700ef54: Pulling fs layer
+2026-11-01T21:49:40.7416244Z 8e159597691d: Pulling fs layer
+2026-11-01T21:49:40.7416429Z c0ebccf77ab9: Pulling fs layer
+2026-11-01T21:49:40.7416619Z b7093a70d5d5: Pulling fs layer
+2026-11-01T21:49:40.7416843Z f2a57dfa5358: Pulling fs layer
+2026-11-01T21:49:40.7417064Z 93b66eaa292a: Pulling fs layer
+2026-11-01T21:49:40.7417254Z 0aba2ee32120: Pulling fs layer
+2026-11-01T21:49:40.7417460Z 60033bb88c74: Pulling fs layer
+2026-11-01T21:49:40.7417648Z 883b72a7df53: Pulling fs layer
+2026-11-01T21:49:40.7417833Z 9aaba240d281: Pulling fs layer
+2026-11-01T21:49:40.7418018Z fd24333fa18a: Pulling fs layer
+2026-11-01T21:49:40.7418205Z ab20f402dc6f: Pulling fs layer
+2026-11-01T21:49:40.7418390Z a3afc412b613: Pulling fs layer
+2026-11-01T21:49:40.7418573Z 0a2200cec51c: Pulling fs layer
+2026-11-01T21:49:40.7418759Z f9b5b03a559e: Pulling fs layer
+2026-11-01T21:49:40.7418942Z 2becab109f47: Pulling fs layer
+2026-11-01T21:49:40.7419128Z 3b4307789f50: Pulling fs layer
+2026-11-01T21:49:40.7419322Z 58571fc518c5: Pulling fs layer
+2026-11-01T21:49:40.7419525Z b71b8622ab3f: Pulling fs layer
+2026-11-01T21:49:40.7419714Z d06dd6319b47: Pulling fs layer
+2026-11-01T21:49:40.7419899Z 51a56fdb7118: Pulling fs layer
+2026-11-01T21:49:40.7420084Z 8f235d762bf6: Pulling fs layer
+2026-11-01T21:49:40.7420467Z 37173500316b: Pulling fs layer
+2026-11-01T21:49:40.7420738Z fa11cfb60409: Pulling fs layer
+2026-11-01T21:49:40.7421245Z 2fdcc8b83d1d: Pulling fs layer
+2026-11-01T21:49:40.7421588Z ca0e54137564: Waiting
+2026-11-01T21:49:40.7421892Z 799649323729: Waiting
+2026-11-01T21:49:40.7422155Z e88b1a083917: Waiting
+2026-11-01T21:49:40.7422369Z 1ae4fb0c8a4a: Waiting
+2026-11-01T21:49:40.7422578Z b237ecdf51a3: Waiting
+2026-11-01T21:49:40.7422779Z d10f17e04c11: Waiting
+2026-11-01T21:49:40.7422987Z b16ee2e05313: Waiting
+2026-11-01T21:49:40.7423210Z 8103ae60d4a2: Pulling fs layer
+2026-11-01T21:49:40.7423452Z d38ea67f8871: Waiting
+2026-11-01T21:49:40.7423672Z 8153ec1c4f57: Waiting
+2026-11-01T21:49:40.7423980Z 0ac2d6f63403: Pulling fs layer
+2026-11-01T21:49:40.7424287Z dca9c53526f0: Pulling fs layer
+2026-11-01T21:49:40.7424608Z d62b4203b486: Pulling fs layer
+2026-11-01T21:49:40.7424885Z 262d0301190b: Pulling fs layer
+2026-11-01T21:49:40.7425134Z fd24333fa18a: Waiting
+2026-11-01T21:49:40.7425382Z ab4fd71ce45a: Pulling fs layer
+2026-11-01T21:49:40.7425634Z 721b47947ac4: Pulling fs layer
+2026-11-01T21:49:40.7425873Z ab20f402dc6f: Waiting
+2026-11-01T21:49:40.7426117Z 4fe137cf5212: Pulling fs layer
+2026-11-01T21:49:40.7426404Z a3afc412b613: Waiting
+2026-11-01T21:49:40.7426624Z d44046465503: Pulling fs layer
+2026-11-01T21:49:40.7426871Z 26d82a051384: Pulling fs layer
+2026-11-01T21:49:40.7427141Z 0a2200cec51c: Waiting
+2026-11-01T21:49:40.7427358Z d06dd6319b47: Waiting
+2026-11-01T21:49:40.7427570Z f9b5b03a559e: Waiting
+2026-11-01T21:49:40.7427783Z 51a56fdb7118: Waiting
+2026-11-01T21:49:40.7428002Z 2becab109f47: Waiting
+2026-11-01T21:49:40.7428262Z 8f235d762bf6: Waiting
+2026-11-01T21:49:40.7428496Z 37173500316b: Waiting
+2026-11-01T21:49:40.7428966Z fa11cfb60409: Waiting
+2026-11-01T21:49:40.7429211Z 2fdcc8b83d1d: Waiting
+2026-11-01T21:49:40.7429450Z 8103ae60d4a2: Waiting
+2026-11-01T21:49:40.7429705Z 0ac2d6f63403: Waiting
+2026-11-01T21:49:40.7429887Z dca9c53526f0: Waiting
+2026-11-01T21:49:40.7430046Z d62b4203b486: Waiting
+2026-11-01T21:49:40.7430436Z 262d0301190b: Waiting
+2026-11-01T21:49:40.7430666Z ab4fd71ce45a: Waiting
+2026-11-01T21:49:40.7430835Z 721b47947ac4: Waiting
+2026-11-01T21:49:40.7431003Z 4fe137cf5212: Waiting
+2026-11-01T21:49:40.7431165Z d44046465503: Waiting
+2026-11-01T21:49:40.7431325Z 26d82a051384: Waiting
+2026-11-01T21:49:40.7431490Z e3a01a28a7ad: Waiting
+2026-11-01T21:49:40.7431655Z adb989234928: Waiting
+2026-11-01T21:49:40.7431819Z 3b4307789f50: Waiting
+2026-11-01T21:49:40.7431978Z 0546e39b6053: Waiting
+2026-11-01T21:49:40.7432148Z 58571fc518c5: Waiting
+2026-11-01T21:49:40.7432311Z b71b8622ab3f: Waiting
+2026-11-01T21:49:40.7432473Z 5ebdad05b03e: Waiting
+2026-11-01T21:49:40.7432641Z 6435672f1863: Waiting
+2026-11-01T21:49:40.7432811Z c0ebccf77ab9: Waiting
+2026-11-01T21:49:40.7432981Z 5c5711f4465e: Waiting
+2026-11-01T21:49:40.7433142Z b7093a70d5d5: Waiting
+2026-11-01T21:49:40.7433304Z 7264e6096409: Waiting
+2026-11-01T21:49:40.7433471Z f2a57dfa5358: Waiting
+2026-11-01T21:49:40.7433635Z 2202cd0e879d: Waiting
+2026-11-01T21:49:40.7433799Z 93b66eaa292a: Waiting
+2026-11-01T21:49:40.7433962Z c31277fa0297: Waiting
+2026-11-01T21:49:40.7434135Z 0aba2ee32120: Waiting
+2026-11-01T21:49:40.7434300Z 4f4fb700ef54: Waiting
+2026-11-01T21:49:40.7434460Z 8e159597691d: Waiting
+2026-11-01T21:49:40.7434621Z 60033bb88c74: Waiting
+2026-11-01T21:49:40.7434784Z 883b72a7df53: Waiting
+2026-11-01T21:49:40.7434950Z 9aaba240d281: Waiting
+2026-11-01T21:49:40.9482570Z 6c4bd78e0c43: Verifying Checksum
+2026-11-01T21:49:40.9482954Z 6c4bd78e0c43: Download complete
+2026-11-01T21:49:40.9497856Z 9bf581ba34fd: Verifying Checksum
+2026-11-01T21:49:40.9498326Z 9bf581ba34fd: Download complete
+2026-11-01T21:49:41.1719407Z 1ae4fb0c8a4a: Verifying Checksum
+2026-11-01T21:49:41.1719789Z 1ae4fb0c8a4a: Download complete
+2026-11-01T21:49:41.2303475Z 01cedcff86f8: Download complete
+2026-11-01T21:49:41.2354297Z 799649323729: Verifying Checksum
+2026-11-01T21:49:41.2354646Z 799649323729: Download complete
+2026-11-01T21:49:41.4643843Z adb989234928: Verifying Checksum
+2026-11-01T21:49:41.4646639Z adb989234928: Download complete
+2026-11-01T21:49:41.4693336Z b16ee2e05313: Verifying Checksum
+2026-11-01T21:49:41.4694763Z b16ee2e05313: Download complete
+2026-11-01T21:49:41.7200059Z ca0e54137564: Verifying Checksum
+2026-11-01T21:49:41.7200565Z ca0e54137564: Download complete
+2026-11-01T21:49:41.8545696Z e3a01a28a7ad: Verifying Checksum
+2026-11-01T21:49:41.8546842Z e3a01a28a7ad: Download complete
+2026-11-01T21:49:41.9721772Z b237ecdf51a3: Verifying Checksum
+2026-11-01T21:49:41.9725789Z b237ecdf51a3: Download complete
+2026-11-01T21:49:42.0565812Z e88b1a083917: Verifying Checksum
+2026-11-01T21:49:42.0566715Z e88b1a083917: Download complete
+2026-11-01T21:49:42.1134222Z d10f17e04c11: Verifying Checksum
+2026-11-01T21:49:42.1134582Z d10f17e04c11: Download complete
+2026-11-01T21:49:42.2170937Z d38ea67f8871: Verifying Checksum
+2026-11-01T21:49:42.2171321Z d38ea67f8871: Download complete
+2026-11-01T21:49:42.2731367Z 8153ec1c4f57: Verifying Checksum
+2026-11-01T21:49:42.2731909Z 8153ec1c4f57: Download complete
+2026-11-01T21:49:42.3399277Z 0546e39b6053: Verifying Checksum
+2026-11-01T21:49:42.3399601Z 0546e39b6053: Download complete
+2026-11-01T21:49:42.4466876Z 5ebdad05b03e: Download complete
+2026-11-01T21:49:42.4772769Z 6435672f1863: Verifying Checksum
+2026-11-01T21:49:42.4773192Z 6435672f1863: Download complete
+2026-11-01T21:49:42.5656031Z 5c5711f4465e: Verifying Checksum
+2026-11-01T21:49:42.5657038Z 5c5711f4465e: Download complete
+2026-11-01T21:49:42.6625385Z 7264e6096409: Verifying Checksum
+2026-11-01T21:49:42.6626770Z 7264e6096409: Download complete
+2026-11-01T21:49:42.7029077Z 2202cd0e879d: Verifying Checksum
+2026-11-01T21:49:42.7029509Z 2202cd0e879d: Download complete
+2026-11-01T21:49:42.7929497Z c31277fa0297: Verifying Checksum
+2026-11-01T21:49:42.7929866Z c31277fa0297: Download complete
+2026-11-01T21:49:42.8650276Z 01cedcff86f8: Pull complete
+2026-11-01T21:49:42.8728270Z 4f4fb700ef54: Verifying Checksum
+2026-11-01T21:49:42.8731437Z 4f4fb700ef54: Download complete
+2026-11-01T21:49:42.9206935Z 8e159597691d: Verifying Checksum
+2026-11-01T21:49:42.9207335Z 8e159597691d: Download complete
+2026-11-01T21:49:43.0052622Z c0ebccf77ab9: Verifying Checksum
+2026-11-01T21:49:43.0053017Z c0ebccf77ab9: Download complete
+2026-11-01T21:49:43.0839801Z b7093a70d5d5: Verifying Checksum
+2026-11-01T21:49:43.0840871Z b7093a70d5d5: Download complete
+2026-11-01T21:49:43.1290627Z f2a57dfa5358: Verifying Checksum
+2026-11-01T21:49:43.1291148Z f2a57dfa5358: Download complete
+2026-11-01T21:49:43.2247926Z 93b66eaa292a: Verifying Checksum
+2026-11-01T21:49:43.2249949Z 93b66eaa292a: Download complete
+2026-11-01T21:49:43.3023800Z 0aba2ee32120: Verifying Checksum
+2026-11-01T21:49:43.3027327Z 0aba2ee32120: Download complete
+2026-11-01T21:49:43.3558726Z 60033bb88c74: Download complete
+2026-11-01T21:49:43.4484890Z 883b72a7df53: Verifying Checksum
+2026-11-01T21:49:43.4485275Z 883b72a7df53: Download complete
+2026-11-01T21:49:43.5263975Z 9aaba240d281: Verifying Checksum
+2026-11-01T21:49:43.5264274Z 9aaba240d281: Download complete
+2026-11-01T21:49:43.5789166Z fd24333fa18a: Verifying Checksum
+2026-11-01T21:49:43.5789576Z fd24333fa18a: Download complete
+2026-11-01T21:49:43.6605878Z ab20f402dc6f: Verifying Checksum
+2026-11-01T21:49:43.6606236Z ab20f402dc6f: Download complete
+2026-11-01T21:49:43.7496619Z a3afc412b613: Verifying Checksum
+2026-11-01T21:49:43.7497021Z a3afc412b613: Download complete
+2026-11-01T21:49:43.8678250Z f9b5b03a559e: Verifying Checksum
+2026-11-01T21:49:43.8678923Z f9b5b03a559e: Download complete
+2026-11-01T21:49:44.0872057Z 3b4307789f50: Verifying Checksum
+2026-11-01T21:49:44.0878283Z 3b4307789f50: Download complete
+2026-11-01T21:49:44.3080579Z 58571fc518c5: Verifying Checksum
+2026-11-01T21:49:44.3081025Z 58571fc518c5: Download complete
+2026-11-01T21:49:44.5150525Z 2becab109f47: Verifying Checksum
+2026-11-01T21:49:44.5151050Z 2becab109f47: Download complete
+2026-11-01T21:49:44.5160386Z b71b8622ab3f: Verifying Checksum
+2026-11-01T21:49:44.5160754Z b71b8622ab3f: Download complete
+2026-11-01T21:49:44.5215133Z 0a2200cec51c: Verifying Checksum
+2026-11-01T21:49:44.5215381Z 0a2200cec51c: Download complete
+2026-11-01T21:49:44.7229722Z 51a56fdb7118: Download complete
+2026-11-01T21:49:44.7385442Z 8f235d762bf6: Verifying Checksum
+2026-11-01T21:49:44.7386324Z 8f235d762bf6: Download complete
+2026-11-01T21:49:44.9518210Z 37173500316b: Verifying Checksum
+2026-11-01T21:49:44.9518615Z 37173500316b: Download complete
+2026-11-01T21:49:44.9896855Z fa11cfb60409: Verifying Checksum
+2026-11-01T21:49:44.9897252Z fa11cfb60409: Download complete
+2026-11-01T21:49:45.1763619Z 2fdcc8b83d1d: Verifying Checksum
+2026-11-01T21:49:45.1764026Z 2fdcc8b83d1d: Download complete
+2026-11-01T21:49:45.2057511Z 8103ae60d4a2: Download complete
+2026-11-01T21:49:45.3545466Z d06dd6319b47: Download complete
+2026-11-01T21:49:45.4031543Z 0ac2d6f63403: Verifying Checksum
+2026-11-01T21:49:45.4031915Z 0ac2d6f63403: Download complete
+2026-11-01T21:49:45.4281166Z dca9c53526f0: Verifying Checksum
+2026-11-01T21:49:45.4281536Z dca9c53526f0: Download complete
+2026-11-01T21:49:45.6155404Z 262d0301190b: Verifying Checksum
+2026-11-01T21:49:45.6156144Z 262d0301190b: Download complete
+2026-11-01T21:49:45.6845548Z ab4fd71ce45a: Verifying Checksum
+2026-11-01T21:49:45.6846174Z ab4fd71ce45a: Download complete
+2026-11-01T21:49:45.8655718Z 721b47947ac4: Verifying Checksum
+2026-11-01T21:49:45.8656112Z 721b47947ac4: Download complete
+2026-11-01T21:49:46.0974386Z d44046465503: Verifying Checksum
+2026-11-01T21:49:46.0974788Z d44046465503: Download complete
+2026-11-01T21:49:46.3161249Z 26d82a051384: Verifying Checksum
+2026-11-01T21:49:46.3161645Z 26d82a051384: Download complete
+2026-11-01T21:49:47.0386352Z 9bf581ba34fd: Pull complete
+2026-11-01T21:49:47.1731820Z 6c4bd78e0c43: Pull complete
+2026-11-01T21:49:47.5901193Z d62b4203b486: Verifying Checksum
+2026-11-01T21:49:47.5901649Z d62b4203b486: Download complete
+2026-11-01T21:49:47.6164386Z 4fe137cf5212: Verifying Checksum
+2026-11-01T21:49:47.6164753Z 4fe137cf5212: Download complete
+2026-11-01T21:49:54.2593363Z 799649323729: Pull complete
+2026-11-01T21:49:54.2701347Z 1ae4fb0c8a4a: Pull complete
+2026-11-01T21:50:00.8544201Z b237ecdf51a3: Pull complete
+2026-11-01T21:50:01.0255724Z b16ee2e05313: Pull complete
+2026-11-01T21:50:01.2482271Z adb989234928: Pull complete
+2026-11-01T21:50:01.4285249Z e3a01a28a7ad: Pull complete
+2026-11-01T21:50:01.5998005Z ca0e54137564: Pull complete
+2026-11-01T21:50:01.7769910Z e88b1a083917: Pull complete
+2026-11-01T21:50:01.9433670Z d10f17e04c11: Pull complete
+2026-11-01T21:50:02.1324744Z d38ea67f8871: Pull complete
+2026-11-01T21:50:02.1505890Z 8153ec1c4f57: Pull complete
+2026-11-01T21:50:02.1577732Z 0546e39b6053: Pull complete
+2026-11-01T21:50:02.1650077Z 5ebdad05b03e: Pull complete
+2026-11-01T21:50:02.1708770Z 6435672f1863: Pull complete
+2026-11-01T21:50:02.1769899Z 5c5711f4465e: Pull complete
+2026-11-01T21:50:02.1858346Z 7264e6096409: Pull complete
+2026-11-01T21:50:02.1934478Z 2202cd0e879d: Pull complete
+2026-11-01T21:50:02.2004832Z c31277fa0297: Pull complete
+2026-11-01T21:50:02.2060014Z 4f4fb700ef54: Pull complete
+2026-11-01T21:50:02.2140342Z 8e159597691d: Pull complete
+2026-11-01T21:50:02.2201909Z c0ebccf77ab9: Pull complete
+2026-11-01T21:50:02.2262835Z b7093a70d5d5: Pull complete
+2026-11-01T21:50:02.2320836Z f2a57dfa5358: Pull complete
+2026-11-01T21:50:02.2398361Z 93b66eaa292a: Pull complete
+2026-11-01T21:50:02.2464567Z 0aba2ee32120: Pull complete
+2026-11-01T21:50:02.2525344Z 60033bb88c74: Pull complete
+2026-11-01T21:50:02.2587180Z 883b72a7df53: Pull complete
+2026-11-01T21:50:02.2665598Z 9aaba240d281: Pull complete
+2026-11-01T21:50:02.2732631Z fd24333fa18a: Pull complete
+2026-11-01T21:50:02.2793596Z ab20f402dc6f: Pull complete
+2026-11-01T21:50:02.2864052Z a3afc412b613: Pull complete
+2026-11-01T21:50:35.5348784Z 0a2200cec51c: Pull complete
+2026-11-01T21:50:35.5432850Z f9b5b03a559e: Pull complete
+2026-11-01T21:50:37.1158764Z 2becab109f47: Pull complete
+2026-11-01T21:50:37.1234033Z 3b4307789f50: Pull complete
+2026-11-01T21:50:37.1301855Z 58571fc518c5: Pull complete
+2026-11-01T21:50:37.1380733Z b71b8622ab3f: Pull complete
+2026-11-01T21:50:43.0471545Z d06dd6319b47: Pull complete
+2026-11-01T21:50:43.0594991Z 51a56fdb7118: Pull complete
+2026-11-01T21:50:43.0950072Z 8f235d762bf6: Pull complete
+2026-11-01T21:50:43.1038838Z 37173500316b: Pull complete
+2026-11-01T21:50:43.4463540Z fa11cfb60409: Pull complete
+2026-11-01T21:50:43.4539619Z 2fdcc8b83d1d: Pull complete
+2026-11-01T21:50:43.4663549Z 8103ae60d4a2: Pull complete
+2026-11-01T21:50:43.5781060Z 0ac2d6f63403: Pull complete
+2026-11-01T21:50:43.5864454Z dca9c53526f0: Pull complete
+2026-11-01T21:51:16.9803372Z d62b4203b486: Pull complete
+2026-11-01T21:51:16.9921671Z 262d0301190b: Pull complete
+2026-11-01T21:51:17.0696592Z ab4fd71ce45a: Pull complete
+2026-11-01T21:51:19.4961680Z 721b47947ac4: Pull complete
+2026-11-01T21:51:37.0565729Z 4fe137cf5212: Pull complete
+2026-11-01T21:51:37.0641715Z d44046465503: Pull complete
+2026-11-01T21:52:01.0865773Z 26d82a051384: Pull complete
+2026-11-01T21:52:01.0891545Z Digest: sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T21:52:01.0896593Z Status: Downloaded newer image for framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T21:52:01.2876445Z 32.1 (Germanium)
+2026-11-01T21:52:01.4614620Z [kernel] Parsing /repo/phase19-bridge.c (with preprocessing)
+2026-11-01T21:52:01.5956343Z [wp] Running WP plugin...
+2026-11-01T21:52:01.5992057Z [rte:annot] annotating function tb_receipt_verify_chain
+2026-11-01T21:52:01.7260561Z [wp] 62 goals scheduled
+2026-11-01T21:52:07.1020534Z [wp] Proved goals:   62 / 62
+2026-11-01T21:52:07.1020938Z   Qed:              46 (29ms-19ms-110ms)
+2026-11-01T21:52:07.1021269Z   Alt-Ergo 2.5.4:   16 (12ms-43ms-101ms)
+2026-11-01T21:52:07.1036358Z [wp:pedantic-assigns] /repo/phase19-bridge.c:483: Warning: 
+2026-11-01T21:52:07.1037189Z   No \from specification for assigned pointer 'p19_owner'.
+2026-11-01T21:52:07.1037590Z   Callers assumptions might be imprecise.
+2026-11-01T21:52:07.1038794Z [wp] /repo/phase19-bridge.c:503: Warning: 
+2026-11-01T21:52:07.1039215Z   Memory model hypotheses for function 'tb_receipt_verify_chain':
+2026-11-01T21:52:07.1039613Z   /*@
+2026-11-01T21:52:07.1039844Z      behavior wp_bytes:
+2026-11-01T21:52:07.1040259Z        requires
+2026-11-01T21:52:07.1040615Z          \separated(receipts + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:07.1040912Z        requires
+2026-11-01T21:52:07.1041148Z          \separated(trusted_head + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:07.1041529Z      */
+2026-11-01T21:52:07.1041780Z   tb_status tb_receipt_verify_chain(tb_receipt_v1 const *receipts,
+2026-11-01T21:52:07.1042081Z                                     size_t count,
+2026-11-01T21:52:07.1042445Z                                     unsigned char const trusted_head[32]);
+2026-11-01T21:52:07.1042910Z [wp:pedantic-assigns] /repo/phase19-bridge.c:211: Warning: 
+2026-11-01T21:52:07.1043350Z   No \from specification for assigned pointer 'p19_owner'.
+2026-11-01T21:52:07.1043731Z   Callers assumptions might be imprecise.
+2026-11-01T21:52:07.1044242Z [wp] /repo/phase19-bridge.c:221: Warning: 
+2026-11-01T21:52:07.1044624Z   Memory model hypotheses for function 'calculate_hash':
+2026-11-01T21:52:07.1044976Z   /*@
+2026-11-01T21:52:07.1045165Z      behavior wp_bytes:
+2026-11-01T21:52:07.1045421Z        requires \separated(out + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:07.1045699Z        requires
+2026-11-01T21:52:07.1045935Z          \separated(out + (0 .. 31), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:07.1046304Z        requires \separated(r + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T21:52:07.1046680Z      */
+2026-11-01T21:52:07.1047072Z   static tb_status calculate_hash(tb_receipt_v1 const *r, unsigned char out[32]);
+2026-11-01T21:52:07.1202309Z [ { "goal": "bytes_tb_receipt_verify_chain_terminates",
+2026-11-01T21:52:07.1203212Z     "property": "tb_receipt_verify_chain_terminates", "file": "", "line": 0,
+2026-11-01T21:52:07.1203875Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1204338Z     "verdict": "valid",
+2026-11-01T21:52:07.1204924Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1205267Z     "proved": 1 },
+2026-11-01T21:52:07.1205472Z   { "goal": "bytes_tb_receipt_verify_chain_ensures",
+2026-11-01T21:52:07.1205734Z     "property": "tb_receipt_verify_chain_ensures",
+2026-11-01T21:52:07.1206011Z     "file": "/repo/phase19-bridge.c", "line": 484,
+2026-11-01T21:52:07.1206326Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1206622Z     "verdict": "valid",
+2026-11-01T21:52:07.1206857Z     "provers": [ { "prover": "qed", "time": 0.0893, "success": 0 },
+2026-11-01T21:52:07.1207187Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0262, "success": 1 } ],
+2026-11-01T21:52:07.1207454Z     "proved": 1 },
+2026-11-01T21:52:07.1207655Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_2",
+2026-11-01T21:52:07.1207917Z     "property": "tb_receipt_verify_chain_ensures_2",
+2026-11-01T21:52:07.1208168Z     "file": "/repo/phase19-bridge.c", "line": 485,
+2026-11-01T21:52:07.1208464Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1208733Z     "verdict": "valid",
+2026-11-01T21:52:07.1208948Z     "provers": [ { "prover": "qed", "time": 0.101, "success": 0 },
+2026-11-01T21:52:07.1209264Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0315, "success": 1 } ],
+2026-11-01T21:52:07.1209520Z     "proved": 1 },
+2026-11-01T21:52:07.1209710Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_3",
+2026-11-01T21:52:07.1209961Z     "property": "tb_receipt_verify_chain_ensures_3",
+2026-11-01T21:52:07.1210426Z     "file": "/repo/phase19-bridge.c", "line": 487,
+2026-11-01T21:52:07.1211029Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1211356Z     "verdict": "valid",
+2026-11-01T21:52:07.1211574Z     "provers": [ { "prover": "qed", "time": 0.104, "success": 0 },
+2026-11-01T21:52:07.1211873Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0476, "success": 1 } ],
+2026-11-01T21:52:07.1212131Z     "proved": 1 },
+2026-11-01T21:52:07.1212331Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_4",
+2026-11-01T21:52:07.1212579Z     "property": "tb_receipt_verify_chain_ensures_4",
+2026-11-01T21:52:07.1212822Z     "file": "/repo/phase19-bridge.c", "line": 491,
+2026-11-01T21:52:07.1213111Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1213381Z     "verdict": "valid",
+2026-11-01T21:52:07.1213598Z     "provers": [ { "prover": "qed", "time": 0.0641, "success": 0 },
+2026-11-01T21:52:07.1213900Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0402, "success": 1 } ],
+2026-11-01T21:52:07.1214163Z     "proved": 1 },
+2026-11-01T21:52:07.1214370Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_cleanup",
+2026-11-01T21:52:07.1214662Z     "property": "tb_receipt_verify_chain_ensures_cleanup",
+2026-11-01T21:52:07.1214923Z     "file": "/repo/phase19-bridge.c", "line": 494,
+2026-11-01T21:52:07.1215210Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1215588Z     "verdict": "valid",
+2026-11-01T21:52:07.1215904Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1216223Z     "proved": 1 },
+2026-11-01T21:52:07.1216439Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_caller_receipts",
+2026-11-01T21:52:07.1216855Z     "property": "tb_receipt_verify_chain_ensures_caller_receipts",
+2026-11-01T21:52:07.1217171Z     "file": "/repo/phase19-bridge.c", "line": 495,
+2026-11-01T21:52:07.1217562Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1217937Z     "verdict": "valid",
+2026-11-01T21:52:07.1218207Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1218530Z     "proved": 1 },
+2026-11-01T21:52:07.1218802Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_caller_head",
+2026-11-01T21:52:07.1219214Z     "property": "tb_receipt_verify_chain_ensures_caller_head",
+2026-11-01T21:52:07.1219579Z     "file": "/repo/phase19-bridge.c", "line": 499,
+2026-11-01T21:52:07.1220344Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1220757Z     "verdict": "valid",
+2026-11-01T21:52:07.1221064Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1221346Z     "proved": 1 },
+2026-11-01T21:52:07.1221521Z   { "goal": "bytes_tb_receipt_verify_chain_exits",
+2026-11-01T21:52:07.1221894Z     "property": "tb_receipt_verify_chain_exits", "file": "", "line": 0,
+2026-11-01T21:52:07.1222398Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1222853Z     "verdict": "valid",
+2026-11-01T21:52:07.1223183Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1223420Z     "proved": 1 },
+2026-11-01T21:52:07.1223640Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_established",
+2026-11-01T21:52:07.1224064Z     "property": "tb_receipt_verify_chain_loop_invariant",
+2026-11-01T21:52:07.1224441Z     "file": "/repo/phase19-bridge.c", "line": 511,
+2026-11-01T21:52:07.1224885Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1225359Z     "verdict": "valid",
+2026-11-01T21:52:07.1225649Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1225982Z     "proved": 1 },
+2026-11-01T21:52:07.1226281Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_preserved",
+2026-11-01T21:52:07.1226731Z     "property": "tb_receipt_verify_chain_loop_invariant",
+2026-11-01T21:52:07.1227119Z     "file": "/repo/phase19-bridge.c", "line": 511,
+2026-11-01T21:52:07.1227686Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1228003Z     "verdict": "valid",
+2026-11-01T21:52:07.1228369Z     "provers": [ { "prover": "qed", "time": 0.0964, "success": 0 },
+2026-11-01T21:52:07.1228734Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0369, "success": 1 } ],
+2026-11-01T21:52:07.1228994Z     "proved": 1 },
+2026-11-01T21:52:07.1229228Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_2_established",
+2026-11-01T21:52:07.1229628Z     "property": "tb_receipt_verify_chain_loop_invariant_2",
+2026-11-01T21:52:07.1229972Z     "file": "/repo/phase19-bridge.c", "line": 512,
+2026-11-01T21:52:07.1230574Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1230982Z     "verdict": "valid",
+2026-11-01T21:52:07.1231320Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1231715Z     "proved": 1 },
+2026-11-01T21:52:07.1232081Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_2_preserved",
+2026-11-01T21:52:07.1232565Z     "property": "tb_receipt_verify_chain_loop_invariant_2",
+2026-11-01T21:52:07.1232982Z     "file": "/repo/phase19-bridge.c", "line": 512,
+2026-11-01T21:52:07.1233427Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1233832Z     "verdict": "valid",
+2026-11-01T21:52:07.1234215Z     "provers": [ { "prover": "qed", "time": 0.0923, "success": 0 },
+2026-11-01T21:52:07.1234580Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0282, "success": 1 } ],
+2026-11-01T21:52:07.1234852Z     "proved": 1 },
+2026-11-01T21:52:07.1235198Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_3_established",
+2026-11-01T21:52:07.1235529Z     "property": "tb_receipt_verify_chain_loop_invariant_3",
+2026-11-01T21:52:07.1235872Z     "file": "/repo/phase19-bridge.c", "line": 514,
+2026-11-01T21:52:07.1236157Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1236433Z     "verdict": "valid",
+2026-11-01T21:52:07.1236725Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1236968Z     "proved": 1 },
+2026-11-01T21:52:07.1237190Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_3_preserved",
+2026-11-01T21:52:07.1237573Z     "property": "tb_receipt_verify_chain_loop_invariant_3",
+2026-11-01T21:52:07.1238524Z     "file": "/repo/phase19-bridge.c", "line": 514,
+2026-11-01T21:52:07.1238857Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1239134Z     "verdict": "valid",
+2026-11-01T21:52:07.1239349Z     "provers": [ { "prover": "qed", "time": 0.0796, "success": 0 },
+2026-11-01T21:52:07.1239657Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0449, "success": 1 } ],
+2026-11-01T21:52:07.1239918Z     "proved": 1 },
+2026-11-01T21:52:07.1241662Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_4_established",
+2026-11-01T21:52:07.1241996Z     "property": "tb_receipt_verify_chain_loop_invariant_4",
+2026-11-01T21:52:07.1242262Z     "file": "/repo/phase19-bridge.c", "line": 516,
+2026-11-01T21:52:07.1242548Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1242814Z     "verdict": "valid",
+2026-11-01T21:52:07.1243025Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1243266Z     "proved": 1 },
+2026-11-01T21:52:07.1243498Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_4_preserved",
+2026-11-01T21:52:07.1243824Z     "property": "tb_receipt_verify_chain_loop_invariant_4",
+2026-11-01T21:52:07.1244088Z     "file": "/repo/phase19-bridge.c", "line": 516,
+2026-11-01T21:52:07.1244376Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1244644Z     "verdict": "valid",
+2026-11-01T21:52:07.1244869Z     "provers": [ { "prover": "qed", "time": 0.0883, "success": 0 },
+2026-11-01T21:52:07.1245176Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.101, "success": 1 } ],
+2026-11-01T21:52:07.1245598Z     "proved": 1 },
+2026-11-01T21:52:07.1245832Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_5_established",
+2026-11-01T21:52:07.1246140Z     "property": "tb_receipt_verify_chain_loop_invariant_5",
+2026-11-01T21:52:07.1246396Z     "file": "/repo/phase19-bridge.c", "line": 519,
+2026-11-01T21:52:07.1246679Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1246974Z     "verdict": "valid",
+2026-11-01T21:52:07.1247187Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1247426Z     "proved": 1 },
+2026-11-01T21:52:07.1247647Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_5_preserved",
+2026-11-01T21:52:07.1247950Z     "property": "tb_receipt_verify_chain_loop_invariant_5",
+2026-11-01T21:52:07.1248206Z     "file": "/repo/phase19-bridge.c", "line": 519,
+2026-11-01T21:52:07.1248486Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1248756Z     "verdict": "valid",
+2026-11-01T21:52:07.1248963Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1249202Z     "proved": 1 },
+2026-11-01T21:52:07.1249414Z   { "goal": "bytes_tb_receipt_verify_chain_assert_rte_mem_access",
+2026-11-01T21:52:07.1249715Z     "property": "tb_receipt_verify_chain_assert_rte_mem_access",
+2026-11-01T21:52:07.1249977Z     "file": "/repo/phase19-bridge.c", "line": 525,
+2026-11-01T21:52:07.1250390Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1250656Z     "verdict": "valid",
+2026-11-01T21:52:07.1250866Z     "provers": [ { "prover": "qed", "time": 0.0291, "success": 0 },
+2026-11-01T21:52:07.1251176Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.012, "success": 1 } ],
+2026-11-01T21:52:07.1251430Z     "proved": 1 },
+2026-11-01T21:52:07.1251643Z   { "goal": "bytes_tb_receipt_verify_chain_assert_rte_mem_access_2",
+2026-11-01T21:52:07.1251953Z     "property": "tb_receipt_verify_chain_assert_rte_mem_access_2",
+2026-11-01T21:52:07.1252229Z     "file": "/repo/phase19-bridge.c", "line": 526,
+2026-11-01T21:52:07.1252501Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1252766Z     "verdict": "valid",
+2026-11-01T21:52:07.1252974Z     "provers": [ { "prover": "qed", "time": 0.0353, "success": 0 },
+2026-11-01T21:52:07.1253378Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0394, "success": 1 } ],
+2026-11-01T21:52:07.1253649Z     "proved": 1 },
+2026-11-01T21:52:07.1253862Z   { "goal": "bytes_tb_receipt_verify_chain_loop_assigns_part1",
+2026-11-01T21:52:07.1254148Z     "property": "tb_receipt_verify_chain_loop_assigns",
+2026-11-01T21:52:07.1254404Z     "file": "/repo/phase19-bridge.c", "line": 520,
+2026-11-01T21:52:07.1276733Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1277222Z     "verdict": "valid",
+2026-11-01T21:52:07.1277587Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1278006Z     "proved": 1 },
+2026-11-01T21:52:07.1278338Z   { "goal": "bytes_tb_receipt_verify_chain_loop_assigns_part2",
+2026-11-01T21:52:07.1278784Z     "property": "tb_receipt_verify_chain_loop_assigns",
+2026-11-01T21:52:07.1279162Z     "file": "/repo/phase19-bridge.c", "line": 520,
+2026-11-01T21:52:07.1279615Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1280054Z     "verdict": "valid",
+2026-11-01T21:52:07.1280538Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1280961Z     "proved": 1 },
+2026-11-01T21:52:07.1281274Z   { "goal": "bytes_tb_receipt_verify_chain_loop_assigns_part3",
+2026-11-01T21:52:07.1281710Z     "property": "tb_receipt_verify_chain_loop_assigns",
+2026-11-01T21:52:07.1282128Z     "file": "/repo/phase19-bridge.c", "line": 520,
+2026-11-01T21:52:07.1282559Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1283173Z     "verdict": "valid",
+2026-11-01T21:52:07.1283519Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1283902Z     "proved": 1 },
+2026-11-01T21:52:07.1284276Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part01",
+2026-11-01T21:52:07.1284751Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1285140Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1285592Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1285904Z     "verdict": "valid",
+2026-11-01T21:52:07.1286188Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1286471Z     "proved": 1 },
+2026-11-01T21:52:07.1286692Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part02",
+2026-11-01T21:52:07.1286976Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1287403Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1287857Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1288318Z     "verdict": "valid",
+2026-11-01T21:52:07.1288583Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1289003Z     "proved": 1 },
+2026-11-01T21:52:07.1289339Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part03",
+2026-11-01T21:52:07.1289848Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1290568Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1290950Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1291334Z     "verdict": "valid",
+2026-11-01T21:52:07.1291611Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1291863Z     "proved": 1 },
+2026-11-01T21:52:07.1292200Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part04",
+2026-11-01T21:52:07.1292490Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1292785Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1293261Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1293715Z     "verdict": "valid",
+2026-11-01T21:52:07.1294043Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1294370Z     "proved": 1 },
+2026-11-01T21:52:07.1294717Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part05",
+2026-11-01T21:52:07.1295435Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1295824Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1296116Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1296464Z     "verdict": "valid",
+2026-11-01T21:52:07.1296689Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1296946Z     "proved": 1 },
+2026-11-01T21:52:07.1297165Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part06",
+2026-11-01T21:52:07.1297559Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1297951Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1298420Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1298869Z     "verdict": "valid",
+2026-11-01T21:52:07.1299145Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1299389Z     "proved": 1 },
+2026-11-01T21:52:07.1299673Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part07",
+2026-11-01T21:52:07.1300111Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1300637Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1301085Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1301500Z     "verdict": "valid",
+2026-11-01T21:52:07.1301713Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1301952Z     "proved": 1 },
+2026-11-01T21:52:07.1302159Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part08",
+2026-11-01T21:52:07.1302615Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1302856Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1303134Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1303411Z     "verdict": "valid",
+2026-11-01T21:52:07.1303614Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1303854Z     "proved": 1 },
+2026-11-01T21:52:07.1304058Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part09",
+2026-11-01T21:52:07.1304330Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1304562Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1304837Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1305094Z     "verdict": "valid",
+2026-11-01T21:52:07.1305291Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1305528Z     "proved": 1 },
+2026-11-01T21:52:07.1305733Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part10",
+2026-11-01T21:52:07.1305999Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1306418Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1306807Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1307204Z     "verdict": "valid",
+2026-11-01T21:52:07.1307410Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1307774Z     "proved": 1 },
+2026-11-01T21:52:07.1308093Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part11",
+2026-11-01T21:52:07.1308443Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1308726Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1309119Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1309449Z     "verdict": "valid",
+2026-11-01T21:52:07.1309753Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1310112Z     "proved": 1 },
+2026-11-01T21:52:07.1310966Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part12",
+2026-11-01T21:52:07.1311609Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1312155Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1313018Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1313591Z     "verdict": "valid",
+2026-11-01T21:52:07.1313897Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1314269Z     "proved": 1 },
+2026-11-01T21:52:07.1314600Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part13",
+2026-11-01T21:52:07.1315074Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1315419Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1315789Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1316254Z     "verdict": "valid",
+2026-11-01T21:52:07.1316587Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1316958Z     "proved": 1 },
+2026-11-01T21:52:07.1317266Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part14",
+2026-11-01T21:52:07.1317699Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1318087Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1318536Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1318928Z     "verdict": "valid",
+2026-11-01T21:52:07.1319232Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1319597Z     "proved": 1 },
+2026-11-01T21:52:07.1319912Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part15",
+2026-11-01T21:52:07.1326831Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1327251Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1327927Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1328367Z     "verdict": "valid",
+2026-11-01T21:52:07.1328750Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1329143Z     "proved": 1 },
+2026-11-01T21:52:07.1329490Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part16",
+2026-11-01T21:52:07.1329939Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1330484Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1330927Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1331349Z     "verdict": "valid",
+2026-11-01T21:52:07.1331665Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1332049Z     "proved": 1 },
+2026-11-01T21:52:07.1332368Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part17",
+2026-11-01T21:52:07.1332804Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1333186Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1333637Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1334059Z     "verdict": "valid",
+2026-11-01T21:52:07.1334387Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1334757Z     "proved": 1 },
+2026-11-01T21:52:07.1335091Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part18",
+2026-11-01T21:52:07.1335503Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1335819Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1336276Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1336704Z     "verdict": "valid",
+2026-11-01T21:52:07.1337046Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1337423Z     "proved": 1 },
+2026-11-01T21:52:07.1337749Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part1",
+2026-11-01T21:52:07.1338187Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1338567Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1339001Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1339416Z     "verdict": "valid",
+2026-11-01T21:52:07.1339741Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1340453Z     "proved": 1 },
+2026-11-01T21:52:07.1340791Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part2",
+2026-11-01T21:52:07.1341212Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1341579Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1342016Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1342439Z     "verdict": "valid",
+2026-11-01T21:52:07.1342756Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1343129Z     "proved": 1 },
+2026-11-01T21:52:07.1343449Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part3",
+2026-11-01T21:52:07.1343861Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1344216Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1344668Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1345103Z     "verdict": "valid",
+2026-11-01T21:52:07.1345438Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1345871Z     "proved": 1 },
+2026-11-01T21:52:07.1346181Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part4",
+2026-11-01T21:52:07.1346594Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1346956Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1347383Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1347800Z     "verdict": "valid",
+2026-11-01T21:52:07.1348115Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1348663Z     "proved": 1 },
+2026-11-01T21:52:07.1348985Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part5",
+2026-11-01T21:52:07.1349338Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1349745Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1351303Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1351639Z     "verdict": "valid",
+2026-11-01T21:52:07.1351858Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1352181Z     "proved": 1 },
+2026-11-01T21:52:07.1352397Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part6",
+2026-11-01T21:52:07.1352681Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T21:52:07.1353015Z     "file": "/repo/phase19-bridge.c", "line": 483,
+2026-11-01T21:52:07.1353308Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1353748Z     "verdict": "valid",
+2026-11-01T21:52:07.1353983Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1354232Z     "proved": 1 },
+2026-11-01T21:52:07.1354530Z   { "goal": "bytes_tb_receipt_verify_chain_loop_variant_positive",
+2026-11-01T21:52:07.1354824Z     "property": "tb_receipt_verify_chain_loop_variant",
+2026-11-01T21:52:07.1355076Z     "file": "/repo/phase19-bridge.c", "line": 521,
+2026-11-01T21:52:07.1355477Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1355862Z     "verdict": "valid",
+2026-11-01T21:52:07.1356192Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1356518Z     "proved": 1 },
+2026-11-01T21:52:07.1356739Z   { "goal": "bytes_tb_receipt_verify_chain_loop_variant_decrease",
+2026-11-01T21:52:07.1357083Z     "property": "tb_receipt_verify_chain_loop_variant",
+2026-11-01T21:52:07.1357370Z     "file": "/repo/phase19-bridge.c", "line": 521,
+2026-11-01T21:52:07.1357662Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1358020Z     "verdict": "valid",
+2026-11-01T21:52:07.1358242Z     "provers": [ { "prover": "qed", "time": 0.0874, "success": 0 },
+2026-11-01T21:52:07.1358556Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0364, "success": 1 } ],
+2026-11-01T21:52:07.1358916Z     "proved": 1 },
+2026-11-01T21:52:07.1359139Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_requires",
+2026-11-01T21:52:07.1359720Z     "property": "equal32_requires", "file": "/repo/phase19-bridge.c",
+2026-11-01T21:52:07.1360069Z     "line": 527, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T21:52:07.1360537Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:07.1360790Z     "provers": [ { "prover": "qed", "time": 0.0372, "success": 0 },
+2026-11-01T21:52:07.1361172Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0427, "success": 1 } ],
+2026-11-01T21:52:07.1361446Z     "proved": 1 },
+2026-11-01T21:52:07.1361678Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_requires_2",
+2026-11-01T21:52:07.1362089Z     "property": "equal32_requires_2", "file": "/repo/phase19-bridge.c",
+2026-11-01T21:52:07.1362406Z     "line": 527, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T21:52:07.1362728Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:07.1363004Z     "provers": [ { "prover": "qed", "time": 0.0356, "success": 0 },
+2026-11-01T21:52:07.1363305Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0431, "success": 1 } ],
+2026-11-01T21:52:07.1363641Z     "proved": 1 },
+2026-11-01T21:52:07.1363873Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires",
+2026-11-01T21:52:07.1364267Z     "property": "calculate_hash_requires", "file": "/repo/phase19-bridge.c",
+2026-11-01T21:52:07.1364654Z     "line": 529, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T21:52:07.1364912Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:07.1365246Z     "provers": [ { "prover": "qed", "time": 0.11, "success": 0 },
+2026-11-01T21:52:07.1365654Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0736, "success": 1 } ],
+2026-11-01T21:52:07.1365989Z     "proved": 1 },
+2026-11-01T21:52:07.1366226Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_2",
+2026-11-01T21:52:07.1366525Z     "property": "calculate_hash_requires_2",
+2026-11-01T21:52:07.1366761Z     "file": "/repo/phase19-bridge.c", "line": 529,
+2026-11-01T21:52:07.1367158Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1367437Z     "verdict": "valid",
+2026-11-01T21:52:07.1367674Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1367919Z     "proved": 1 },
+2026-11-01T21:52:07.1368146Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_3",
+2026-11-01T21:52:07.1368523Z     "property": "calculate_hash_requires_3",
+2026-11-01T21:52:07.1368755Z     "file": "/repo/phase19-bridge.c", "line": 529,
+2026-11-01T21:52:07.1369041Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1369305Z     "verdict": "valid",
+2026-11-01T21:52:07.1369509Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1369747Z     "proved": 1 },
+2026-11-01T21:52:07.1369978Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_4",
+2026-11-01T21:52:07.1370420Z     "property": "calculate_hash_requires_4",
+2026-11-01T21:52:07.1370662Z     "file": "/repo/phase19-bridge.c", "line": 529,
+2026-11-01T21:52:07.1370947Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1371215Z     "verdict": "valid",
+2026-11-01T21:52:07.1371426Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1371664Z     "proved": 1 },
+2026-11-01T21:52:07.1371886Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_5",
+2026-11-01T21:52:07.1372165Z     "property": "calculate_hash_requires_5",
+2026-11-01T21:52:07.1372404Z     "file": "/repo/phase19-bridge.c", "line": 529,
+2026-11-01T21:52:07.1372682Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1372952Z     "verdict": "valid",
+2026-11-01T21:52:07.1373155Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1373387Z     "proved": 1 },
+2026-11-01T21:52:07.1373727Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_6",
+2026-11-01T21:52:07.1374089Z     "property": "calculate_hash_requires_6",
+2026-11-01T21:52:07.1374430Z     "file": "/repo/phase19-bridge.c", "line": 529,
+2026-11-01T21:52:07.1374720Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T21:52:07.1374987Z     "verdict": "valid",
+2026-11-01T21:52:07.1375198Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1375569Z     "proved": 1 },
+2026-11-01T21:52:07.1375927Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_2_requires",
+2026-11-01T21:52:07.1376477Z     "property": "equal32_requires_3", "file": "/repo/phase19-bridge.c",
+2026-11-01T21:52:07.1376846Z     "line": 531, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T21:52:07.1377205Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:07.1377454Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1377732Z     "proved": 1 },
+2026-11-01T21:52:07.1378006Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_2_requires_2",
+2026-11-01T21:52:07.1378332Z     "property": "equal32_requires_4", "file": "/repo/phase19-bridge.c",
+2026-11-01T21:52:07.1378721Z     "line": 531, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T21:52:07.1378980Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:07.1379336Z     "provers": [ { "prover": "qed", "time": 0.0866, "success": 0 },
+2026-11-01T21:52:07.1379645Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0461, "success": 1 } ],
+2026-11-01T21:52:07.1380253Z     "proved": 1 },
+2026-11-01T21:52:07.1380511Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_3_requires",
+2026-11-01T21:52:07.1380825Z     "property": "equal32_requires_5", "file": "/repo/phase19-bridge.c",
+2026-11-01T21:52:07.1381246Z     "line": 533, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T21:52:07.1381509Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:07.1381751Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T21:52:07.1382091Z     "proved": 1 },
+2026-11-01T21:52:07.1382308Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_3_requires_2",
+2026-11-01T21:52:07.1382629Z     "property": "equal32_requires_6", "file": "/repo/phase19-bridge.c",
+2026-11-01T21:52:07.1383097Z     "line": 533, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T21:52:07.1383469Z     "passed": true, "verdict": "valid",
+2026-11-01T21:52:07.1383711Z     "provers": [ { "prover": "qed", "time": 0.0381, "success": 0 },
+2026-11-01T21:52:07.1384016Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0381, "success": 1 } ],
+2026-11-01T21:52:07.1384268Z     "proved": 1 } ]
+2026-11-01T21:52:07.2176567Z FAIL: P19-03 WP gate: missing/duplicate original WP JSON report
+2026-11-01T21:52:07.2224696Z ##[error]Process completed with exit code 1.
+2026-11-01T21:52:07.2306152Z ##[group]Run actions/upload-artifact@v4
+2026-11-01T21:52:07.2306387Z with:
+2026-11-01T21:52:07.2306578Z   name: phase19-bridge-tb_receipt_verify_chain
+2026-11-01T21:52:07.2306836Z   path: phase19-bridge*.log
+phase19-bridge.c
+
+2026-11-01T21:52:07.2307062Z   retention-days: 30
+2026-11-01T21:52:07.2307252Z   if-no-files-found: warn
+2026-11-01T21:52:07.2307440Z   compression-level: 6
+2026-11-01T21:52:07.2307616Z   overwrite: false
+2026-11-01T21:52:07.2307789Z   include-hidden-files: false
+2026-11-01T21:52:07.2307988Z ##[endgroup]
+2026-11-01T21:52:07.3696625Z (node:2598) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-01T21:52:07.3697282Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-01T21:52:07.3747592Z With the provided path, there will be 2 files uploaded
+2026-11-01T21:52:07.3752008Z Artifact name is valid!
+2026-11-01T21:52:07.3752469Z Root directory input is valid!
+2026-11-01T21:52:07.7726458Z Beginning upload of artifact content to blob storage
+2026-11-01T21:52:07.7949680Z (node:2598) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-01T21:52:08.0718344Z Uploaded bytes 8828
+2026-11-01T21:52:08.1470650Z Finished uploading artifact content to blob storage!
+2026-11-01T21:52:08.1471374Z SHA256 digest of uploaded artifact zip is 916a41af2e9d280edaf9d9cd14496c20933c3bc67a4df211150f6fa0db731669
+2026-11-01T21:52:08.1472876Z Finalizing artifact upload
+2026-11-01T21:52:08.6161258Z Artifact phase19-bridge-tb_receipt_verify_chain.zip successfully finalized. Artifact ID 13102522848
+2026-11-01T21:52:08.6162527Z Artifact phase19-bridge-tb_receipt_verify_chain has been successfully uploaded! Final size is 8828 bytes. Artifact ID is 13102522848
+2026-11-01T21:52:08.6167769Z Artifact download URL: https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41353978018/artifacts/13102522848
+2026-11-01T21:52:08.6366822Z Post job cleanup.
+2026-11-01T21:52:08.7065847Z [command]/usr/bin/git version
+2026-11-01T21:52:08.7098188Z git version 2.56.0
+2026-11-01T21:52:08.7125478Z Temporarily overriding HOME='/home/runner/work/_temp/37a71af3-6303-4b72-822f-89167c95e0f5' before making global git config changes
+2026-11-01T21:52:08.7126384Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T21:52:08.7129600Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T21:52:08.7159929Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T21:52:08.7188287Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T21:52:08.7413878Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T21:52:08.7437216Z http.https://github.com/.extraheader
+2026-11-01T21:52:08.7445731Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-01T21:52:08.7474696Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T21:52:08.7667980Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T21:52:08.7694059Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T21:52:08.8066973Z Cleaning up orphan processes
+2026-11-01T21:52:08.8382217Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
