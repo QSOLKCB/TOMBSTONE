@@ -1,26 +1,24 @@
 # TOMBSTONE roadmap
 
-**Phases 0–5 have merged. Phase 6 GTK4 desktop is implemented in this PR and awaits review and CI. Phase 7 is planned.**
+**Phases 0–6 are merged. Phase 7 hardening is implemented in this PR and awaits exact-head review and executed CI evidence. No release tag is created here.**
 
-| Phase | Deliverable | Acceptance gate | Status |
+| Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
-| **0 — Foundation** | Human/machine docs, receipt fixtures, project layout | Documentation checks | Merged |
-| **1 — C99 SHA-256** | OpenSSL EVP, byte-safe C ABI | Vectors, sanitizers, reproducibility | Merged |
-| **2 — C99 deletion witness** | Exact splice checking, observed transitions | Invalid-byte/offset tests | Merged |
-| **3 — Receipts/chains** | Restricted RFC 8785 JSON and linked hashes | Golden hashes, malformed/chain tests | Merged |
-| **4 — Rust FFI/CLI** | Safe C99 adapter and deterministic headless commands | CLI parity, safe errors | Merged |
-| **5 — Rust TUI** | ncurses-guided workflows, inspected receipts, create-new save | PTY and C99 parity | Merged |
-| **6 — GTK4 desktop** | Separate native GTK4 frontend using existing C99 evidence workflows | Isolated native build, Xvfb smoke, parity/no-overwrite tests, headless unaffected | In PR; review pending |
-| **7 — Hardening/release** | Fuzzing, portability, independent anchoring options | Independent exact-head review and immutable tag | Planned |
+| 0 — Foundation | Human/machine contract and fixtures | Documentation checks | Merged |
+| 1 — C99 SHA-256 | OpenSSL EVP, binary-safe C ABI | Vectors, ASan/UBSan, reproducibility | Merged |
+| 2 — C99 splice | Exact witnessed byte deletion and observed transition | Adversarial inputs | Merged |
+| 3 — Canonical receipts | Strict v1 JSON and SHA-256 hash chain | Golden/invalid cases | Merged |
+| 4 — Rust CLI | Safe C99 FFI, deterministic headless commands | CLI parity and sanitized I/O | Merged |
+| 5 — Rust TUI | ncurses inspection, optional create-new save | PTY tests and C99 parity | Merged |
+| 6 — Optional GTK4 | Isolated desktop frontend over same FFI | Xvfb and independent builds | Merged |
+| **7 — Hardening/release gate** | Bounded C99 fuzzing, compiler/arch replay, documented anchoring and release evidence | CI + exact-head independent review + maintainer tag decision | In PR; no tag |
 
-## Phase 6 scope
+## Phase 7 scope
 
-- `apps/gtk` is a **separate Cargo workspace** and remains excluded from the root. `libgtk-4-dev` is required only when building the GUI.
-- Six native GTK4 tabs: fingerprint, observe, verify supplied deletion, inspect receipt, verify ordered chain and explicitly save canonical JSON without overwrite.
-- The GUI calls the Phase 5 Rust workflow library and established FFI, which exclusively call C99 for evidence and cryptography. No duplicated hash/receipt code, Node.js or third-party Rust crates.
-- C99 golden-vector parity, anchored chain tests, input privacy and GTK startup tested under Xvfb. The original headless CLI/TUI/C99 jobs remain intact.
-- No automatic deletion, file replacement, remote services, signatures, credentials, history-author authentication or secure erasure claims.
+- Clang libFuzzer targets for the bounded C99 receipt parser and exact-splice/transition APIs, instrumented with AddressSanitizer and UndefinedBehaviorSanitizer, with reproducible synthetic seed corpus.
+- GCC and Clang compilation of the authoritative C99 backend in **independent Rust CLI builds**. Python's standard-library oracle verifies the fixed v1 schema hashes and byte-for-byte canonical JSON results without introducing a production duplicate.
+- Linux x86-64 and ARM64 runner matrix for independently executed cross-compiler receipt replay, historical fixture continuity and malformed/chain negative tests.
+- New [release gate](docs/RELEASE_GATE.md), [portability limits](docs/PORTABILITY.md) and [anchoring/privacy boundary](docs/ANCHORING_PRIVACY.md). No changes to existing receipt schema, output hashes, CLI or GUI contract.
+- The exact PR head must receive review and green checks; the maintainer may tag a selected version **after merge** with evidence and asset checksums. No premature stable-release or secure-erasure claims.
 
-**Next Phase 7:** fuzz input parsers and FFI, independently validate cross-platform replay, review anchoring/privacy tradeoffs and only then consider an immutable release.
-
-See [GTK guide](docs/GTK.md), [invariants](INVARIANTS.md) and [security](SECURITY.md).
+The next action after this PR is review, any corrections, locally executed evidence where useful, and an independent **release decision**. A green CI status alone is not a release.

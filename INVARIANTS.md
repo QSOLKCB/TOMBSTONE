@@ -1,6 +1,6 @@
 # Invariants — design requirements
 
-**Status:** Phase 1 implements TMB-001 and Phase 2 implements the **in-memory byte verification portions** of TMB-002–005, TMB-009 and TMB-014, now merged. Phase 3 implements receipt encoding, parsing, hash checks and chain validation (merged); no external anchoring infrastructure or real-world event authentication is implemented. Phase 4 Rust CLI and C99 FFI were merged with TMB-011/TMB-012 tests. Phase 5 TUI is merged with TMB-011 tests and no-overwrite receipt exports. Phase 6 GTK extends the same contract to an independent native GUI (pending review). \`make docs-check\` checks illustrative fixtures, not the real engine; \`make test\`, \`make sanitizer-test\` and \`make reproducibility\` exercise the new library.
+**Status:** Phase 1 implements TMB-001 and Phase 2 implements the **in-memory byte verification portions** of TMB-002–005, TMB-009 and TMB-014, now merged. Phase 3 implements receipt encoding, parsing, hash checks and chain validation (merged); no external anchoring infrastructure or real-world event authentication is implemented. Phase 4 Rust CLI and C99 FFI were merged with TMB-011/TMB-012 tests. Phase 5 TUI is merged with TMB-011 tests and no-overwrite receipt exports. Phase 6 GTK extends the same contract to a merged independent native GUI. Phase 7 fuzz and independent canonical replay add regression evidence (pending review). \`make docs-check\` checks illustrative fixtures, not the real engine; \`make test\`, \`make sanitizer-test\` and \`make reproducibility\` exercise the new library.
 
 | ID | Requirement | Required future validation |
 | --- | --- | --- |
@@ -23,5 +23,7 @@
 **Desktop boundary:** GTK4 performs only presentation and path/input transport through existing Rust workflows and C99 FFI. Its package must not be part of the root Cargo workspace and no GTK library may be needed to test/build the C99 engine, CLI or ncurses TUI. A failed GUI action clears the last exportable result; save is explicit and create-new only.
 
 **TUI boundary:** Screen navigation and IO are Rust/ncurses responsibilities, but C99 exclusively determines evidence and canonical JSON. There must be no automatic deletion, no file overwrite, no plaintext in exported receipts and no claim of authenticated edits. 
+
+**Hardening boundary:** Fuzzing is bounded and cannot prove absence of bugs. Independent Python SHA-256/JCS checks are *test-only*. The existing C99 engine remains the sole production authority for v1 receipts. New architecture coverage applies only to executed runners; external chain heads must be independently retained.
 
 **Boundary:** JSON Schema handles syntax and basic conditional structure, not splice equality, signature authenticity, hash correctness, or chain integrity. Phase 2 tests byte-exact splice relationships and reports `TB_ERR_MISMATCH` on false witnesses; Phase 3 now provides executable receipt and chain checks for the v1 format. A historical diff must never be promoted to a witnessed deletion.

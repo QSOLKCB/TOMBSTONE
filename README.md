@@ -9,7 +9,7 @@
 
 TOMBSTONE is a C99-first system for deterministic, independently checkable fingerprints of caller-supplied bytes, exact deletion-splice relationships and linked canonical receipt evidence.
 
-**Status:** Phases 0–5 are merged. Phase 6 adds an **optional GTK4 desktop app in PR**, pending review. C99 alone owns SHA-256, witness validation, canonical receipt encoding and chain verification; Rust handles terminal and desktop interfaces. Phase 7 hardening and release remain planned.
+**Status:** Phases 0–6 are merged. **Phase 7 adds bounded C99 fuzzing, independent cross-compiler/architecture receipt replay, and a release evidence gate (pending PR review).** C99 alone owns SHA-256, witness validation, canonical receipt encoding and chain verification; Rust handles terminal and desktop interfaces. No immutable tag or security certification is created by this PR.
 
 ## Interfaces
 
@@ -31,6 +31,16 @@ apps/gtk/target/release/tombstone-gtk
 
 The GUI offers fingerprint, observed-transition, witnessed-deletion, receipt inspection, chain verification and **explicit create-new receipt export**, using the same tested C99-backed workflows as the TUI. The **root Cargo workspace excludes GTK**, preserving all headless builds and tests.
 
+## Phase 7 hardening checks
+
+Run the bounded sanitizer-backed C99 fuzzers and use the GitHub Actions x86-64/ARM64 matrix for independent replay:
+
+```sh
+make fuzz               # Clang libFuzzer, AddressSanitizer and UBSan
+```
+
+The [release gate](docs/RELEASE_GATE.md), [anchoring/privacy notes](docs/ANCHORING_PRIVACY.md) and [portability matrix](docs/PORTABILITY.md) explain the evidence required before any immutable tag. These tests do not prove deletion, confidentiality or erasure.
+
 ## Verify the engine and existing interfaces
 
 ```sh
@@ -41,7 +51,7 @@ make docs-check
 cargo test --workspace --locked --offline
 ```
 
-Read the [GTK4 guide](docs/GTK.md), [TUI guide](docs/TUI.md), [CLI guide](docs/CLI.md), [architecture](ARCHITECTURE.md), [roadmap](ROADMAP.md), [invariants](INVARIANTS.md), and [security](SECURITY.md).
+Read the [Phase 7 release gate](docs/RELEASE_GATE.md), [GTK4 guide](docs/GTK.md), [TUI guide](docs/TUI.md), [CLI guide](docs/CLI.md), [architecture](ARCHITECTURE.md), [roadmap](ROADMAP.md), [invariants](INVARIANTS.md), and [security](SECURITY.md).
 
 Human prose lives in root Markdown and `docs/`; machine-readable receipts/schemas and synthetic fixtures live in `machine/`. [Apache-2.0](LICENSE).
 

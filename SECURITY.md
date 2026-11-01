@@ -1,6 +1,6 @@
 # Security and privacy model
 
-**Scope today:** Phase 1 implements C99 SHA-256 through OpenSSL EVP. Phase 2 adds caller-supplied, exact byte-splice verification and observed-transition classification, returning only in-memory digests/lengths/offset. Neither library function opens files, deletes data, logs removed bytes nor serializes receipts. Phase 3 adds deterministic receipt serialization, strict parsing, and hash-chain checking; secure erasure, historic attestation, trusted anchoring infrastructure and authenticated historical deletion are not implemented. Phase 5 merged the Rust ncurses TUI; Phase 6 adds an optional GTK4 GUI in PR. Phase 4 provides a Rust CLI that reads explicitly named inputs or stdin, bounded at 64 MiB per input. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
+**Scope today:** Phase 1 implements C99 SHA-256 through OpenSSL EVP. Phase 2 adds caller-supplied, exact byte-splice verification and observed-transition classification, returning only in-memory digests/lengths/offset. Neither library function opens files, deletes data, logs removed bytes nor serializes receipts. Phase 3 adds deterministic receipt serialization, strict parsing, and hash-chain checking; secure erasure, historic attestation, trusted anchoring infrastructure and authenticated historical deletion are not implemented. Phase 5 merged the Rust ncurses TUI; Phase 6 merged the optional GTK4 GUI. Phase 7 adds reproducible bounded C99 fuzzing, independent receipt replay and a pre-tag security/evidence gate, but no secure erasure or historical-authentication mechanism. Phase 4 provides a Rust CLI that reads explicitly named inputs or stdin, bounded at 64 MiB per input. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
 
 ## Nonclaims
 
@@ -29,6 +29,10 @@ The TUI prompts for selected paths; these are visible while typed but are not in
 ## Phase 6 GTK4 desktop boundary
 
 The desktop app uses system GTK4 only as an optional user interface, isolated from the headless Cargo workspace. File paths are visible while typed in GTK entries but are never included in canonical JSON, rendered receipt reports or application diagnostics. It reuses the Phase 5 C99-backed workflows for binary-safe inputs, restricted-size receipts, optional independently trusted chain heads and create-new-only saves. A failed or replaced evidence operation clears the last exportable receipt; nothing is automatically saved, edited or deleted. GTK4 may have its own runtime/display environmental behaviour; never treat its input fields as a secure secret-entry facility. There is no logging of deleted plaintext, telemetry, cloud access, signing or secure erasure.
+
+## Phase 7 adversarial tests and anchoring boundary
+
+The C99 parser and splice APIs now have sanitizer-backed libFuzzer targets seeded only with public synthetic fixtures. These check error-path immutability and canonical round trips, not actual deletion or privacy of guessed secrets. Independent Python SHA-256 replay only checks the *fixed* v1 ASCII receipt profile on real GCC/Clang C99-backed CLI builds. Neither fuzz coverage nor successful CI establishes formal correctness, cryptographic confidentiality or historical authenticity. See [anchoring/privacy](docs/ANCHORING_PRIVACY.md) and [release gate](docs/RELEASE_GATE.md).
 
 ## Planned controls
 

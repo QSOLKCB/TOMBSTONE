@@ -2,7 +2,7 @@
 
 ## Boundary and maturity
 
-This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprinting and exact deletion-splice verification**. Phase 2 is merged. Phase 3 provides merged schema-limited RFC 8785 receipt serialization, strict parsing and hash-link validation. Phase 4 merged the safe Rust FFI and headless CLI. Phase 5 merged the Rust ncurses terminal UI. Phase 6 introduces a separate optional native GTK4 desktop frontend (in PR pending review). No filesystem deletion capability is implemented. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
+This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprinting and exact deletion-splice verification**. Phase 2 is merged. Phase 3 provides merged schema-limited RFC 8785 receipt serialization, strict parsing and hash-link validation. Phase 4 merged the safe Rust FFI and headless CLI. Phase 5 merged the Rust ncurses terminal UI. Phase 6 merged the separate optional native GTK4 desktop frontend. No filesystem deletion capability is implemented. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
 
 \`\`\`text
              Human terminal        Agents/scripts          Optional desktop
@@ -55,6 +55,8 @@ This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprint
 
 **Phase 6 desktop boundary:** The GTK app is a standalone Cargo workspace with its own native GTK4 dependencies. Rust uses minimal GTK4 C ABI calls solely to build windows, gather UTF-8 path input and display C99-derived results. The same Phase 5 workflow functions enforce size limits, chain validation, canonical exports and create-new-only saving. GTK does not change or replace the root Cargo workspace, C99 library or headless CLI.
 
+**Phase 7 hardening:** `tests/fuzz/` exercises the existing C99 parser/splice APIs with sanitizers, while `tools/check_portability.py` independently cross-checks serialized SHA-256 receipts from isolated GCC/Clang-backed Rust CLI builds on separate Linux architectures. These are verification tools, not alternate evidence engines, signatures, or security certifications. No wire format or C99 ABI is changed.
+
 ### Evidence classes
 
 | Kind | Inputs witnessed | What can be claimed |
@@ -92,7 +94,7 @@ src/{core,crypto,encoding}/ C99 implementation of splices, SHA-256 and receipts
 bindings/rust/             implemented safe Rust C99 adapter
 apps/cli/                   implemented headless Rust CLI (Phase 4)
 apps/tui/                   merged Rust interactive ncurses UI
-apps/gtk/                   isolated Phase 6 Rust/GTK4 desktop frontend (in PR)
+apps/gtk/                   merged isolated Rust/GTK4 desktop frontend
 tests/{unit,integration,fixtures}/ validation targets + public toy fixture
 tools/                     docs/fixture validation
 examples/                  later user-facing usage examples

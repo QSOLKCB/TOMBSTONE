@@ -2,6 +2,9 @@
 
 All files here are human-readable explanations. The machine-readable contract and examples live separately in [machine/](../machine/README.md).
 
+- [Phase 7 release gate](RELEASE_GATE.md) — mandatory exact-head, CI and asset evidence before immutable tag
+- [Independent portability](PORTABILITY.md) — GCC/Clang and Linux x86-64/ARM64 replay scope
+- [Anchoring and privacy](ANCHORING_PRIVACY.md) — local-chain, short-secret and erasure limitations
 - [Optional GTK4 desktop](GTK.md) — Phase 6 native interface, build isolation and privacy boundary
 - [Rust ncurses TUI](TUI.md) — Phase 5 guided human inspection and verification, C99 interface boundary
 - [Rust CLI and FFI](CLI.md) — Phase 4 headless commands, statuses, C99 boundary and trust limits

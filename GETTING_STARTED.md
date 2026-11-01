@@ -53,3 +53,13 @@ apps/gtk/target/release/tombstone-gtk
 ```
 
 See [docs/GTK.md](docs/GTK.md). It provides the same C99-backed evidence workflows and never edits or deletes the supplied input files.
+
+## Phase 7 bounded hardening checks
+
+On Ubuntu, install Clang and the LLVM fuzz sanitizer runtime (`clang libclang-rt-dev`) and run:
+
+```sh
+make fuzz
+```
+
+The PR GitHub Actions matrix builds the real Rust CLI with independent GCC and Clang C99 backends on x86-64 and ARM64 Linux, and compares canonical receipts to an independent standard-library Python oracle. See [docs/PORTABILITY.md](docs/PORTABILITY.md) and the pre-tag [release gate](docs/RELEASE_GATE.md). Fuzzing and CI are neither secure-erasure guarantees nor proofs of bug absence.

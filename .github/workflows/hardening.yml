@@ -1,0 +1,49 @@
+name: Phase 7 hardening and independent replay
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fuzz:
+    name: Clang libFuzzer + ASan/UBSan (receipt and splice)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Clang fuzzer and OpenSSL development libraries
+        run: sudo apt-get update && sudo apt-get install -y clang libclang-rt-dev libssl-dev pkg-config
+      - name: Verify UBSan runtime failures cannot pass silently
+        run: sh tools/check_sanitizer_gate.sh clang
+      - name: Fuzz the C99 parsers and splice verifier on synthetic data
+        run: sh tools/run_fuzz.sh
+
+  portability:
+    name: Cross-compiler receipt replay (${{ matrix.runner }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install GCC, Clang, OpenSSL and Python
+        run: sudo apt-get update && sudo apt-get install -y gcc clang pkg-config libssl-dev python3
+      - name: Identify actual architecture and toolchains
+        run: uname -m && gcc --version | head -n 1 && clang --version | head -n 1 && rustc --version
+      - name: Build isolated CLI binaries from independent C compilers
+        run: |
+          CC=gcc CARGO_TARGET_DIR="$RUNNER_TEMP/tombstone-gcc" cargo build -p tombstone-cli --release --offline --locked
+          CC=clang CARGO_TARGET_DIR="$RUNNER_TEMP/tombstone-clang" cargo build -p tombstone-cli --release --offline --locked
+      - name: Verify independent receipts, prefixes, anchors and tamper rejection
+        run: |
+          python3 tools/check_portability.py \
+            "$RUNNER_TEMP/tombstone-gcc/release/tombstone" \
+            "$RUNNER_TEMP/tombstone-clang/release/tombstone"
+      - name: Native C99 regression suite
+        run: make test

@@ -48,3 +48,9 @@ cargo build -p tombstone-cli --release --offline --locked
 For CLI development enforce deterministic JSON on stdout, stderr-only errors, no implicit prompts, no logs of plaintext/paths, explicit exit statuses and 64 MiB file caps. A supplied `--previous` is not independent proof of a valid preceding receipt; `verify` checks one record, while `verify-chain` checks the whole chain. A trusted external anchor is always an explicit caller input.
 
 Review the **exact head SHA** and distinguish executed tests from inferred results. Keep each future milestone narrow, evidence-gated and independently reviewable.
+
+## Phase 7 release discipline
+
+Run `make fuzz` (requires Clang/libFuzzer with sanitizers) and the GitHub Actions architecture/replay matrix. This adds only synthetic fuzz inputs: never include user secrets in corpora or failure artifacts. `tools/check_portability.py` is an **independent test oracle**, not a production canonicalization implementation. Do not silently alter existing v1 receipt hashes, C99 API, ABI or machine contracts.
+
+Before any tag, enforce [docs/RELEASE_GATE.md](docs/RELEASE_GATE.md): preserve source, distinguish executed from inferred platform coverage, exact-head independent review with no actionable defects, collect CI evidence, source/asset checksums, and explicit maintainer decision. **Do not create a tag automatically or merge based on a prior-head approval.**
