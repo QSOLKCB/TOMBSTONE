@@ -19,7 +19,7 @@ MODEL=r"""/* Proof-only model of externally owned SHA state, NOT a provider impl
  * The real provider may modify its private context; no caller input or
  * unrelated buffer may be modified under these assumed contracts.
  */
-static unsigned char model_private_provider_state;
+extern unsigned char model_private_provider_state;
 /*@
   requires \valid(out_ctx);
   assigns *out_ctx, model_private_provider_state;
