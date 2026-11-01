@@ -7,6 +7,10 @@ cd "$ROOT"
 LOG=$(mktemp)
 trap 'rm -f "$LOG"' EXIT HUP INT TERM
 frama-c -version
-frama-c -wp -wp-fct splice_equal -wp-prover alt-ergo -wp-timeout 20 \
-    -wp-rte -wp-par 2 -cpp-extra-args="-Iinclude" src/core/deletion.c 2>&1 | tee "$LOG"
+if ! frama-c -wp -wp-fct splice_equal -wp-prover alt-ergo -wp-timeout 20 \
+    -wp-rte -wp-par 2 -cpp-extra-args="-Iinclude" src/core/deletion.c > "$LOG" 2>&1; then
+    cat "$LOG"
+    exit 1
+fi
+cat "$LOG"
 python3 tools/check_wp_proofs.py "$LOG"
