@@ -66,9 +66,13 @@ void check_string_bounds(void)
     __CPROVER_assert(p.i <= p.n, "string parser never advances past input");
     __CPROVER_assert((unsigned char)output[4] == 0xa5,
                      "string parser respects destination capacity");
-    if (ok)
-        __CPROVER_assert(memchr(output, 0, 4u) != NULL,
+    if (ok) {
+        int has_terminator = 0;
+        for (j = 0u; j < 4u; ++j)
+            if (output[j] == '\0') has_terminator = 1;
+        __CPROVER_assert(has_terminator,
                          "successful string parser terminates within capacity");
+    }
 }
 
 void check_whitespace_bounds(void)
