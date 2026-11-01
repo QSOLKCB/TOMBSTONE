@@ -1,6 +1,6 @@
 # Invariants — design requirements
 
-**Status:** These are planned requirements, not claims of a finished implementation. \`make docs-check\` currently checks illustrative fixtures and some schema shape, not full product correctness.
+**Status:** Phase 1 now implements the SHA-256 fingerprint subset of TMB-001, as exercised by C99 vectors including binary bytes. All deletion/receipt requirements remain planned. \`make docs-check\` checks illustrative fixtures, not the real engine; \`make test\`, \`make sanitizer-test\` and \`make reproducibility\` exercise the new library.
 
 | ID | Requirement | Required future validation |
 | --- | --- | --- |

@@ -7,19 +7,31 @@
   <em>The data is gone from the receipt. The tombstone has a checksum.</em>
 </p>
 
-TOMBSTONE is a planned **C99-first** utility for deterministic, independently checkable evidence about file transitions and, when removed bytes are actually available to the tool, **explicit deletion events**.
+TOMBSTONE is a **C99-first** project for deterministic, independently checkable evidence about file transitions and, when removed bytes are actually witnessed, explicit deletion events.
 
-**Project status: documentation and directory scaffolding only.** There is no working C engine, Rust CLI/TUI or GTK frontend yet. The machine-readable v1 schema is a **proposal**, not a released interface.
+**Implementation status:** Phase 0 documentation is established. Phase 1 provides a working **binary-safe C99 SHA-256 fingerprint library**, backed by OpenSSL EVP, with a minimal versioned public C ABI. **Deletion witnessing, receipts, strict JSON verification, Rust CLI/TUI and GTK are still planned.** The receipt v1 schema is a proposal, not a released protocol.
 
-- **C99 logic**: byte handling, fingerprints, receipt encoding and verification.
-- **Rust CLI + TUI**: automation and human interfaces using one C99 source of truth.
-- **Optional GTK4**: later desktop GUI with no duplicated evidence logic.
-- **Human prose**: root Markdown and [docs](docs/INDEX.md); **machine data**: [machine/](machine/README.md).
+- **C99 logic:** SHA-256 fingerprinting implemented; deletion/receipt logic follows in later phases.
+- **Rust CLI + TUI:** planned interfaces for agents and humans using the C99 core.
+- **Optional GTK4:** future desktop GUI, not a requirement of the engine.
+- **Separate documentation:** human prose in root Markdown and [docs](docs/INDEX.md), candidate machine contract in [machine/](machine/README.md).
 
-**Critical distinction:** A before/after SHA-256 comparison does **not** reveal what was deleted. An explicit deletion receipt requires access to the deleted bytes at the moment of the operation. Fingerprints are neither proof of secure erasure nor a way to recover lost bytes; predictable deleted data can be guessed from its hash.
+## Build and verify the Phase 1 C99 library
 
-Start with [GETTING_STARTED.md](GETTING_STARTED.md). See [ARCHITECTURE.md](ARCHITECTURE.md), [INVARIANTS.md](INVARIANTS.md), [AGENTS.md](AGENTS.md), [ROADMAP.md](ROADMAP.md), and [SECURITY.md](SECURITY.md).
+Requires a C99 compiler, GNU Make, GNU ar, \`pkg-config\` and OpenSSL development headers/library (e.g. \`libssl-dev\` on Ubuntu).
 
-A documentation/fixture smoke check (Python 3 standard library only) is available via \`make docs-check\`. It does not build the unimplemented product.
+\`\`\`sh
+make                  # creates build/libtombstone.a
+make test             # C99 vectors, binary bytes, streaming, error handling, public link
+make reproducibility  # two independent identical static-library builds
+make sanitizer-test   # ASan and UBSan
+make docs-check       # original documentation/receipt fixture checks
+\`\`\`
+
+Public C ABI: [include/tombstone/fingerprint.h](include/tombstone/fingerprint.h). See the [API guide](docs/FINGERPRINT_API.md) and [getting started](GETTING_STARTED.md).
+
+**Important:** A before/after SHA-256 comparison cannot reveal which bytes were deleted. Fingerprints are not proof of secure erasure or confidentiality; a hash of predictable data may be guessable.
+
+Project instructions: [ARCHITECTURE.md](ARCHITECTURE.md), [INVARIANTS.md](INVARIANTS.md), [AGENTS.md](AGENTS.md), [ROADMAP.md](ROADMAP.md), [SECURITY.md](SECURITY.md).
 
 Existing repository license: [Apache-2.0](LICENSE).

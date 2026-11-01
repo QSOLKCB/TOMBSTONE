@@ -2,6 +2,7 @@
 
 All files here are human-readable explanations. The machine-readable contract and examples live separately in [machine/](../machine/README.md).
 
+- [C99 fingerprint API](FINGERPRINT_API.md) — Phase 1 public SHA-256 ABI, usage, errors and backend
 - [Architecture](../ARCHITECTURE.md) — C99 evidence core, Rust CLI/TUI, optional GTK
 - [Invariants](../INVARIANTS.md) — testable requirements
 - [Roadmap](../ROADMAP.md) — phased, evidence-gated delivery

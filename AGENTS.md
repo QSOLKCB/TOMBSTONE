@@ -18,10 +18,20 @@ Follow [ARCHITECTURE.md](ARCHITECTURE.md), [INVARIANTS.md](INVARIANTS.md) and [R
 
 Review the **exact head SHA**; report only actionable correctness/security defects with minimal reproduction, expected vs actual results and whether executed or reasoned. Do not re-report fixed findings. Propose small PRs with tests and clear rollback. Do not merge merely because another PR passed review.
 
-## Immediate development commands
+## Phase 1 engine and test commands
+
+\`make\` builds the native static archive. Requires OpenSSL development headers and pkg-config; C99 code resides in \`src/crypto/fingerprint.c\`, header in \`include/tombstone/fingerprint.h\`.
 
 \`\`\`sh
+make
+make test
+make sanitizer-test
+make reproducibility
 make docs-check
 \`\`\`
 
-This validates **documentation fixtures only**. There is no buildable C or Rust product yet. The first implementation PR should add C99 SHA-256 vectors and deterministic receipt encoding/verification tests, then update this file with real build commands.
+**Implemented:** C99 one-shot/streamed SHA-256, ABI version query, lowercase hex, and explicit argument/state/length errors.
+
+**Not implemented:** deletion witnessing, canonical receipts, Rust CLI/TUI or GTK. Never claim that before/after hashes prove removed bytes.
+
+Review the **exact head SHA** and distinguish executed tests from inferred results. Keep each future milestone narrow, evidence-gated and independently reviewable.

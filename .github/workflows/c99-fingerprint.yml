@@ -1,0 +1,40 @@
+name: C99 fingerprint Phase 1
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  c99:
+    name: C99 vectors + reproducibility (${{ matrix.compiler }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OpenSSL development headers
+        run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config
+      - name: Build and run SHA-256 tests
+        run: make test CC=${{ matrix.compiler }}
+      - name: Verify reproducible static library
+        run: make reproducibility CC=${{ matrix.compiler }}
+      - name: Verify documentation fixtures remain valid
+        run: make docs-check
+
+  sanitizers:
+    name: AddressSanitizer + UndefinedBehaviorSanitizer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OpenSSL development headers
+        run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config
+      - name: Compile and run instrumented C99 tests
+        run: make sanitizer-test CC=gcc

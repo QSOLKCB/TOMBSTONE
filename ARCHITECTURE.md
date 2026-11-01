@@ -2,7 +2,7 @@
 
 ## Boundary and maturity
 
-This is a **target design**. No production deletion logic or user interface has been implemented. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
+This is a staged target design. **Phase 1 has implemented the C99 SHA-256 fingerprint core** using OpenSSL EVP. No production deletion witnessing, receipt engine, Rust interface or GTK UI exists yet. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
 
 \`\`\`text
              Human terminal        Agents/scripts          Optional desktop
@@ -29,6 +29,10 @@ This is a **target design**. No production deletion logic or user interface has 
 **Ownership:** Only C99 is permitted to classify a deletion, hash bytes, construct and validate canonical receipts, or verify the chain. Rust owns UI, arguments, presentation, transport and safe FFI memory handling, never a competing implementation. GTK4 via gtk4-rs is a later *optional* shell, not a runtime dependency of the C99 core or headless CLI.
 
 ### C99 core
+
+**Phase 1 implemented:** `include/tombstone/fingerprint.h` provides a versioned public C ABI for one-shot/streaming SHA-256, hexadecimal output and explicit argument, state, allocation and length errors. `src/crypto/fingerprint.c` delegates cryptography to OpenSSL EVP. Tests and reproducible archive builds run in GitHub Actions. This implementation has no file I/O, no direct deletion, and no receipt parser.
+
+**Later phases must add:**
 
 - Binary-safe buffers with explicit lengths; no assumptions about NUL terminators, encodings, or platform newline conventions.
 - Defined ownership and allocation/error handling at the C ABI boundary. Use C99-compatible headers and an explicit ABI version when implemented.
