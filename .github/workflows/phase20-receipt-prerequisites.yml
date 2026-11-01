@@ -100,7 +100,7 @@ jobs:
                   accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;
                   bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;
                 esac
-                if [ "$function" = format_json ]; then split="-wp-literals -wp-status"; fi
+                if [ "$function" = format_json ]; then split="-wp-literals -wp-no-callee-precond -wp-status"; fi
                 (frama-c -version && frama-c -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover "$provers" -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1
               done
               cat /out/*.log

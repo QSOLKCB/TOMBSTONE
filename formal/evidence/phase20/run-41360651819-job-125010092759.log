@@ -1,0 +1,1929 @@
+﻿2026-11-01T23:08:57.6111770Z Current runner version: '2.338.2'
+2026-11-01T23:08:57.6137860Z ##[group]Runner Image Provisioner
+2026-11-01T23:08:57.6138864Z Hosted Compute Agent
+2026-11-01T23:08:57.6139457Z Version: 20261021.618
+2026-11-01T23:08:57.6140168Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-01T23:08:57.6140914Z Build Date: 2026-10-21T00:45:21Z
+2026-11-01T23:08:57.6141635Z Worker ID: {3d7ab18d-0a23-4205-901f-cf5cb70e25dd}
+2026-11-01T23:08:57.6142414Z Region: westcentralus
+2026-11-01T23:08:57.6143005Z Cloud: Azure
+2026-11-01T23:08:57.6143676Z ##[endgroup]
+2026-11-01T23:08:57.6145214Z ##[group]Operating System
+2026-11-01T23:08:57.6145846Z Ubuntu
+2026-11-01T23:08:57.6146445Z 24.04.5
+2026-11-01T23:08:57.6147321Z LTS
+2026-11-01T23:08:57.6147888Z ##[endgroup]
+2026-11-01T23:08:57.6148542Z ##[group]Runner Image
+2026-11-01T23:08:57.6149197Z Image: ubuntu-24.04
+2026-11-01T23:08:57.6149817Z Version: 20261025.353.1
+2026-11-01T23:08:57.6151123Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-01T23:08:57.6152737Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-01T23:08:57.6153697Z ##[endgroup]
+2026-11-01T23:08:57.6154837Z ##[group]GITHUB_TOKEN Permissions
+2026-11-01T23:08:57.6157109Z Contents: read
+2026-11-01T23:08:57.6157886Z Metadata: read
+2026-11-01T23:08:57.6158456Z ##[endgroup]
+2026-11-01T23:08:57.6160680Z Secret source: Actions
+2026-11-01T23:08:57.6161902Z Cache mode: write
+2026-11-01T23:08:57.6162614Z Prepare workflow directory
+2026-11-01T23:08:57.6568216Z Prepare all required actions
+2026-11-01T23:08:57.6617328Z Getting action download info
+2026-11-01T23:08:57.9510307Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-01T23:08:58.1026097Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-01T23:08:58.3269829Z Complete job name: Actual C99 prerequisites — hex
+2026-11-01T23:08:58.4253668Z ##[group]Run actions/checkout@v4
+2026-11-01T23:08:58.4254610Z with:
+2026-11-01T23:08:58.4255054Z   repository: QSOLKCB/TOMBSTONE
+2026-11-01T23:08:58.4258890Z   token: ***
+2026-11-01T23:08:58.4259340Z   ssh-strict: true
+2026-11-01T23:08:58.4259778Z   ssh-user: git
+2026-11-01T23:08:58.4260229Z   persist-credentials: true
+2026-11-01T23:08:58.4260720Z   clean: true
+2026-11-01T23:08:58.4261160Z   sparse-checkout-cone-mode: true
+2026-11-01T23:08:58.4261688Z   fetch-depth: 1
+2026-11-01T23:08:58.4262121Z   fetch-tags: false
+2026-11-01T23:08:58.4262573Z   show-progress: true
+2026-11-01T23:08:58.4263022Z   lfs: false
+2026-11-01T23:08:58.4263438Z   submodules: false
+2026-11-01T23:08:58.4263891Z   set-safe-directory: true
+2026-11-01T23:08:58.4264408Z   allow-unsafe-pr-checkout: false
+2026-11-01T23:08:58.4265195Z ##[endgroup]
+2026-11-01T23:08:59.0078354Z Syncing repository: QSOLKCB/TOMBSTONE
+2026-11-01T23:08:59.0080487Z ##[group]Getting Git version info
+2026-11-01T23:08:59.0081300Z Working directory is '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T23:08:59.0082336Z [command]/usr/bin/git version
+2026-11-01T23:08:59.0192394Z git version 2.56.0
+2026-11-01T23:08:59.0214392Z ##[endgroup]
+2026-11-01T23:08:59.0229898Z Temporarily overriding HOME='/home/runner/work/_temp/85a7b9b6-824c-476b-ace7-c0b4a3ddcf42' before making global git config changes
+2026-11-01T23:08:59.0232253Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T23:08:59.0235528Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T23:08:59.0289256Z Deleting the contents of '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T23:08:59.0294189Z ##[group]Initializing the repository
+2026-11-01T23:08:59.0298553Z [command]/usr/bin/git init /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T23:08:59.0414995Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-01T23:08:59.0416410Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-01T23:08:59.0418262Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-01T23:08:59.0419104Z hint: call:
+2026-11-01T23:08:59.0419592Z hint:
+2026-11-01T23:08:59.0420193Z hint: 	git config --global init.defaultBranch <name>
+2026-11-01T23:08:59.0420889Z hint:
+2026-11-01T23:08:59.0421556Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-01T23:08:59.0422580Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-01T23:08:59.0423400Z hint:
+2026-11-01T23:08:59.0423888Z hint: 	git branch -m <name>
+2026-11-01T23:08:59.0424426Z hint:
+2026-11-01T23:08:59.0425140Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-01T23:08:59.0431795Z Initialized empty Git repository in /home/runner/work/TOMBSTONE/TOMBSTONE/.git/
+2026-11-01T23:08:59.0443763Z [command]/usr/bin/git remote add origin https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T23:08:59.0495753Z ##[endgroup]
+2026-11-01T23:08:59.0496555Z ##[group]Disabling automatic garbage collection
+2026-11-01T23:08:59.0501347Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-01T23:08:59.0535425Z ##[endgroup]
+2026-11-01T23:08:59.0537048Z ##[group]Setting up auth
+2026-11-01T23:08:59.0543457Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T23:08:59.0582393Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T23:08:59.0979990Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T23:08:59.1016252Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T23:08:59.1251782Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T23:08:59.1288264Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T23:08:59.1523737Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-01T23:08:59.1563651Z ##[endgroup]
+2026-11-01T23:08:59.1564608Z ##[group]Fetching the repository
+2026-11-01T23:08:59.1576256Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6125f3b87cd3137ed31dc4b9f4f063390834b5e5:refs/remotes/pull/30/merge
+2026-11-01T23:08:59.7109046Z From https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T23:08:59.7111166Z  * [new ref]         6125f3b87cd3137ed31dc4b9f4f063390834b5e5 -> pull/30/merge
+2026-11-01T23:08:59.7119895Z ##[endgroup]
+2026-11-01T23:08:59.7121974Z ##[group]Determining the checkout info
+2026-11-01T23:08:59.7124261Z ##[endgroup]
+2026-11-01T23:08:59.7136746Z [command]/usr/bin/git sparse-checkout disable
+2026-11-01T23:08:59.7190096Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-01T23:08:59.7219815Z ##[group]Checking out the ref
+2026-11-01T23:08:59.7223202Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/30/merge
+2026-11-01T23:08:59.7490750Z Note: switching to 'refs/remotes/pull/30/merge'.
+2026-11-01T23:08:59.7492203Z 
+2026-11-01T23:08:59.7493335Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-01T23:08:59.7496136Z changes and commit them, and you can discard any commits you make in this
+2026-11-01T23:08:59.7499113Z state without impacting any branches by switching back to a branch.
+2026-11-01T23:08:59.7500529Z 
+2026-11-01T23:08:59.7501236Z If you want to create a new branch to retain commits you create, you may
+2026-11-01T23:08:59.7502928Z do so (now or later) by using -c with the switch command. Example:
+2026-11-01T23:08:59.7504239Z 
+2026-11-01T23:08:59.7504698Z   git switch -c <new-branch-name>
+2026-11-01T23:08:59.7505624Z 
+2026-11-01T23:08:59.7506026Z Or undo this operation with:
+2026-11-01T23:08:59.7506688Z 
+2026-11-01T23:08:59.7507492Z   git switch -
+2026-11-01T23:08:59.7508370Z 
+2026-11-01T23:08:59.7509339Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-01T23:08:59.7510618Z 
+2026-11-01T23:08:59.7512063Z HEAD is now at 6125f3b Merge 19e99ac5deb0a9768aeaffdd5f2079ca8df20685 into f9140bdda31ea64f7e077115db6f0bb0622c7874
+2026-11-01T23:08:59.7517020Z ##[endgroup]
+2026-11-01T23:08:59.7551603Z [command]/usr/bin/git log -1 --format=%H
+2026-11-01T23:08:59.7578781Z 6125f3b87cd3137ed31dc4b9f4f063390834b5e5
+2026-11-01T23:08:59.7894583Z ##[group]Run set -euo pipefail
+2026-11-01T23:08:59.7895893Z [36;1mset -euo pipefail[0m
+2026-11-01T23:08:59.7897477Z [36;1mpython3 tools/check_phase18_receipt.py[0m
+2026-11-01T23:08:59.7899112Z [36;1mpython3 tools/check_phase19_bridge_evidence.py[0m
+2026-11-01T23:08:59.7900726Z [36;1mpython3 tests/formal/test_phase20_overlay.py[0m
+2026-11-01T23:08:59.7902172Z [36;1mmkdir phase20-results[0m
+2026-11-01T23:08:59.7903584Z [36;1mchmod 777 phase20-results[0m
+2026-11-01T23:08:59.7905421Z [36;1mpython3 tools/phase20_receipt_overlay.py --output phase20-receipt.c[0m
+2026-11-01T23:08:59.7984393Z [36;1mfor backend in openssl hacl; do[0m
+2026-11-01T23:08:59.7987275Z [36;1m  python3 tools/phase20_receipt_overlay.py --hex-backend "$backend" --output "phase20-hex-$backend.c"[0m
+2026-11-01T23:08:59.7989615Z [36;1mdone[0m
+2026-11-01T23:08:59.7990829Z [36;1mfor mutant in accept-invalid bad-size error-size; do[0m
+2026-11-01T23:08:59.7993311Z [36;1m  python3 tools/phase20_receipt_overlay.py --mutant "$mutant" --output "phase20-$mutant.c"[0m
+2026-11-01T23:08:59.7995405Z [36;1mdone[0m
+2026-11-01T23:08:59.7996359Z [36;1mfor source in phase20-*.c; do[0m
+2026-11-01T23:08:59.7998878Z [36;1m  gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c "$source" -o /tmp/phase20-check.o[0m
+2026-11-01T23:08:59.8000987Z [36;1mdone[0m
+2026-11-01T23:08:59.8001925Z [36;1mgit rev-parse HEAD[0m
+2026-11-01T23:08:59.8003059Z [36;1msha256sum phase20-*.c[0m
+2026-11-01T23:08:59.8029020Z shell: /usr/bin/bash -e {0}
+2026-11-01T23:08:59.8030088Z env:
+2026-11-01T23:08:59.8030868Z   GROUP: hex
+2026-11-01T23:08:59.8031687Z ##[endgroup]
+2026-11-01T23:08:59.8376413Z PASS: 54/54 conditional unbounded WP proof receipt pinned to exact source, checkers, CI job
+2026-11-01T23:08:59.8380212Z LIMIT: prior evidence does not prove a new commit or the actual SHA-256 provider
+2026-11-01T23:08:59.8948996Z PASS: retained P19-03 source, 3 complete proofs, 3 semantic controls and original failed attempt
+2026-11-01T23:08:59.8952239Z LIMIT: conditional caller-frame/protocol evidence; no current-head review or real-provider closure
+2026-11-01T23:08:59.9321476Z PASS: unchanged bodies, stronger original contracts, preserved chain theorem, distinct semantic mutants
+2026-11-01T23:08:59.9712607Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T23:09:00.0080563Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T23:09:00.0463786Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T23:09:00.0860106Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T23:09:00.1249491Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T23:09:00.1639726Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T23:09:00.5358268Z 6125f3b87cd3137ed31dc4b9f4f063390834b5e5
+2026-11-01T23:09:00.5388477Z d5561aa4ff18bbef00d8db93369c6fddefbe34a9eb0a25f3e06bb4e528ced59c  phase20-accept-invalid.c
+2026-11-01T23:09:00.5390076Z a4943158c2f73fb6d2779ee60d0701f9a9fa6f5511b52479d0a4a5020309d254  phase20-bad-size.c
+2026-11-01T23:09:00.5391422Z a7536b2beb613956a4d1e0b9ad09002e5c2801e2137ac165ab429d7cd9dda377  phase20-error-size.c
+2026-11-01T23:09:00.5392213Z 3cc10a271b80b29cde4185140f47635404bb0a14c7174231702bbbdcc00cf427  phase20-hex-hacl.c
+2026-11-01T23:09:00.5393456Z 8b74da4865511573cba478df14b31998302790b3140027a041e45b70a315defb  phase20-hex-openssl.c
+2026-11-01T23:09:00.5394987Z 93fbce98d173e6a1a77178d594d9f64f3ac47cd78844210981c750ebc58bf200  phase20-receipt.c
+2026-11-01T23:09:00.5501805Z ##[group]Run set -euo pipefail
+2026-11-01T23:09:00.5502455Z [36;1mset -euo pipefail[0m
+2026-11-01T23:09:00.5503136Z [36;1mdocker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-results:/out" -e GROUP -w /tmp \[0m
+2026-11-01T23:09:00.5504087Z [36;1m  framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \[0m
+2026-11-01T23:09:00.5504835Z [36;1m  sh -c '[0m
+2026-11-01T23:09:00.5505316Z [36;1m    if [ -d /repo/phase20-provers ]; then[0m
+2026-11-01T23:09:00.5506002Z [36;1m      export PATH=/repo/phase20-provers/z3-4.12.2-x64-glibc-2.31/bin:$PATH[0m
+2026-11-01T23:09:00.5506687Z [36;1m      why3 config detect || exit 1[0m
+2026-11-01T23:09:00.5507996Z [36;1m    fi[0m
+2026-11-01T23:09:00.5508445Z [36;1m    case "$GROUP" in[0m
+2026-11-01T23:09:00.5509091Z [36;1m      validators) targets="zero32 equal32 good_evidence good_receipt";;[0m
+2026-11-01T23:09:00.5509777Z [36;1m      formatters) targets="hex32 format_json";;[0m
+2026-11-01T23:09:00.5510486Z [36;1m      composition) targets="calculate_hash tb_receipt_verify_chain";;[0m
+2026-11-01T23:09:00.5511154Z [36;1m      hex) targets="hex-openssl hex-hacl";;[0m
+2026-11-01T23:09:00.5511777Z [36;1m      negative) targets="accept-invalid bad-size error-size";;[0m
+2026-11-01T23:09:00.5512357Z [36;1m    esac[0m
+2026-11-01T23:09:00.5512788Z [36;1m    frama-c -wp-detect || exit 1[0m
+2026-11-01T23:09:00.5513273Z [36;1m    status=0[0m
+2026-11-01T23:09:00.5513698Z [36;1m    for target in $targets; do[0m
+2026-11-01T23:09:00.5514201Z [36;1m      source=/repo/phase20-receipt.c[0m
+2026-11-01T23:09:00.5514691Z [36;1m      function=$target[0m
+2026-11-01T23:09:00.5515140Z [36;1m      timeout=35[0m
+2026-11-01T23:09:00.5515596Z [36;1m      provers=alt-ergo[0m
+2026-11-01T23:09:00.5516062Z [36;1m      split=[0m
+2026-11-01T23:09:00.5516467Z [36;1m      case "$target" in[0m
+2026-11-01T23:09:00.5517525Z [36;1m        hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex; split="-wp-auto wp:bitshift -wp-print";;[0m
+2026-11-01T23:09:00.5518540Z [36;1m        accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;[0m
+2026-11-01T23:09:00.5519475Z [36;1m        bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;[0m
+2026-11-01T23:09:00.5520173Z [36;1m      esac[0m
+2026-11-01T23:09:00.5520681Z [36;1m      if [ "$function" = format_json ]; then provers=Z3:4.12.2; fi[0m
+2026-11-01T23:09:00.5522191Z [36;1m      (frama-c -version && frama-c -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover "$provers" -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1[0m
+2026-11-01T23:09:00.5523572Z [36;1m    done[0m
+2026-11-01T23:09:00.5523965Z [36;1m    cat /out/*.log[0m
+2026-11-01T23:09:00.5524386Z [36;1m    exit "$status"[0m
+2026-11-01T23:09:00.5524794Z [36;1m  '[0m
+2026-11-01T23:09:00.5546039Z shell: /usr/bin/bash -e {0}
+2026-11-01T23:09:00.5546518Z env:
+2026-11-01T23:09:00.5547087Z   GROUP: hex
+2026-11-01T23:09:00.5547475Z ##[endgroup]
+2026-11-01T23:09:00.6576551Z Unable to find image 'framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36' locally
+2026-11-01T23:09:01.1678670Z docker.io/framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36: Pulling from framac/frama-c
+2026-11-01T23:09:01.1689175Z 01cedcff86f8: Pulling fs layer
+2026-11-01T23:09:01.1690927Z 9bf581ba34fd: Pulling fs layer
+2026-11-01T23:09:01.1691879Z 6c4bd78e0c43: Pulling fs layer
+2026-11-01T23:09:01.1693445Z 799649323729: Pulling fs layer
+2026-11-01T23:09:01.1697738Z 1ae4fb0c8a4a: Pulling fs layer
+2026-11-01T23:09:01.1700554Z b237ecdf51a3: Pulling fs layer
+2026-11-01T23:09:01.1703992Z b16ee2e05313: Pulling fs layer
+2026-11-01T23:09:01.1705296Z adb989234928: Pulling fs layer
+2026-11-01T23:09:01.1706211Z e3a01a28a7ad: Pulling fs layer
+2026-11-01T23:09:01.1707535Z ca0e54137564: Pulling fs layer
+2026-11-01T23:09:01.1708523Z e88b1a083917: Pulling fs layer
+2026-11-01T23:09:01.1709459Z d10f17e04c11: Pulling fs layer
+2026-11-01T23:09:01.1710442Z d38ea67f8871: Pulling fs layer
+2026-11-01T23:09:01.1711508Z 8153ec1c4f57: Pulling fs layer
+2026-11-01T23:09:01.1712285Z 0546e39b6053: Pulling fs layer
+2026-11-01T23:09:01.1713153Z 5ebdad05b03e: Pulling fs layer
+2026-11-01T23:09:01.1714051Z 6435672f1863: Pulling fs layer
+2026-11-01T23:09:01.1714786Z 5c5711f4465e: Pulling fs layer
+2026-11-01T23:09:01.1715550Z 7264e6096409: Pulling fs layer
+2026-11-01T23:09:01.1716307Z 2202cd0e879d: Pulling fs layer
+2026-11-01T23:09:01.1717542Z c31277fa0297: Pulling fs layer
+2026-11-01T23:09:01.1719198Z 4f4fb700ef54: Pulling fs layer
+2026-11-01T23:09:01.1719996Z 8e159597691d: Pulling fs layer
+2026-11-01T23:09:01.1720844Z c0ebccf77ab9: Pulling fs layer
+2026-11-01T23:09:01.1721601Z b7093a70d5d5: Pulling fs layer
+2026-11-01T23:09:01.1722363Z 1ae4fb0c8a4a: Waiting
+2026-11-01T23:09:01.1723112Z f2a57dfa5358: Pulling fs layer
+2026-11-01T23:09:01.1723901Z 93b66eaa292a: Pulling fs layer
+2026-11-01T23:09:01.1724696Z 0aba2ee32120: Pulling fs layer
+2026-11-01T23:09:01.1725388Z b237ecdf51a3: Waiting
+2026-11-01T23:09:01.1726063Z 60033bb88c74: Pulling fs layer
+2026-11-01T23:09:01.1726736Z b16ee2e05313: Waiting
+2026-11-01T23:09:01.1728072Z 883b72a7df53: Pulling fs layer
+2026-11-01T23:09:01.1728755Z 9aaba240d281: Pulling fs layer
+2026-11-01T23:09:01.1729447Z fd24333fa18a: Pulling fs layer
+2026-11-01T23:09:01.1730106Z adb989234928: Waiting
+2026-11-01T23:09:01.1730761Z ab20f402dc6f: Pulling fs layer
+2026-11-01T23:09:01.1731462Z e3a01a28a7ad: Waiting
+2026-11-01T23:09:01.1732178Z a3afc412b613: Pulling fs layer
+2026-11-01T23:09:01.1732954Z 0a2200cec51c: Pulling fs layer
+2026-11-01T23:09:01.1733688Z ca0e54137564: Waiting
+2026-11-01T23:09:01.1734445Z f9b5b03a559e: Pulling fs layer
+2026-11-01T23:09:01.1735253Z 2becab109f47: Pulling fs layer
+2026-11-01T23:09:01.1735998Z 3b4307789f50: Pulling fs layer
+2026-11-01T23:09:01.1736744Z 58571fc518c5: Pulling fs layer
+2026-11-01T23:09:01.1737773Z b71b8622ab3f: Pulling fs layer
+2026-11-01T23:09:01.1738477Z d06dd6319b47: Pulling fs layer
+2026-11-01T23:09:01.1739192Z 51a56fdb7118: Pulling fs layer
+2026-11-01T23:09:01.1739884Z 8f235d762bf6: Pulling fs layer
+2026-11-01T23:09:01.1740591Z 37173500316b: Pulling fs layer
+2026-11-01T23:09:01.1741359Z fa11cfb60409: Pulling fs layer
+2026-11-01T23:09:01.1742132Z 2fdcc8b83d1d: Pulling fs layer
+2026-11-01T23:09:01.1742855Z 8103ae60d4a2: Pulling fs layer
+2026-11-01T23:09:01.1743484Z 0ac2d6f63403: Pulling fs layer
+2026-11-01T23:09:01.1744140Z dca9c53526f0: Pulling fs layer
+2026-11-01T23:09:01.1744796Z d62b4203b486: Pulling fs layer
+2026-11-01T23:09:01.1745500Z 262d0301190b: Pulling fs layer
+2026-11-01T23:09:01.1746200Z ab4fd71ce45a: Pulling fs layer
+2026-11-01T23:09:01.1747187Z 721b47947ac4: Pulling fs layer
+2026-11-01T23:09:01.1747926Z 4fe137cf5212: Pulling fs layer
+2026-11-01T23:09:01.1748622Z d44046465503: Pulling fs layer
+2026-11-01T23:09:01.1749349Z 26d82a051384: Pulling fs layer
+2026-11-01T23:09:01.1750056Z 0546e39b6053: Waiting
+2026-11-01T23:09:01.1750758Z 5ebdad05b03e: Waiting
+2026-11-01T23:09:01.1751456Z 6435672f1863: Waiting
+2026-11-01T23:09:01.1752159Z 5c5711f4465e: Waiting
+2026-11-01T23:09:01.1752826Z 7264e6096409: Waiting
+2026-11-01T23:09:01.1753493Z 2202cd0e879d: Waiting
+2026-11-01T23:09:01.1754146Z c31277fa0297: Waiting
+2026-11-01T23:09:01.1754751Z e88b1a083917: Waiting
+2026-11-01T23:09:01.1755588Z 4f4fb700ef54: Waiting
+2026-11-01T23:09:01.1756217Z 8e159597691d: Waiting
+2026-11-01T23:09:01.1756681Z d10f17e04c11: Waiting
+2026-11-01T23:09:01.1757227Z c0ebccf77ab9: Waiting
+2026-11-01T23:09:01.1757583Z d38ea67f8871: Waiting
+2026-11-01T23:09:01.1757912Z b7093a70d5d5: Waiting
+2026-11-01T23:09:01.1758122Z 8153ec1c4f57: Waiting
+2026-11-01T23:09:01.1758613Z f2a57dfa5358: Waiting
+2026-11-01T23:09:01.1758835Z 93b66eaa292a: Waiting
+2026-11-01T23:09:01.1759057Z 0aba2ee32120: Waiting
+2026-11-01T23:09:01.1759265Z 60033bb88c74: Waiting
+2026-11-01T23:09:01.1759615Z 883b72a7df53: Waiting
+2026-11-01T23:09:01.1759830Z 9aaba240d281: Waiting
+2026-11-01T23:09:01.1760038Z fd24333fa18a: Waiting
+2026-11-01T23:09:01.1760242Z ab20f402dc6f: Waiting
+2026-11-01T23:09:01.1760444Z a3afc412b613: Waiting
+2026-11-01T23:09:01.1760645Z 0a2200cec51c: Waiting
+2026-11-01T23:09:01.1760847Z f9b5b03a559e: Waiting
+2026-11-01T23:09:01.1761047Z 2becab109f47: Waiting
+2026-11-01T23:09:01.1761244Z 3b4307789f50: Waiting
+2026-11-01T23:09:01.1761441Z 58571fc518c5: Waiting
+2026-11-01T23:09:01.1761639Z b71b8622ab3f: Waiting
+2026-11-01T23:09:01.1761834Z d06dd6319b47: Waiting
+2026-11-01T23:09:01.1762034Z 51a56fdb7118: Waiting
+2026-11-01T23:09:01.1762233Z 8f235d762bf6: Waiting
+2026-11-01T23:09:01.1762433Z 37173500316b: Waiting
+2026-11-01T23:09:01.1762626Z fa11cfb60409: Waiting
+2026-11-01T23:09:01.1762825Z 2fdcc8b83d1d: Waiting
+2026-11-01T23:09:01.1763030Z 8103ae60d4a2: Waiting
+2026-11-01T23:09:01.1763228Z 0ac2d6f63403: Waiting
+2026-11-01T23:09:01.1763424Z dca9c53526f0: Waiting
+2026-11-01T23:09:01.1763627Z d62b4203b486: Waiting
+2026-11-01T23:09:01.1763821Z 262d0301190b: Waiting
+2026-11-01T23:09:01.1764018Z ab4fd71ce45a: Waiting
+2026-11-01T23:09:01.1764216Z 721b47947ac4: Waiting
+2026-11-01T23:09:01.1764413Z 4fe137cf5212: Waiting
+2026-11-01T23:09:01.1764608Z d44046465503: Waiting
+2026-11-01T23:09:01.1764813Z 26d82a051384: Waiting
+2026-11-01T23:09:01.1765008Z 799649323729: Waiting
+2026-11-01T23:09:01.3676819Z 9bf581ba34fd: Verifying Checksum
+2026-11-01T23:09:01.3677545Z 9bf581ba34fd: Download complete
+2026-11-01T23:09:01.3823189Z 6c4bd78e0c43: Verifying Checksum
+2026-11-01T23:09:01.3823745Z 6c4bd78e0c43: Download complete
+2026-11-01T23:09:01.5778042Z 1ae4fb0c8a4a: Verifying Checksum
+2026-11-01T23:09:01.5779440Z 1ae4fb0c8a4a: Download complete
+2026-11-01T23:09:01.6380873Z 01cedcff86f8: Verifying Checksum
+2026-11-01T23:09:01.6389939Z 01cedcff86f8: Download complete
+2026-11-01T23:09:01.7027202Z 799649323729: Verifying Checksum
+2026-11-01T23:09:01.7034480Z 799649323729: Download complete
+2026-11-01T23:09:01.9672748Z b16ee2e05313: Download complete
+2026-11-01T23:09:02.0181878Z adb989234928: Verifying Checksum
+2026-11-01T23:09:02.0182385Z adb989234928: Download complete
+2026-11-01T23:09:02.2938199Z e3a01a28a7ad: Verifying Checksum
+2026-11-01T23:09:02.2946110Z e3a01a28a7ad: Download complete
+2026-11-01T23:09:02.3474112Z ca0e54137564: Verifying Checksum
+2026-11-01T23:09:02.3474844Z ca0e54137564: Download complete
+2026-11-01T23:09:02.5848550Z b237ecdf51a3: Download complete
+2026-11-01T23:09:02.6436170Z e88b1a083917: Verifying Checksum
+2026-11-01T23:09:02.6437229Z e88b1a083917: Download complete
+2026-11-01T23:09:02.6740836Z d10f17e04c11: Verifying Checksum
+2026-11-01T23:09:02.6746265Z d10f17e04c11: Download complete
+2026-11-01T23:09:02.8614797Z 0546e39b6053: Verifying Checksum
+2026-11-01T23:09:02.8618102Z 0546e39b6053: Download complete
+2026-11-01T23:09:02.9058141Z 8153ec1c4f57: Verifying Checksum
+2026-11-01T23:09:02.9059500Z d38ea67f8871: Verifying Checksum
+2026-11-01T23:09:02.9060227Z 8153ec1c4f57: Download complete
+2026-11-01T23:09:02.9072072Z d38ea67f8871: Download complete
+2026-11-01T23:09:03.0741747Z 5ebdad05b03e: Verifying Checksum
+2026-11-01T23:09:03.0742675Z 5ebdad05b03e: Download complete
+2026-11-01T23:09:03.0996142Z 6435672f1863: Download complete
+2026-11-01T23:09:03.1023969Z 5c5711f4465e: Verifying Checksum
+2026-11-01T23:09:03.1025106Z 5c5711f4465e: Download complete
+2026-11-01T23:09:03.2683347Z 7264e6096409: Verifying Checksum
+2026-11-01T23:09:03.2683918Z 7264e6096409: Download complete
+2026-11-01T23:09:03.3010230Z 2202cd0e879d: Verifying Checksum
+2026-11-01T23:09:03.3010837Z 2202cd0e879d: Download complete
+2026-11-01T23:09:03.3139340Z c31277fa0297: Verifying Checksum
+2026-11-01T23:09:03.3139863Z c31277fa0297: Download complete
+2026-11-01T23:09:03.4618314Z 4f4fb700ef54: Verifying Checksum
+2026-11-01T23:09:03.4619388Z 4f4fb700ef54: Download complete
+2026-11-01T23:09:03.5125957Z 8e159597691d: Verifying Checksum
+2026-11-01T23:09:03.5130416Z 8e159597691d: Download complete
+2026-11-01T23:09:03.5259387Z c0ebccf77ab9: Download complete
+2026-11-01T23:09:03.6282396Z 01cedcff86f8: Pull complete
+2026-11-01T23:09:03.6576470Z b7093a70d5d5: Verifying Checksum
+2026-11-01T23:09:03.6581147Z b7093a70d5d5: Download complete
+2026-11-01T23:09:03.7057298Z f2a57dfa5358: Download complete
+2026-11-01T23:09:03.7242108Z 93b66eaa292a: Verifying Checksum
+2026-11-01T23:09:03.7242689Z 93b66eaa292a: Download complete
+2026-11-01T23:09:03.8392470Z 0aba2ee32120: Download complete
+2026-11-01T23:09:03.8995401Z 60033bb88c74: Verifying Checksum
+2026-11-01T23:09:03.8997953Z 60033bb88c74: Download complete
+2026-11-01T23:09:03.9171144Z 883b72a7df53: Verifying Checksum
+2026-11-01T23:09:03.9171755Z 883b72a7df53: Download complete
+2026-11-01T23:09:04.0265653Z 9aaba240d281: Verifying Checksum
+2026-11-01T23:09:04.0266753Z 9aaba240d281: Download complete
+2026-11-01T23:09:04.0987534Z fd24333fa18a: Verifying Checksum
+2026-11-01T23:09:04.0994009Z fd24333fa18a: Download complete
+2026-11-01T23:09:04.1088520Z ab20f402dc6f: Verifying Checksum
+2026-11-01T23:09:04.1089194Z ab20f402dc6f: Download complete
+2026-11-01T23:09:04.2206408Z a3afc412b613: Verifying Checksum
+2026-11-01T23:09:04.2207189Z a3afc412b613: Download complete
+2026-11-01T23:09:04.2498254Z 9bf581ba34fd: Pull complete
+2026-11-01T23:09:04.2617624Z 6c4bd78e0c43: Pull complete
+2026-11-01T23:09:04.3008929Z f9b5b03a559e: Verifying Checksum
+2026-11-01T23:09:04.3010492Z f9b5b03a559e: Download complete
+2026-11-01T23:09:04.4136439Z 799649323729: Pull complete
+2026-11-01T23:09:04.4315041Z 1ae4fb0c8a4a: Pull complete
+2026-11-01T23:09:04.4930984Z 3b4307789f50: Verifying Checksum
+2026-11-01T23:09:04.4931560Z 3b4307789f50: Download complete
+2026-11-01T23:09:04.6910970Z 58571fc518c5: Verifying Checksum
+2026-11-01T23:09:04.6911703Z 58571fc518c5: Download complete
+2026-11-01T23:09:04.8783580Z b71b8622ab3f: Verifying Checksum
+2026-11-01T23:09:04.8784605Z b71b8622ab3f: Download complete
+2026-11-01T23:09:05.1977302Z 0a2200cec51c: Verifying Checksum
+2026-11-01T23:09:05.1978408Z 0a2200cec51c: Download complete
+2026-11-01T23:09:05.2354007Z 2becab109f47: Verifying Checksum
+2026-11-01T23:09:05.2355044Z 2becab109f47: Download complete
+2026-11-01T23:09:05.4152194Z 51a56fdb7118: Verifying Checksum
+2026-11-01T23:09:05.4153103Z 51a56fdb7118: Download complete
+2026-11-01T23:09:05.4679675Z 8f235d762bf6: Verifying Checksum
+2026-11-01T23:09:05.4681460Z 8f235d762bf6: Download complete
+2026-11-01T23:09:05.6175994Z 37173500316b: Verifying Checksum
+2026-11-01T23:09:05.6176685Z 37173500316b: Download complete
+2026-11-01T23:09:05.8111837Z 2fdcc8b83d1d: Verifying Checksum
+2026-11-01T23:09:05.8112701Z 2fdcc8b83d1d: Download complete
+2026-11-01T23:09:05.8145810Z fa11cfb60409: Verifying Checksum
+2026-11-01T23:09:05.8146542Z fa11cfb60409: Download complete
+2026-11-01T23:09:05.8653050Z d06dd6319b47: Download complete
+2026-11-01T23:09:06.0160176Z 8103ae60d4a2: Download complete
+2026-11-01T23:09:06.0660864Z dca9c53526f0: Verifying Checksum
+2026-11-01T23:09:06.0661716Z dca9c53526f0: Download complete
+2026-11-01T23:09:06.1081367Z 0ac2d6f63403: Verifying Checksum
+2026-11-01T23:09:06.1082469Z 0ac2d6f63403: Download complete
+2026-11-01T23:09:06.2608914Z 262d0301190b: Verifying Checksum
+2026-11-01T23:09:06.2609602Z 262d0301190b: Download complete
+2026-11-01T23:09:06.4494435Z ab4fd71ce45a: Verifying Checksum
+2026-11-01T23:09:06.4496746Z ab4fd71ce45a: Download complete
+2026-11-01T23:09:06.6082242Z 721b47947ac4: Verifying Checksum
+2026-11-01T23:09:06.6083044Z 721b47947ac4: Download complete
+2026-11-01T23:09:06.8202274Z d44046465503: Verifying Checksum
+2026-11-01T23:09:06.8204178Z d44046465503: Download complete
+2026-11-01T23:09:07.0150076Z 26d82a051384: Verifying Checksum
+2026-11-01T23:09:07.0151142Z 26d82a051384: Download complete
+2026-11-01T23:09:08.4490005Z d62b4203b486: Verifying Checksum
+2026-11-01T23:09:08.4491206Z d62b4203b486: Download complete
+2026-11-01T23:09:08.8723227Z 4fe137cf5212: Verifying Checksum
+2026-11-01T23:09:08.8724639Z 4fe137cf5212: Download complete
+2026-11-01T23:09:14.4104832Z b237ecdf51a3: Pull complete
+2026-11-01T23:09:14.5104970Z b16ee2e05313: Pull complete
+2026-11-01T23:09:14.6077828Z adb989234928: Pull complete
+2026-11-01T23:09:14.7157265Z e3a01a28a7ad: Pull complete
+2026-11-01T23:09:14.8205968Z ca0e54137564: Pull complete
+2026-11-01T23:09:14.9284453Z e88b1a083917: Pull complete
+2026-11-01T23:09:15.0415366Z d10f17e04c11: Pull complete
+2026-11-01T23:09:15.1462204Z d38ea67f8871: Pull complete
+2026-11-01T23:09:15.1673251Z 8153ec1c4f57: Pull complete
+2026-11-01T23:09:15.1791067Z 0546e39b6053: Pull complete
+2026-11-01T23:09:15.1883946Z 5ebdad05b03e: Pull complete
+2026-11-01T23:09:15.1990052Z 6435672f1863: Pull complete
+2026-11-01T23:09:15.2073660Z 5c5711f4465e: Pull complete
+2026-11-01T23:09:15.2216251Z 7264e6096409: Pull complete
+2026-11-01T23:09:15.2309335Z 2202cd0e879d: Pull complete
+2026-11-01T23:09:15.2414073Z c31277fa0297: Pull complete
+2026-11-01T23:09:15.2489001Z 4f4fb700ef54: Pull complete
+2026-11-01T23:09:15.2612530Z 8e159597691d: Pull complete
+2026-11-01T23:09:15.2703572Z c0ebccf77ab9: Pull complete
+2026-11-01T23:09:15.2797517Z b7093a70d5d5: Pull complete
+2026-11-01T23:09:15.2888540Z f2a57dfa5358: Pull complete
+2026-11-01T23:09:15.3022325Z 93b66eaa292a: Pull complete
+2026-11-01T23:09:15.3119496Z 0aba2ee32120: Pull complete
+2026-11-01T23:09:15.3210434Z 60033bb88c74: Pull complete
+2026-11-01T23:09:15.3304462Z 883b72a7df53: Pull complete
+2026-11-01T23:09:15.3441083Z 9aaba240d281: Pull complete
+2026-11-01T23:09:15.3544394Z fd24333fa18a: Pull complete
+2026-11-01T23:09:15.3641491Z ab20f402dc6f: Pull complete
+2026-11-01T23:09:15.3737315Z a3afc412b613: Pull complete
+2026-11-01T23:09:50.4579234Z 0a2200cec51c: Pull complete
+2026-11-01T23:09:50.4673066Z f9b5b03a559e: Pull complete
+2026-11-01T23:09:51.3454654Z 2becab109f47: Pull complete
+2026-11-01T23:09:51.3566343Z 3b4307789f50: Pull complete
+2026-11-01T23:09:51.3893865Z 58571fc518c5: Pull complete
+2026-11-01T23:09:51.3986484Z b71b8622ab3f: Pull complete
+2026-11-01T23:09:56.3535297Z d06dd6319b47: Pull complete
+2026-11-01T23:09:56.3671354Z 51a56fdb7118: Pull complete
+2026-11-01T23:09:56.3934369Z 8f235d762bf6: Pull complete
+2026-11-01T23:09:56.4025171Z 37173500316b: Pull complete
+2026-11-01T23:09:56.5904786Z fa11cfb60409: Pull complete
+2026-11-01T23:09:56.5986653Z 2fdcc8b83d1d: Pull complete
+2026-11-01T23:09:56.6164565Z 8103ae60d4a2: Pull complete
+2026-11-01T23:09:56.7151160Z 0ac2d6f63403: Pull complete
+2026-11-01T23:09:56.7228767Z dca9c53526f0: Pull complete
+2026-11-01T23:10:31.6945141Z d62b4203b486: Pull complete
+2026-11-01T23:10:31.7068891Z 262d0301190b: Pull complete
+2026-11-01T23:10:31.7540708Z ab4fd71ce45a: Pull complete
+2026-11-01T23:10:34.6988245Z 721b47947ac4: Pull complete
+2026-11-01T23:10:49.5945897Z 4fe137cf5212: Pull complete
+2026-11-01T23:10:49.6047323Z d44046465503: Pull complete
+2026-11-01T23:11:23.2315520Z 26d82a051384: Pull complete
+2026-11-01T23:11:23.2342083Z Digest: sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T23:11:23.2349518Z Status: Downloaded newer image for framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T23:11:23.6763554Z [wp] Prover Alt-Ergo   2.5.4  [Alt-Ergo:2.5.4] (alt-ergo) (counter-examples)
+2026-11-01T23:12:38.1029860Z 32.1 (Germanium)
+2026-11-01T23:12:38.1035891Z [kernel] Parsing /repo/phase20-hex-hacl.c (with preprocessing)
+2026-11-01T23:12:38.1036572Z [wp] Running WP plugin...
+2026-11-01T23:12:38.1037296Z [rte:annot] annotating function tb_sha256_hex
+2026-11-01T23:12:38.1037868Z [wp] 24 goals scheduled
+2026-11-01T23:12:38.1038274Z [wp] Proved goals:   26 / 26
+2026-11-01T23:12:38.1038709Z   Terminating:       1
+2026-11-01T23:12:38.1039094Z   Unreachable:       1
+2026-11-01T23:12:38.1039341Z   Qed:              13 (11ms-8ms-35ms)
+2026-11-01T23:12:38.1039616Z   Alt-Ergo 2.5.4:   10 (15ms-71ms-254ms)
+2026-11-01T23:12:38.1040024Z   Script:            1 (Tactic) (Qed 1/2 17ms) (Alt-Ergo 1/2 80ms)
+2026-11-01T23:12:38.1040662Z 
+2026-11-01T23:12:38.1040949Z Goal Post-condition (file /repo/phase20-hex-hacl.c, line 7) in 'tb_sha256_hex':
+2026-11-01T23:12:38.1041694Z Prove: true.
+2026-11-01T23:12:38.1042287Z Prover Qed returns Valid (29ms)
+2026-11-01T23:12:38.1042600Z 
+2026-11-01T23:12:38.1042814Z ------------------------------------------------------------
+2026-11-01T23:12:38.1043114Z 
+2026-11-01T23:12:38.1043269Z Goal Post-condition 'nul_terminated' in 'tb_sha256_hex':
+2026-11-01T23:12:38.1043593Z Let a = shift_sint8(out_0, 64).
+2026-11-01T23:12:38.1043993Z Let a_1 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1044348Z Let a_2 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1044839Z Let a_3 = memcpy(mem_0, a_2, mem_undef_0, a_2, 64).
+2026-11-01T23:12:38.1045426Z Let m = write_sint8(a_3, a, 0).
+2026-11-01T23:12:38.1045714Z Let x = read_sint8(m, a).
+2026-11-01T23:12:38.1045934Z Assume {
+2026-11-01T23:12:38.1046185Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_3) /\ bytes(m) /\
+2026-11-01T23:12:38.1046510Z       is_sint8(x).
+2026-11-01T23:12:38.1046718Z   (* Heap *)
+2026-11-01T23:12:38.1047823Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1048557Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1049099Z   (* Residual *)
+2026-11-01T23:12:38.1049452Z   When: null != out_0.
+2026-11-01T23:12:38.1049831Z   (* Residual *)
+2026-11-01T23:12:38.1050186Z   When: null != digest_0.
+2026-11-01T23:12:38.1050575Z   (* Pre-condition *)
+2026-11-01T23:12:38.1050963Z   Have: valid_rd(alloc_0, a_1, 32).
+2026-11-01T23:12:38.1051403Z   (* Pre-condition *)
+2026-11-01T23:12:38.1051777Z   Have: valid_rw(alloc_0, a_2, 65).
+2026-11-01T23:12:38.1052210Z   (* Pre-condition *)
+2026-11-01T23:12:38.1052583Z   Have: separated(a_1, 32, a_2, 65).
+2026-11-01T23:12:38.1052998Z   (* Invariant *)
+2026-11-01T23:12:38.1053342Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1053729Z   (* Else *)
+2026-11-01T23:12:38.1054034Z   Have: 32 <= i.
+2026-11-01T23:12:38.1054251Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1054705Z   Have: valid_rw(alloc_0, a, 1).
+2026-11-01T23:12:38.1055001Z }
+2026-11-01T23:12:38.1055174Z Prove: x = 0.
+2026-11-01T23:12:38.1055452Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:35ms) (54ms) (204)
+2026-11-01T23:12:38.1055770Z 
+2026-11-01T23:12:38.1056006Z ------------------------------------------------------------
+2026-11-01T23:12:38.1056265Z 
+2026-11-01T23:12:38.1056474Z Goal Establishment of Invariant (file /repo/phase20-hex-hacl.c, line 17):
+2026-11-01T23:12:38.1057472Z Prove: true.
+2026-11-01T23:12:38.1057691Z Prover Qed returns Valid (3ms)
+2026-11-01T23:12:38.1057857Z 
+2026-11-01T23:12:38.1057982Z ------------------------------------------------------------
+2026-11-01T23:12:38.1058232Z 
+2026-11-01T23:12:38.1058627Z Goal Preservation of Invariant (file /repo/phase20-hex-hacl.c, line 17):
+2026-11-01T23:12:38.1059025Z Let x = to_uint64(2 * i).
+2026-11-01T23:12:38.1059417Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1059917Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1060229Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1060483Z Let x_1 = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1060724Z Let x_2 = to_sint32(lsr(x_1, 4)).
+2026-11-01T23:12:38.1061181Z Let a_3 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1061423Z Assume {
+2026-11-01T23:12:38.1090383Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x_1).
+2026-11-01T23:12:38.1091000Z   (* Heap *)
+2026-11-01T23:12:38.1091522Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1092284Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1092794Z   (* Pre-condition *)
+2026-11-01T23:12:38.1093188Z   Have: valid_rd(alloc_0, a_3, 32).
+2026-11-01T23:12:38.1093615Z   (* Pre-condition *)
+2026-11-01T23:12:38.1093995Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1094420Z   (* Pre-condition *)
+2026-11-01T23:12:38.1094769Z   Have: separated(a_3, 32, a, 65).
+2026-11-01T23:12:38.1095158Z   (* Else *)
+2026-11-01T23:12:38.1095918Z   Have: null != digest_0.
+2026-11-01T23:12:38.1096360Z   (* Else *)
+2026-11-01T23:12:38.1096661Z   Have: null != out_0.
+2026-11-01T23:12:38.1097051Z   (* Invariant *)
+2026-11-01T23:12:38.1097600Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1097937Z   (* Then *)
+2026-11-01T23:12:38.1098248Z   Have: i <= 31.
+2026-11-01T23:12:38.1098607Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1099105Z   Have: valid_rw(alloc_0, shift_sint8(out_0, x), 1).
+2026-11-01T23:12:38.1099553Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1099809Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1100154Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1100421Z   Have: 0 <= x_2.
+2026-11-01T23:12:38.1100634Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1100873Z   Have: x_2 <= 16.
+2026-11-01T23:12:38.1101080Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1101480Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(1 + x)), 1).
+2026-11-01T23:12:38.1101882Z }
+2026-11-01T23:12:38.1102071Z Prove: to_uint64(1 + i) <= 32.
+2026-11-01T23:12:38.1102388Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:15ms) (63ms) (178)
+2026-11-01T23:12:38.1102786Z 
+2026-11-01T23:12:38.1102925Z ------------------------------------------------------------
+2026-11-01T23:12:38.1103159Z 
+2026-11-01T23:12:38.1103359Z Goal Assertion 'rte,index_bound' (file /repo/phase20-hex-hacl.c, line 22):
+2026-11-01T23:12:38.1103836Z Let a = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1104148Z Let a_1 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1104410Z Let a_2 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1104681Z Let a_3 = memcpy(mem_0, a_2, mem_undef_0, a_2, 64).
+2026-11-01T23:12:38.1104973Z Let x = read_uint8(a_3, a).
+2026-11-01T23:12:38.1105192Z Assume {
+2026-11-01T23:12:38.1105448Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_3) /\ is_uint8(x).
+2026-11-01T23:12:38.1105766Z   (* Heap *)
+2026-11-01T23:12:38.1106036Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1106417Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1106715Z   (* Pre-condition *)
+2026-11-01T23:12:38.1107374Z   Have: valid_rd(alloc_0, a_1, 32).
+2026-11-01T23:12:38.1107635Z   (* Pre-condition *)
+2026-11-01T23:12:38.1107856Z   Have: valid_rw(alloc_0, a_2, 65).
+2026-11-01T23:12:38.1108096Z   (* Pre-condition *)
+2026-11-01T23:12:38.1108310Z   Have: separated(a_1, 32, a_2, 65).
+2026-11-01T23:12:38.1108549Z   (* Else *)
+2026-11-01T23:12:38.1108740Z   Have: null != digest_0.
+2026-11-01T23:12:38.1108951Z   (* Else *)
+2026-11-01T23:12:38.1109144Z   Have: null != out_0.
+2026-11-01T23:12:38.1109354Z   (* Invariant *)
+2026-11-01T23:12:38.1109553Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1109769Z   (* Then *)
+2026-11-01T23:12:38.1109946Z   Have: i <= 31.
+2026-11-01T23:12:38.1110163Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1110484Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(2 * i)), 1).
+2026-11-01T23:12:38.1110833Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1111085Z   Have: valid_rd(alloc_0, a, 1).
+2026-11-01T23:12:38.1111312Z }
+2026-11-01T23:12:38.1111500Z Prove: 0 <= to_sint32(lsr(x, 4)).
+2026-11-01T23:12:38.1111819Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:12ms) (254ms) (2915)
+2026-11-01T23:12:38.1112071Z 
+2026-11-01T23:12:38.1112198Z ------------------------------------------------------------
+2026-11-01T23:12:38.1112420Z 
+2026-11-01T23:12:38.1112614Z Goal Assertion 'rte,index_bound' (file /repo/phase20-hex-hacl.c, line 22):
+2026-11-01T23:12:38.1113008Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1113270Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1113584Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1113838Z Let x = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1114068Z Let x_1 = to_sint32(lsr(x, 4)).
+2026-11-01T23:12:38.1114319Z Let a_3 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1114551Z Assume {
+2026-11-01T23:12:38.1114801Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x).
+2026-11-01T23:12:38.1115308Z   (* Heap *)
+2026-11-01T23:12:38.1115568Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1116051Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1116350Z   (* Pre-condition *)
+2026-11-01T23:12:38.1116566Z   Have: valid_rd(alloc_0, a_3, 32).
+2026-11-01T23:12:38.1117083Z   (* Pre-condition *)
+2026-11-01T23:12:38.1117306Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1117539Z   (* Pre-condition *)
+2026-11-01T23:12:38.1117756Z   Have: separated(a_3, 32, a, 65).
+2026-11-01T23:12:38.1117982Z   (* Else *)
+2026-11-01T23:12:38.1118169Z   Have: null != digest_0.
+2026-11-01T23:12:38.1118376Z   (* Else *)
+2026-11-01T23:12:38.1118559Z   Have: null != out_0.
+2026-11-01T23:12:38.1118762Z   (* Invariant *)
+2026-11-01T23:12:38.1118958Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1119172Z   (* Then *)
+2026-11-01T23:12:38.1119346Z   Have: i <= 31.
+2026-11-01T23:12:38.1119549Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1119864Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(2 * i)), 1).
+2026-11-01T23:12:38.1120201Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1120448Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1120692Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1120928Z   Have: 0 <= x_1.
+2026-11-01T23:12:38.1121115Z }
+2026-11-01T23:12:38.1121284Z Prove: x_1 <= 16.
+2026-11-01T23:12:38.1121529Z Prover Alt-Ergo 2.5.4 returns Timeout (Qed:11ms) (35s)
+2026-11-01T23:12:38.1121880Z Prover Script returns Valid (Qed:17ms) (80ms)
+2026-11-01T23:12:38.1122086Z 
+2026-11-01T23:12:38.1122208Z ------------------------------------------------------------
+2026-11-01T23:12:38.1122431Z 
+2026-11-01T23:12:38.1122625Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-hacl.c, line 22):
+2026-11-01T23:12:38.1123015Z Let a = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1123265Z Let a_1 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1123494Z Assume {
+2026-11-01T23:12:38.1123677Z   Type: is_uint64(i).
+2026-11-01T23:12:38.1123885Z   (* Heap *)
+2026-11-01T23:12:38.1124154Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1124487Z       linked(alloc_0).
+2026-11-01T23:12:38.1124698Z   (* Pre-condition *)
+2026-11-01T23:12:38.1124910Z   Have: valid_rd(alloc_0, a, 32).
+2026-11-01T23:12:38.1125143Z   (* Pre-condition *)
+2026-11-01T23:12:38.1125355Z   Have: valid_rw(alloc_0, a_1, 65).
+2026-11-01T23:12:38.1125816Z   (* Pre-condition *)
+2026-11-01T23:12:38.1126208Z   Have: separated(a, 32, a_1, 65).
+2026-11-01T23:12:38.1126636Z   (* Else *)
+2026-11-01T23:12:38.1127222Z   Have: null != digest_0.
+2026-11-01T23:12:38.1127576Z   (* Else *)
+2026-11-01T23:12:38.1127762Z   Have: null != out_0.
+2026-11-01T23:12:38.1127960Z   (* Invariant *)
+2026-11-01T23:12:38.1128158Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1128373Z   (* Then *)
+2026-11-01T23:12:38.1128550Z   Have: i <= 31.
+2026-11-01T23:12:38.1128736Z }
+2026-11-01T23:12:38.1128986Z Prove: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(2 * i)), 1).
+2026-11-01T23:12:38.1129602Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:16ms) (22ms) (107)
+2026-11-01T23:12:38.1129842Z 
+2026-11-01T23:12:38.1130035Z ------------------------------------------------------------
+2026-11-01T23:12:38.1130341Z 
+2026-11-01T23:12:38.1130539Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-hacl.c, line 22):
+2026-11-01T23:12:38.1130915Z Let a = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1131239Z Let a_1 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1131580Z Assume {
+2026-11-01T23:12:38.1131764Z   Type: is_uint64(i).
+2026-11-01T23:12:38.1131961Z   (* Heap *)
+2026-11-01T23:12:38.1132226Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1132565Z       linked(alloc_0).
+2026-11-01T23:12:38.1132773Z   (* Pre-condition *)
+2026-11-01T23:12:38.1133094Z   Have: valid_rd(alloc_0, a, 32).
+2026-11-01T23:12:38.1133401Z   (* Pre-condition *)
+2026-11-01T23:12:38.1133615Z   Have: valid_rw(alloc_0, a_1, 65).
+2026-11-01T23:12:38.1134094Z   (* Pre-condition *)
+2026-11-01T23:12:38.1134316Z   Have: separated(a, 32, a_1, 65).
+2026-11-01T23:12:38.1134553Z   (* Else *)
+2026-11-01T23:12:38.1134748Z   Have: null != digest_0.
+2026-11-01T23:12:38.1135065Z   (* Else *)
+2026-11-01T23:12:38.1135255Z   Have: null != out_0.
+2026-11-01T23:12:38.1135461Z   (* Invariant *)
+2026-11-01T23:12:38.1135659Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1135877Z   (* Then *)
+2026-11-01T23:12:38.1136055Z   Have: i <= 31.
+2026-11-01T23:12:38.1136258Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1136578Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(2 * i)), 1).
+2026-11-01T23:12:38.1137242Z }
+2026-11-01T23:12:38.1137552Z Prove: valid_rd(alloc_0, shift_uint8(digest_0, i), 1).
+2026-11-01T23:12:38.1137923Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:12ms) (22ms) (127)
+2026-11-01T23:12:38.1138172Z 
+2026-11-01T23:12:38.1138298Z ------------------------------------------------------------
+2026-11-01T23:12:38.1138518Z 
+2026-11-01T23:12:38.1138730Z Goal Assertion 'rte,index_bound' (file /repo/phase20-hex-hacl.c, line 23):
+2026-11-01T23:12:38.1139100Z Prove: true.
+2026-11-01T23:12:38.1139298Z Prover Qed returns Valid
+2026-11-01T23:12:38.1139441Z 
+2026-11-01T23:12:38.1139567Z ------------------------------------------------------------
+2026-11-01T23:12:38.1139777Z 
+2026-11-01T23:12:38.1139969Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-hacl.c, line 23):
+2026-11-01T23:12:38.1140341Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1140604Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1140932Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1141194Z Let x = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1141432Z Let x_1 = to_sint32(lsr(x, 4)).
+2026-11-01T23:12:38.1141666Z Let x_2 = to_uint64(2 * i).
+2026-11-01T23:12:38.1141900Z Let a_3 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1142137Z Assume {
+2026-11-01T23:12:38.1142392Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x).
+2026-11-01T23:12:38.1142715Z   (* Heap *)
+2026-11-01T23:12:38.1142983Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1143369Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1143668Z   (* Pre-condition *)
+2026-11-01T23:12:38.1143887Z   Have: valid_rd(alloc_0, a_3, 32).
+2026-11-01T23:12:38.1144128Z   (* Pre-condition *)
+2026-11-01T23:12:38.1144350Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1144590Z   (* Pre-condition *)
+2026-11-01T23:12:38.1144804Z   Have: separated(a_3, 32, a, 65).
+2026-11-01T23:12:38.1145038Z   (* Else *)
+2026-11-01T23:12:38.1145227Z   Have: null != digest_0.
+2026-11-01T23:12:38.1145439Z   (* Else *)
+2026-11-01T23:12:38.1145621Z   Have: null != out_0.
+2026-11-01T23:12:38.1145829Z   (* Invariant *)
+2026-11-01T23:12:38.1146030Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1146260Z   (* Then *)
+2026-11-01T23:12:38.1146436Z   Have: i <= 31.
+2026-11-01T23:12:38.1146639Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1147181Z   Have: valid_rw(alloc_0, shift_sint8(out_0, x_2), 1).
+2026-11-01T23:12:38.1147483Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1147724Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1147977Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1148220Z   Have: 0 <= x_1.
+2026-11-01T23:12:38.1148422Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1148658Z   Have: x_1 <= 16.
+2026-11-01T23:12:38.1148842Z }
+2026-11-01T23:12:38.1149096Z Prove: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(1 + x_2)), 1).
+2026-11-01T23:12:38.1149500Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:15ms) (75ms) (365)
+2026-11-01T23:12:38.1149744Z 
+2026-11-01T23:12:38.1149862Z ------------------------------------------------------------
+2026-11-01T23:12:38.1150081Z 
+2026-11-01T23:12:38.1150269Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-hacl.c, line 23):
+2026-11-01T23:12:38.1150633Z Prove: true.
+2026-11-01T23:12:38.1150912Z Prover Qed returns Valid (4ms)
+2026-11-01T23:12:38.1151245Z 
+2026-11-01T23:12:38.1151369Z ------------------------------------------------------------
+2026-11-01T23:12:38.1151583Z 
+2026-11-01T23:12:38.1151876Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-hacl.c, line 25):
+2026-11-01T23:12:38.1152251Z Let a = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1152573Z Let a_1 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1152801Z Assume {
+2026-11-01T23:12:38.1152981Z   Type: is_uint64(i).
+2026-11-01T23:12:38.1153258Z   (* Heap *)
+2026-11-01T23:12:38.1153676Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1154244Z       linked(alloc_0).
+2026-11-01T23:12:38.1154611Z   (* Pre-condition *)
+2026-11-01T23:12:38.1155068Z   Have: valid_rd(alloc_0, a, 32).
+2026-11-01T23:12:38.1155522Z   (* Pre-condition *)
+2026-11-01T23:12:38.1155875Z   Have: valid_rw(alloc_0, a_1, 65).
+2026-11-01T23:12:38.1156216Z   (* Pre-condition *)
+2026-11-01T23:12:38.1156630Z   Have: separated(a, 32, a_1, 65).
+2026-11-01T23:12:38.1157389Z   (* Else *)
+2026-11-01T23:12:38.1157735Z   Have: null != digest_0.
+2026-11-01T23:12:38.1158117Z   (* Else *)
+2026-11-01T23:12:38.1158426Z   Have: null != out_0.
+2026-11-01T23:12:38.1158764Z   (* Invariant *)
+2026-11-01T23:12:38.1158979Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1159205Z   (* Else *)
+2026-11-01T23:12:38.1159509Z   Have: 32 <= i.
+2026-11-01T23:12:38.1159803Z }
+2026-11-01T23:12:38.1160154Z Prove: valid_rw(alloc_0, shift_sint8(out_0, 64), 1).
+2026-11-01T23:12:38.1160745Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:11ms) (15ms) (71)
+2026-11-01T23:12:38.1161158Z 
+2026-11-01T23:12:38.1161338Z ------------------------------------------------------------
+2026-11-01T23:12:38.1161738Z 
+2026-11-01T23:12:38.1162038Z Goal Loop assigns (file /repo/phase20-hex-hacl.c, line 18) (1/4):
+2026-11-01T23:12:38.1162508Z Prove: true.
+2026-11-01T23:12:38.1162871Z Prover Qed returns Valid
+2026-11-01T23:12:38.1163109Z 
+2026-11-01T23:12:38.1163242Z ------------------------------------------------------------
+2026-11-01T23:12:38.1163663Z 
+2026-11-01T23:12:38.1164002Z Goal Loop assigns (file /repo/phase20-hex-hacl.c, line 18) (2/4):
+2026-11-01T23:12:38.1164612Z Effect at line 21
+2026-11-01T23:12:38.1164935Z Prove: true.
+2026-11-01T23:12:38.1165187Z Prover Qed returns Valid (5ms)
+2026-11-01T23:12:38.1165349Z 
+2026-11-01T23:12:38.1165545Z ------------------------------------------------------------
+2026-11-01T23:12:38.1165949Z 
+2026-11-01T23:12:38.1166242Z Goal Loop assigns (file /repo/phase20-hex-hacl.c, line 18) (3/4):
+2026-11-01T23:12:38.1167107Z Effect at line 22
+2026-11-01T23:12:38.1167502Z Let x = to_uint64(2 * i).
+2026-11-01T23:12:38.1167919Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1168189Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1168692Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1169194Z Let x_1 = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1169659Z Let x_2 = to_sint32(lsr(x_1, 4)).
+2026-11-01T23:12:38.1170111Z Let a_3 = shift_sint8(out_0, x).
+2026-11-01T23:12:38.1170543Z Let a_4 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1170793Z Assume {
+2026-11-01T23:12:38.1171055Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x_1).
+2026-11-01T23:12:38.1171678Z   (* Heap *)
+2026-11-01T23:12:38.1172164Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1172724Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1173019Z   (* Goal *)
+2026-11-01T23:12:38.1173217Z   When: !invalid(alloc_0, a_3, 1).
+2026-11-01T23:12:38.1173672Z   (* Pre-condition *)
+2026-11-01T23:12:38.1174072Z   Have: valid_rd(alloc_0, a_4, 32).
+2026-11-01T23:12:38.1174500Z   (* Pre-condition *)
+2026-11-01T23:12:38.1174897Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1175334Z   (* Pre-condition *)
+2026-11-01T23:12:38.1175701Z   Have: separated(a_4, 32, a, 65).
+2026-11-01T23:12:38.1176069Z   (* Else *)
+2026-11-01T23:12:38.1176272Z   Have: null != digest_0.
+2026-11-01T23:12:38.1176618Z   (* Else *)
+2026-11-01T23:12:38.1177078Z   Have: null != out_0.
+2026-11-01T23:12:38.1177734Z   (* Invariant *)
+2026-11-01T23:12:38.1177992Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1178227Z   (* Then *)
+2026-11-01T23:12:38.1178419Z   Have: i <= 31.
+2026-11-01T23:12:38.1178755Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1179149Z   Have: valid_rw(alloc_0, a_3, 1).
+2026-11-01T23:12:38.1179519Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1179791Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1180037Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1180522Z   Have: 0 <= x_2.
+2026-11-01T23:12:38.1180890Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1181307Z   Have: x_2 <= 16.
+2026-11-01T23:12:38.1181658Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1182185Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(1 + x)), 1).
+2026-11-01T23:12:38.1182740Z   (* Invariant *)
+2026-11-01T23:12:38.1183077Z   Have: to_uint64(1 + i) <= 32.
+2026-11-01T23:12:38.1183453Z }
+2026-11-01T23:12:38.1183738Z Prove: x <= 63.
+2026-11-01T23:12:38.1184191Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:17ms) (61ms) (186)
+2026-11-01T23:12:38.1184607Z 
+2026-11-01T23:12:38.1184820Z ------------------------------------------------------------
+2026-11-01T23:12:38.1185204Z 
+2026-11-01T23:12:38.1185491Z Goal Loop assigns (file /repo/phase20-hex-hacl.c, line 18) (4/4):
+2026-11-01T23:12:38.1186071Z Effect at line 23
+2026-11-01T23:12:38.1186418Z Let x = to_uint64(2 * i).
+2026-11-01T23:12:38.1186960Z Let x_1 = to_uint64(1 + x).
+2026-11-01T23:12:38.1187359Z Let a = shift_sint8(out_0, x_1).
+2026-11-01T23:12:38.1187762Z Let a_1 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1188225Z Let a_2 = memcpy(mem_0, a_1, mem_undef_0, a_1, 64).
+2026-11-01T23:12:38.1188746Z Let a_3 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1189188Z Let x_2 = read_uint8(a_2, a_3).
+2026-11-01T23:12:38.1189594Z Let x_3 = to_sint32(lsr(x_2, 4)).
+2026-11-01T23:12:38.1190029Z Let a_4 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1190413Z Assume {
+2026-11-01T23:12:38.1190908Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_2) /\ is_uint8(x_2).
+2026-11-01T23:12:38.1191423Z   (* Heap *)
+2026-11-01T23:12:38.1191873Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1192520Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1193042Z   (* Goal *)
+2026-11-01T23:12:38.1193430Z   When: !invalid(alloc_0, a, 1).
+2026-11-01T23:12:38.1193745Z   (* Pre-condition *)
+2026-11-01T23:12:38.1194023Z   Have: valid_rd(alloc_0, a_4, 32).
+2026-11-01T23:12:38.1194400Z   (* Pre-condition *)
+2026-11-01T23:12:38.1194629Z   Have: valid_rw(alloc_0, a_1, 65).
+2026-11-01T23:12:38.1194873Z   (* Pre-condition *)
+2026-11-01T23:12:38.1195090Z   Have: separated(a_4, 32, a_1, 65).
+2026-11-01T23:12:38.1195483Z   (* Else *)
+2026-11-01T23:12:38.1195828Z   Have: null != digest_0.
+2026-11-01T23:12:38.1196047Z   (* Else *)
+2026-11-01T23:12:38.1196248Z   Have: null != out_0.
+2026-11-01T23:12:38.1196547Z   (* Invariant *)
+2026-11-01T23:12:38.1197054Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1197322Z   (* Then *)
+2026-11-01T23:12:38.1197499Z   Have: i <= 31.
+2026-11-01T23:12:38.1197925Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1198291Z   Have: valid_rw(alloc_0, shift_sint8(out_0, x), 1).
+2026-11-01T23:12:38.1198609Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1198859Z   Have: valid_rd(alloc_0, a_3, 1).
+2026-11-01T23:12:38.1199288Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1199690Z   Have: 0 <= x_3.
+2026-11-01T23:12:38.1199947Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1200360Z   Have: x_3 <= 16.
+2026-11-01T23:12:38.1200622Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1200911Z   Have: valid_rw(alloc_0, a, 1).
+2026-11-01T23:12:38.1201140Z   (* Invariant *)
+2026-11-01T23:12:38.1201336Z   Have: to_uint64(1 + i) <= 32.
+2026-11-01T23:12:38.1201556Z }
+2026-11-01T23:12:38.1201727Z Prove: x_1 <= 63.
+2026-11-01T23:12:38.1202036Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:18ms) (82ms) (408)
+2026-11-01T23:12:38.1202663Z 
+2026-11-01T23:12:38.1202870Z ------------------------------------------------------------
+2026-11-01T23:12:38.1203287Z 
+2026-11-01T23:12:38.1203858Z Goal Assigns (file /repo/phase20-hex-hacl.c, line 6) in 'tb_sha256_hex' (1/6):
+2026-11-01T23:12:38.1204631Z Effect at line 15
+2026-11-01T23:12:38.1204996Z Prove: true.
+2026-11-01T23:12:38.1205376Z Prover Qed returns Valid (2ms)
+2026-11-01T23:12:38.1205661Z 
+2026-11-01T23:12:38.1205910Z ------------------------------------------------------------
+2026-11-01T23:12:38.1206306Z 
+2026-11-01T23:12:38.1206740Z Goal Assigns (file /repo/phase20-hex-hacl.c, line 6) in 'tb_sha256_hex' (2/6):
+2026-11-01T23:12:38.1207643Z Effect at line 15
+2026-11-01T23:12:38.1207963Z Prove: true.
+2026-11-01T23:12:38.1208289Z Prover Qed returns Valid (2ms)
+2026-11-01T23:12:38.1208562Z 
+2026-11-01T23:12:38.1208766Z ------------------------------------------------------------
+2026-11-01T23:12:38.1209160Z 
+2026-11-01T23:12:38.1209397Z Goal Assigns (file /repo/phase20-hex-hacl.c, line 6) in 'tb_sha256_hex' (3/6):
+2026-11-01T23:12:38.1209795Z Effect at line 21
+2026-11-01T23:12:38.1209994Z Prove: true.
+2026-11-01T23:12:38.1210193Z Prover Qed returns Valid (3ms)
+2026-11-01T23:12:38.1210354Z 
+2026-11-01T23:12:38.1210479Z ------------------------------------------------------------
+2026-11-01T23:12:38.1210698Z 
+2026-11-01T23:12:38.1210913Z Goal Assigns (file /repo/phase20-hex-hacl.c, line 6) in 'tb_sha256_hex' (4/6):
+2026-11-01T23:12:38.1211288Z Effect at line 21
+2026-11-01T23:12:38.1211487Z Prove: true.
+2026-11-01T23:12:38.1211685Z Prover Qed returns Valid (3ms)
+2026-11-01T23:12:38.1211846Z 
+2026-11-01T23:12:38.1211961Z ------------------------------------------------------------
+2026-11-01T23:12:38.1212176Z 
+2026-11-01T23:12:38.1212375Z Goal Assigns (file /repo/phase20-hex-hacl.c, line 6) in 'tb_sha256_hex' (5/6):
+2026-11-01T23:12:38.1212844Z Effect at line 25
+2026-11-01T23:12:38.1213153Z Prove: true.
+2026-11-01T23:12:38.1213450Z Prover Qed returns Valid (4ms)
+2026-11-01T23:12:38.1213611Z 
+2026-11-01T23:12:38.1213739Z ------------------------------------------------------------
+2026-11-01T23:12:38.1214066Z 
+2026-11-01T23:12:38.1214304Z Goal Assigns (file /repo/phase20-hex-hacl.c, line 6) in 'tb_sha256_hex' (6/6):
+2026-11-01T23:12:38.1214675Z Effect at line 26
+2026-11-01T23:12:38.1214863Z Prove: true.
+2026-11-01T23:12:38.1215059Z Prover Qed returns Valid (4ms)
+2026-11-01T23:12:38.1215217Z 
+2026-11-01T23:12:38.1215340Z ------------------------------------------------------------
+2026-11-01T23:12:38.1215545Z 
+2026-11-01T23:12:38.1215770Z Goal Positivity of Loop variant at loop (file /repo/phase20-hex-hacl.c, line 21):
+2026-11-01T23:12:38.1216157Z Prove: true.
+2026-11-01T23:12:38.1216351Z Prover Qed returns Valid (5ms)
+2026-11-01T23:12:38.1216502Z 
+2026-11-01T23:12:38.1216615Z ------------------------------------------------------------
+2026-11-01T23:12:38.1217163Z 
+2026-11-01T23:12:38.1217546Z Goal Decreasing of Loop variant at loop (file /repo/phase20-hex-hacl.c, line 21):
+2026-11-01T23:12:38.1218151Z Let x = to_uint64(1 + i).
+2026-11-01T23:12:38.1218558Z Let x_1 = to_uint64(2 * i).
+2026-11-01T23:12:38.1218970Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1219253Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1219546Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1219798Z Let x_2 = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1220037Z Let x_3 = to_sint32(lsr(x_2, 4)).
+2026-11-01T23:12:38.1220284Z Let a_3 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1220518Z Assume {
+2026-11-01T23:12:38.1220937Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x_2).
+2026-11-01T23:12:38.1221413Z   (* Heap *)
+2026-11-01T23:12:38.1221784Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1222439Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1222966Z   (* Pre-condition *)
+2026-11-01T23:12:38.1223344Z   Have: valid_rd(alloc_0, a_3, 32).
+2026-11-01T23:12:38.1223767Z   (* Pre-condition *)
+2026-11-01T23:12:38.1224377Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1224797Z   (* Pre-condition *)
+2026-11-01T23:12:38.1225171Z   Have: separated(a_3, 32, a, 65).
+2026-11-01T23:12:38.1225782Z   (* Else *)
+2026-11-01T23:12:38.1226141Z   Have: null != digest_0.
+2026-11-01T23:12:38.1226520Z   (* Else *)
+2026-11-01T23:12:38.1227086Z   Have: null != out_0.
+2026-11-01T23:12:38.1227459Z   (* Invariant *)
+2026-11-01T23:12:38.1227823Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1228233Z   (* Then *)
+2026-11-01T23:12:38.1228551Z   Have: i <= 31.
+2026-11-01T23:12:38.1228908Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1229391Z   Have: valid_rw(alloc_0, shift_sint8(out_0, x_1), 1).
+2026-11-01T23:12:38.1229911Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1230362Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1230790Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1231226Z   Have: 0 <= x_3.
+2026-11-01T23:12:38.1231585Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1232002Z   Have: x_3 <= 16.
+2026-11-01T23:12:38.1232347Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1232895Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(1 + x_1)), 1).
+2026-11-01T23:12:38.1233498Z   (* Invariant *)
+2026-11-01T23:12:38.1233837Z   Have: x <= 32.
+2026-11-01T23:12:38.1234155Z }
+2026-11-01T23:12:38.1234463Z Prove: i < x.
+2026-11-01T23:12:38.1234948Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:16ms) (61ms) (183)
+2026-11-01T23:12:38.1235387Z 
+2026-11-01T23:12:38.1235609Z ------------------------------------------------------------
+2026-11-01T23:12:38.1236176Z [wp] /repo/phase20-hex-hacl.c:10: Warning: 
+2026-11-01T23:12:38.1236766Z   Memory model hypotheses for function 'tb_sha256_hex':
+2026-11-01T23:12:38.1237523Z   /*@
+2026-11-01T23:12:38.1237851Z      behavior wp_bytes:
+2026-11-01T23:12:38.1238213Z        requires
+2026-11-01T23:12:38.1238719Z          \separated(digest + (..), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T23:12:38.1239337Z        requires
+2026-11-01T23:12:38.1239830Z          \separated(out + (..), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T23:12:38.1240421Z        requires
+2026-11-01T23:12:38.1240971Z          \separated(out + (0 .. 64), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T23:12:38.1241581Z      */
+2026-11-01T23:12:38.1242056Z   tb_status tb_sha256_hex(unsigned char const digest[32], char out[65]);
+2026-11-01T23:12:38.1242713Z [ { "goal": "bytes_tb_sha256_hex_ensures",
+2026-11-01T23:12:38.1243342Z     "property": "tb_sha256_hex_ensures", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T23:12:38.1244122Z     "line": 7, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1244744Z     "verdict": "valid",
+2026-11-01T23:12:38.1245235Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1245797Z     "proved": 1 },
+2026-11-01T23:12:38.1246241Z   { "goal": "bytes_tb_sha256_hex_ensures_nul_terminated",
+2026-11-01T23:12:38.1247165Z     "property": "tb_sha256_hex_ensures_nul_terminated",
+2026-11-01T23:12:38.1247784Z     "file": "/repo/phase20-hex-hacl.c", "line": 8,
+2026-11-01T23:12:38.1248434Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1249037Z     "verdict": "valid",
+2026-11-01T23:12:38.1249528Z     "provers": [ { "prover": "qed", "time": 0.0354, "success": 0 },
+2026-11-01T23:12:38.1250248Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.054, "success": 1 } ],
+2026-11-01T23:12:38.1250846Z     "proved": 1 },
+2026-11-01T23:12:38.1251320Z   { "goal": "bytes_tb_sha256_hex_loop_invariant_established",
+2026-11-01T23:12:38.1251928Z     "property": "tb_sha256_hex_loop_invariant",
+2026-11-01T23:12:38.1252493Z     "file": "/repo/phase20-hex-hacl.c", "line": 17,
+2026-11-01T23:12:38.1253087Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1253510Z     "verdict": "valid",
+2026-11-01T23:12:38.1254051Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1254692Z     "proved": 1 },
+2026-11-01T23:12:38.1255195Z   { "goal": "bytes_tb_sha256_hex_loop_invariant_preserved",
+2026-11-01T23:12:38.1255738Z     "property": "tb_sha256_hex_loop_invariant",
+2026-11-01T23:12:38.1256447Z     "file": "/repo/phase20-hex-hacl.c", "line": 17,
+2026-11-01T23:12:38.1257142Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1257585Z     "verdict": "valid",
+2026-11-01T23:12:38.1257866Z     "provers": [ { "prover": "qed", "time": 0.0152, "success": 0 },
+2026-11-01T23:12:38.1258558Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0625, "success": 1 } ],
+2026-11-01T23:12:38.1258921Z     "proved": 1 },
+2026-11-01T23:12:38.1259176Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound",
+2026-11-01T23:12:38.1259622Z     "property": "tb_sha256_hex_assert_rte_index_bound",
+2026-11-01T23:12:38.1260024Z     "file": "/repo/phase20-hex-hacl.c", "line": 22,
+2026-11-01T23:12:38.1260383Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1260815Z     "verdict": "valid",
+2026-11-01T23:12:38.1261147Z     "provers": [ { "prover": "qed", "time": 0.0118, "success": 0 },
+2026-11-01T23:12:38.1261550Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.254, "success": 1 } ],
+2026-11-01T23:12:38.1262079Z     "proved": 1 },
+2026-11-01T23:12:38.1262515Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound_2",
+2026-11-01T23:12:38.1262958Z     "property": "tb_sha256_hex_assert_rte_index_bound_2",
+2026-11-01T23:12:38.1263293Z     "file": "/repo/phase20-hex-hacl.c", "line": 22,
+2026-11-01T23:12:38.1263639Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1263954Z     "verdict": "valid",
+2026-11-01T23:12:38.1264225Z     "provers": [ { "prover": "qed", "time": 0.017, "success": 1 },
+2026-11-01T23:12:38.1264619Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0805, "success": 1 } ],
+2026-11-01T23:12:38.1265156Z     "subgoals": 2, "tactics": 1, "proved": 2 },
+2026-11-01T23:12:38.1265476Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access",
+2026-11-01T23:12:38.1265816Z     "property": "tb_sha256_hex_assert_rte_mem_access",
+2026-11-01T23:12:38.1266302Z     "file": "/repo/phase20-hex-hacl.c", "line": 22,
+2026-11-01T23:12:38.1266660Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1267263Z     "verdict": "valid",
+2026-11-01T23:12:38.1267617Z     "provers": [ { "prover": "qed", "time": 0.0165, "success": 0 },
+2026-11-01T23:12:38.1268034Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0219, "success": 1 } ],
+2026-11-01T23:12:38.1268497Z     "proved": 1 },
+2026-11-01T23:12:38.1268783Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_2",
+2026-11-01T23:12:38.1269132Z     "property": "tb_sha256_hex_assert_rte_mem_access_2",
+2026-11-01T23:12:38.1269476Z     "file": "/repo/phase20-hex-hacl.c", "line": 22,
+2026-11-01T23:12:38.1269999Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1270322Z     "verdict": "valid",
+2026-11-01T23:12:38.1270598Z     "provers": [ { "prover": "qed", "time": 0.0121, "success": 0 },
+2026-11-01T23:12:38.1271152Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0219, "success": 1 } ],
+2026-11-01T23:12:38.1271496Z     "proved": 1 },
+2026-11-01T23:12:38.1271750Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound_3",
+2026-11-01T23:12:38.1272255Z     "property": "tb_sha256_hex_assert_rte_index_bound_3",
+2026-11-01T23:12:38.1272589Z     "file": "/repo/phase20-hex-hacl.c", "line": 23,
+2026-11-01T23:12:38.1272931Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1273404Z     "verdict": "valid",
+2026-11-01T23:12:38.1273677Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1273978Z     "proved": 1 },
+2026-11-01T23:12:38.1274291Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_3",
+2026-11-01T23:12:38.1274732Z     "property": "tb_sha256_hex_assert_rte_mem_access_3",
+2026-11-01T23:12:38.1275054Z     "file": "/repo/phase20-hex-hacl.c", "line": 23,
+2026-11-01T23:12:38.1275750Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1276068Z     "verdict": "valid",
+2026-11-01T23:12:38.1276464Z     "provers": [ { "prover": "qed", "time": 0.0154, "success": 0 },
+2026-11-01T23:12:38.1277152Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.075, "success": 1 } ],
+2026-11-01T23:12:38.1277495Z     "proved": 1 },
+2026-11-01T23:12:38.1277795Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_4",
+2026-11-01T23:12:38.1278302Z     "property": "tb_sha256_hex_assert_rte_mem_access_4",
+2026-11-01T23:12:38.1278628Z     "file": "/repo/phase20-hex-hacl.c", "line": 23,
+2026-11-01T23:12:38.1278971Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1279444Z     "verdict": "valid",
+2026-11-01T23:12:38.1279714Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1280020Z     "proved": 1 },
+2026-11-01T23:12:38.1280333Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_5",
+2026-11-01T23:12:38.1280786Z     "property": "tb_sha256_hex_assert_rte_mem_access_5",
+2026-11-01T23:12:38.1281125Z     "file": "/repo/phase20-hex-hacl.c", "line": 25,
+2026-11-01T23:12:38.1281570Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1281969Z     "verdict": "valid",
+2026-11-01T23:12:38.1282247Z     "provers": [ { "prover": "qed", "time": 0.011, "success": 0 },
+2026-11-01T23:12:38.1282726Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0154, "success": 1 } ],
+2026-11-01T23:12:38.1283141Z     "proved": 1 },
+2026-11-01T23:12:38.1283383Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part1",
+2026-11-01T23:12:38.1283715Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T23:12:38.1284183Z     "file": "/repo/phase20-hex-hacl.c", "line": 18,
+2026-11-01T23:12:38.1284546Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1285098Z     "verdict": "valid",
+2026-11-01T23:12:38.1285578Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1286034Z     "proved": 1 },
+2026-11-01T23:12:38.1286312Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part2",
+2026-11-01T23:12:38.1286636Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T23:12:38.1287776Z     "file": "/repo/phase20-hex-hacl.c", "line": 18,
+2026-11-01T23:12:38.1288185Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1288782Z     "verdict": "valid",
+2026-11-01T23:12:38.1289228Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1289577Z     "proved": 1 },
+2026-11-01T23:12:38.1289954Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part3",
+2026-11-01T23:12:38.1290346Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T23:12:38.1290665Z     "file": "/repo/phase20-hex-hacl.c", "line": 18,
+2026-11-01T23:12:38.1291162Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1291535Z     "verdict": "valid",
+2026-11-01T23:12:38.1291832Z     "provers": [ { "prover": "qed", "time": 0.0165, "success": 0 },
+2026-11-01T23:12:38.1292399Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0612, "success": 1 } ],
+2026-11-01T23:12:38.1292754Z     "proved": 1 },
+2026-11-01T23:12:38.1293002Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part4",
+2026-11-01T23:12:38.1293359Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T23:12:38.1293772Z     "file": "/repo/phase20-hex-hacl.c", "line": 18,
+2026-11-01T23:12:38.1294142Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1294466Z     "verdict": "valid",
+2026-11-01T23:12:38.1294904Z     "provers": [ { "prover": "qed", "time": 0.0178, "success": 0 },
+2026-11-01T23:12:38.1295304Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0819, "success": 1 } ],
+2026-11-01T23:12:38.1295886Z     "proved": 1 },
+2026-11-01T23:12:38.1296152Z   { "goal": "bytes_tb_sha256_hex_assigns_part1",
+2026-11-01T23:12:38.1296537Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T23:12:38.1297607Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1297959Z     "verdict": "valid",
+2026-11-01T23:12:38.1298382Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1298878Z     "proved": 1 },
+2026-11-01T23:12:38.1299108Z   { "goal": "bytes_tb_sha256_hex_assigns_part2",
+2026-11-01T23:12:38.1299490Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T23:12:38.1299990Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1300335Z     "verdict": "valid",
+2026-11-01T23:12:38.1300607Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1301080Z     "proved": 1 },
+2026-11-01T23:12:38.1301319Z   { "goal": "bytes_tb_sha256_hex_assigns_part3",
+2026-11-01T23:12:38.1301863Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T23:12:38.1302331Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1302670Z     "verdict": "valid",
+2026-11-01T23:12:38.1302946Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1303259Z     "proved": 1 },
+2026-11-01T23:12:38.1303484Z   { "goal": "bytes_tb_sha256_hex_assigns_part4",
+2026-11-01T23:12:38.1303859Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T23:12:38.1304309Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1304697Z     "verdict": "valid",
+2026-11-01T23:12:38.1305079Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1305386Z     "proved": 1 },
+2026-11-01T23:12:38.1305605Z   { "goal": "bytes_tb_sha256_hex_assigns_part5",
+2026-11-01T23:12:38.1305975Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T23:12:38.1306456Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1307271Z     "verdict": "valid",
+2026-11-01T23:12:38.1307545Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1307855Z     "proved": 1 },
+2026-11-01T23:12:38.1308079Z   { "goal": "bytes_tb_sha256_hex_assigns_part6",
+2026-11-01T23:12:38.1308446Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T23:12:38.1308878Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1309212Z     "verdict": "valid",
+2026-11-01T23:12:38.1309483Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1309795Z     "proved": 1 },
+2026-11-01T23:12:38.1310041Z   { "goal": "bytes_tb_sha256_hex_loop_variant_positive",
+2026-11-01T23:12:38.1310358Z     "property": "tb_sha256_hex_loop_variant",
+2026-11-01T23:12:38.1310671Z     "file": "/repo/phase20-hex-hacl.c", "line": 19,
+2026-11-01T23:12:38.1311028Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1311355Z     "verdict": "valid",
+2026-11-01T23:12:38.1311620Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1311926Z     "proved": 1 },
+2026-11-01T23:12:38.1312181Z   { "goal": "bytes_tb_sha256_hex_loop_variant_decrease",
+2026-11-01T23:12:38.1312744Z     "property": "tb_sha256_hex_loop_variant",
+2026-11-01T23:12:38.1313055Z     "file": "/repo/phase20-hex-hacl.c", "line": 19,
+2026-11-01T23:12:38.1313406Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1313732Z     "verdict": "valid",
+2026-11-01T23:12:38.1314016Z     "provers": [ { "prover": "qed", "time": 0.0156, "success": 0 },
+2026-11-01T23:12:38.1314568Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0611, "success": 1 } ],
+2026-11-01T23:12:38.1314932Z     "proved": 1 } ]
+2026-11-01T23:12:38.1315130Z 32.1 (Germanium)
+2026-11-01T23:12:38.1315425Z [kernel] Parsing /repo/phase20-hex-openssl.c (with preprocessing)
+2026-11-01T23:12:38.1316006Z [wp] Running WP plugin...
+2026-11-01T23:12:38.1316268Z [rte:annot] annotating function tb_sha256_hex
+2026-11-01T23:12:38.1316568Z [wp] 23 goals scheduled
+2026-11-01T23:12:38.1317202Z [wp] Proved goals:   25 / 25
+2026-11-01T23:12:38.1317475Z   Terminating:       1
+2026-11-01T23:12:38.1317692Z   Unreachable:       1
+2026-11-01T23:12:38.1317915Z   Qed:              12 (11ms-8ms-34ms)
+2026-11-01T23:12:38.1318193Z   Alt-Ergo 2.5.4:   10 (17ms-71ms-255ms)
+2026-11-01T23:12:38.1318522Z   Script:            1 (Tactic) (Qed 1/2 15ms) (Alt-Ergo 1/2 81ms)
+2026-11-01T23:12:38.1318764Z 
+2026-11-01T23:12:38.1319005Z Goal Post-condition (file /repo/phase20-hex-openssl.c, line 7) in 'tb_sha256_hex':
+2026-11-01T23:12:38.1319409Z Prove: true.
+2026-11-01T23:12:38.1319618Z Prover Qed returns Valid (26ms)
+2026-11-01T23:12:38.1319783Z 
+2026-11-01T23:12:38.1319912Z ------------------------------------------------------------
+2026-11-01T23:12:38.1320141Z 
+2026-11-01T23:12:38.1320282Z Goal Post-condition 'nul_terminated' in 'tb_sha256_hex':
+2026-11-01T23:12:38.1320608Z Let a = shift_sint8(out_0, 64).
+2026-11-01T23:12:38.1320863Z Let a_1 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1321117Z Let a_2 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1321441Z Let a_3 = memcpy(mem_0, a_2, mem_undef_0, a_2, 64).
+2026-11-01T23:12:38.1322011Z Let m = write_sint8(a_3, a, 0).
+2026-11-01T23:12:38.1322392Z Let x = read_sint8(m, a).
+2026-11-01T23:12:38.1322734Z Assume {
+2026-11-01T23:12:38.1323145Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_3) /\ bytes(m) /\
+2026-11-01T23:12:38.1323666Z       is_sint8(x).
+2026-11-01T23:12:38.1323978Z   (* Heap *)
+2026-11-01T23:12:38.1324415Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1324952Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1325359Z   (* Residual *)
+2026-11-01T23:12:38.1325723Z   When: null != out_0.
+2026-11-01T23:12:38.1326007Z   (* Residual *)
+2026-11-01T23:12:38.1326204Z   When: null != digest_0.
+2026-11-01T23:12:38.1326437Z   (* Pre-condition *)
+2026-11-01T23:12:38.1327057Z   Have: valid_rd(alloc_0, a_1, 32).
+2026-11-01T23:12:38.1327438Z   (* Pre-condition *)
+2026-11-01T23:12:38.1327670Z   Have: valid_rw(alloc_0, a_2, 65).
+2026-11-01T23:12:38.1327914Z   (* Pre-condition *)
+2026-11-01T23:12:38.1328132Z   Have: separated(a_1, 32, a_2, 65).
+2026-11-01T23:12:38.1328382Z   (* Invariant *)
+2026-11-01T23:12:38.1328588Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1328807Z   (* Else *)
+2026-11-01T23:12:38.1328986Z   Have: 32 <= i.
+2026-11-01T23:12:38.1329189Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1329443Z   Have: valid_rw(alloc_0, a, 1).
+2026-11-01T23:12:38.1329810Z }
+2026-11-01T23:12:38.1329987Z Prove: x = 0.
+2026-11-01T23:12:38.1330408Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:34ms) (55ms) (204)
+2026-11-01T23:12:38.1330814Z 
+2026-11-01T23:12:38.1330945Z ------------------------------------------------------------
+2026-11-01T23:12:38.1331172Z 
+2026-11-01T23:12:38.1331383Z Goal Establishment of Invariant (file /repo/phase20-hex-openssl.c, line 19):
+2026-11-01T23:12:38.1331810Z Prove: true.
+2026-11-01T23:12:38.1332015Z Prover Qed returns Valid (2ms)
+2026-11-01T23:12:38.1332250Z 
+2026-11-01T23:12:38.1332518Z ------------------------------------------------------------
+2026-11-01T23:12:38.1332896Z 
+2026-11-01T23:12:38.1333138Z Goal Preservation of Invariant (file /repo/phase20-hex-openssl.c, line 19):
+2026-11-01T23:12:38.1333655Z Let x = to_uint64(2 * i).
+2026-11-01T23:12:38.1334064Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1334436Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1335120Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1335757Z Let x_1 = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1336115Z Let x_2 = to_sint32(lsr(x_1, 4)).
+2026-11-01T23:12:38.1336538Z Let a_3 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1337272Z Assume {
+2026-11-01T23:12:38.1337668Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x_1).
+2026-11-01T23:12:38.1397243Z   (* Heap *)
+2026-11-01T23:12:38.1397877Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1398309Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1398936Z   (* Pre-condition *)
+2026-11-01T23:12:38.1399185Z   Have: valid_rd(alloc_0, a_3, 32).
+2026-11-01T23:12:38.1399441Z   (* Pre-condition *)
+2026-11-01T23:12:38.1399813Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1400086Z   (* Pre-condition *)
+2026-11-01T23:12:38.1400310Z   Have: separated(a_3, 32, a, 65).
+2026-11-01T23:12:38.1400555Z   (* Else *)
+2026-11-01T23:12:38.1400797Z   Have: null != digest_0.
+2026-11-01T23:12:38.1401122Z   (* Else *)
+2026-11-01T23:12:38.1401312Z   Have: null != out_0.
+2026-11-01T23:12:38.1401520Z   (* Invariant *)
+2026-11-01T23:12:38.1401739Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1402032Z   (* Then *)
+2026-11-01T23:12:38.1402294Z   Have: i <= 31.
+2026-11-01T23:12:38.1402502Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1402795Z   Have: valid_rw(alloc_0, shift_sint8(out_0, x), 1).
+2026-11-01T23:12:38.1403162Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1403526Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1403785Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1404032Z   Have: 0 <= x_2.
+2026-11-01T23:12:38.1404236Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1404624Z   Have: x_2 <= 16.
+2026-11-01T23:12:38.1404844Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1405156Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(1 + x)), 1).
+2026-11-01T23:12:38.1405553Z }
+2026-11-01T23:12:38.1405820Z Prove: to_uint64(1 + i) <= 32.
+2026-11-01T23:12:38.1406131Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:17ms) (62ms) (178)
+2026-11-01T23:12:38.1406383Z 
+2026-11-01T23:12:38.1406511Z ------------------------------------------------------------
+2026-11-01T23:12:38.1406971Z 
+2026-11-01T23:12:38.1407200Z Goal Assertion 'rte,index_bound' (file /repo/phase20-hex-openssl.c, line 24):
+2026-11-01T23:12:38.1407620Z Let a = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1408035Z Let a_1 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1408361Z Let a_2 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1408638Z Let a_3 = memcpy(mem_0, a_2, mem_undef_0, a_2, 64).
+2026-11-01T23:12:38.1408938Z Let x = read_uint8(a_3, a).
+2026-11-01T23:12:38.1409289Z Assume {
+2026-11-01T23:12:38.1409566Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_3) /\ is_uint8(x).
+2026-11-01T23:12:38.1409883Z   (* Heap *)
+2026-11-01T23:12:38.1410152Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1410678Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1410971Z   (* Pre-condition *)
+2026-11-01T23:12:38.1411190Z   Have: valid_rd(alloc_0, a_1, 32).
+2026-11-01T23:12:38.1411474Z   (* Pre-condition *)
+2026-11-01T23:12:38.1411783Z   Have: valid_rw(alloc_0, a_2, 65).
+2026-11-01T23:12:38.1412023Z   (* Pre-condition *)
+2026-11-01T23:12:38.1412239Z   Have: separated(a_1, 32, a_2, 65).
+2026-11-01T23:12:38.1412484Z   (* Else *)
+2026-11-01T23:12:38.1412765Z   Have: null != digest_0.
+2026-11-01T23:12:38.1413031Z   (* Else *)
+2026-11-01T23:12:38.1413212Z   Have: null != out_0.
+2026-11-01T23:12:38.1413425Z   (* Invariant *)
+2026-11-01T23:12:38.1413624Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1413933Z   (* Then *)
+2026-11-01T23:12:38.1414168Z   Have: i <= 31.
+2026-11-01T23:12:38.1414377Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1414693Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(2 * i)), 1).
+2026-11-01T23:12:38.1415140Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1415430Z   Have: valid_rd(alloc_0, a, 1).
+2026-11-01T23:12:38.1415657Z }
+2026-11-01T23:12:38.1415842Z Prove: 0 <= to_sint32(lsr(x, 4)).
+2026-11-01T23:12:38.1416199Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:11ms) (255ms) (2915)
+2026-11-01T23:12:38.1416532Z 
+2026-11-01T23:12:38.1416658Z ------------------------------------------------------------
+2026-11-01T23:12:38.1417004Z 
+2026-11-01T23:12:38.1417582Z Goal Assertion 'rte,index_bound' (file /repo/phase20-hex-openssl.c, line 24):
+2026-11-01T23:12:38.1418022Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1418433Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1418892Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1419148Z Let x = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1419384Z Let x_1 = to_sint32(lsr(x, 4)).
+2026-11-01T23:12:38.1419627Z Let a_3 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1419988Z Assume {
+2026-11-01T23:12:38.1420264Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x).
+2026-11-01T23:12:38.1420588Z   (* Heap *)
+2026-11-01T23:12:38.1420854Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1421380Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1421675Z   (* Pre-condition *)
+2026-11-01T23:12:38.1421986Z   Have: valid_rd(alloc_0, a_3, 32).
+2026-11-01T23:12:38.1422370Z   (* Pre-condition *)
+2026-11-01T23:12:38.1422590Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1422834Z   (* Pre-condition *)
+2026-11-01T23:12:38.1423045Z   Have: separated(a_3, 32, a, 65).
+2026-11-01T23:12:38.1423276Z   (* Else *)
+2026-11-01T23:12:38.1423631Z   Have: null != digest_0.
+2026-11-01T23:12:38.1423843Z   (* Else *)
+2026-11-01T23:12:38.1424021Z   Have: null != out_0.
+2026-11-01T23:12:38.1424222Z   (* Invariant *)
+2026-11-01T23:12:38.1424420Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1424783Z   (* Then *)
+2026-11-01T23:12:38.1424974Z   Have: i <= 31.
+2026-11-01T23:12:38.1425176Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1425485Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(2 * i)), 1).
+2026-11-01T23:12:38.1425963Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1426211Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1426454Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1426688Z   Have: 0 <= x_1.
+2026-11-01T23:12:38.1427149Z }
+2026-11-01T23:12:38.1427331Z Prove: x_1 <= 16.
+2026-11-01T23:12:38.1427590Z Prover Alt-Ergo 2.5.4 returns Timeout (Qed:11ms) (35s)
+2026-11-01T23:12:38.1427929Z Prover Script returns Valid (Qed:15ms) (81ms)
+2026-11-01T23:12:38.1428223Z 
+2026-11-01T23:12:38.1428412Z ------------------------------------------------------------
+2026-11-01T23:12:38.1428631Z 
+2026-11-01T23:12:38.1428841Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-openssl.c, line 24):
+2026-11-01T23:12:38.1429232Z Let a = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1429625Z Let a_1 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1429858Z Assume {
+2026-11-01T23:12:38.1430043Z   Type: is_uint64(i).
+2026-11-01T23:12:38.1430244Z   (* Heap *)
+2026-11-01T23:12:38.1430616Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1430991Z       linked(alloc_0).
+2026-11-01T23:12:38.1431202Z   (* Pre-condition *)
+2026-11-01T23:12:38.1431418Z   Have: valid_rd(alloc_0, a, 32).
+2026-11-01T23:12:38.1431733Z   (* Pre-condition *)
+2026-11-01T23:12:38.1432021Z   Have: valid_rw(alloc_0, a_1, 65).
+2026-11-01T23:12:38.1432271Z   (* Pre-condition *)
+2026-11-01T23:12:38.1432487Z   Have: separated(a, 32, a_1, 65).
+2026-11-01T23:12:38.1432723Z   (* Else *)
+2026-11-01T23:12:38.1433053Z   Have: null != digest_0.
+2026-11-01T23:12:38.1433272Z   (* Else *)
+2026-11-01T23:12:38.1433457Z   Have: null != out_0.
+2026-11-01T23:12:38.1433657Z   (* Invariant *)
+2026-11-01T23:12:38.1433851Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1434185Z   (* Then *)
+2026-11-01T23:12:38.1434396Z   Have: i <= 31.
+2026-11-01T23:12:38.1434579Z }
+2026-11-01T23:12:38.1434830Z Prove: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(2 * i)), 1).
+2026-11-01T23:12:38.1435318Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:14ms) (21ms) (107)
+2026-11-01T23:12:38.1435613Z 
+2026-11-01T23:12:38.1435739Z ------------------------------------------------------------
+2026-11-01T23:12:38.1435955Z 
+2026-11-01T23:12:38.1436152Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-openssl.c, line 24):
+2026-11-01T23:12:38.1436653Z Let a = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1437235Z Let a_1 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1437526Z Assume {
+2026-11-01T23:12:38.1437858Z   Type: is_uint64(i).
+2026-11-01T23:12:38.1438251Z   (* Heap *)
+2026-11-01T23:12:38.1438530Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1438864Z       linked(alloc_0).
+2026-11-01T23:12:38.1439072Z   (* Pre-condition *)
+2026-11-01T23:12:38.1439287Z   Have: valid_rd(alloc_0, a, 32).
+2026-11-01T23:12:38.1439522Z   (* Pre-condition *)
+2026-11-01T23:12:38.1439733Z   Have: valid_rw(alloc_0, a_1, 65).
+2026-11-01T23:12:38.1440143Z   (* Pre-condition *)
+2026-11-01T23:12:38.1440361Z   Have: separated(a, 32, a_1, 65).
+2026-11-01T23:12:38.1440592Z   (* Else *)
+2026-11-01T23:12:38.1440789Z   Have: null != digest_0.
+2026-11-01T23:12:38.1441029Z   (* Else *)
+2026-11-01T23:12:38.1441211Z   Have: null != out_0.
+2026-11-01T23:12:38.1441414Z   (* Invariant *)
+2026-11-01T23:12:38.1441610Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1441834Z   (* Then *)
+2026-11-01T23:12:38.1442021Z   Have: i <= 31.
+2026-11-01T23:12:38.1442226Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1442546Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(2 * i)), 1).
+2026-11-01T23:12:38.1442874Z }
+2026-11-01T23:12:38.1443093Z Prove: valid_rd(alloc_0, shift_uint8(digest_0, i), 1).
+2026-11-01T23:12:38.1443468Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:11ms) (23ms) (127)
+2026-11-01T23:12:38.1443745Z 
+2026-11-01T23:12:38.1443966Z ------------------------------------------------------------
+2026-11-01T23:12:38.1444187Z 
+2026-11-01T23:12:38.1444396Z Goal Assertion 'rte,index_bound' (file /repo/phase20-hex-openssl.c, line 25):
+2026-11-01T23:12:38.1444781Z Prove: true.
+2026-11-01T23:12:38.1444980Z Prover Qed returns Valid
+2026-11-01T23:12:38.1445122Z 
+2026-11-01T23:12:38.1445240Z ------------------------------------------------------------
+2026-11-01T23:12:38.1445456Z 
+2026-11-01T23:12:38.1445649Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-openssl.c, line 25):
+2026-11-01T23:12:38.1446040Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1446306Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1446600Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1447081Z Let x = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1447319Z Let x_1 = to_sint32(lsr(x, 4)).
+2026-11-01T23:12:38.1447557Z Let x_2 = to_uint64(2 * i).
+2026-11-01T23:12:38.1447792Z Let a_3 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1448025Z Assume {
+2026-11-01T23:12:38.1448284Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x).
+2026-11-01T23:12:38.1448608Z   (* Heap *)
+2026-11-01T23:12:38.1448877Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1449264Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1449570Z   (* Pre-condition *)
+2026-11-01T23:12:38.1449789Z   Have: valid_rd(alloc_0, a_3, 32).
+2026-11-01T23:12:38.1450033Z   (* Pre-condition *)
+2026-11-01T23:12:38.1450250Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1450488Z   (* Pre-condition *)
+2026-11-01T23:12:38.1450700Z   Have: separated(a_3, 32, a, 65).
+2026-11-01T23:12:38.1451070Z   (* Else *)
+2026-11-01T23:12:38.1451319Z   Have: null != digest_0.
+2026-11-01T23:12:38.1451529Z   (* Else *)
+2026-11-01T23:12:38.1451857Z   Have: null != out_0.
+2026-11-01T23:12:38.1452174Z   (* Invariant *)
+2026-11-01T23:12:38.1452383Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1452606Z   (* Then *)
+2026-11-01T23:12:38.1452785Z   Have: i <= 31.
+2026-11-01T23:12:38.1452990Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1453276Z   Have: valid_rw(alloc_0, shift_sint8(out_0, x_2), 1).
+2026-11-01T23:12:38.1453578Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1453823Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1454068Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1454304Z   Have: 0 <= x_1.
+2026-11-01T23:12:38.1454509Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1454749Z   Have: x_1 <= 16.
+2026-11-01T23:12:38.1455111Z }
+2026-11-01T23:12:38.1455367Z Prove: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(1 + x_2)), 1).
+2026-11-01T23:12:38.1455890Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:14ms) (78ms) (365)
+2026-11-01T23:12:38.1456144Z 
+2026-11-01T23:12:38.1456279Z ------------------------------------------------------------
+2026-11-01T23:12:38.1456506Z 
+2026-11-01T23:12:38.1456708Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-openssl.c, line 25):
+2026-11-01T23:12:38.1457411Z Prove: true.
+2026-11-01T23:12:38.1457621Z Prover Qed returns Valid (6ms)
+2026-11-01T23:12:38.1457868Z 
+2026-11-01T23:12:38.1458060Z ------------------------------------------------------------
+2026-11-01T23:12:38.1458438Z 
+2026-11-01T23:12:38.1458762Z Goal Assertion 'rte,mem_access' (file /repo/phase20-hex-openssl.c, line 27):
+2026-11-01T23:12:38.1459157Z Let a = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1459588Z Let a_1 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1459974Z Assume {
+2026-11-01T23:12:38.1460277Z   Type: is_uint64(i).
+2026-11-01T23:12:38.1460626Z   (* Heap *)
+2026-11-01T23:12:38.1461055Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1461627Z       linked(alloc_0).
+2026-11-01T23:12:38.1462015Z   (* Pre-condition *)
+2026-11-01T23:12:38.1462381Z   Have: valid_rd(alloc_0, a, 32).
+2026-11-01T23:12:38.1462780Z   (* Pre-condition *)
+2026-11-01T23:12:38.1463155Z   Have: valid_rw(alloc_0, a_1, 65).
+2026-11-01T23:12:38.1463565Z   (* Pre-condition *)
+2026-11-01T23:12:38.1463821Z   Have: separated(a, 32, a_1, 65).
+2026-11-01T23:12:38.1464053Z   (* Else *)
+2026-11-01T23:12:38.1464451Z   Have: null != digest_0.
+2026-11-01T23:12:38.1464826Z   (* Else *)
+2026-11-01T23:12:38.1465128Z   Have: null != out_0.
+2026-11-01T23:12:38.1465472Z   (* Invariant *)
+2026-11-01T23:12:38.1465807Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1466206Z   (* Else *)
+2026-11-01T23:12:38.1466669Z   Have: 32 <= i.
+2026-11-01T23:12:38.1467314Z }
+2026-11-01T23:12:38.1467675Z Prove: valid_rw(alloc_0, shift_sint8(out_0, 64), 1).
+2026-11-01T23:12:38.1468338Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:17ms) (17ms) (71)
+2026-11-01T23:12:38.1468701Z 
+2026-11-01T23:12:38.1468925Z ------------------------------------------------------------
+2026-11-01T23:12:38.1469288Z 
+2026-11-01T23:12:38.1469572Z Goal Loop assigns (file /repo/phase20-hex-openssl.c, line 20) (1/4):
+2026-11-01T23:12:38.1470174Z Prove: true.
+2026-11-01T23:12:38.1470508Z Prover Qed returns Valid
+2026-11-01T23:12:38.1470658Z 
+2026-11-01T23:12:38.1470783Z ------------------------------------------------------------
+2026-11-01T23:12:38.1471013Z 
+2026-11-01T23:12:38.1471190Z Goal Loop assigns (file /repo/phase20-hex-openssl.c, line 20) (2/4):
+2026-11-01T23:12:38.1471553Z Effect at line 23
+2026-11-01T23:12:38.1471943Z Prove: true.
+2026-11-01T23:12:38.1472169Z Prover Qed returns Valid (5ms)
+2026-11-01T23:12:38.1472324Z 
+2026-11-01T23:12:38.1472452Z ------------------------------------------------------------
+2026-11-01T23:12:38.1472684Z 
+2026-11-01T23:12:38.1472850Z Goal Loop assigns (file /repo/phase20-hex-openssl.c, line 20) (3/4):
+2026-11-01T23:12:38.1473194Z Effect at line 24
+2026-11-01T23:12:38.1473396Z Let x = to_uint64(2 * i).
+2026-11-01T23:12:38.1473631Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1473891Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1474199Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1474455Z Let x_1 = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1474855Z Let x_2 = to_sint32(lsr(x_1, 4)).
+2026-11-01T23:12:38.1475297Z Let a_3 = shift_sint8(out_0, x).
+2026-11-01T23:12:38.1475683Z Let a_4 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1475923Z Assume {
+2026-11-01T23:12:38.1476187Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x_1).
+2026-11-01T23:12:38.1476511Z   (* Heap *)
+2026-11-01T23:12:38.1477030Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1477438Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1477957Z   (* Goal *)
+2026-11-01T23:12:38.1478153Z   When: !invalid(alloc_0, a_3, 1).
+2026-11-01T23:12:38.1478401Z   (* Pre-condition *)
+2026-11-01T23:12:38.1478741Z   Have: valid_rd(alloc_0, a_4, 32).
+2026-11-01T23:12:38.1478995Z   (* Pre-condition *)
+2026-11-01T23:12:38.1479216Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1479458Z   (* Pre-condition *)
+2026-11-01T23:12:38.1479673Z   Have: separated(a_4, 32, a, 65).
+2026-11-01T23:12:38.1479914Z   (* Else *)
+2026-11-01T23:12:38.1480107Z   Have: null != digest_0.
+2026-11-01T23:12:38.1480318Z   (* Else *)
+2026-11-01T23:12:38.1480506Z   Have: null != out_0.
+2026-11-01T23:12:38.1480723Z   (* Invariant *)
+2026-11-01T23:12:38.1480924Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1481146Z   (* Then *)
+2026-11-01T23:12:38.1481332Z   Have: i <= 31.
+2026-11-01T23:12:38.1481544Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1481797Z   Have: valid_rw(alloc_0, a_3, 1).
+2026-11-01T23:12:38.1482046Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1482299Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1482546Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1482793Z   Have: 0 <= x_2.
+2026-11-01T23:12:38.1483008Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1483258Z   Have: x_2 <= 16.
+2026-11-01T23:12:38.1483471Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1483788Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(1 + x)), 1).
+2026-11-01T23:12:38.1484123Z   (* Invariant *)
+2026-11-01T23:12:38.1484327Z   Have: to_uint64(1 + i) <= 32.
+2026-11-01T23:12:38.1484555Z }
+2026-11-01T23:12:38.1484729Z Prove: x <= 63.
+2026-11-01T23:12:38.1484996Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:15ms) (63ms) (186)
+2026-11-01T23:12:38.1485245Z 
+2026-11-01T23:12:38.1485371Z ------------------------------------------------------------
+2026-11-01T23:12:38.1485593Z 
+2026-11-01T23:12:38.1485773Z Goal Loop assigns (file /repo/phase20-hex-openssl.c, line 20) (4/4):
+2026-11-01T23:12:38.1486127Z Effect at line 25
+2026-11-01T23:12:38.1486330Z Let x = to_uint64(2 * i).
+2026-11-01T23:12:38.1486554Z Let x_1 = to_uint64(1 + x).
+2026-11-01T23:12:38.1487039Z Let a = shift_sint8(out_0, x_1).
+2026-11-01T23:12:38.1487321Z Let a_1 = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1487596Z Let a_2 = memcpy(mem_0, a_1, mem_undef_0, a_1, 64).
+2026-11-01T23:12:38.1487896Z Let a_3 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1488146Z Let x_2 = read_uint8(a_2, a_3).
+2026-11-01T23:12:38.1488389Z Let x_3 = to_sint32(lsr(x_2, 4)).
+2026-11-01T23:12:38.1488636Z Let a_4 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1488878Z Assume {
+2026-11-01T23:12:38.1489139Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_2) /\ is_uint8(x_2).
+2026-11-01T23:12:38.1489463Z   (* Heap *)
+2026-11-01T23:12:38.1489730Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1490110Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1490397Z   (* Goal *)
+2026-11-01T23:12:38.1490588Z   When: !invalid(alloc_0, a, 1).
+2026-11-01T23:12:38.1490958Z   (* Pre-condition *)
+2026-11-01T23:12:38.1491231Z   Have: valid_rd(alloc_0, a_4, 32).
+2026-11-01T23:12:38.1491473Z   (* Pre-condition *)
+2026-11-01T23:12:38.1491693Z   Have: valid_rw(alloc_0, a_1, 65).
+2026-11-01T23:12:38.1491946Z   (* Pre-condition *)
+2026-11-01T23:12:38.1492040Z   Have: separated(a_4, 32, a_1, 65).
+2026-11-01T23:12:38.1492119Z   (* Else *)
+2026-11-01T23:12:38.1492202Z   Have: null != digest_0.
+2026-11-01T23:12:38.1492278Z   (* Else *)
+2026-11-01T23:12:38.1492358Z   Have: null != out_0.
+2026-11-01T23:12:38.1492441Z   (* Invariant *)
+2026-11-01T23:12:38.1492524Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1492604Z   (* Then *)
+2026-11-01T23:12:38.1492683Z   Have: i <= 31.
+2026-11-01T23:12:38.1492775Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1492902Z   Have: valid_rw(alloc_0, shift_sint8(out_0, x), 1).
+2026-11-01T23:12:38.1492994Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1493086Z   Have: valid_rd(alloc_0, a_3, 1).
+2026-11-01T23:12:38.1493345Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1493432Z   Have: 0 <= x_3.
+2026-11-01T23:12:38.1493521Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1493712Z   Have: x_3 <= 16.
+2026-11-01T23:12:38.1493814Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1493902Z   Have: valid_rw(alloc_0, a, 1).
+2026-11-01T23:12:38.1493985Z   (* Invariant *)
+2026-11-01T23:12:38.1494069Z   Have: to_uint64(1 + i) <= 32.
+2026-11-01T23:12:38.1494151Z }
+2026-11-01T23:12:38.1494228Z Prove: x_1 <= 63.
+2026-11-01T23:12:38.1494384Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:16ms) (76ms) (408)
+2026-11-01T23:12:38.1494389Z 
+2026-11-01T23:12:38.1494516Z ------------------------------------------------------------
+2026-11-01T23:12:38.1494521Z 
+2026-11-01T23:12:38.1494741Z Goal Assigns (file /repo/phase20-hex-openssl.c, line 6) in 'tb_sha256_hex' (1/5):
+2026-11-01T23:12:38.1494824Z Effect at line 16
+2026-11-01T23:12:38.1494901Z Prove: true.
+2026-11-01T23:12:38.1494996Z Prover Qed returns Valid (4ms)
+2026-11-01T23:12:38.1495006Z 
+2026-11-01T23:12:38.1495126Z ------------------------------------------------------------
+2026-11-01T23:12:38.1495136Z 
+2026-11-01T23:12:38.1495351Z Goal Assigns (file /repo/phase20-hex-openssl.c, line 6) in 'tb_sha256_hex' (2/5):
+2026-11-01T23:12:38.1495435Z Effect at line 23
+2026-11-01T23:12:38.1495512Z Prove: true.
+2026-11-01T23:12:38.1495605Z Prover Qed returns Valid (3ms)
+2026-11-01T23:12:38.1495610Z 
+2026-11-01T23:12:38.1495726Z ------------------------------------------------------------
+2026-11-01T23:12:38.1495730Z 
+2026-11-01T23:12:38.1495941Z Goal Assigns (file /repo/phase20-hex-openssl.c, line 6) in 'tb_sha256_hex' (3/5):
+2026-11-01T23:12:38.1496023Z Effect at line 23
+2026-11-01T23:12:38.1496101Z Prove: true.
+2026-11-01T23:12:38.1496195Z Prover Qed returns Valid (4ms)
+2026-11-01T23:12:38.1496199Z 
+2026-11-01T23:12:38.1496315Z ------------------------------------------------------------
+2026-11-01T23:12:38.1496320Z 
+2026-11-01T23:12:38.1496528Z Goal Assigns (file /repo/phase20-hex-openssl.c, line 6) in 'tb_sha256_hex' (4/5):
+2026-11-01T23:12:38.1496612Z Effect at line 27
+2026-11-01T23:12:38.1496705Z Prove: true.
+2026-11-01T23:12:38.1497092Z Prover Qed returns Valid (5ms)
+2026-11-01T23:12:38.1497109Z 
+2026-11-01T23:12:38.1497242Z ------------------------------------------------------------
+2026-11-01T23:12:38.1497247Z 
+2026-11-01T23:12:38.1497464Z Goal Assigns (file /repo/phase20-hex-openssl.c, line 6) in 'tb_sha256_hex' (5/5):
+2026-11-01T23:12:38.1497547Z Effect at line 28
+2026-11-01T23:12:38.1497624Z Prove: true.
+2026-11-01T23:12:38.1497723Z Prover Qed returns Valid (5ms)
+2026-11-01T23:12:38.1497727Z 
+2026-11-01T23:12:38.1497843Z ------------------------------------------------------------
+2026-11-01T23:12:38.1497846Z 
+2026-11-01T23:12:38.1498075Z Goal Positivity of Loop variant at loop (file /repo/phase20-hex-openssl.c, line 23):
+2026-11-01T23:12:38.1498152Z Prove: true.
+2026-11-01T23:12:38.1498248Z Prover Qed returns Valid (7ms)
+2026-11-01T23:12:38.1498252Z 
+2026-11-01T23:12:38.1498380Z ------------------------------------------------------------
+2026-11-01T23:12:38.1498385Z 
+2026-11-01T23:12:38.1498604Z Goal Decreasing of Loop variant at loop (file /repo/phase20-hex-openssl.c, line 23):
+2026-11-01T23:12:38.1498696Z Let x = to_uint64(1 + i).
+2026-11-01T23:12:38.1498781Z Let x_1 = to_uint64(2 * i).
+2026-11-01T23:12:38.1498874Z Let a = shift_sint8(out_0, 0).
+2026-11-01T23:12:38.1498992Z Let a_1 = memcpy(mem_0, a, mem_undef_0, a, 64).
+2026-11-01T23:12:38.1499085Z Let a_2 = shift_uint8(digest_0, i).
+2026-11-01T23:12:38.1499176Z Let x_2 = read_uint8(a_1, a_2).
+2026-11-01T23:12:38.1499267Z Let x_3 = to_sint32(lsr(x_2, 4)).
+2026-11-01T23:12:38.1499360Z Let a_3 = shift_uint8(digest_0, 0).
+2026-11-01T23:12:38.1499435Z Assume {
+2026-11-01T23:12:38.1499598Z   Type: bytes(mem_0) /\ is_uint64(i) /\ bytes(a_1) /\ is_uint8(x_2).
+2026-11-01T23:12:38.1499672Z   (* Heap *)
+2026-11-01T23:12:38.1499832Z   Type: (region(digest_0.base) <= 0) /\ (region(out_0.base) <= 0) /\
+2026-11-01T23:12:38.1500105Z       framed(mem_0) /\ linked(alloc_0) /\ sconst(mem_0).
+2026-11-01T23:12:38.1500189Z   (* Pre-condition *)
+2026-11-01T23:12:38.1500282Z   Have: valid_rd(alloc_0, a_3, 32).
+2026-11-01T23:12:38.1500477Z   (* Pre-condition *)
+2026-11-01T23:12:38.1500575Z   Have: valid_rw(alloc_0, a, 65).
+2026-11-01T23:12:38.1500655Z   (* Pre-condition *)
+2026-11-01T23:12:38.1500750Z   Have: separated(a_3, 32, a, 65).
+2026-11-01T23:12:38.1500822Z   (* Else *)
+2026-11-01T23:12:38.1500910Z   Have: null != digest_0.
+2026-11-01T23:12:38.1500986Z   (* Else *)
+2026-11-01T23:12:38.1501065Z   Have: null != out_0.
+2026-11-01T23:12:38.1501145Z   (* Invariant *)
+2026-11-01T23:12:38.1501225Z   Have: (0 <= i) /\ (i <= 32).
+2026-11-01T23:12:38.1501301Z   (* Then *)
+2026-11-01T23:12:38.1501377Z   Have: i <= 31.
+2026-11-01T23:12:38.1501473Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1501604Z   Have: valid_rw(alloc_0, shift_sint8(out_0, x_1), 1).
+2026-11-01T23:12:38.1501693Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1501791Z   Have: valid_rd(alloc_0, a_2, 1).
+2026-11-01T23:12:38.1501880Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1501963Z   Have: 0 <= x_3.
+2026-11-01T23:12:38.1502066Z   (* Assertion 'rte,index_bound' *)
+2026-11-01T23:12:38.1502148Z   Have: x_3 <= 16.
+2026-11-01T23:12:38.1502239Z   (* Assertion 'rte,mem_access' *)
+2026-11-01T23:12:38.1502409Z   Have: valid_rw(alloc_0, shift_sint8(out_0, to_uint64(1 + x_1)), 1).
+2026-11-01T23:12:38.1502492Z   (* Invariant *)
+2026-11-01T23:12:38.1502569Z   Have: x <= 32.
+2026-11-01T23:12:38.1502644Z }
+2026-11-01T23:12:38.1502723Z Prove: i < x.
+2026-11-01T23:12:38.1502881Z Prover Alt-Ergo 2.5.4 returns Valid (Qed:21ms) (64ms) (183)
+2026-11-01T23:12:38.1502885Z 
+2026-11-01T23:12:38.1503006Z ------------------------------------------------------------
+2026-11-01T23:12:38.1503131Z [wp] /repo/phase20-hex-openssl.c:10: Warning: 
+2026-11-01T23:12:38.1503272Z   Memory model hypotheses for function 'tb_sha256_hex':
+2026-11-01T23:12:38.1503345Z   /*@
+2026-11-01T23:12:38.1503443Z      behavior wp_bytes:
+2026-11-01T23:12:38.1503519Z        requires
+2026-11-01T23:12:38.1503707Z          \separated(digest + (..), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T23:12:38.1503785Z        requires
+2026-11-01T23:12:38.1503956Z          \separated(out + (..), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T23:12:38.1504032Z        requires
+2026-11-01T23:12:38.1504213Z          \separated(out + (0 .. 64), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T23:12:38.1504293Z      */
+2026-11-01T23:12:38.1504469Z   tb_status tb_sha256_hex(unsigned char const digest[32], char out[65]);
+2026-11-01T23:12:38.1504575Z [ { "goal": "bytes_tb_sha256_hex_ensures",
+2026-11-01T23:12:38.1504672Z     "property": "tb_sha256_hex_ensures",
+2026-11-01T23:12:38.1504803Z     "file": "/repo/phase20-hex-openssl.c", "line": 7,
+2026-11-01T23:12:38.1504955Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1505043Z     "verdict": "valid",
+2026-11-01T23:12:38.1505192Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1505271Z     "proved": 1 },
+2026-11-01T23:12:38.1505414Z   { "goal": "bytes_tb_sha256_hex_ensures_nul_terminated",
+2026-11-01T23:12:38.1505540Z     "property": "tb_sha256_hex_ensures_nul_terminated",
+2026-11-01T23:12:38.1505665Z     "file": "/repo/phase20-hex-openssl.c", "line": 8,
+2026-11-01T23:12:38.1505806Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1505893Z     "verdict": "valid",
+2026-11-01T23:12:38.1506042Z     "provers": [ { "prover": "qed", "time": 0.0335, "success": 0 },
+2026-11-01T23:12:38.1506205Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0551, "success": 1 } ],
+2026-11-01T23:12:38.1506289Z     "proved": 1 },
+2026-11-01T23:12:38.1506433Z   { "goal": "bytes_tb_sha256_hex_loop_invariant_established",
+2026-11-01T23:12:38.1506554Z     "property": "tb_sha256_hex_loop_invariant",
+2026-11-01T23:12:38.1506678Z     "file": "/repo/phase20-hex-openssl.c", "line": 19,
+2026-11-01T23:12:38.1507241Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1507333Z     "verdict": "valid",
+2026-11-01T23:12:38.1507607Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1507698Z     "proved": 1 },
+2026-11-01T23:12:38.1507844Z   { "goal": "bytes_tb_sha256_hex_loop_invariant_preserved",
+2026-11-01T23:12:38.1507962Z     "property": "tb_sha256_hex_loop_invariant",
+2026-11-01T23:12:38.1508087Z     "file": "/repo/phase20-hex-openssl.c", "line": 19,
+2026-11-01T23:12:38.1508240Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1508327Z     "verdict": "valid",
+2026-11-01T23:12:38.1508473Z     "provers": [ { "prover": "qed", "time": 0.0167, "success": 0 },
+2026-11-01T23:12:38.1508644Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0623, "success": 1 } ],
+2026-11-01T23:12:38.1508723Z     "proved": 1 },
+2026-11-01T23:12:38.1508858Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound",
+2026-11-01T23:12:38.1508989Z     "property": "tb_sha256_hex_assert_rte_index_bound",
+2026-11-01T23:12:38.1509118Z     "file": "/repo/phase20-hex-openssl.c", "line": 24,
+2026-11-01T23:12:38.1509271Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1509351Z     "verdict": "valid",
+2026-11-01T23:12:38.1509499Z     "provers": [ { "prover": "qed", "time": 0.0107, "success": 0 },
+2026-11-01T23:12:38.1509657Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.255, "success": 1 } ],
+2026-11-01T23:12:38.1509740Z     "proved": 1 },
+2026-11-01T23:12:38.1509872Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound_2",
+2026-11-01T23:12:38.1510004Z     "property": "tb_sha256_hex_assert_rte_index_bound_2",
+2026-11-01T23:12:38.1510127Z     "file": "/repo/phase20-hex-openssl.c", "line": 24,
+2026-11-01T23:12:38.1510268Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1510355Z     "verdict": "valid",
+2026-11-01T23:12:38.1510494Z     "provers": [ { "prover": "qed", "time": 0.0155, "success": 1 },
+2026-11-01T23:12:38.1510660Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0806, "success": 1 } ],
+2026-11-01T23:12:38.1510769Z     "subgoals": 2, "tactics": 1, "proved": 2 },
+2026-11-01T23:12:38.1510901Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access",
+2026-11-01T23:12:38.1511024Z     "property": "tb_sha256_hex_assert_rte_mem_access",
+2026-11-01T23:12:38.1511141Z     "file": "/repo/phase20-hex-openssl.c", "line": 24,
+2026-11-01T23:12:38.1511288Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1511368Z     "verdict": "valid",
+2026-11-01T23:12:38.1511513Z     "provers": [ { "prover": "qed", "time": 0.0142, "success": 0 },
+2026-11-01T23:12:38.1511667Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0205, "success": 1 } ],
+2026-11-01T23:12:38.1511750Z     "proved": 1 },
+2026-11-01T23:12:38.1511884Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_2",
+2026-11-01T23:12:38.1512011Z     "property": "tb_sha256_hex_assert_rte_mem_access_2",
+2026-11-01T23:12:38.1512131Z     "file": "/repo/phase20-hex-openssl.c", "line": 24,
+2026-11-01T23:12:38.1512287Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1512375Z     "verdict": "valid",
+2026-11-01T23:12:38.1512514Z     "provers": [ { "prover": "qed", "time": 0.0111, "success": 0 },
+2026-11-01T23:12:38.1512672Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0226, "success": 1 } ],
+2026-11-01T23:12:38.1512755Z     "proved": 1 },
+2026-11-01T23:12:38.1512885Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound_3",
+2026-11-01T23:12:38.1513019Z     "property": "tb_sha256_hex_assert_rte_index_bound_3",
+2026-11-01T23:12:38.1513136Z     "file": "/repo/phase20-hex-openssl.c", "line": 25,
+2026-11-01T23:12:38.1513281Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1513360Z     "verdict": "valid",
+2026-11-01T23:12:38.1513500Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1513711Z     "proved": 1 },
+2026-11-01T23:12:38.1513842Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_3",
+2026-11-01T23:12:38.1514047Z     "property": "tb_sha256_hex_assert_rte_mem_access_3",
+2026-11-01T23:12:38.1514165Z     "file": "/repo/phase20-hex-openssl.c", "line": 25,
+2026-11-01T23:12:38.1514311Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1514389Z     "verdict": "valid",
+2026-11-01T23:12:38.1514534Z     "provers": [ { "prover": "qed", "time": 0.0136, "success": 0 },
+2026-11-01T23:12:38.1514686Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0776, "success": 1 } ],
+2026-11-01T23:12:38.1514769Z     "proved": 1 },
+2026-11-01T23:12:38.1514901Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_4",
+2026-11-01T23:12:38.1515021Z     "property": "tb_sha256_hex_assert_rte_mem_access_4",
+2026-11-01T23:12:38.1515141Z     "file": "/repo/phase20-hex-openssl.c", "line": 25,
+2026-11-01T23:12:38.1515283Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1515377Z     "verdict": "valid",
+2026-11-01T23:12:38.1515512Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1515600Z     "proved": 1 },
+2026-11-01T23:12:38.1515730Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_5",
+2026-11-01T23:12:38.1515849Z     "property": "tb_sha256_hex_assert_rte_mem_access_5",
+2026-11-01T23:12:38.1515969Z     "file": "/repo/phase20-hex-openssl.c", "line": 27,
+2026-11-01T23:12:38.1516108Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1516194Z     "verdict": "valid",
+2026-11-01T23:12:38.1516332Z     "provers": [ { "prover": "qed", "time": 0.0165, "success": 0 },
+2026-11-01T23:12:38.1516488Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0172, "success": 1 } ],
+2026-11-01T23:12:38.1516572Z     "proved": 1 },
+2026-11-01T23:12:38.1516693Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part1",
+2026-11-01T23:12:38.1517077Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T23:12:38.1517274Z     "file": "/repo/phase20-hex-openssl.c", "line": 20,
+2026-11-01T23:12:38.1517448Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1517531Z     "verdict": "valid",
+2026-11-01T23:12:38.1517682Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1517766Z     "proved": 1 },
+2026-11-01T23:12:38.1517887Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part2",
+2026-11-01T23:12:38.1518002Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T23:12:38.1518123Z     "file": "/repo/phase20-hex-openssl.c", "line": 20,
+2026-11-01T23:12:38.1518275Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1518354Z     "verdict": "valid",
+2026-11-01T23:12:38.1518496Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1518580Z     "proved": 1 },
+2026-11-01T23:12:38.1518695Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part3",
+2026-11-01T23:12:38.1518810Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T23:12:38.1518925Z     "file": "/repo/phase20-hex-openssl.c", "line": 20,
+2026-11-01T23:12:38.1519074Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1519155Z     "verdict": "valid",
+2026-11-01T23:12:38.1519310Z     "provers": [ { "prover": "qed", "time": 0.0149, "success": 0 },
+2026-11-01T23:12:38.1519479Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0626, "success": 1 } ],
+2026-11-01T23:12:38.1519559Z     "proved": 1 },
+2026-11-01T23:12:38.1519680Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part4",
+2026-11-01T23:12:38.1519782Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T23:12:38.1519906Z     "file": "/repo/phase20-hex-openssl.c", "line": 20,
+2026-11-01T23:12:38.1520046Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1520130Z     "verdict": "valid",
+2026-11-01T23:12:38.1520278Z     "provers": [ { "prover": "qed", "time": 0.0162, "success": 0 },
+2026-11-01T23:12:38.1520584Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0761, "success": 1 } ],
+2026-11-01T23:12:38.1520667Z     "proved": 1 },
+2026-11-01T23:12:38.1520883Z   { "goal": "bytes_tb_sha256_hex_assigns_part1",
+2026-11-01T23:12:38.1520991Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T23:12:38.1521106Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T23:12:38.1521258Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1521337Z     "verdict": "valid",
+2026-11-01T23:12:38.1521477Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1521557Z     "proved": 1 },
+2026-11-01T23:12:38.1521663Z   { "goal": "bytes_tb_sha256_hex_assigns_part2",
+2026-11-01T23:12:38.1521761Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T23:12:38.1521875Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T23:12:38.1522026Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1522110Z     "verdict": "valid",
+2026-11-01T23:12:38.1522248Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1522330Z     "proved": 1 },
+2026-11-01T23:12:38.1522438Z   { "goal": "bytes_tb_sha256_hex_assigns_part3",
+2026-11-01T23:12:38.1522543Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T23:12:38.1522664Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T23:12:38.1522815Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1522898Z     "verdict": "valid",
+2026-11-01T23:12:38.1523039Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1523122Z     "proved": 1 },
+2026-11-01T23:12:38.1523229Z   { "goal": "bytes_tb_sha256_hex_assigns_part4",
+2026-11-01T23:12:38.1523330Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T23:12:38.1523451Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T23:12:38.1523599Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1523682Z     "verdict": "valid",
+2026-11-01T23:12:38.1523821Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1523911Z     "proved": 1 },
+2026-11-01T23:12:38.1524019Z   { "goal": "bytes_tb_sha256_hex_assigns_part5",
+2026-11-01T23:12:38.1524121Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T23:12:38.1524237Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T23:12:38.1524383Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1524463Z     "verdict": "valid",
+2026-11-01T23:12:38.1524604Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1524682Z     "proved": 1 },
+2026-11-01T23:12:38.1524817Z   { "goal": "bytes_tb_sha256_hex_loop_variant_positive",
+2026-11-01T23:12:38.1524929Z     "property": "tb_sha256_hex_loop_variant",
+2026-11-01T23:12:38.1525050Z     "file": "/repo/phase20-hex-openssl.c", "line": 21,
+2026-11-01T23:12:38.1525197Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1525283Z     "verdict": "valid",
+2026-11-01T23:12:38.1525425Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:12:38.1525507Z     "proved": 1 },
+2026-11-01T23:12:38.1525636Z   { "goal": "bytes_tb_sha256_hex_loop_variant_decrease",
+2026-11-01T23:12:38.1525743Z     "property": "tb_sha256_hex_loop_variant",
+2026-11-01T23:12:38.1525861Z     "file": "/repo/phase20-hex-openssl.c", "line": 21,
+2026-11-01T23:12:38.1526008Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T23:12:38.1526090Z     "verdict": "valid",
+2026-11-01T23:12:38.1526241Z     "provers": [ { "prover": "qed", "time": 0.021, "success": 0 },
+2026-11-01T23:12:38.1526403Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0641, "success": 1 } ],
+2026-11-01T23:12:38.1526488Z     "proved": 1 } ]
+2026-11-01T23:12:38.1910434Z ##[group]Run set -euo pipefail
+2026-11-01T23:12:38.1910615Z [36;1mset -euo pipefail[0m
+2026-11-01T23:12:38.1910958Z [36;1mfor log in phase20-results/*.log; do[0m
+2026-11-01T23:12:38.1911059Z [36;1m  target=$(basename "$log" .log)[0m
+2026-11-01T23:12:38.1911223Z [36;1m  python3 tools/check_phase20_wp.py "$target" "$log"[0m
+2026-11-01T23:12:38.1911298Z [36;1mdone[0m
+2026-11-01T23:12:38.1930837Z shell: /usr/bin/bash -e {0}
+2026-11-01T23:12:38.1930938Z ##[endgroup]
+2026-11-01T23:12:38.2328101Z FAIL: Phase 20: execution observed; exact inventory/diagnostics NOT_YET_RECORDED
+2026-11-01T23:12:38.2391643Z ##[error]Process completed with exit code 1.
+2026-11-01T23:12:38.2493189Z ##[group]Run actions/upload-artifact@v4
+2026-11-01T23:12:38.2493308Z with:
+2026-11-01T23:12:38.2493408Z   name: phase20-hex
+2026-11-01T23:12:38.2493526Z   path: phase20-results/
+phase20-*.c
+
+2026-11-01T23:12:38.2493611Z   retention-days: 30
+2026-11-01T23:12:38.2493706Z   if-no-files-found: warn
+2026-11-01T23:12:38.2493797Z   compression-level: 6
+2026-11-01T23:12:38.2493875Z   overwrite: false
+2026-11-01T23:12:38.2493979Z   include-hidden-files: false
+2026-11-01T23:12:38.2494079Z ##[endgroup]
+2026-11-01T23:12:38.4290065Z (node:2989) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-01T23:12:38.4291683Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-01T23:12:38.4402759Z With the provided path, there will be 8 files uploaded
+2026-11-01T23:12:38.4409336Z Artifact name is valid!
+2026-11-01T23:12:38.4410004Z Root directory input is valid!
+2026-11-01T23:12:38.7678335Z Beginning upload of artifact content to blob storage
+2026-11-01T23:12:38.8085879Z (node:2989) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-01T23:12:39.0478433Z Uploaded bytes 32300
+2026-11-01T23:12:39.1048400Z Finished uploading artifact content to blob storage!
+2026-11-01T23:12:39.1049528Z SHA256 digest of uploaded artifact zip is d87ad65b760c80a18c6c39168dda2b898f672f02fee2a84a9291efad4f56c1e6
+2026-11-01T23:12:39.1052060Z Finalizing artifact upload
+2026-11-01T23:12:39.5577972Z Artifact phase20-hex.zip successfully finalized. Artifact ID 13105531170
+2026-11-01T23:12:39.5580635Z Artifact phase20-hex has been successfully uploaded! Final size is 32300 bytes. Artifact ID is 13105531170
+2026-11-01T23:12:39.5581421Z Artifact download URL: https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41360651819/artifacts/13105531170
+2026-11-01T23:12:39.5830562Z Post job cleanup.
+2026-11-01T23:12:39.6744311Z [command]/usr/bin/git version
+2026-11-01T23:12:39.6789504Z git version 2.56.0
+2026-11-01T23:12:39.6863454Z Temporarily overriding HOME='/home/runner/work/_temp/bbab1211-f656-4450-b867-527bbfde7d6e' before making global git config changes
+2026-11-01T23:12:39.6864852Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T23:12:39.6870986Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T23:12:39.6913899Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T23:12:39.6953989Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T23:12:39.7202288Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T23:12:39.7234812Z http.https://github.com/.extraheader
+2026-11-01T23:12:39.7245873Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-01T23:12:39.7283398Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T23:12:39.7529762Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T23:12:39.7567176Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T23:12:39.8028123Z Cleaning up orphan processes
+2026-11-01T23:12:39.8479552Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

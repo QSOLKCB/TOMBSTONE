@@ -58,6 +58,13 @@ def parse(text,target):
         verdict=goal["verdict"]
         if verdict not in ("valid","timeout","unknown","failed","stepout") or goal["passed"] is not (verdict=="valid"):
             raise ValueError("unexecuted/inconsistent verdict")
+        provers=goal["provers"]
+        if not provers or any(p["prover"] not in ("qed","Alt-Ergo:2.5.4") for p in provers):
+            raise ValueError("unexpected or missing executed prover")
+        if any(type(p["success"]) is not int or p["success"] not in (0,1) for p in provers):
+            raise ValueError("invalid prover verdict")
+        if (any(p["success"] for p in provers)) != (verdict=="valid"):
+            raise ValueError("goal and prover verdicts disagree")
         (good if verdict=="valid" else bad).append(goal["goal"])
     if len(good) + sum(automatic.values()) != proved:
         raise ValueError("summary disagrees with goals")

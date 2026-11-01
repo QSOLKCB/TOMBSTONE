@@ -159,9 +159,43 @@ EXTRA = {
     "static int hex32(const unsigned char *d, char b[TB_SHA256_HEX_SIZE])": HEX32,
 }
 
+def frame_assertions(label):
+    return r"""    /*@ assert p20_size_LABEL: *size == \at(*size,Pre); */
+    /*@ assert p20_input_LABEL: \forall integer j; 0 <= j < sizeof(*r) ==>
+      ((const unsigned char *)r)[j] == \at(((const unsigned char *)r)[j],Pre); */
+""".replace("LABEL",label)
+
+
+def string_assertion(label, pairs):
+    terms = [f"p20_cstr({name},{bound})" for name,bound in pairs]
+    return "    /*@ assert p20_strings_"+label+": "+" && ".join(terms)+"; */\n"
+
+
+HEX_STRINGS = [(name,65) for name in ("before","after","deleted","prev","own")]
+FORMAT_HINTS = {
+    "    if (e->kind == TB_EVIDENCE_EXPLICIT_DELETE) {":
+        r"""    /*@ assert p20_literal_bytes: p20_fmt_deleted[0] == '{' &&
+      p20_fmt_previous[0] == '"' && p20_fmt_hash[0] == ',' && p20_fmt_receipt[0] == '{'; */
+""" + frame_assertions("hex") + string_assertion("hex",HEX_STRINGS),
+    "        if (k < 0 || (size_t)k >= sizeof(dfield)) return TB_ERR_LENGTH;":
+        frame_assertions("deleted_call"),
+    "    if (r->has_previous) {":
+        frame_assertions("deleted") + string_assertion("deleted",HEX_STRINGS+[("dfield",192),("kind",20)]),
+    "        if (k < 0 || (size_t)k >= sizeof(pfield)) return TB_ERR_LENGTH;":
+        frame_assertions("previous_call"),
+    "    if (with_hash) {":
+        frame_assertions("previous") + string_assertion("previous",[("before",65),("after",65),("own",65),("dfield",192),("kind",20),("pfield",96)]),
+    "        if (k < 0 || (size_t)k >= sizeof(hfield)) return TB_ERR_LENGTH;":
+        frame_assertions("own_call"),
+    "    k = snprintf(buffer,capacity,":
+        frame_assertions("own") + string_assertion("own",[("before",65),("after",65),("dfield",192),("kind",20),("pfield",96),("hfield",96)]),
+    "    if (k < 0 || (size_t)k >= capacity) return TB_ERR_LENGTH;":
+        frame_assertions("final_call"),
+}
+
 
 def strip(text):
-    for fragment in (PREDICATES, LIBC, DECL, *EXTRA.values()):
+    for fragment in (PREDICATES, LIBC, DECL, *EXTRA.values(), *FORMAT_HINTS.values()):
         if text.count(fragment) != 1:
             raise ValueError("missing/duplicate Phase 20 proof fragment")
         text = text.replace(fragment,"",1)
@@ -177,6 +211,14 @@ def render():
         if text.count(marker) != 1:
             raise ValueError("actual source marker drift")
         text = text.replace(marker,contract+marker,1)
+    start=text.index(FORMAT_MARKER)
+    end=text.index("static tb_status calculate_hash(",start)
+    body=text[start:end]
+    for marker, assertion in FORMAT_HINTS.items():
+        if body.count(marker) != 1:
+            raise ValueError("formatter assertion site drift")
+        body=body.replace(marker,assertion+marker,1)
+    text=text[:start]+body+text[end:]
     if strip(text) != bridge.p18.SOURCE.read_text():
         raise ValueError("receipt source bytes changed")
     return text

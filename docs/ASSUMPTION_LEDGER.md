@@ -166,8 +166,9 @@ The separate error-path overlay admits streaming `TB_ERR_LENGTH` and adds an
 output-preservation obligation under the provider's documented final-error
 frame. The original 40-goal record cannot establish that stronger claim.
 Native failure injection checks cleanup on 13 finite paths; it does not close
-the universal heap-lifetime obligation. P19-03 remains blocked by the private
-provider-state effect absent from the original Phase 18 frame.
+the universal heap-lifetime obligation. At the PR #27 boundary, P19-03 was
+blocked by the private provider-state effect absent from the original Phase
+18 frame.
 
 The [P19-03 follow-up](PHASE19_BRIDGE.md) introduces a separately named
 caller-memory composition with a shared helper/chain contract environment and
@@ -175,4 +176,24 @@ a linear ownership/call-protocol model. It preserves the original Phase 18
 theorem. The new frame permits private provider effects, so it does not prove
 the old literal global frame. Backend separation, allocation/deallocation,
 `good_receipt`, `format_json` and real SHA remain explicit open premises.
-Solver evidence and exact-head review are required before accepting this new scope.
+PR #29 merged this separate scope after its executed evidence and clean
+independent review of head `b13d1ba4e72ed697627c24e3cb90b62ff74eb8f8`.
+That review does not close the original global-frame or real-provider gap.
+
+## Phase 20 — Actual validation and formatter prerequisite work
+
+[Draft PR #30](https://github.com/QSOLKCB/TOMBSTONE/pull/30) checks the actual
+validator, formatter and both hex bodies under the [explicit Phase 20
+premises](PHASE20_RECEIPT_PREREQUISITES.md). Complete executed targets include
+`zero32`, `equal32`, `good_evidence`, `good_receipt`, `hex32`, both actual
+`tb_sha256_hex` bodies, and the shared hash/chain composition. The formatter
+remains incomplete; these results do not yet discharge the combined
+prerequisite gate. Failed parser, solver and timeout attempts are retained
+separately and cannot be counted as semantic negative controls.
+
+The fixed-format libc aliases assume restricted memory effects and successful
+NUL termination. Actual libc implementation/global effects, numeric hex
+meaning, canonical JSON contents and actual streaming SHA refinement remain
+open. Native GCC/Clang OpenSSL/HACL checks are finite observed tests. A04/A05
+and issue #28 stay open; this new PR needs independent review of its final
+exact head. Original Phase 18/19 evidence is historical and unchanged.

@@ -27,7 +27,8 @@ termination, not the numeric meaning of every emitted hex digit. Native
 golden-byte tests remain a distinct evidence class.
 
 The native harness checks 160 validation cases and 2,530 formatter cases
-(including 30 injected failures) per compiler/provider tuple. Its independent
+(including 30 injected failures) per compiler/provider tuple on Ubuntu 24.04
+x86-64. Its independent
 Python oracle canonicalizes the frozen public toy fixtures and first checks
 their recorded digests. It exercises every capacity from 1 through two bytes
 past each expected output length, both `with_hash` branches, all observed
@@ -56,6 +57,15 @@ locale and source-to-machine refinement remain separate assumptions. In
 particular, the abstract libc frame must not be advertised as a universal
 no-global-effects guarantee for real `snprintf`.
 
+The evidence retains every emitted model diagnostic, including the external
+exit/termination defaults, pointer dependency warnings and whole-block
+separation hypotheses. The hex-body proofs expose separation from their
+private static digit table; the hash/chain proofs retain the Phase 19 private
+state separation premises. These are conditional model results, not a proof
+of arbitrary aliasing or real libc/provider state. Hex index bounds use WP's
+built-in `wp:bitshift` proof strategy; no C operation is rewritten and no
+bit-range axiom is added by this overlay.
+
 The snprintf return/termination behavior follows the C interface described
 in [WG14 N1548, 7.21.6.5](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf).
 The restricted frame is an explicit additional proof premise. Streaming SHA
@@ -76,8 +86,8 @@ semantic mutant keeps the positive contracts: accept invalid receipts,
 return an out-of-bounds success size, or modify the size on a formatter error.
 It must leave the designated obligation unproved; a parser/tool failure does
 not count as semantic rejection. Original successful and failed logs must
-remain distinguishable. Execution is IN_PROGRESS: the retained validator and
-composition runs are complete, while formatter and hex results remain partial.
+remain distinguishable. Execution is IN_PROGRESS: the retained validator,
+hex and composition runs are complete, while the formatter remains partial.
 The gate fails until every positive target is complete and its actual goal
 inventory and model diagnostics have been inspected and pinned.
 

@@ -127,6 +127,9 @@ def validate(record,root=ROOT):
             if message not in raw:
                 raise ValueError("missing native semantic result")
     # Earlier parser errors and incomplete proofs never become positive proof.
+    attempts={str(path.relative_to(root)) for path in (root/"machine/formal").glob("phase20-attempt-*.json")}
+    if not attempts or set(record["failed_attempts"]) != attempts or len(record["failed_attempts"]) != len(attempts):
+        raise ValueError("failed attempt inventory changed or omitted")
     for path in record["failed_attempts"]:
         attempt=load(root/path)
         if attempt["conclusion"] != "FAILED":

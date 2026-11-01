@@ -35,6 +35,7 @@ for target,log in logs.items():
     rejects(lambda:gate.validate(re.sub(r"\[rte:annot\] annotating function \w+","",log),target,inventory))
     rejects(lambda:gate.validate(log+"\n"+log,target,inventory))
     rejects(lambda:gate.validate(log+"\n[wp] unexpected Warning:\n  new assumption\n",target,inventory))
+    rejects(lambda:gate.validate(log+"\n[wp] User Error: Prover unavailable\n",target,inventory))
     rejects(lambda:gate.validate(log,target,None))
 
 log=logs["good_receipt"]
