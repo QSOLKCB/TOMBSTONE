@@ -4,6 +4,7 @@ All files here are human-readable explanations. The machine-readable contract an
 
 - [v0.1.0 post-merge evidence](release/v0.1.0/POST_MERGE_EVIDENCE.md) — pinned source, exact push CI, compiler and portability evidence
 - [v0.1.0 candidate packaging](release/v0.1.0/README.md) — reproducible archive and frozen SHA-256 manifest
+- [Phase 9 unbounded splice proof](FORMAL_VERIFICATION.md) — ACSL contracts and direct-source Frama-C/WP gate
 - [Phase 7 release gate](RELEASE_GATE.md) — mandatory exact-head, CI and asset evidence before immutable tag
 - [Independent portability](PORTABILITY.md) — GCC/Clang and Linux x86-64/ARM64 replay scope
 - [Anchoring and privacy](ANCHORING_PRIVACY.md) — local-chain, short-secret and erasure limitations

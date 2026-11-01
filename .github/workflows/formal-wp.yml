@@ -1,0 +1,41 @@
+name: Phase 9 — Frama-C WP unbounded C99 splice relation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wp:
+    name: ACSL/WP on production C99 (arbitrary valid lengths)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check native C99 and historical receipt vectors
+        run: |
+          sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev
+          make test
+      - name: Fail-closed WP log checker negative controls
+        run: python3 tests/formal/test_wp_gate.py
+      - name: Prove exact C99 splice relation with Frama-C and Alt-Ergo
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct splice_equal -wp-prover alt-ergo -wp-timeout 20 -wp-rte -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/src/core/deletion.c' \
+            2>&1 | tee wp-proofs.log
+          python3 tools/check_wp_proofs.py wp-proofs.log
+      - name: Preserve proof log for independent review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tombstone-phase9-wp-proof-log
+          path: wp-proofs.log
+          if-no-files-found: warn
+          retention-days: 30
