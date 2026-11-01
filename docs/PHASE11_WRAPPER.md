@@ -2,8 +2,11 @@
 
 **Scope:** the actual production `tb_witness_delete` function, including
 `witness_header_status` (Phase 10), `splice_equal` (Phase 9),
-`fingerprints` and the third SHA-256 call. It includes the unmodified
-production `src/core/deletion.c` in a verification-only translation unit.
+`fingerprints`, the new production `witness_stage` helper, and the third
+SHA-256 call. It includes the actual development `src/core/deletion.c` in
+a verification-only translation unit. Phase 11 refactors the local evidence
+construction into the private production `witness_stage` helper; no public
+ABI or receipt-format change is intended.
 
 The goal is a complete, modular source-level contract for every documented
 argument, length, mismatch, successful metadata and no-write-on-error case,
@@ -18,8 +21,9 @@ proof, and does not substitute one for the other.
 - Successful output records exact sizes, caller offset and explicit kind.
 - Failed calls do not mutate the caller-owned output, including padding bytes
   insofar as the C memory model and ACSL specification permit.
-- `fingerprints`, the actual private helper, is **separately checked** against
-  its own ACSL contract rather than automatically trusted.
+- Both `fingerprints` and `witness_stage` are actual private production helpers;
+  each is **separately checked** against its own ACSL contract rather than
+  being automatically trusted.
 - Frama-C runtime-error checks, missing/zero/incomplete proof goals and failing
   solver exits remain blockers.
 
