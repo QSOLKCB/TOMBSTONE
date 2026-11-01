@@ -89,3 +89,18 @@ x86-64/ARM64 with GCC/Clang, sanitizers, documented upstream F* origin,
 explicit C/FFI/ABI refinement obligations, and exact-head independent review.
 Do not merge or describe the result as an end-to-end formal SHA proof on
 upstream proof reputation or green unit tests alone.
+
+## Phase 14 production receipt formalisation
+
+Scope issue #16 and [docs/PHASE14_RECEIPTS.md](docs/PHASE14_RECEIPTS.md).
+Target real `src/encoding/receipt.c`, not a reimplementation. Never rewrite
+frozen `machine/examples/*.json` or v1 receipt hashes to make tests pass.
+`tools/check_phase14_evidence.py` pins the production C Git blob, both proof
+overlays and all three original v1 receipt fixtures: any source change
+invalidates the proof receipt until rerun and re-pinned. Use the Phase 14
+workflow with all nonzero WP goals, `-wp-rte`, CBMC unwinding/bounds/pointer
+checks, GCC/Clang, and x86-64/ARM64 negative controls. WP proof of
+`decimal_step`/`unseen_field` does not imply the whole JSON parser,
+encoder, or chain is verified. External SHA-provider, Rust, compiler, anchor,
+historical deletion and physical erasure are explicit open premises. Draft
+until independent Codex exact-head review and all executed CI checks pass.

@@ -11,7 +11,7 @@ source identities, evidence and separately documented residual assumptions.
 | A02 | C99 witness prehash status and whole wrapper | Phase 10 and Phase 11 ACSL/WP, conditional on SHA provider | Verify actual SHA wrapper rather than assume it |
 | A03 | C99 `tb_sha256_bytes` error/status/output/resource handling | Phase 12 injected failures against real C99 source and actual EVP on success — **executed tests, not full formal proof** | Source-level WP contracts for C99 wrapper under explicit EVP/allocator model |
 | A04 | SHA-256 computation and actual OpenSSL EVP internals | OpenSSL NIST vectors; Phase 13 opt-in pinned HACL* extracted-C candidate (upstream F* verification), **not proof of OpenSSL or adapter** | Reproduce F* proof on exact upstream revision; C adapter/ABI refinement and source-to-binary translation |
-| A05 | Canonical JSON/receipt parser and chain | Golden vectors, negative tests and independent replay | Direct C99 parser, encoder and hash-chain WP proofs |
+| A05 | Canonical JSON/receipt parser and chain | Phase 14 actual-source numeric/field-mask ACSL targets and bounded parser/chain negative evidence (exact-head verification required) | Full unbounded production C99 encoder/parser/chain, hash-domain and no-write-on-error WP/refinement proofs remain open |
 | A06 | Rust FFI, CLI, TUI, GTK | Runtime and integration tests, not formal proof | Ownership, bounds, ABI layout and error refinement proofs |
 | A07 | C source-to-executable compiler/linker semantics | GCC/Clang/ARM64 testing, not proof | CompCert or target-specific translation validation |
 | A08 | OS, firmware and physical hardware | Model and executed target tests only | Explicit target-specific model and trusted hardware assumptions |
@@ -83,3 +83,22 @@ The published `v0.1.0` SHA-256 baseline is immutable.
 ### Phase 13 executed checks and residual proof boundary
 
 At [run 41321354704](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704), all four x86-64/ARM64 GCC/Clang HACL/OpenSSL parity jobs and direct-source CBMC adapter checks passed. CBMC verified 0/195, 0/195, and 0/194 failed properties for bounded one-shot, streaming and invalid-input harnesses under a synthetic, explicitly **modeled** HACL provider. Real upstream SHA-256 and the adapter's unbounded correctness were **not formally proved by these local checks**. See `machine/formal/phase13-hacl-evidence-v1.json` and the source-pinning check.
+
+## Phase 14 — Actual receipt engine, bounded and modular evidence
+
+The [Phase 14 scope](PHASE14_RECEIPTS.md) applies to production
+`src/encoding/receipt.c`; no v1 wire-format or digest change is authorized.
+The WP targets are the **actual** `decimal_step` overflow check called by
+`number`, and the actual `unseen_field` bitmask predicate called by both
+nested and top-level field parsers. Their contracts are scoped to those
+functions, not to all possible JSON inputs or the complete `tb_receipt_parse`
+implementation. The direct-source CBMC checks use bounded symbolic input;
+the runtime tests use the real C99 hash provider and fixture set. All three
+historical JSON blobs and the proof inputs are pinned offline.
+
+There is no theorem yet connecting arbitrary parsed input to canonical body
+bytes, domain-separated SHA-256, complete chain linking, or public error
+output immutability over all permitted inputs. A local internally consistent
+chain lacks any independent trusted head, time, author or deletion history.
+**A05 remains open** until full-source proofs are actually discharged and
+reviewed; Phase 13's outstanding SHA/ABI/translator premises still apply.

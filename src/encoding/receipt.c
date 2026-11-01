@@ -208,6 +208,38 @@ static int string(tb_parser *p,char *dst,size_t cap)
     }
     return 0;
 }
+/* Production decimal accumulator. The proof contract explicitly quantifies
+ * over every in-range uint64_t prefix and decimal digit; it does not assume
+ * an input is a NUL-terminated C string.
+ */
+/*@
+  requires x <= MAXN;
+  requires digit <= 9;
+  requires \valid(next);
+  assigns *next;
+  ensures \result == 0 || \result == 1;
+  ensures \result == 1 <==> (10 * (integer)x + digit <= MAXN);
+  ensures \result == 1 ==> *next == 10 * (integer)x + digit;
+  ensures \result == 0 ==> *next == \old(*next);
+*/
+static int decimal_step(uint64_t x, unsigned int digit, uint64_t *next)
+{
+    if (x > (MAXN - digit) / 10u) return 0;
+    *next = x * 10u + digit;
+    return 1;
+}
+
+/* Duplicate-bit rejection applies to both the top-level receipt and nested
+ * fingerprint objects. Field names/bit assignments are checked separately. */
+/*@
+  assigns \nothing;
+  ensures \result == 0 || \result == 1;
+  ensures \result == 1 <==> ((mask & bit) == 0u);
+*/
+static int unseen_field(unsigned int mask, unsigned int bit)
+{
+    return (mask & bit) == 0u;
+}
 static int number(tb_parser *p,size_t *out)
 {
     uint64_t x=0;
@@ -218,8 +250,7 @@ static int number(tb_parser *p,size_t *out)
        p->s[p->i+1u]>='0' && p->s[p->i+1u]<='9') return 0;
     do {
         digit=(unsigned int)(p->s[p->i++]-'0');
-        if(x>(MAXN-digit)/10u) return 0;
-        x=x*10u+digit;
+        if(!decimal_step(x,digit,&x)) return 0;
     } while(p->i<p->n && p->s[p->i]>='0' && p->s[p->i]<='9');
     if(x>SIZE_MAX) return 0;
     *out=(size_t)x;
@@ -253,7 +284,7 @@ static int object_fp(tb_parser *p,size_t *size,unsigned char hash[32],
         else if(strcmp(key,"size")==0) bit=2u;
         else if(with_offset && strcmp(key,"offset")==0) bit=4u;
         else return 0;
-        if(mask&bit) return 0;
+        if(!unseen_field(mask,bit)) return 0;
         mask|=bit;
         if(bit==1u) { if(!digest(p,hash)) return 0; }
         else if(bit==2u) { if(!number(p,size)) return 0; }
@@ -287,7 +318,7 @@ tb_status tb_receipt_parse(const char *json,size_t len,tb_receipt_v1 *out)
         else if(strcmp(key,"receipt_hash")==0) bit=F_HASH;
         else if(strcmp(key,"version")==0) bit=F_VERSION;
         else return TB_ERR_FORMAT;
-        if(mask&bit) return TB_ERR_FORMAT;
+        if(!unseen_field(mask,bit)) return TB_ERR_FORMAT;
         mask|=bit;
         if(bit==F_AFTER) {
             if(!object_fp(&p,&tmp.evidence.after_size,tmp.evidence.after_sha256,NULL,0)) return TB_ERR_FORMAT;

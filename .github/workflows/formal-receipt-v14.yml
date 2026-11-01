@@ -1,0 +1,122 @@
+name: Phase 14 — actual C99 receipt proof gates
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  receipt-evidence-regression:
+    name: Reject stale Phase 14 proof pins and modified source/fixtures
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check live proof inputs and negative regression cases
+        run: |
+          set -euo pipefail
+          python3 tools/check_phase14_evidence.py
+          python3 tests/formal/test_phase14_evidence_gate.py
+
+  receipt-runtime:
+    name: C99 receipt negatives and backend parity (${{ matrix.compiler }} / ${{ matrix.runner }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install C99 compilers and OpenSSL
+        run: sudo apt-get update && sudo apt-get install -y gcc clang pkg-config libssl-dev
+      - name: Check exact production proof sources and frozen receipts
+        run: python3 tools/check_phase14_evidence.py
+      - name: OpenSSL and HACL actual C99 regression and adversarial controls
+        run: |
+          set -euo pipefail
+          make SHA256_BACKEND=openssl CC=${{ matrix.compiler }} test
+          ${{ matrix.compiler }} -std=c99 -O2 -Wall -Wextra -Wpedantic -Werror -Iinclude \
+            tests/formal/test_receipt_adversarial.c build/libtombstone.a \
+            $(pkg-config --libs openssl) -o "$RUNNER_TEMP/receipt-openssl"
+          "$RUNNER_TEMP/receipt-openssl"
+          make SHA256_BACKEND=hacl CC=${{ matrix.compiler }} test
+          ${{ matrix.compiler }} -std=c99 -O2 -Wall -Wextra -Wpedantic -Werror -Iinclude \
+            tests/formal/test_receipt_adversarial.c build/hacl/libtombstone.a \
+            -o "$RUNNER_TEMP/receipt-hacl"
+          "$RUNNER_TEMP/receipt-hacl"
+          python3 tools/check_docs.py
+
+  receipt-wp:
+    name: Production numeric-overflow and duplicate-bit ACSL/WP obligations
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check real C99 proof translation unit and pinned sources
+        run: |
+          gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c formal/framac/receipt_v14.c -o /tmp/receipt-wp.o
+          python3 tools/check_phase14_evidence.py
+      - name: Prove actual decimal overflow guard and success relation
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct decimal_step -wp-rte -wp-prover alt-ergo -wp-timeout 30 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/formal/framac/receipt_v14.c' \
+            2>&1 | tee phase14-decimal.log
+          python3 tools/check_wp_proofs.py phase14-decimal.log
+      - name: Prove actual duplicate field mask predicate
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct unseen_field -wp-rte -wp-prover alt-ergo -wp-timeout 30 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/formal/framac/receipt_v14.c' \
+            2>&1 | tee phase14-unique.log
+          python3 tools/check_wp_proofs.py phase14-unique.log
+      - name: Retain exact WP logs even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tombstone-phase14-partial-wp
+          path: |
+            phase14-decimal.log
+            phase14-unique.log
+          if-no-files-found: warn
+          retention-days: 30
+
+  receipt-cbmc:
+    name: Bounded production numeric, string and whitespace indexing
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check actual receipt source under direct proof overlay
+        run: |
+          python3 tools/check_phase14_evidence.py
+          gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c formal/cbmc/receipt_v14_harness.c -o /tmp/receipt-cbmc.o
+      - name: Check bounded helpers, require complete loop unwinding
+        run: |
+          set -euo pipefail
+          for target in check_number check_string_bounds check_whitespace_bounds; do
+            timeout 300 docker run --rm --entrypoint cbmc -v "$PWD:/repo:ro" -w /repo \
+              ghcr.io/diffblue/cbmc:6.11.0 --function "$target" --unwind 96 \
+              --unwinding-assertions --bounds-check --pointer-check \
+              --signed-overflow-check --unsigned-overflow-check \
+              -I include formal/cbmc/receipt_v14_harness.c \
+              2>&1 | tee "phase14-$target.log"
+            grep -q 'VERIFICATION SUCCESSFUL' "phase14-$target.log"
+          done
+      - name: Retain proof logs including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tombstone-phase14-cbmc
+          path: phase14-check_*.log
+          if-no-files-found: warn
+          retention-days: 30
