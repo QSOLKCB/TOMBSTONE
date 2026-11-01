@@ -41,7 +41,7 @@ $(BUILD_DIR)/fingerprint.o: $(FINGERPRINT_SOURCE) include/tombstone/fingerprint.
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(if $(filter hacl,$(SHA256_BACKEND)),-D_DEFAULT_SOURCE -Wno-pedantic,) $(OPENSSL_CFLAGS) $(HACL_INC) -Iinclude -c $< -o $@
 
 $(BUILD_DIR)/hacl_sha2.o: $(HACL_ROOT)/dist/gcc-compatible/Hacl_Hash_SHA2.c | $(BUILD_DIR)
-	$(CC) -O2 -std=c99 -D_DEFAULT_SOURCE $(HACL_INC) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) -Wno-error -Wno-pedantic -D_DEFAULT_SOURCE $(HACL_INC) -c $< -o $@
 
 $(BUILD_DIR)/deletion.o: src/core/deletion.c include/tombstone/deletion.h include/tombstone/fingerprint.h | $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(OPENSSL_CFLAGS) -Iinclude -c $< -o $@
@@ -75,7 +75,7 @@ test: $(TESTS)
 	$(BUILD_DIR)/test_deletion_link
 
 sanitizer-test:
-	$(MAKE) BUILD_DIR=build/sanitize CFLAGS="-O1 -g -std=c99 -Wall -Wextra -Wpedantic -Werror -fno-omit-frame-pointer -fsanitize=address,undefined" LDFLAGS="-fsanitize=address,undefined" test
+	$(MAKE) BUILD_DIR=$(BUILD_DIR)/sanitize CFLAGS="-O1 -g -std=c99 -Wall -Wextra -Wpedantic -Werror -fno-omit-frame-pointer -fsanitize=address,undefined" LDFLAGS="-fsanitize=address,undefined" test
 
 reproducibility:
 	sh tools/check_reproducible.sh
