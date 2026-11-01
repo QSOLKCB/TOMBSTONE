@@ -127,6 +127,17 @@ static int splice_equal(const unsigned char *before, size_t before_size,
      (before == \null && before_size != 0) ||
      removed == \null || removed_size == 0 ||
      (after == \null && after_size != 0));
+  ensures (out != \null &&
+           (before != \null || before_size == 0) &&
+           removed != \null && removed_size > 0 &&
+           (after != \null || after_size == 0) &&
+           (before_size > TB_EVIDENCE_MAX_BYTES ||
+            after_size > TB_EVIDENCE_MAX_BYTES ||
+            removed_size > TB_EVIDENCE_MAX_BYTES ||
+            offset > TB_EVIDENCE_MAX_BYTES ||
+            removed_size > before_size ||
+            (removed_size <= before_size && offset > before_size-removed_size))) ==>
+           \result == TB_ERR_LENGTH;
   ensures \result == TB_ERR_LENGTH ==>
     (out != \null && (before != \null || before_size == 0) &&
      removed != \null && removed_size > 0 &&
