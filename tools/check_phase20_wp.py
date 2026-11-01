@@ -29,25 +29,40 @@ def parse(text,target):
     if len(summary) != 1:
         raise ValueError("missing/duplicate goal summary")
     proved,total = map(int,summary[0])
-    if not 0 < proved <= total or re.findall(r"\[wp\]\s+(\d+) goals? scheduled",text) != [str(total)]:
+    scheduled = re.findall(r"\[wp\]\s+(\d+) goals? scheduled",text)
+    if len(scheduled) != 1 or not 0 < int(scheduled[0]) <= total or not 0 < proved <= total:
         raise ValueError("zero/inconsistent scheduled inventory")
+    scheduled = int(scheduled[0])
+    # WP includes automatic CFG facts in its summary but excludes them from
+    # the original JSON report. Account for them explicitly; never invent IDs.
+    automatic = {}
+    for label in ("Terminating","Unreachable"):
+        values = re.findall(r"(?m)^  "+label+r":\s*(\d+)\s*$",text)
+        if len(values) > 1:
+            raise ValueError("duplicate automatic goal count")
+        automatic[label] = int(values[0]) if values else 0
+    if scheduled + sum(automatic.values()) != total:
+        raise ValueError("scheduled and automatic goals disagree with summary")
     matches = list(re.finditer(r'(?m)^\[\s*\{\s*"goal"\s*:',text))
     if len(matches) != 1:
         raise ValueError("missing/duplicate structured report")
     goals,_ = json.JSONDecoder(object_pairs_hook=unique_pairs).raw_decode(text[matches[0].start():])
-    if len(goals) != total or len({g["goal"] for g in goals}) != total:
+    if len(goals) != scheduled or len({g["goal"] for g in goals}) != scheduled:
         raise ValueError("missing/duplicate individual goal")
     good=[];bad=[]
     for goal in goals:
         if goal["function"] != function or goal["smoke"] is not False:
             raise ValueError("wrong function or smoke goal")
+        if not goal["goal"].startswith("bytes_"+function+"_"):
+            raise ValueError("unexpected goal identifier")
         verdict=goal["verdict"]
         if verdict not in ("valid","timeout","unknown","failed","stepout") or goal["passed"] is not (verdict=="valid"):
             raise ValueError("unexecuted/inconsistent verdict")
         (good if verdict=="valid" else bad).append(goal["goal"])
-    if len(good) != proved:
+    if len(good) + sum(automatic.values()) != proved:
         raise ValueError("summary disagrees with goals")
-    return {"proved":proved,"total":total,"valid":sorted(good),"unproved":sorted(bad),"diagnostics":warnings(text)}
+    return {"proved":proved,"total":total,"scheduled":scheduled,"automatic":automatic,
+            "valid":sorted(good),"unproved":sorted(bad),"diagnostics":warnings(text)}
 
 
 def validate(text,target,inventory):

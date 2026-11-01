@@ -192,8 +192,8 @@ HEX_LOOP = r"""    /*@
 """
 
 
-HEX_BOUNDS = r"""        /*@ assert byte_range: 0 <= (integer)digest[i] <= 255;
-            assert high_nibble: 0 <= (digest[i] >> 4) <= 15; */
+HEX_BOUNDS = r"""        /*@ assert byte_range: 0 <= (integer)digest[i] <= 255; */
+        /*@ assert high_nibble: 0 <= (digest[i] >> 4) <= 15; */
 """
 
 
