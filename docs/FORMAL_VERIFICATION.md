@@ -54,6 +54,6 @@ The live `tb_witness_delete` code calls a private `splice_equal` implemented in 
 
 The proof target is only the private helper. Frama-C/WP proofs on this helper do not imply that the public wrapper's error handling, output-write conditions, OpenSSL SHA-256 provider, receipt parser or compiled binary are proved. In particular the wrapper still requires separate contracts for the hash API, its fail-no-write guarantee, and the relationship between byte comparison and output status. Caller-supplied pointers must refer to genuine readable objects; invalid pointers and environmental faults are not proved away.
 
-**Executed-gate commands:** `frama-c -wp -wp-fct splice_equal -wp-rte -wp-prover alt-ergo -I include src/core/deletion.c`, then `tools/check_wp_proofs.py` rejects zero goals or any unproved goal. Use the exact PR head's `formal-wp.yml` Actions run for the result. An ACSL annotation alone is never evidence of a completed theorem.
+**Executed-gate commands:** `frama-c -wp -wp-fct splice_equal -wp-rte -wp-prover alt-ergo -cpp-extra-args="-Iinclude" src/core/deletion.c`, then `tools/check_wp_proofs.py` rejects zero goals or any unproved goal. Use the exact PR head's `formal-wp.yml` Actions run for the result. An ACSL annotation alone is never evidence of a completed theorem.
 
 **Compatibility:** the released `v0.1.0` tag remains untouched; no production receipt ABI, JSON wire format, or test vectors are modified. Any future release needs its own exact-head review and reproducible packaging gate.
