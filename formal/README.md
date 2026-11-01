@@ -22,3 +22,11 @@ A GCC syntax check is *not* a completed proof. CBMC must exit successfully with 
 The verification translation unit `formal/framac/witness_wrapper.c` includes the same production `src/core/deletion.c` used in the native binary. The exploratory full-wrapper overlay targets `tb_witness_delete` and an explicit assumed *contract* for the out-of-scope `tb_sha256_bytes` provider; its initial WP run was **incomplete** (35/64 proved, 29 timeouts). The required Phase 10 WP CI instead targets the actual production `witness_header_status` helper, which implements unbounded numeric/argument/length/mismatch prehash decisions without reading or writing caller byte buffers. An independent C99 test `tests/formal/test_wrapper_hash_failures.c` executes every hash-failure position with a test-only stub. No stub is linked into production.
 
 Run CI `.github/workflows/formal-wrapper.yml`. The proof gate requires all nonzero goals discharged; see `docs/PHASE10_WRAPPER.md` for the exact scope. A contract on OpenSSL is an assumption and never a proof of the SHA implementation.
+
+## Phase 11 — Whole-wrapper modular WP
+
+The verification-only `formal/framac/witness_wrapper_v11.c` includes the unchanged real C99 source, adds separately checkable contracts for the real `fingerprints` and production `witness_stage` helpers, and retains quantified splice/result and failure-no-write goals on `tb_witness_delete`. CI `.github/workflows/formal-v11.yml` checks **all three** functions with `-wp-rte` and rejects missing/zero/partial proof goal summaries. A green helper check alone is not a whole-wrapper proof. OpenSSL is an explicitly assumed dependency, not a proved primitive.
+
+### Phase 11 executed result
+
+[GitHub Actions run 41314458282](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41314458282) completed **18/18 `fingerprints`**, **23/23 `witness_stage`**, and **47/47 `tb_witness_delete`** Frama-C/WP obligations on the exact production source and proof overlay. The source-level proof is conditional on the external SHA provider and C memory-model assumptions. Evidence blobs are pinned and automatically checked by `tools/check_formal_evidence.py`. Source SHA changes must not inherit the old proof evidence.

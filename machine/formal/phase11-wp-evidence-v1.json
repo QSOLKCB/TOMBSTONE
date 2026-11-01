@@ -1,0 +1,72 @@
+{
+  "format": "tombstone.formal-proof-evidence",
+  "version": 1,
+  "phase": 11,
+  "subject": "actual C99 witnessed deletion wrapper, separately verified modular helpers",
+  "source_path": "src/core/deletion.c",
+  "source_git_blob_sha": "a3dce4e7a78b591028d33c230c2b417f12945729",
+  "overlay_path": "formal/framac/witness_wrapper_v11.c",
+  "overlay_git_blob_sha": "bddf6ef44cd97f65a052a47860a09909a4d71e7c",
+  "reference_head": "53a31739496788a2e1c7b195339b4e8648999e7d",
+  "run_id": 41314458282,
+  "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41314458282",
+  "artifact_id": 13086419774,
+  "artifact_name": "tombstone-phase11-modular-wp-logs",
+  "artifact_zip_digest_sha256": "1b186c39037f95a59f4dd9d56f4bf5a990b1e8e703611de76717d82623ed6a1e",
+  "tool": "Frama-C 32.1 Germanium",
+  "prover": "Alt-Ergo 2.5.4 / Qed",
+  "wp_rte_enabled": true,
+  "goals": [
+    {
+      "function": "fingerprints",
+      "proved": 18,
+      "total": 18,
+      "memory_model": "typed"
+    },
+    {
+      "function": "witness_stage",
+      "proved": 23,
+      "total": 23,
+      "memory_model": "Bytes"
+    },
+    {
+      "function": "tb_witness_delete",
+      "proved": 47,
+      "total": 47,
+      "memory_model": "Bytes"
+    }
+  ],
+  "total_proved": 88,
+  "total_goals": 88,
+  "assumptions": [
+    "valid readable input objects and disjoint writable output under stated ACSL requirements",
+    "external tb_sha256_bytes assumed returns TB_OK/TB_ERR_CRYPTO/TB_ERR_MEMORY and respects output-frame/failure contract",
+    "Frama-C C memory-model semantics; each used memory model is specified above"
+  ],
+  "excluded_claims": [
+    "production SHA-256/OpenSSL implementation correctness",
+    "compiler/ABI/machine-code correctness",
+    "Rust UI/FFI formal proof",
+    "authenticated historical deletion or secure erasure"
+  ],
+  "negative_runs": [
+    {
+      "run_id": 41311888973,
+      "details": "fingerprints 14/18; 4 timeouts"
+    },
+    {
+      "run_id": 41312320907,
+      "details": "fingerprints 18/18; public wrapper 49/61; 12 timeouts"
+    },
+    {
+      "run_id": 41312928221,
+      "details": "witness_stage 36/39; 3 timeouts"
+    },
+    {
+      "run_id": 41314042829,
+      "details": "witness_stage 38/39; 1 timeout"
+    }
+  ],
+  "review_required": true,
+  "note": "This JSON pins existing executed CI; it is neither a signed certificate nor a substitute for reviewing prover logs and all preconditions."
+}

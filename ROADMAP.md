@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–9 are merged. v0.1.0 is an immutable source release. Phase 10 is a development PR for the public witness's pure pre-hash validation path, with separately executed hash-failure tests. The complete wrapper/crypto proof remains a subsequent milestone. Only executed Frama-C/WP proof results and exact-head review authorize merging.**
+**Phases 0–10 are merged. v0.1.0 is an immutable source release. Phase 11 is an open development PR with executed Frama-C/WP verification of the actual public C99 wrapper and both private hash-staging helpers: 18/18, 23/23, and 47/47 goals discharged. Independent exact-head review remains required before merging. The external SHA-256 provider contract is an assumption, not a verified cryptographic implementation.**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -14,9 +14,17 @@
 | **7 — Hardening/release gate** | Bounded C99 fuzzing, compiler/arch replay and release evidence | CI and independently reviewed frozen source | Merged; v0.1.0 released |
 | **8 — Direct C99 bounded verification** | CBMC on actual C99 splice and observation | Mandatory unwind checks, symbolic inputs ≤4 bytes | Merged |
 | **9 — Unbounded splice relation proof** | Production C99 splice helper with ACSL contracts and loop invariants | Frama-C/WP: 35/35 executed; exact-head review | Merged |
-| **10 — Public witness validation proof** | Actual C99 prehash argument/length/mismatch decision helper; synthetic SHA failure tests | Frama-C/WP all nonzero goals discharged, C99/CBMC regression parity, exact-head review | In PR; stronger production prehash WP 25/25 executed; exact-head review pending |
-| **11 — Whole-wrapper modular proof** | Public `tb_witness_delete` wrapper under explicit SHA provider contract; all output/error postconditions | Decomposed Frama-C/WP including call contracts and RTE | Planned — unproved |
-| **Later proof expansion** | Wrapper error paths, hash provider, ABI/compiled code, receipt chain, VST/CompCert | Separate complete proofs and explicit assumptions | Planned |
+| **10 — Public witness validation proof** | Actual C99 prehash argument/length/mismatch decision helper; synthetic SHA failure tests | Frama-C/WP 25/25, exact-head review | Merged |
+| **11 — Whole-wrapper modular proof** | Actual public `tb_witness_delete` plus `fingerprints` helper under external SHA-256 contract | Separate Frama-C/WP checks of each source function; all nonzero goals, RTE and original CI | Three production-source WP targets proved 88/88; exact-head review and merge pending |
+| **Later proof expansion** | Real SHA-256/OpenSSL provider, ABI/compiled code, receipt chain, VST/CompCert | Separate complete proofs and explicit assumptions | Planned |
+
+## Phase 11 — Whole-wrapper modular source proof attempt
+
+- Development source refactors the existing local evidence construction into a private production `witness_stage` helper, preserving the public C ABI and API semantics. A verification-only translation unit includes the actual development `src/core/deletion.c` and adds ACSL contracts to the real `fingerprints` and `witness_stage` helpers.
+- Three **separate** Frama-C/WP targets were successfully executed: `fingerprints` 18/18, `witness_stage` 23/23, and `tb_witness_delete` 47/47 at [run 41314458282](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41314458282). Phase 9's splice relation and Phase 10's prehash status checker remain required independent proofs.
+- The external `tb_sha256_bytes` contract is **assumed**; it is not an OpenSSL or SHA-256 proof. No successful whole-wrapper claim is made until both Phase 11 proof logs discharge 100% of nonzero goals, with RTE obligations enabled.
+- Preserved negative evidence: the original full-wrapper run 41307132302 proved 35/64 with 29 timeouts; Phase 11 run 41312320907 proved `fingerprints` 18/18 but the wrapper only 49/61 (12 timeouts); staging runs 41312928221 and 41314042829 were incomplete. After the live production refactor, run 41314458282 passed all three proof targets. Timeout, unproved memory-framing or a missing solver report is a hard stop.
+- Preserve the published v0.1.0 tag, source archive, ABI, input-retention policy, receipt format and original test vectors.
 
 ## Phase 10 scope and proof boundaries
 
