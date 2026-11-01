@@ -167,7 +167,7 @@ def frame_assertions(label):
 
 
 def string_assertion(label, pairs):
-    terms = [f"p20_cstr({name},{bound})" for name,bound in pairs]
+    terms = [f"p20_cstr(&{name}[0],{bound})" for name,bound in pairs]
     return "    /*@ assert p20_strings_"+label+": "+" && ".join(terms)+"; */\n"
 
 
