@@ -38,10 +38,10 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 $(BUILD_DIR)/fingerprint.o: $(FINGERPRINT_SOURCE) include/tombstone/fingerprint.h | $(BUILD_DIR)
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(if $(filter hacl,$(SHA256_BACKEND)),-Wno-pedantic,) $(OPENSSL_CFLAGS) $(HACL_INC) -Iinclude -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(if $(filter hacl,$(SHA256_BACKEND)),-D_DEFAULT_SOURCE -Wno-pedantic,) $(OPENSSL_CFLAGS) $(HACL_INC) -Iinclude -c $< -o $@
 
 $(BUILD_DIR)/hacl_sha2.o: $(HACL_ROOT)/dist/gcc-compatible/Hacl_Hash_SHA2.c | $(BUILD_DIR)
-	$(CC) -O2 -std=c99 $(HACL_INC) -c $< -o $@
+	$(CC) -O2 -std=c99 -D_DEFAULT_SOURCE $(HACL_INC) -c $< -o $@
 
 $(BUILD_DIR)/deletion.o: src/core/deletion.c include/tombstone/deletion.h include/tombstone/fingerprint.h | $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(OPENSSL_CFLAGS) -Iinclude -c $< -o $@
