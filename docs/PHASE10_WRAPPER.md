@@ -1,40 +1,46 @@
-# Phase 10 — Public C99 witnessed-deletion wrapper (under review)
+# Phase 10 — Public witnessed-deletion validation proof
 
-**Target:** the actual production function `tb_witness_delete`, not a
-reimplementation of its algorithm. Phase 9's `splice_equal` was proved
-with Frama-C/WP for arbitrary valid lengths; Phase 10 attempts the public
-wrapper's argument/length/mismatch/result/output contract.
+**Implementation status: in PR, exact-head Frama-C/WP gate.**
 
-## Scope and assumptions
+The actual production `tb_witness_delete` now calls a small static
+`witness_header_status` helper that checks **all prehash public-API errors**
+in the same order as v0.1.0: argument error, invalid size/offset error,
+then incompatible after-length error. This helper does not inspect caller
+byte values, write to caller memory, allocate or perform cryptography.
 
-`formal/framac/witness_wrapper.c` declares additional ACSL contracts and
-then **includes** the original `src/core/deletion.c` for source-level WP.
-The proof harness introduces no production SHA-256 implementation and never
-modifies the C ABI.
+Its ACSL contract describes the return-status domain, the *if and only if*
+argument-error condition, the necessary length/mismatch conditions and
+the exact successful length/offset invariants. The proof runs against the
+production `src/core/deletion.c` function with arbitrary `size_t` inputs.
+The `assigns \nothing` contract forbids any caller-visible mutation.
 
-The separately declared `tb_sha256_bytes` contract is **assumed**. It permits
-success or a provider memory/crypto failure, assumes valid and disjoint
-buffers, limits writes to digest output, and requires no digest changes
-on failure. **Frama-C does not verify OpenSSL or actual SHA-256** in this
-phase. The actual provider needs its own proof to close this assumption.
+**Separate executable fault test:** `tests/formal/test_wrapper_hash_failures.c`
+includes the real production C99 wrapper and uses a *test-only* SHA provider
+stub that fails at the first, second and third hash calls. It validates
+success metadata, error precedence, early rejection before hashing and that
+failures never modify caller output. This is an executed regression test,
+**not** an unbounded proof of those full-wrapper outcomes.
 
-The caller must supply real valid readable objects when required and a valid
-non-overlapping writable output object. Invalid non-null pointers cannot
-be made safe by numeric length checking alone.
+## Complete wrapper proof remains open
 
-## Intended obligations
+The exploratory `formal/framac/witness_wrapper.c` still states the
+**intended complete** `tb_witness_delete` contract and an explicitly assumed
+external `tb_sha256_bytes` contract. Initial Frama-C run
+[41307132302](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41307132302)
+discharged **35/64** goals, with 29 timeouts. It is **not a proof**.
+It is excluded from the release claim and not silently counted as passed.
+Its remaining work includes pointer casts and memory modeling, call-site
+preconditions, struct-output framing, and hash-provider assumptions.
 
-- Output remains byte-for-byte unchanged on any error return.
-- Success implies explicit deletion classification, exact byte lengths and
-  exact caller-supplied offset.
-- Error precedence: argument before length before mismatch before hashes.
-- Hash failure never causes the public output to be written.
-- Frama-C/WP runtime safety obligations (RTE) are enabled.
+## Independent proof gate
 
-**Status:** unproved until the exact-head CI reports all nonzero goals
-discharged. Missing, partial and zero-goal summaries fail CI.
+CI `.github/workflows/formal-wrapper.yml` must prove all generated,
+nonzero goals for the production helper with `-wp-rte`, preserve the
+Frama-C log, and run the native failure regression. It fails closed on
+incomplete results. Phase 9's 35/35 proven splice relation is preserved.
 
-**Not proved here:** SHA-256/OpenSSL implementation, Rust bindings,
-compiler/ABI equivalence, receipt chain or real historical deletion events.
+**Not proved:** the entire public witness wrapper, actual OpenSSL/SHA-256,
+output preservation for all abstract hash failures, Rust, compiled machine
+code, filesystem erasure, authenticated history or an alien architecture.
 
-The released `v0.1.0` tag and its checksummed source remain unchanged.
+The versioned source `v0.1.0` tag is unchanged and remains immutable.

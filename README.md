@@ -50,7 +50,7 @@ The GUI offers fingerprint, observed-transition, witnessed-deletion, receipt ins
 
 ## Phase 10 — Public C99 wrapper proof boundary
 
-A separate [Phase 10 proof harness](docs/PHASE10_WRAPPER.md) targets the actual `tb_witness_delete` C99 wrapper with ACSL error, output and successful-metadata postconditions, under an explicit external SHA-256 provider contract. A synthetic-provider regression exercises all three SHA error sites without modifying the release engine. **The provider contract is an assumption, not a proof of OpenSSL.** Phase 10 is a development PR; exact-head WP and independent review are required before accepting its claims.
+Phase 10 adds a [source-level proof target](docs/PHASE10_WRAPPER.md) for the production prehash argument/length/mismatch decision helper used by `tb_witness_delete`, alongside native tests that inject errors at all three SHA-256 calls. An exploratory whole-wrapper ACSL model is retained with explicit external provider assumptions, but its full proof remains **incomplete** (initial 35/64 goals discharged). A synthetic-provider regression exercises all three SHA error sites without modifying the release engine. **The provider contract is an assumption, not a proof of OpenSSL.** Phase 10 is a development PR; exact-head WP and independent review are required before accepting its claims.
 
 ## Phase 9 — Source-level C99 proof obligations
 
