@@ -1,0 +1,55 @@
+name: Phase 11 — public C99 whole-wrapper modular verification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  modular-wp:
+    name: Real C99 fingerprints and wrapper — all WP obligations mandatory
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify real production C99 and phase 11 annotation syntax
+        run: |
+          sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev
+          make test
+          gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -I include -c formal/framac/witness_wrapper_v11.c -o /tmp/tombstone-v11-proof.o
+      - name: Verify external hash failure-path tests
+        run: |
+          gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -O2 -I include tests/formal/test_wrapper_hash_failures.c -o /tmp/tombstone-v11-hash-faults
+          /tmp/tombstone-v11-hash-faults
+          python3 tests/formal/test_wp_gate.py
+      - name: Prove actual private fingerprints helper under assumed SHA provider
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct fingerprints -wp-prover alt-ergo -wp-timeout 30 -wp-rte -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/formal/framac/witness_wrapper_v11.c' \
+            2>&1 | tee phase11-fingerprints.log
+          python3 tools/check_wp_proofs.py phase11-fingerprints.log
+      - name: Prove actual public witnessed-delete wrapper
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct tb_witness_delete -wp-prover alt-ergo -wp-timeout 30 -wp-rte -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/formal/framac/witness_wrapper_v11.c' \
+            2>&1 | tee phase11-wrapper.log
+          python3 tools/check_wp_proofs.py phase11-wrapper.log
+      - name: Upload exact proof logs, including failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tombstone-phase11-modular-wp-logs
+          path: |
+            phase11-fingerprints.log
+            phase11-wrapper.log
+          if-no-files-found: warn
+          retention-days: 30
