@@ -40,3 +40,25 @@ external digest contract requires a verified implementation or further proof.
 
 The `v0.1.0` source release is immutable, and proof claims never transfer to
 new source blobs without new evidence. No merge without exact-head review.
+
+## Phase 13 candidate — formally verified SHA-256, not an assumed EVP
+
+HACL* / EverCrypt is a candidate: its [upstream project](https://github.com/hacl-star/hacl-star)
+documents F*-verified SHA-2 primitives extracted to portable C, and its
+[verified algorithm matrix](https://hacl-star.github.io/Supported.html)
+includes SHA2-256. Upstream documentation is evidence about **their specified
+implementation and verification**, not automatically about TOMBSTONE's use.
+
+Before integrating, require a specific immutable upstream commit/release, its
+F*/Low* proof origin and generated-C source identity; verify that the
+distribution/license and required dependencies are suitable; retain a
+reproducible build and audit the exact C ABI and input-length/byte-order
+conventions. Independently compare OpenSSL and HACL* against NIST vectors,
+binary inputs, streaming/chunk-boundary equivalence and historical receipt
+fixtures. Only then attempt a separate Frama-C/CBMC/ABI refinement proof
+connecting **the exact compiled provider used** to the Phase 11 hash contract.
+
+No SHA provider replacement, OpenSSL removal, source release modification or
+algorithmically-verified claim is made by Phase 12. HACL* proof assumptions,
+generated-code translation, the compiler and the hardware must be included
+in the resulting trust ledger.
