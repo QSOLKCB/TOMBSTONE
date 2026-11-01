@@ -55,6 +55,6 @@ security certification. No external trusted anchor is automatically produced.
 | Asset checksum manifest | Produced by `tools/package_candidate.sh` and uploaded by the source-candidate workflow when successful; never predeclare digest values |
 | Immutable tag | Not created |
 
-Full post-merge run details are in [the v0.1.0 evidence record](../release/v0.1.0/POST_MERGE_EVIDENCE.md). Download the produced Actions artifact, inspect and independently verify `SHA256SUMS.txt` before authorizing any tag. **A green workflow is necessary but insufficient for a release.**
+Full post-merge run details are in [the v0.1.0 evidence record](release/v0.1.0/POST_MERGE_EVIDENCE.md). Download the produced Actions artifact, inspect and independently verify `SHA256SUMS.txt` before authorizing any tag. **A green workflow is necessary but insufficient for a release.**
 
 **Sanitizer gate regression:** `tools/check_sanitizer_gate.sh` deliberately triggers signed integer overflow in an isolated synthetic binary. It requires UBSan to report an error **and** return nonzero. `tools/run_fuzz.sh` also builds with `-fno-sanitize-recover=undefined` and sets `UBSAN_OPTIONS=halt_on_error=1`. This prevents recoverable undefined-behaviour reports from being mislabelled as passing fuzz runs.

@@ -18,7 +18,7 @@ git merge-base --is-ancestor "$SOURCE_SHA" HEAD || {
   echo "FAIL: source SHA is not an ancestor of current checkout" >&2
   exit 1
 }
-test -r "release/$VERSION/POST_MERGE_EVIDENCE.md"
+test -r "docs/release/$VERSION/POST_MERGE_EVIDENCE.md"
 test -r "release/$VERSION/SOURCE_COMMIT.txt"
 grep -Fq "$SOURCE_SHA" "release/$VERSION/SOURCE_COMMIT.txt"
 
@@ -54,7 +54,7 @@ for path in \
   }
 done
 cp "release/$VERSION/SOURCE_COMMIT.txt" "$OUT/SOURCE_COMMIT.txt"
-cp "release/$VERSION/POST_MERGE_EVIDENCE.md" "$OUT/POST_MERGE_EVIDENCE.md"
+cp "docs/release/$VERSION/POST_MERGE_EVIDENCE.md" "$OUT/POST_MERGE_EVIDENCE.md"
 (
   cd "$OUT"
   sha256sum "$ARCHIVE" SOURCE_COMMIT.txt POST_MERGE_EVIDENCE.md > SHA256SUMS.txt
