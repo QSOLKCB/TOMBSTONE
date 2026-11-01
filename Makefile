@@ -6,6 +6,7 @@ SHA256_BACKEND ?= openssl
 ifeq ($(SHA256_BACKEND),hacl)
 BUILD_DIR ?= build/hacl
 FINGERPRINT_SOURCE := src/crypto/fingerprint_hacl.c
+HACL_COMPAT_FLAGS := -Wno-pedantic
 EXTRA_OBJ := $(BUILD_DIR)/hacl_sha2.o
 HASH_LIBS :=
 HACL_ROOT := vendor/hacl-star
