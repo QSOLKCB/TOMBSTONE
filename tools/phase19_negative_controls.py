@@ -61,8 +61,7 @@ def equal32_mutant(output):
                       encoding="utf-8")
 
 
-def negative_wp(log):
-    text = log.read_text(encoding="utf-8")
+def validate_negative_wp(text):
     if not re.search(r"(?m)^32\.1 \(Germanium\)\s*$", text):
         raise ValueError("mutant did not execute pinned Frama-C")
     if re.findall(r"\[rte:annot\] annotating function (\w+)", text) != ["equal32"]:
@@ -73,10 +72,18 @@ def negative_wp(log):
     proved, total = map(int, summary[0])
     if not 0 < proved < total:
         raise ValueError("mutated equality must leave a real proof obligation unproved")
+    if re.findall(r"\[wp\]\s+(\d+) goals? scheduled", text) != [str(total)]:
+        raise ValueError("mutant goal inventory is missing or ambiguous")
     if re.search(r"\[.*(?:error|abort).*\]|unsupported|Missing RTE", text, re.I):
         raise ValueError("tool/parse/model error is not a semantic negative control")
-    if not re.search(r"Goal \S*equal32_ensures\S*\s*:\s*(?:Unknown|Timeout|Failed)", text):
+    if not re.search(r"\[wp\] \[(?:Unknown|Timeout|Failed)\]\s+"
+                     r"bytes_equal32_ensures(?:_\w+)?\b", text):
         raise ValueError("no failed equal32 postcondition in mutant log")
+    return proved, total
+
+
+def negative_wp(log):
+    proved, total = validate_negative_wp(log.read_text(encoding="utf-8"))
     print(f"PASS: unchanged contracts reject always-true equal32 ({proved}/{total})")
 
 

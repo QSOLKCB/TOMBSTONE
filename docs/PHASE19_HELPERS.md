@@ -44,8 +44,9 @@ the real provider has this public status, which the original unconstrained
 context model omitted. It assumes the documented final-call no-write-on-error
 guarantee and asks WP to prove that `calculate_hash` preserves all 32 output
 bytes on every non-OK return. The old receipt is not evidence for this new
-postcondition. The new 41-goal gate must be executed successfully before this
-claim can be described as proved. The original private-state frame is retained;
+postcondition. [Run 41349751316](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41349751316)
+discharged **41/41** goals at head `1f664a610f1f114c7eaeb4804c9c659090921d3a`
+with `-wp-rte` under those external premises. The original private-state frame is retained;
 there is no new provider, allocation-lifetime or P19-03 theorem.
 
 `tests/formal/test_phase19_faults.c` executes 13 cases with the real helper:
@@ -63,6 +64,21 @@ an equality postcondition unproved under the **same** contracts; syntax errors
 or missing reports do not count as semantic negative evidence. Original mutant
 and positive solver logs are uploaded separately. Never copy these mutants
 into production or use them as source identity baselines.
+
+That first run proved the positive equality target (11/11) and left the
+mutant's equality postcondition unproved (11/12, expected timeout), but its
+negative-control checker expected an older log format and failed. The corrected
+checker has tests for the actual 32.1 format and must pass a fresh CI run.
+This failed workflow is **not** recorded as green. The unchanged Phase 18
+chain independently reran at 54/54 in run 41349751507.
+
+Original decoded GitHub job logs, including the earlier 13/17 and 37/46
+failures, are retained under `formal/evidence/phase19/`. Their hashes, exact
+head/checkout identities, conditional results and failure classifications are
+in `machine/formal/phase19-error-path-attempt-v1.json`. This is an observation
+record for that attempt, not current-head review approval. The local sanitizer
+attempt could not complete because LeakSanitizer could not inspect `/proc` in
+the execution environment; sanitizer coverage comes from the separate CI jobs.
 
 The PR remains draft while the stronger Phase 18 bridge and exact-head
 independent review are outstanding. A successful rerun of the unchanged
