@@ -152,11 +152,30 @@ extern void *p20_memcpy(void *dst,const void *src,size_t n);
 #define snprintf(...) P20_PICK(__VA_ARGS__,p20_snprintf_receipt,p20_bad10,p20_bad9,p20_bad8,p20_bad7,p20_snprintf_deleted,p20_bad5,p20_snprintf_string,p20_bad3,p20_bad2,p20_bad1)(__VA_ARGS__)
 """
 DECL = HEX + "tb_status tb_sha256_hex(const unsigned char digest[TB_SHA256_DIGEST_SIZE],\n                        char out[TB_SHA256_HEX_SIZE]);\n"
+FRAME_HINT = r"""    /*@ assert caller_size: *size == \at(*size,Pre); */
+    /*@ assert caller_bytes: \forall integer j; 0 <= j < sizeof(*r) ==>
+      ((const unsigned char *)r)[j] == \at(((const unsigned char *)r)[j],Pre); */
+"""
+HEX_HINT = FRAME_HINT.replace("caller_size","hex_size").replace("caller_bytes","hex_bytes") + r"""    /*@ assert hex_strings:
+      p20_cstr(&before[0],65) && p20_cstr(&after[0],65) &&
+      p20_cstr(&deleted[0],65) && p20_cstr(&prev[0],65) && p20_cstr(&own[0],65); */
+"""
+DELETED_HINT = FRAME_HINT.replace("caller_size","deleted_size").replace("caller_bytes","deleted_bytes") + r"""    /*@ assert deleted_string: p20_cstr(&dfield[0],192); */
+    /*@ assert kind_string: p20_cstr(kind,20); */
+"""
+PREVIOUS_HINT = FRAME_HINT.replace("caller_size","previous_size").replace("caller_bytes","previous_bytes") + r"""    /*@ assert previous_string: p20_cstr(&pfield[0],96); */
+"""
+FINAL_HINT = FRAME_HINT.replace("caller_size","final_size").replace("caller_bytes","final_bytes") + r"""    /*@ assert own_string: p20_cstr(&hfield[0],96); */
+"""
 EXTRA = {
     "static int zero32(const unsigned char *p)": ZERO,
     "    for (i = 0; i < 32u; ++i) if (p[i]) return 0;": ZERO_LOOP,
     "static int good_evidence(const tb_evidence_v1 *e)": EVIDENCE,
     "static int hex32(const unsigned char *d, char b[TB_SHA256_HEX_SIZE])": HEX32,
+    "    if (e->kind == TB_EVIDENCE_EXPLICIT_DELETE) {": HEX_HINT,
+    "    if (r->has_previous) {": DELETED_HINT,
+    "    if (with_hash) {": PREVIOUS_HINT,
+    "    k = snprintf(buffer,capacity,": FINAL_HINT,
 }
 
 
