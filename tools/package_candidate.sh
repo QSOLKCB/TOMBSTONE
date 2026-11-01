@@ -48,7 +48,8 @@ for path in \
   "$PREFIX/apps/gtk/src/main.rs" \
   "$PREFIX/machine/examples/explicit-delete-v1.json"; do
   grep -Fxq "$path" "$tmp/archive_paths.txt" || {
-    echo "FAIL: required source file missing from archive" >&2
+    echo "FAIL: required source file missing from archive: $path" >&2
+    sed -n '1,110p' "$tmp/archive_paths.txt" >&2
     exit 1
   }
 done
