@@ -9,11 +9,17 @@ unsigned int tb_evidence_abi_version(void)
     return TB_EVIDENCE_ABI_VERSION;
 }
 
+/*@ assigns \nothing;
+    ensures \result == (p != \null || n == 0);
+*/
 static int valid_buffer(const void *p, size_t n)
 {
     return p != NULL || n == 0u;
 }
 
+/*@ assigns \nothing;
+    ensures \result == (n <= TB_EVIDENCE_MAX_BYTES);
+*/
 static int valid_size(size_t n)
 {
     /* Check before casting: works on both 32- and 64-bit size_t. */
@@ -108,17 +114,46 @@ static int splice_equal(const unsigned char *before, size_t before_size,
     return 1;
 }
 
-tb_status tb_witness_delete(const void *before, size_t before_size,
-                            const void *removed, size_t removed_size,
-                            size_t offset,
-                            const void *after, size_t after_size,
-                            tb_evidence_v1 *out)
+/* Pure prehash public-API decision path: never reads caller bytes.
+ * These are all C99 reachable values; the ACSL contract quantifies across
+ * arbitrary size_t values, not a fixed symbolic buffer bound.
+ */
+/*@
+  assigns \nothing;
+  ensures \result == TB_OK || \result == TB_ERR_ARGUMENT ||
+          \result == TB_ERR_LENGTH || \result == TB_ERR_MISMATCH;
+  ensures (\result == TB_ERR_ARGUMENT) <==>
+    (out == \null ||
+     (before == \null && before_size != 0) ||
+     removed == \null || removed_size == 0 ||
+     (after == \null && after_size != 0));
+  ensures \result == TB_ERR_LENGTH ==>
+    (out != \null && (before != \null || before_size == 0) &&
+     removed != \null && removed_size > 0 &&
+     (after != \null || after_size == 0) &&
+     (before_size > TB_EVIDENCE_MAX_BYTES ||
+      after_size > TB_EVIDENCE_MAX_BYTES ||
+      removed_size > TB_EVIDENCE_MAX_BYTES ||
+      offset > TB_EVIDENCE_MAX_BYTES ||
+      removed_size > before_size ||
+      (removed_size <= before_size && offset > before_size-removed_size)));
+  ensures \result == TB_ERR_MISMATCH ==>
+    (after_size != before_size - removed_size);
+  ensures \result == TB_OK ==>
+    (removed_size > 0 && removed_size <= before_size &&
+     offset <= before_size - removed_size &&
+     after_size == before_size - removed_size &&
+     before_size <= TB_EVIDENCE_MAX_BYTES &&
+     after_size <= TB_EVIDENCE_MAX_BYTES &&
+     removed_size <= TB_EVIDENCE_MAX_BYTES &&
+     offset <= TB_EVIDENCE_MAX_BYTES);
+*/
+static tb_status witness_header_status(const void *before, size_t before_size,
+                                       const void *removed, size_t removed_size,
+                                       size_t offset,
+                                       const void *after, size_t after_size,
+                                       tb_evidence_v1 *out)
 {
-    const unsigned char *b;
-    const unsigned char *a;
-    tb_evidence_v1 tmp;
-    tb_status st;
-
     if (out == NULL || !valid_buffer(before, before_size) ||
         removed == NULL || removed_size == 0u ||
         !valid_buffer(after, after_size)) {
@@ -132,6 +167,23 @@ tb_status tb_witness_delete(const void *before, size_t before_size,
     if (after_size != before_size - removed_size) {
         return TB_ERR_MISMATCH;
     }
+    return TB_OK;
+}
+
+tb_status tb_witness_delete(const void *before, size_t before_size,
+                            const void *removed, size_t removed_size,
+                            size_t offset,
+                            const void *after, size_t after_size,
+                            tb_evidence_v1 *out)
+{
+    const unsigned char *b;
+    const unsigned char *a;
+    tb_evidence_v1 tmp;
+    tb_status st;
+
+    st = witness_header_status(before, before_size, removed, removed_size,
+                               offset, after, after_size, out);
+    if (st != TB_OK) return st;
 
     b = (const unsigned char *)before;
     a = (const unsigned char *)after;
