@@ -26,7 +26,7 @@ jobs:
           set -euo pipefail
           docker run --rm -v "$PWD:/repo:ro" -w /tmp \
             framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
-            sh -c 'frama-c -version && frama-c -wp -wp-fct splice_equal -wp-prover alt-ergo -wp-timeout 20 -wp-rte -wp-par 2 -I /repo/include /repo/src/core/deletion.c' \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct splice_equal -wp-prover alt-ergo -wp-timeout 20 -wp-rte -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/src/core/deletion.c' \
             2>&1 | tee wp-proofs.log
           python3 tools/check_wp_proofs.py wp-proofs.log
       - name: Preserve proof log for independent review
