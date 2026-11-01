@@ -15,6 +15,9 @@ for comment in [m.HASH_CONTRACT]+[v for k,v in p.ANNOTATIONS.items() if k!=m.HAS
 assert stripped==source
 assert out.count("static tb_status calculate_hash(")==1
 assert "model_private_provider_state" in out
+assert "assigns out[0 .. 31], model_private_provider_state;" in out
+assert "assigns out[0 .. 31];\n" not in m.HASH_CONTRACT
+
 assert "assigns model_private_provider_state;" in out
 assert "ensures \\result == TB_OK ==> *out_ctx != \\null;" in out
 assert "ensures \\result == TB_OK ==> *size < capacity;" in out
