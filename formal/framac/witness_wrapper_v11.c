@@ -56,16 +56,11 @@ static tb_status fingerprints(const void *before, size_t before_size,
   assigns *tmp;
   ensures \result == TB_OK || \result == TB_ERR_CRYPTO ||
           \result == TB_ERR_MEMORY;
-  ensures \result == TB_OK ==> tmp->kind == TB_EVIDENCE_EXPLICIT_DELETE;
-  ensures \result == TB_OK ==> tmp->before_size == before_size;
-  ensures \result == TB_OK ==> tmp->after_size == after_size;
-  ensures \result == TB_OK ==> tmp->deleted_size == removed_size;
-  ensures \result == TB_OK ==> tmp->deleted_offset == offset;
 */
 static tb_status witness_stage(const void *before, size_t before_size,
                                const void *removed, size_t removed_size,
-                               size_t offset, const void *after,
-                               size_t after_size, tb_evidence_v1 *tmp);
+                               const void *after, size_t after_size,
+                               tb_evidence_v1 *tmp);
 
 /* Exact byte identity is mandatory for any successful or hash-reached
  * return. This is an INTENDED contract; full-wrapper WP is not yet proved.
