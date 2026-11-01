@@ -37,3 +37,9 @@ See [architecture](../ARCHITECTURE.md), [security](../SECURITY.md) and [roadmap]
 ## Multi-instance activation safety
 
 GTK routes a second process launch to the existing application. Its activation handler now presents the existing GtkApplication window rather than building another window or overwriting the shared widget pointers. When no window exists, a new one can be constructed. The `--smoke-test` path performs a second application activation on the GTK main loop and verifies that exactly one window exists and the existing-window branch executed, in addition to the C99 fingerprint check. This avoids cross-window input confusion and potential use-after-free when windows are closed out of order.
+
+## Second-launch behavior on Wayland
+
+GTK4 forwards another process's activation to the running instance through the session D-Bus when application uniqueness is available. The activation handler reuses its one live window and calls `gtk_window_present()`. **This is a request, not a guarantee of keyboard focus.** GNOME/Mutter on Wayland may deny a programmatically initiated focus or raise operation, particularly from another terminal. A successful second launch may therefore exit immediately without visibly focusing the window. Users can select the existing window in the Activities overview or task switcher.
+
+The GTK CI suite now includes a separate, explicit **two-process** test under an isolated D-Bus session and Xvfb. It verifies that a secondary invocation reaches the first process and retains one window. The in-process `--smoke-test` still independently checks callback reuse. Neither test asserts compositor-granted focus on a real Wayland session.

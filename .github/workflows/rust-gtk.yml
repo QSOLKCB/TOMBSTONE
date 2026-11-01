@@ -19,7 +19,7 @@ jobs:
       - name: Confirm compiler
         run: rustc --version && cargo --version
       - name: Install native GTK4/OpenSSL for optional GUI only
-        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev libgtk-4-dev libncurses-dev xvfb
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev libgtk-4-dev libncurses-dev xvfb dbus
       - name: Verify isolated GUI Cargo package and C99 parity tests
         run: cargo test --manifest-path apps/gtk/Cargo.toml --offline --locked
       - name: Build native desktop application
@@ -28,6 +28,8 @@ jobs:
         run: |
           xvfb-run -a apps/gtk/target/release/tombstone-gtk --smoke-test | tee gtk-smoke.txt
           grep -q 'repeat activation reused one window' gtk-smoke.txt
+      - name: Verify second-process GTK activation through D-Bus
+        run: dbus-run-session -- xvfb-run -a python3 tools/check_gtk_ipc.py apps/gtk/target/release/tombstone-gtk
       - name: Verify C99 tests and separate root Rust workspace
         run: |
           make test

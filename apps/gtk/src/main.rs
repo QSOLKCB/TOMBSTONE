@@ -5,6 +5,7 @@ use std::env;
 use std::ffi::{c_char, c_int, c_void, CStr, CString};
 use std::ptr;
 use std::process;
+use std::io::{self, Write};
 use tombstone_ffi as engine;
 use tombstone_tui as work;
 
@@ -40,10 +41,12 @@ struct AppState {
     smoke: bool,
     smoke_ok: bool,
     smoke_reused: bool,
+    ipc_primary: bool,
+    ipc_triggered: bool,
     app: *mut c_void,
 }
 impl AppState {
-    fn new(smoke: bool) -> Self {
+    fn new(smoke: bool, ipc_primary: bool) -> Self {
         Self {
             fingerprint: ptr::null_mut(),
             observe_before: ptr::null_mut(), observe_after: ptr::null_mut(),
@@ -53,7 +56,8 @@ impl AppState {
             inspect: ptr::null_mut(), chain: ptr::null_mut(),
             trusted: ptr::null_mut(), save_path: ptr::null_mut(),
             output: ptr::null_mut(), last_receipt: None, smoke, smoke_ok: false,
-            smoke_reused: false, app: ptr::null_mut(),
+            smoke_reused: false, ipc_primary, ipc_triggered: false,
+            app: ptr::null_mut(),
         }
     }
 
@@ -288,7 +292,18 @@ unsafe extern "C" fn activate(app: *mut c_void, data: *mut c_void) {
     let existing = g_list_nth_data(gtk_application_get_windows(app), 0);
     if !existing.is_null() {
         if state.smoke { state.smoke_reused = true; }
+        // gtk_window_present() requests activation. Under Wayland only the
+        // compositor can decide whether to grant focus/raise the window.
         gtk_window_present(existing);
+        if state.ipc_primary {
+            // An actual second process must trigger this callback via the
+            // session D-Bus. Reuse one window and never replace GTK pointers.
+            state.ipc_triggered =
+                g_list_nth_data(gtk_application_get_windows(app), 1).is_null();
+            println!("REMOTE_ACTIVATION_RECEIVED");
+            let _ = io::stdout().flush();
+            g_application_quit(app);
+        }
         return;
     }
     // Any previous window has been destroyed; no old widgets are active.
@@ -359,6 +374,11 @@ A verified splice proves only a mathematical relationship among supplied byte bu
 
     gtk_window_present(window);
 
+    if state.ipc_primary {
+        println!("PRIMARY_WINDOW_READY");
+        let _ = io::stdout().flush();
+    }
+
     if state.smoke {
         state.smoke_ok = engine::sha256(b"abc")
             .and_then(|digest| engine::to_hex(&digest))
@@ -403,7 +423,10 @@ fn main() {
     };
     if args.len() == 1 && args[0] == "--help" { print!("{HELP}"); return; }
     let smoke = args.len() == 1 && args[0] == "--smoke-test";
-    if !args.is_empty() && !smoke {
+    // Test-only mode: the Python runner launches another *process* on the
+    // same session D-Bus and confirms that GtkApplication forwards activate.
+    let ipc_primary = args.len() == 1 && args[0] == "--ipc-primary-smoke";
+    if !args.is_empty() && !smoke && !ipc_primary {
         eprintln!("tombstone-gtk: only --help is accepted for regular use");
         process::exit(2);
     }
@@ -420,11 +443,19 @@ fn main() {
             eprintln!("tombstone-gtk: could not initialize desktop application");
             process::exit(2);
         }
-        let mut state = Box::new(AppState::new(smoke));
+        let mut state = Box::new(AppState::new(smoke, ipc_primary));
         let user_data = (&mut *state) as *mut AppState as *mut c_void;
         g_signal_connect_data(app, c("activate").as_ptr(), activate, user_data, None, 0);
         let code = g_application_run(app, 0, ptr::null_mut());
         g_object_unref(app);
+        if ipc_primary {
+            if code == 0 && state.ipc_triggered {
+                println!("PASS: cross-process D-Bus activation reused one window");
+                return;
+            }
+            eprintln!("tombstone-gtk: cross-process activation smoke failed");
+            process::exit(3);
+        }
         if smoke {
             if code == 0 && state.smoke_ok {
                 println!("PASS: GTK4 activated, repeat activation reused one window, and C99 SHA-256 checked");
