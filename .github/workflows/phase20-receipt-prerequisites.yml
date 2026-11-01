@@ -56,6 +56,14 @@ jobs:
           done
           git rev-parse HEAD
           sha256sum phase20-*.c
+      - name: Load explicit Z3 4.12.2 proof dependency
+        if: matrix.group == 'formatters' || matrix.group == 'negative'
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 https://github.com/Z3Prover/z3/releases/download/z3-4.12.2/z3-4.12.2-x64-glibc-2.31.zip -o phase20-z3.zip
+          sha256sum phase20-z3.zip
+          unzip -q phase20-z3.zip -d phase20-provers
+          sha256sum phase20-provers/z3-4.12.2-x64-glibc-2.31/bin/z3
       - name: Run every target with RTE and original structured reports
         env:
           GROUP: ${{ matrix.group }}
@@ -64,6 +72,10 @@ jobs:
           docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-results:/out" -e GROUP -w /tmp \
             framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
             sh -c '
+              if [ -d /repo/phase20-provers ]; then
+                export PATH=/repo/phase20-provers/z3-4.12.2-x64-glibc-2.31/bin:$PATH
+                why3 config detect || exit 1
+              fi
               case "$GROUP" in
                 validators) targets="zero32 equal32 good_evidence good_receipt";;
                 formatters) targets="hex32 format_json";;
