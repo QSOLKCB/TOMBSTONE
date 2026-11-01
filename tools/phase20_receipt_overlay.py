@@ -86,6 +86,7 @@ HEX32 = r"""/*@
   requires \separated(d+(0 .. 31), b+(0 .. 64));
   assigns b[0 .. 64];
   ensures \result == 1;
+  ensures b[64] == '\0';
   ensures p20_cstr(b,65);
 */
 """
@@ -151,6 +152,19 @@ extern void *p20_memcpy(void *dst,const void *src,size_t n);
 #define P20_PICK(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,NAME,...) NAME
 #define snprintf(...) P20_PICK(__VA_ARGS__,p20_snprintf_receipt,p20_bad10,p20_bad9,p20_bad8,p20_bad7,p20_snprintf_deleted,p20_bad5,p20_snprintf_string,p20_bad3,p20_bad2,p20_bad1)(__VA_ARGS__)
 """
+# Expand only the four finite, fixed-format byte equalities. The sizeof guard
+# deliberately rejects a different PRIu64 expansion instead of silently
+# interpreting that target's format as this 64-bit proof model's format.
+FORMAT_LENGTHS = {"deleted":40,"previous":5,"hash":21,"receipt":168}
+for _name,_length in FORMAT_LENGTHS.items():
+    _table="p20_fmt_"+_name
+    _original=f"p20_text(fmt,&{_table}[0],sizeof({_table}))"
+    _checks=[f"sizeof({_table}) == {_length}",
+             f"\\valid_read(fmt+(0 .. {_length-1}))",
+             f"\\valid_read(&{_table}[0]+(0 .. {_length-1}))"]
+    _checks += [f"fmt[{i}] == {_table}[{i}]" for i in range(_length)]
+    LIBC=LIBC.replace(_original,"("+" &&\n           ".join(_checks)+")")
+
 DECL = HEX + "tb_status tb_sha256_hex(const unsigned char digest[TB_SHA256_DIGEST_SIZE],\n                        char out[TB_SHA256_HEX_SIZE]);\n"
 EXTRA = {
     "static int zero32(const unsigned char *p)": ZERO,
