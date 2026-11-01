@@ -39,7 +39,12 @@ fn main() {
     let cc = env::var("CC").unwrap_or_else(|_| "cc".to_string());
     let ar = env::var("AR").unwrap_or_else(|_| "ar".to_string());
 
-    run("pkg-config", &["--exists", "openssl"]);
+    let backend = env::var("TOMBSTONE_SHA256_BACKEND").unwrap_or_else(|_| "openssl".to_string());
+    assert!(backend == "openssl" || backend == "hacl", "unsupported SHA-256 backend");
+    if backend == "openssl" {
+        run("pkg-config", &["--exists", "openssl"]);
+    }
+    println!("cargo:rerun-if-env-changed=TOMBSTONE_SHA256_BACKEND");
     for path in [
         "src/crypto/fingerprint.c",
         "src/core/deletion.c",
@@ -53,22 +58,42 @@ fn main() {
     println!("cargo:rerun-if-env-changed=CC");
     println!("cargo:rerun-if-env-changed=AR");
 
-    compile(&cc, &root, &out, "src/crypto/fingerprint.c", "fingerprint.o");
+    if backend == "openssl" {
+        compile(&cc, &root, &out, "src/crypto/fingerprint.c", "fingerprint.o");
+    } else {
+        println!("cargo:rerun-if-changed={}", root.join("src/crypto/fingerprint_hacl.c").display());
+        println!("cargo:rerun-if-changed={}", root.join("vendor/hacl-star/dist/gcc-compatible/Hacl_Hash_SHA2.c").display());
+        let hacl_inc = root.join("vendor/hacl-star/dist/gcc-compatible");
+        let krml_inc = root.join("vendor/hacl-star/dist/karamel/include");
+        let uint128_inc = root.join("vendor/hacl-star/dist/karamel/krmllib/dist/minimal");
+        let compile_hacl = |source: &str, object: &str| {
+            run(
+                &cc,
+                &[
+                    "-std=c99", "-O2", "-D_DEFAULT_SOURCE",
+                    "-I", root.join("include").to_str().expect("UTF-8 include").to_owned().as_str(),
+                    "-I", hacl_inc.to_str().expect("UTF-8 HACL path"),
+                    "-I", krml_inc.to_str().expect("UTF-8 KaRaMeL path"),
+                    "-I", uint128_inc.to_str().expect("UTF-8 uint128 path"),
+                    "-c", root.join(source).to_str().expect("UTF-8 source").to_owned().as_str(),
+                    "-o", out.join(object).to_str().expect("UTF-8 object").to_owned().as_str(),
+                ],
+            );
+        };
+        compile_hacl("src/crypto/fingerprint_hacl.c", "fingerprint.o");
+        compile_hacl("vendor/hacl-star/dist/gcc-compatible/Hacl_Hash_SHA2.c", "hacl_sha2.o");
+    }
     compile(&cc, &root, &out, "src/core/deletion.c", "deletion.o");
     compile(&cc, &root, &out, "src/encoding/receipt.c", "receipt.o");
 
     let archive = out.join("libtombstone_native.a");
-    run(
-        &ar,
-        &[
-            "rcsD",
-            archive.to_str().expect("UTF-8 archive path"),
-            out.join("fingerprint.o").to_str().expect("UTF-8 object path"),
-            out.join("deletion.o").to_str().expect("UTF-8 object path"),
-            out.join("receipt.o").to_str().expect("UTF-8 object path"),
-        ],
-    );
+    let native_objects = ["fingerprint.o", "deletion.o", "receipt.o"];
+    let mut args = vec!["rcsD".to_string(), archive.to_str().expect("UTF-8 archive").to_owned()];
+    for entry in native_objects { args.push(out.join(entry).to_str().expect("UTF-8 object").to_owned()); }
+    if backend == "hacl" { args.push(out.join("hacl_sha2.o").to_str().expect("UTF-8 object").to_owned()); }
+    let refs: Vec<&str> = args.iter().map(String::as_str).collect();
+    run(&ar, &refs);
     println!("cargo:rustc-link-search=native={}", out.display());
     println!("cargo:rustc-link-lib=static=tombstone_native");
-    println!("cargo:rustc-link-lib=crypto");
+    if backend == "openssl" { println!("cargo:rustc-link-lib=crypto"); }
 }
