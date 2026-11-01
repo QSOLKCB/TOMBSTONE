@@ -56,12 +56,11 @@ static tb_status fingerprints(const void *before, size_t before_size,
   assigns *tmp;
   ensures \result == TB_OK || \result == TB_ERR_CRYPTO ||
           \result == TB_ERR_MEMORY;
-  ensures \result == TB_OK ==>
-    (tmp->kind == TB_EVIDENCE_EXPLICIT_DELETE &&
-     tmp->before_size == before_size &&
-     tmp->after_size == after_size &&
-     tmp->deleted_size == removed_size &&
-     tmp->deleted_offset == offset);
+  ensures \result == TB_OK ==> tmp->kind == TB_EVIDENCE_EXPLICIT_DELETE;
+  ensures \result == TB_OK ==> tmp->before_size == before_size;
+  ensures \result == TB_OK ==> tmp->after_size == after_size;
+  ensures \result == TB_OK ==> tmp->deleted_size == removed_size;
+  ensures \result == TB_OK ==> tmp->deleted_offset == offset;
 */
 static tb_status witness_stage(const void *before, size_t before_size,
                                const void *removed, size_t removed_size,
