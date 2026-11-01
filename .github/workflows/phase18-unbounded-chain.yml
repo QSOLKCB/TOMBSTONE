@@ -23,6 +23,8 @@ jobs:
           python3 tools/phase18_wp_overlay.py --output "$RUNNER_TEMP/receipt_v18.c"
           python3 tests/formal/test_phase18_overlay.py
           python3 tests/formal/test_phase18_wp_gate.py
+          python3 tools/check_phase18_receipt.py
+          python3 tests/formal/test_phase18_receipt.py
           python3 tools/check_phase14_evidence.py
           python3 tools/check_phase17_evidence.py
           python3 tools/check_phase16_model.py
@@ -41,6 +43,8 @@ jobs:
           python3 tools/phase18_wp_overlay.py --output "$PWD/receipt_v18_proof.c"
           python3 tests/formal/test_phase18_overlay.py
           python3 tests/formal/test_phase18_wp_gate.py
+          python3 tools/check_phase18_receipt.py
+          python3 tests/formal/test_phase18_receipt.py
           python3 tools/check_phase14_evidence.py
           python3 tools/check_phase17_evidence.py
       - name: Run unbounded Frama-C/WP with RTE and no missing goals
