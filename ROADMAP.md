@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–12 are merged; v0.1.0 remains an immutable source release. Phase 13 is a draft, opt-in HACL* SHA2-256 implementation and parity test; the OpenSSL default, the adapter's formal proof obligation, and source-to-binary assumptions remain unchanged. See the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md).**
+**Phases 0–13 are merged, while the unbounded HACL* adapter/provider proof remains open (#15). v0.1.0 is an immutable source release. Phase 14 is a draft PR targeting production receipt-v1 parsing and chain properties; neither partial helper proofs nor test parity establish the full receipt theorem. See the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md).**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -17,11 +17,18 @@
 | **10 — Public witness validation proof** | Actual C99 prehash argument/length/mismatch decision helper; synthetic SHA failure tests | Frama-C/WP 25/25, exact-head review | Merged |
 | **11 — Whole-wrapper modular proof** | Actual public `tb_witness_delete`, `fingerprints` and `witness_stage` under assumed SHA provider contract | Frama-C/WP 18/18, 23/23, 47/47 (88/88), exact-head review | Merged |
 | **12 — Actual SHA provider boundary** | Actual C99 SHA wrapper + real EVP with test-only failure injection, source identity ledger | GCC + Clang negative/positive outcomes, exact-head CI/review | Merged in PR #14 — executed failure evidence, no SHA theorem |
-| **13 — Verified SHA digest primitive** | Pinned generated HACL* SHA2-256 as optional backend; existing API and receipt wire bytes | Immutable upstream identity, fault tests, GCC/Clang x86-64/ARM64, exact parity; separate adapter/refinement proof remains required | PR #19 — opt-in integration; 4/4 native/Rust parity and bounded CBMC passed; unbounded adapter refinement pending review |
-| **14 — Canonical receipts and chains** | Formalize actual C99 v1 JSON encode/parse/chain invariants | Parser bounds, canonical bytes, chain links, tamper rejection | Planned |
+| **13 — Verified SHA digest primitive** | Pinned generated HACL* SHA2-256 as optional backend; existing API and receipt wire bytes | Immutable upstream identity, fault tests, GCC/Clang x86-64/ARM64, exact parity; separate adapter/refinement proof remains required | PR #19 merged; residual provider refinement tracked in #15 |
+| **14 — Canonical receipts and chains** | Actual C99 decimal-overflow and duplicate-bit WP obligations, bounded parser model, encoder/chain adversarial replay | Nonzero complete WP/CBMC goals, GCC/Clang x86-64/ARM64, frozen v1 blob identities | Draft PR #20 — partial proof attempt; full parser/chain WP remains outstanding |
 | **15 — Rust and compiler refinement** | FFI ownership/ABI and target-specific verified compilation | No C/Rust semantic gap for declared platforms | Planned |
 | **16 — Platform and provenance closure** | Trusted heads, witness signatures, target models, irreversible event caveats | Independent anchors where applicable; explicit unresolved physics/hardware premises | Planned |
 
+
+## Phase 14 — Production canonical receipts and hash-chain assumptions
+
+- Actual `src/encoding/receipt.c` decimal accumulation and field uniqueness are independently specified in ACSL, then checked under Frama-C/WP with runtime-error obligations.
+- A direct-inclusion CBMC harness checks bounded numeric parsing, string buffer and whitespace cursor safety; no synthetic complete JSON parser is substituted.
+- Actual C99 encoding/parsing/chain tests exercise duplicate, escaped duplicate, unknown, malformed numeric, output-immutability, tamper, chain truncation and trusted-head negative controls under both OpenSSL and opt-in HACL*, on GCC/Clang x86-64/ARM64.
+- An offline evidence gate rejects changed proof inputs or the three immutable v1 fixture files. **Open:** unbounded full parser, canonical serializer and complete hash-chain proofs; SHA provider, compiler and external trusted-head assumptions. See [Phase 14 scope](docs/PHASE14_RECEIPTS.md) and issue #16.
 
 ## Phase 13 — Pinned HACL* alternative, with explicit residual assumptions
 
