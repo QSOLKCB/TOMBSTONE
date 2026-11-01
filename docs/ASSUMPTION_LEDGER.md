@@ -10,7 +10,7 @@ source identities, evidence and separately documented residual assumptions.
 | A01 | Actual C99 witnessed byte splice | Phase 9 ACSL/WP | Retain exact-source and input-validity gates |
 | A02 | C99 witness prehash status and whole wrapper | Phase 10 and Phase 11 ACSL/WP, conditional on SHA provider | Verify actual SHA wrapper rather than assume it |
 | A03 | C99 `tb_sha256_bytes` error/status/output/resource handling | Phase 12 injected failures against real C99 source and actual EVP on success — **executed tests, not full formal proof** | Source-level WP contracts for C99 wrapper under explicit EVP/allocator model |
-| A04 | SHA-256 computation and actual OpenSSL EVP internals | OpenSSL NIST vectors; Phase 13 opt-in pinned HACL* extracted-C candidate (upstream F* verification), **not proof of OpenSSL or adapter** | Reproduce F* proof on exact upstream revision; C adapter/ABI refinement and source-to-binary translation |
+| A04 | SHA-256 computation and actual OpenSSL EVP internals | NIST tests, not formally proved | Adopt and integrate a separately verified SHA-256, or provide machine-checked proof of selected implementation |
 | A05 | Canonical JSON/receipt parser and chain | Golden vectors, negative tests and independent replay | Direct C99 parser, encoder and hash-chain WP proofs |
 | A06 | Rust FFI, CLI, TUI, GTK | Runtime and integration tests, not formal proof | Ownership, bounds, ABI layout and error refinement proofs |
 | A07 | C source-to-executable compiler/linker semantics | GCC/Clang/ARM64 testing, not proof | CompCert or target-specific translation validation |
@@ -62,24 +62,3 @@ No SHA provider replacement, OpenSSL removal, source release modification or
 algorithmically-verified claim is made by Phase 12. HACL* proof assumptions,
 generated-code translation, the compiler and the hardware must be included
 in the resulting trust ledger.
-
-## Phase 13 — Pinned candidate and exact residual trust boundary
-
-The optional HACL* implementation in [Phase 13](PHASE13_HACL.md) is pinned to
-`f557259007db9933442dde10aa995c1b00bd3446`. An offline test compares
-**all 16 copied upstream Git blob identities**, including KaRaMeL compatibility
-and endian headers, to hashes recorded from that immutable upstream tree.
-The unmodified generated implementation is MIT-licensed. No part of the
-existing OpenSSL `src/crypto/fingerprint.c` is replaced or claimed verified.
-
-The HACL adapter is new and independent from the upstream proof: it owns
-allocation, pointer/length conversion, chunking, state transitions, the public
-ABI and no-write-on-failure discipline. The test-only linker injection plus
-GCC/Clang receipt parity are *executed evidence only when the exact-head CI
-jobs pass*, not a proof of these properties for all permitted inputs.
-Executed Phase 13 [run 41321354704](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704) used CBMC 6.11.0 to check 584/584 bounded properties on the **actual adapter source** under a synthetic HACL boundary. The verified conditions are bounded status, failure-no-write and state transitions, NOT SHA-256 algorithmic correctness. The exact two proof-source blobs and conditions are in `machine/formal/phase13-adapter-cbmc-v1.json`, with an offline identity gate. The upstream F* proof and KaRaMeL extraction have **not** been independently rerun at the exact revision. The unbounded Frama-C/real-provider/ABI refinement and compiler evidence are still open.
-The published `v0.1.0` SHA-256 baseline is immutable.
-
-### Phase 13 executed checks and residual proof boundary
-
-At [run 41321354704](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704), all four x86-64/ARM64 GCC/Clang HACL/OpenSSL parity jobs and direct-source CBMC adapter checks passed. CBMC verified 0/195, 0/195, and 0/194 failed properties for bounded one-shot, streaming and invalid-input harnesses under a synthetic, explicitly **modeled** HACL provider. Real upstream SHA-256 and the adapter's unbounded correctness were **not formally proved by these local checks**. See `machine/formal/phase13-hacl-evidence-v1.json` and the source-pinning check.

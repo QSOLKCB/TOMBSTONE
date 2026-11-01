@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–12 are merged; v0.1.0 remains an immutable source release. Phase 13 is a draft, opt-in HACL* SHA2-256 implementation and parity test; the OpenSSL default, the adapter's formal proof obligation, and source-to-binary assumptions remain unchanged. See the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md).**
+**Phases 0–11 are merged. v0.1.0 remains an immutable source release. Phase 12 is a DRAFT PR testing the actual C99/OpenSSL SHA provider's error/output/resource boundary through GCC/Clang injected failures. The SHA-256 algorithm and external EVP internals are still not formally verified; see the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md).**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -16,21 +16,12 @@
 | **9 — Unbounded splice relation proof** | Production C99 splice helper with ACSL contracts and loop invariants | Frama-C/WP: 35/35 executed; exact-head review | Merged |
 | **10 — Public witness validation proof** | Actual C99 prehash argument/length/mismatch decision helper; synthetic SHA failure tests | Frama-C/WP 25/25, exact-head review | Merged |
 | **11 — Whole-wrapper modular proof** | Actual public `tb_witness_delete`, `fingerprints` and `witness_stage` under assumed SHA provider contract | Frama-C/WP 18/18, 23/23, 47/47 (88/88), exact-head review | Merged |
-| **12 — Actual SHA provider boundary** | Actual C99 SHA wrapper + real EVP with test-only failure injection, source identity ledger | GCC + Clang negative/positive outcomes, exact-head CI/review | Merged in PR #14 — executed failure evidence, no SHA theorem |
-| **13 — Verified SHA digest primitive** | Pinned generated HACL* SHA2-256 as optional backend; existing API and receipt wire bytes | Immutable upstream identity, fault tests, GCC/Clang x86-64/ARM64, exact parity; separate adapter/refinement proof remains required | PR #19 — opt-in integration; 4/4 native/Rust parity and bounded CBMC passed; unbounded adapter refinement pending review |
+| **12 — Actual SHA provider boundary** | Actual C99 SHA wrapper + real EVP with test-only failure injection, source identity ledger | GCC + Clang negative/positive outcomes, exact-head CI/review | Draft PR — executed evidence, no SHA theorem |
+| **13 — Verified SHA digest primitive** | Select, validate and integrate a machine-checked SHA-256 implementation or proof of the exact provider | Algorithm correctness theorem, ABI/refinement, vectors, side-by-side replay | Planned; OpenSSL presently trusted |
 | **14 — Canonical receipts and chains** | Formalize actual C99 v1 JSON encode/parse/chain invariants | Parser bounds, canonical bytes, chain links, tamper rejection | Planned |
 | **15 — Rust and compiler refinement** | FFI ownership/ABI and target-specific verified compilation | No C/Rust semantic gap for declared platforms | Planned |
 | **16 — Platform and provenance closure** | Trusted heads, witness signatures, target models, irreversible event caveats | Independent anchors where applicable; explicit unresolved physics/hardware premises | Planned |
 
-
-## Phase 13 — Pinned HACL* alternative, with explicit residual assumptions
-
-- The original OpenSSL provider is still the default and unchanged. `SHA256_BACKEND=hacl` selects a separately built C99 backend; Rust uses `TOMBSTONE_SHA256_BACKEND=hacl`.
-- Upstream HACL*/KaRaMeL C and header files are pinned byte-for-byte to Git commit `f557259007db9933442dde10aa995c1b00bd3446` with 16 expected Git blob hashes checked offline by `tools/check_hacl_source.py`.
-- The C adapter handles streaming, state, allocation failure and caller-output immutability. The test-only linker-wrap harness injects allocation and HACL update failures. CI independently checks exact receipt bytes with GCC/Clang and x86-64/ARM64; completion requires exact-head results.
-- **Executed:** bounded CBMC 6.11.0 checked 584/584 properties with synthetic HACL allocation/update/digest calls in [run 41321354704](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704); source and model identities are pinned in `machine/formal/phase13-adapter-cbmc-v1.json`. **Still open:** actual F* verification replay at this revision, unbounded C adapter/ABI refinement against real HACL under Frama-C or CBMC, source-to-binary proof and execution on arbitrary hardware. Upstream proof claims are conditional, and do not prove OpenSSL, the new adapter or historical deletion. Do not close issue #15 or merge/tag before meeting its remaining acceptance gates.
-
-See [Phase 13 details](docs/PHASE13_HACL.md).
 
 ## Phase 12 — Provider boundary under live OpenSSL
 
