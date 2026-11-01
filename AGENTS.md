@@ -58,3 +58,7 @@ Before any tag, enforce [docs/RELEASE_GATE.md](docs/RELEASE_GATE.md): preserve s
 ## Phase 9 proof discipline
 
 The actual production C99 `splice_equal` function has quantified ACSL contracts and loop invariants. Run the native tests and `formal-wp.yml` with Frama-C/WP and Alt-Ergo, then inspect *executed* proof counts. `tools/check_wp_proofs.py` must reject missing, partial or vacuously zero proof goals; never suppress RTE or loop-related obligations merely to obtain a green check. Report assumptions including `\\valid_read` and the separate SHA provider contract. A successful relation-helper proof is **not** an unbounded end-to-end proof of `tb_witness_delete`, OpenSSL, receipt JSON, compiler, memory faults or a different architecture.
+
+## Phase 10 modular proof boundaries
+
+The public C99 wrapper's contracts are in `formal/framac/witness_wrapper.c`; the translation unit includes the **actual** `src/core/deletion.c`. The synthetic hash contract and native fault-injection stub are *verification-only*, not production. Run `formal-wrapper.yml`, require nonzero complete Frama-C/WP proof goals with `-wp-rte`, and distinguish hash-provider assumptions from proved obligations. A successful wrapper proof must not be advertised as verified OpenSSL, filesystem erasure or machine code. Retain the exact-head independent Codex review gate and do not change the v0.1.0 release.

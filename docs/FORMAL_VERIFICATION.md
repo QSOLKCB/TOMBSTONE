@@ -20,7 +20,8 @@ with status-specific invalid-input errors, exact lengths/offset on success, and 
 | Mathematical identities | Rocq, Lean, Isabelle/HOL | Planned — no theorem-checked result yet |
 | Actual C99 splice/observation paths for 0–4-byte inputs | CBMC on unmodified `src/core/deletion.c` | New CI obligation; check exact-head logs before claiming PASS |
 | Unbounded production splice equality helper (`splice_equal`), with valid-buffer premises | ACSL/Frama-C/WP | **35/35 WP goals discharged on [executed CI run 41305390928](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41305390928) at source blob `ed0a2107…`; the final PR head requires its own CI rerun** |
-| Entire public `tb_witness_delete` wrapper and hash failure/ABI behaviour | Frama-C/WP | Not proved |
+| Public `tb_witness_delete` wrapper, modular SHA boundary | Frama-C/WP + native injected failures | Phase 10 proof attempt; only exact-head executed CI results can establish discharge |
+| OpenSSL SHA algorithm/provider, including failures | Separate provider verification | **Assumed**, not proved by wrapper contract |
 | All C99 memory/crypto/receipt operations | Frama-C/WP plus dependent proof | Not proved |
 | Direct C99 source-to-machine refinement | Rocq/VST + CompCert | Not proved |
 | Production SHA-256/OpenSSL EVP | Verified hash primitive or explicit external contract | Not proved here |
@@ -59,3 +60,11 @@ The proof target is only the private helper. Frama-C/WP proofs on this helper do
 **Executed-gate commands:** `frama-c -wp -wp-fct splice_equal -wp-rte -wp-prover alt-ergo -cpp-extra-args="-Iinclude" src/core/deletion.c`, then `tools/check_wp_proofs.py` rejects zero goals or any unproved goal. Use the exact PR head's `formal-wp.yml` Actions run for the result. An ACSL annotation alone is never evidence of a completed theorem.
 
 **Compatibility:** the released `v0.1.0` tag remains untouched; no production receipt ABI, JSON wire format, or test vectors are modified. Any future release needs its own exact-head review and reproducible packaging gate.
+
+## Phase 10 — Public wrapper modular proof
+
+The proof-only file `formal/framac/witness_wrapper.c` includes the real C99 `src/core/deletion.c`. It declares ACSL contracts on the public `tb_witness_delete` function and on the external `tb_sha256_bytes` **assumption**. The production headers, C99 source, Rust interfaces and immutable `v0.1.0` tag are not modified by this stage.
+
+The wrapper proof obligations cover argument/length error precedence, explicit-success metadata and byte-for-byte caller-output preservation on errors for valid C objects. The hash contract permits successful hashing or memory/crypto errors and requires digest output unchanged on failure. This contract is an **axiomatic external assumption**, not proof of the actual OpenSSL EVP function. Separate adversarial C99 tests deliberately fail the first, second and third hash calls and check that the original public output remains untouched.
+
+Frama-C/WP with `-wp-rte` must discharge **all nonzero goals** before any formal claim is made; native tests and bounded CBMC cannot substitute for an unbounded WP result. The full SHA provider, binary compilation, runtime, author authenticity and real-world deletion are still unverified boundaries. See [Phase 10 contract and assumptions](PHASE10_WRAPPER.md).
