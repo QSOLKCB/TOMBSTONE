@@ -71,19 +71,21 @@ jobs:
                 hex) targets="hex-openssl hex-hacl";;
                 negative) targets="accept-invalid bad-size error-size";;
               esac
+              frama-c -wp-detect || exit 1
               status=0
               for target in $targets; do
                 source=/repo/phase20-receipt.c
                 function=$target
                 timeout=35
+                provers=alt-ergo
                 split=
                 case "$target" in
                   hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex; split="-wp-auto wp:bitshift -wp-print";;
                   accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;
                   bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;
                 esac
-                if [ "$function" = format_json ]; then split=-wp-split; fi
-                (frama-c -version && frama-c -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1
+                if [ "$function" = format_json ]; then provers=alt-ergo,z3; fi
+                (frama-c -version && frama-c -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover "$provers" -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1
               done
               cat /out/*.log
               exit "$status"
