@@ -12,8 +12,8 @@ source identities, evidence and separately documented residual assumptions.
 | A03 | C99 `tb_sha256_bytes` error/status/output/resource handling | Phase 12 injected failures against real C99 source and actual EVP on success — **executed tests, not full formal proof** | Source-level WP contracts for C99 wrapper under explicit EVP/allocator model |
 | A04 | SHA-256 computation and actual OpenSSL EVP internals | OpenSSL NIST vectors; Phase 13 opt-in pinned HACL* extracted-C candidate (upstream F* verification), **not proof of OpenSSL or adapter** | Reproduce F* proof on exact upstream revision; C adapter/ABI refinement and source-to-binary translation |
 | A05 | Canonical JSON/receipt parser and chain | Phase 14 actual-source numeric/field-mask ACSL targets and bounded parser/chain negative evidence (exact-head verification required) | Full unbounded production C99 encoder/parser/chain, hash-domain and no-write-on-error WP/refinement proofs remain open |
-| A06 | Rust FFI, CLI, TUI, GTK | Runtime and integration tests, not formal proof | Ownership, bounds, ABI layout and error refinement proofs |
-| A07 | C source-to-executable compiler/linker semantics | GCC/Clang/ARM64 testing, not proof | CompCert or target-specific translation validation |
+| A06 | Rust FFI, CLI, TUI, GTK | Phase 15 direct C99/Rust ABI layout/discriminant and error/no-write tests on specific Linux targets (execution gate pending) | Unbounded ownership, pointer/aliasing, panics and ABI refinement proofs |
+| A07 | C source-to-executable compiler/linker semantics | Phase 15 independent repeat-build executable hashing and exact target/source/toolchain receipts (executed evidence only when CI passes) | CompCert or target-specific translation validation for actual binary and external calls |
 | A08 | OS, firmware and physical hardware | Model and executed target tests only | Explicit target-specific model and trusted hardware assumptions |
 | A09 | Historical deletion, time, author and secure erasure | **Never claimed** | Independent witness, trusted head, signature and separate storage-erasure evidence |
 
@@ -102,3 +102,15 @@ output immutability over all permitted inputs. A local internally consistent
 chain lacks any independent trusted head, time, author or deletion history.
 **A05 remains open** until full-source proofs are actually discharged and
 reviewed; Phase 13's outstanding SHA/ABI/translator premises still apply.
+
+## Phase 15 — FFI layouts and target-specific binary evidence
+
+The [Phase 15 scope](PHASE15_ABI.md) performs actual C99 layout observations
+and compares them to the private Rust `repr(C)` structures, tests native
+status/no-write paths and the CLI 64 MiB boundary, and records two isolated
+release build hashes on the same Linux compiler/backend/architecture tuple.
+It does **not** independently establish compiler correctness, FFI lifetime
+soundness, target linker/OS behaviour or machine-code refinement. Failure
+of any individual ABI or executable identity test blocks the evidence claim,
+not grounds to relax safety checks. C99 remains authoritative and the
+immutable `v0.1.0` baseline stays untouched. A06/A07 remain conditional.
