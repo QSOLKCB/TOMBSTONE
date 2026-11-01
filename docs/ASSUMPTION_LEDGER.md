@@ -161,3 +161,10 @@ This is conditional on **unproved external helper contracts**: equal32 must exac
 ## Phase 19 — Actual helper refinement boundaries
 
 The Phase 19 work ([scope](PHASE19_HELPERS.md), issue #28) tests the actual production `equal32` and `calculate_hash` functions without editing the pinned receipt source. The private `tombstone_phase19` donor is reference data, not current proof acceptance. Libc memcmp semantics are external; the proof-only streaming SHA abstract state is not the real provider's allocation, mutation, cleanup or algorithm proof. Any current-head partial/time-out formal result remains incomplete. A04/A05, JSON, source-to-binary, custody, chronology and erasure obligations remain open.
+
+The separate error-path overlay admits streaming `TB_ERR_LENGTH` and adds an
+output-preservation obligation under the provider's documented final-error
+frame. The original 40-goal record cannot establish that stronger claim.
+Native failure injection checks cleanup on 13 finite paths; it does not close
+the universal heap-lifetime obligation. P19-03 remains blocked by the private
+provider-state effect absent from the original Phase 18 frame.

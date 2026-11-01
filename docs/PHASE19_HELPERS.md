@@ -27,3 +27,43 @@ Existing A04/A05 premises and issues #15–#18 remain open. Require current exac
 ## Phase 18 bridge fidelity caution
 
 The proof-only Phase 19 streaming SHA model has a private mutable state. Its actual `calculate_hash` proof target explicitly permits effects to that model state **in addition to the local 32-byte digest output**. Phase 18's original abstract `calculate_hash` specification permits only digest-output writes; these contracts are not syntactically identical. A passing Phase 19 hash proof therefore **does not by itself discharge Phase 18's stronger frame assumption**. A separately reviewed projection/heap-lifetime refinement is required to show that state changes are private to the provider and unobservable to callers. Do not report the P19-03 bridge as complete without it. Previous 37/46 attempts and their nine frame timeouts remain retained as negative evidence.
+
+## Takeover verification and separate error-path attempt
+
+The original 11/11 and 40/40 overlays and `phase19-helper-evidence-v1.json`
+remain unchanged. Their evidence gate and twelve rejection tests now run in
+the Phase 19 workflow. The WP log gate additionally requires the pinned
+32.1 banner, exactly one RTE target, one scheduled-goal count and one complete
+summary with the expected count. It rejects wrong targets, changed counts,
+duplicated reports, unsupported predicates and solver failures. This is a
+coverage check, not authentication of the execution or a provider proof.
+
+`tools/phase19_hash_errors_overlay.py` is a **separate** proof attempt on
+the same actual C body. It admits `TB_ERR_LENGTH` from streaming update:
+the real provider has this public status, which the original unconstrained
+context model omitted. It assumes the documented final-call no-write-on-error
+guarantee and asks WP to prove that `calculate_hash` preserves all 32 output
+bytes on every non-OK return. The old receipt is not evidence for this new
+postcondition. The new 41-goal gate must be executed successfully before this
+claim can be described as proved. The original private-state frame is retained;
+there is no new provider, allocation-lifetime or P19-03 theorem.
+
+`tests/formal/test_phase19_faults.c` executes 13 cases with the real helper:
+frozen-fixture digest success, invalid receipt, formatter failure, allocation
+failure, both streaming update failures (including length/state errors), and
+final failure. Linker wrappers inject errors in this test executable only;
+positive calls use real OpenSSL. It checks unchanged receipt/output bytes on
+errors, exact call order, no later hash stage after failure, and exactly one
+free of the acquired context. These are finite cleanup observations.
+
+Disposable native mutants must fail a test assertion after successful
+compilation: always-equal comparison, missing cleanup, output writes on error,
+and swallowed errors. An always-true `equal32` proof mutant must also leave
+an equality postcondition unproved under the **same** contracts; syntax errors
+or missing reports do not count as semantic negative evidence. Original mutant
+and positive solver logs are uploaded separately. Never copy these mutants
+into production or use them as source identity baselines.
+
+The PR remains draft while the stronger Phase 18 bridge and exact-head
+independent review are outstanding. A successful rerun of the unchanged
+54-goal Phase 18 workflow still assumes its original helper frame.
