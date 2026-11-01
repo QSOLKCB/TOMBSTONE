@@ -37,6 +37,7 @@ def render() -> str:
     assert original.count(BEFORE)==1
     result=base.replace(BEFORE,BEFORE+EXT,1)
     assert result.replace(EXT,"",1)==base
+    result=result.replace(EXT,"",1)
     for item in module.ANNOTATIONS.values():
         result=result.replace(item,"",1)
     assert result==original,"verification annotations must strip to production C99"
