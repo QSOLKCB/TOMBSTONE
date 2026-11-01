@@ -1,0 +1,34 @@
+name: Phase 8 bounded direct C99 verification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cbmc:
+    name: Actual C99 splice and observation — bounded symbolic verification
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm harness compiles as C99 without altering the engine
+        run: gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c formal/cbmc/splice_harness.c -o /tmp/splice-harness.o
+      - name: Verify witness with pinned CBMC and mandatory unwinding checks
+        run: |
+          docker run --rm --entrypoint cbmc -v "$PWD:/repo:ro" -w /repo ghcr.io/diffblue/cbmc:6.11.0 --version
+          timeout 300 docker run --rm --entrypoint cbmc -v "$PWD:/repo:ro" -w /repo ghcr.io/diffblue/cbmc:6.11.0 \
+            --function check_witness --unwind 192 --unwinding-assertions \
+            --bounds-check --pointer-check --signed-overflow-check --unsigned-overflow-check \
+            -I include formal/cbmc/splice_harness.c
+      - name: Verify observation classification and no fabricated deletion
+        run: |
+          timeout 300 docker run --rm --entrypoint cbmc -v "$PWD:/repo:ro" -w /repo ghcr.io/diffblue/cbmc:6.11.0 \
+            --function check_observe --unwind 192 --unwinding-assertions \
+            --bounds-check --pointer-check --signed-overflow-check --unsigned-overflow-check \
+            -I include formal/cbmc/splice_harness.c
