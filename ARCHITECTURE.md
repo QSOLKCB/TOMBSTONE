@@ -2,7 +2,7 @@
 
 ## Boundary and maturity
 
-This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprinting and exact deletion-splice verification**. Phase 2 is merged. Phase 3 provides merged schema-limited RFC 8785 receipt serialization, strict parsing and hash-link validation. Phase 4 introduces a safe Rust FFI adapter and noninteractive CLI (in PR, pending review). No filesystem deletion, TUI or GTK UI exists. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
+This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprinting and exact deletion-splice verification**. Phase 2 is merged. Phase 3 provides merged schema-limited RFC 8785 receipt serialization, strict parsing and hash-link validation. Phase 4 merged the safe Rust FFI and headless CLI. Phase 5 introduces a Rust ncurses terminal UI (in PR pending review); there is still no filesystem deletion or GTK UI. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
 
 \`\`\`text
              Human terminal        Agents/scripts          Optional desktop
@@ -46,10 +46,12 @@ This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprint
 
 - `bindings/rust/`: Phase 4 safe Rust FFI, with only an internal unsafe C ABI surface, Rust slice/ownership checks and native C99 archive linking.
 - `apps/cli/`: Phase 4 noninteractive commands, pipe-safe deterministic JSON and stderr diagnostics, stable exit codes; no implicit prompts.
-- \`apps/tui/\`: interactive receipt inspection and guided explicit-deletion workflows via the same adapter.
+- `apps/tui/`: Phase 5 Rust ncurses TUI, using the same safe adapter for guided evidence/chain workflows; no secondary cryptographic implementation.
 - \`apps/gtk/\`: future, optional GTK4 desktop app; no product logic beyond UI orchestration.
 
 **Phase 4 build boundary:** Cargo build scripts compile the unchanged C99 source into a private native static archive linked with system OpenSSL. Rust never duplicates receipt serialization, hashing or evidence classification. The CLI reads bounded caller-controlled file bytes (or stdin) and supplies them to C99; the core itself still performs no filesystem I/O.
+
+**Phase 5 terminal boundary:** The TUI links system ncursesw and reads selected files within caps; it can export C99 canonical receipts only by an explicit create-new action, never overwrites them, and does not silently delete source data. The C99 archive and headless CLI still build without ncurses. Rust ncurses handles only UI state, scrolling and prompts. GTK remains future work.
 
 ### Evidence classes
 
@@ -87,7 +89,8 @@ include/tombstone/         public C99 fingerprint and deletion-evidence headers
 src/{core,crypto,encoding}/ C99 implementation of splices, SHA-256 and receipts
 bindings/rust/             implemented safe Rust C99 adapter
 apps/cli/                   implemented headless Rust CLI (Phase 4)
-apps/{tui,gtk}/             planned terminal and optional desktop UIs
+apps/tui/                   Rust interactive ncurses UI (Phase 5 in PR)
+apps/gtk/                   future optional GTK4 interface
 tests/{unit,integration,fixtures}/ validation targets + public toy fixture
 tools/                     docs/fixture validation
 examples/                  later user-facing usage examples

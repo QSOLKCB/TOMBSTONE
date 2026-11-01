@@ -1,6 +1,6 @@
 # Invariants — design requirements
 
-**Status:** Phase 1 implements TMB-001 and Phase 2 implements the **in-memory byte verification portions** of TMB-002–005, TMB-009 and TMB-014, now merged. Phase 3 implements receipt encoding, parsing, hash checks and chain validation (merged); no external anchoring infrastructure or real-world event authentication is implemented. Phase 4 Rust CLI and C99 FFI add tests for the TMB-011/TMB-012 interface boundary, pending review. \`make docs-check\` checks illustrative fixtures, not the real engine; \`make test\`, \`make sanitizer-test\` and \`make reproducibility\` exercise the new library.
+**Status:** Phase 1 implements TMB-001 and Phase 2 implements the **in-memory byte verification portions** of TMB-002–005, TMB-009 and TMB-014, now merged. Phase 3 implements receipt encoding, parsing, hash checks and chain validation (merged); no external anchoring infrastructure or real-world event authentication is implemented. Phase 4 Rust CLI and C99 FFI were merged with TMB-011/TMB-012 tests. Phase 5 TUI extends TMB-011 with guided workflows and no-overwrite receipt export (pending review). \`make docs-check\` checks illustrative fixtures, not the real engine; \`make test\`, \`make sanitizer-test\` and \`make reproducibility\` exercise the new library.
 
 | ID | Requirement | Required future validation |
 | --- | --- | --- |
@@ -19,5 +19,7 @@
 | TMB-013 | Receipts assert neither secure erasure nor authorship nor independently proven chronology. | API/UX review |
 | TMB-014 | The SHA-256 empty-input digest is valid but never by itself evidence of a deletion. | Empty vs no-op tests |
 | TMB-015 | A chain can be rewritten in full without a trusted external anchor. | Threat model and anchoring checks |
+
+**TUI boundary:** Screen navigation and IO are Rust/ncurses responsibilities, but C99 exclusively determines evidence and canonical JSON. There must be no automatic deletion, no file overwrite, no plaintext in exported receipts and no claim of authenticated edits. 
 
 **Boundary:** JSON Schema handles syntax and basic conditional structure, not splice equality, signature authenticity, hash correctness, or chain integrity. Phase 2 tests byte-exact splice relationships and reports `TB_ERR_MISMATCH` on false witnesses; Phase 3 now provides executable receipt and chain checks for the v1 format. A historical diff must never be promoted to a witnessed deletion.
