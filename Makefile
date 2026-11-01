@@ -15,7 +15,7 @@ TEST_UNIT := $(BUILD_DIR)/test_fingerprint $(BUILD_DIR)/test_deletion $(BUILD_DI
 TEST_INTEGRATION := $(BUILD_DIR)/test_public_link $(BUILD_DIR)/test_deletion_link
 TESTS := $(TEST_UNIT) $(TEST_INTEGRATION)
 
-.PHONY: all test clean docs-check sanitizer-test reproducibility rust-test rust-build tui-build
+.PHONY: all test clean docs-check sanitizer-test reproducibility rust-test rust-build tui-build gtk-test gtk-build
 all: $(LIB)
 
 $(BUILD_DIR):
@@ -72,6 +72,12 @@ rust-build:
 
 tui-build:
 	cargo build -p tombstone-tui --release --offline --locked
+
+gtk-test:
+	cargo test --manifest-path apps/gtk/Cargo.toml --offline --locked
+
+gtk-build:
+	cargo build --manifest-path apps/gtk/Cargo.toml --release --offline --locked
 
 clean:
 	rm -rf build
