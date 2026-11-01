@@ -1,6 +1,6 @@
 # Invariants — design requirements
 
-**Status:** Phase 1 implements TMB-001 and Phase 2 implements the **in-memory byte verification portions** of TMB-002–005, TMB-009 and TMB-014, pending review. Phase 3 implements receipt encoding, parsing, hash checks and chain validation (pending review); no external anchoring or real-world event authentication is implemented. \`make docs-check\` checks illustrative fixtures, not the real engine; \`make test\`, \`make sanitizer-test\` and \`make reproducibility\` exercise the new library.
+**Status:** Phase 1 implements TMB-001 and Phase 2 implements the **in-memory byte verification portions** of TMB-002–005, TMB-009 and TMB-014, now merged. Phase 3 implements receipt encoding, parsing, hash checks and chain validation (merged); no external anchoring infrastructure or real-world event authentication is implemented. Phase 4 Rust CLI and C99 FFI add tests for the TMB-011/TMB-012 interface boundary, pending review. \`make docs-check\` checks illustrative fixtures, not the real engine; \`make test\`, \`make sanitizer-test\` and \`make reproducibility\` exercise the new library.
 
 | ID | Requirement | Required future validation |
 | --- | --- | --- |

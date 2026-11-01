@@ -18,7 +18,7 @@ Follow [ARCHITECTURE.md](ARCHITECTURE.md), [INVARIANTS.md](INVARIANTS.md) and [R
 
 Review the **exact head SHA**; report only actionable correctness/security defects with minimal reproduction, expected vs actual results and whether executed or reasoned. Do not re-report fixed findings. Propose small PRs with tests and clear rollback. Do not merge merely because another PR passed review.
 
-## C99 Phases 1–3 engine and test commands
+## C99 and Phase 4 Rust/CLI test commands
 
 \`make\` builds the native static archive. Requires OpenSSL development headers and pkg-config. C99 SHA-256 resides in `src/crypto/fingerprint.c`; verified splice and classification in `src/core/deletion.c`. Public headers additionally include `include/tombstone/receipt.h`; JSON encoding and parser live in `src/encoding/receipt.c`.
 
@@ -32,6 +32,15 @@ make docs-check
 
 **Implemented:** C99 one-shot/streamed SHA-256, exact-splice verification with required nonempty removed span and offset, and observed-change/no-op classification without deletion inference. Return only SHA-256, sizes and offset; failure leaves output untouched.
 
-**Not implemented:** historical proof of editing, filesystem deletion, Rust CLI/TUI or GTK. Canonical v1 JSON and hash-link verification are implemented; a trusted head from outside the local chain remains required to detect wholesale rewriting. Never claim that before/after hashes prove removed bytes.
+**Not implemented:** historical proof of editing, filesystem deletion, Rust TUI or GTK. Canonical v1 JSON and hash-link verification are implemented; a trusted head from outside the local chain remains required to detect wholesale rewriting. Never claim that before/after hashes prove removed bytes.
+
+**Phase 4:** Rust `bindings/rust` is a safe FFI adapter and `apps/cli` is a noninteractive CLI. They MUST call the original C99 API and must not reimplement SHA-256, splice validation, receipt canonicalization, or chain verification. No external Rust crates are needed. Verify using:
+
+```sh
+cargo test --workspace --offline --locked
+cargo build -p tombstone-cli --release --offline --locked
+```
+
+For CLI development enforce deterministic JSON on stdout, stderr-only errors, no implicit prompts, no logs of plaintext/paths, explicit exit statuses and 64 MiB file caps. A supplied `--previous` is not independent proof of a valid preceding receipt; `verify` checks one record, while `verify-chain` checks the whole chain. A trusted external anchor is always an explicit caller input.
 
 Review the **exact head SHA** and distinguish executed tests from inferred results. Keep each future milestone narrow, evidence-gated and independently reviewable.
