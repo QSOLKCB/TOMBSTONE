@@ -82,15 +82,45 @@ fn read_trusted_head_file(path: &str) -> Result<[u8; 32], CliError> {
     if path == "-" {
         return Err(CliError::usage("trusted-head file must be a regular file, not stdin"));
     }
-    let metadata = std::fs::symlink_metadata(path).map_err(|_| CliError::io())?;
-    if !metadata.file_type().is_file() {
-        return Err(CliError::usage("trusted-head file must be a regular file"));
+    // The supported Phase 16 targets are Linux x86-64 and AArch64.
+    // Never check the pathname before a separate open: a concurrent rename
+    // can exchange a regular file for a FIFO (blocking open) or a symlink.
+    // Linux O_NOFOLLOW refuses symlinks in the final path component, while
+    // O_NONBLOCK prevents the FIFO open from waiting for a writer.
+    #[cfg(not(target_os = "linux"))]
+    return Err(CliError::usage("trusted-head files require a supported Linux target"));
+
+    #[cfg(target_os = "linux")]
+    let mut opened = {
+        use std::os::unix::fs::OpenOptionsExt;
+        const O_NONBLOCK: i32 = 0o4000;
+        const O_NOFOLLOW: i32 = 0o400000;
+        std::fs::OpenOptions::new().read(true)
+            .custom_flags(O_NONBLOCK | O_NOFOLLOW)
+            .open(path)
+            .map_err(|error| {
+                // Linux ELOOP: refusing the final-component symlink is a
+                // rejected file type, not a reason to disclose its pathname.
+                if error.raw_os_error() == Some(40) {
+                    CliError::usage("trusted-head file must be a regular file")
+                } else {
+                    CliError::io()
+                }
+            })?
+    };
+    #[cfg(target_os = "linux")]
+    {
+        // fstat the opened descriptor, and read that same descriptor. No
+        // second pathname lookup can substitute a different filesystem item.
+        if !opened.metadata().map_err(|_| CliError::io())?.file_type().is_file() {
+            return Err(CliError::usage("trusted-head file must be a regular file"));
+        }
     }
     // Bound memory before checking syntax: exactly 64 lowercase ASCII hex
     // bytes, optionally terminated by one LF. No BOM/CR/extra whitespace.
     let mut bytes = Vec::new();
-    File::open(path).map_err(|_| CliError::io())?
-        .take(66).read_to_end(&mut bytes).map_err(|_| CliError::io())?;
+    #[cfg(target_os = "linux")]
+    opened.take(66).read_to_end(&mut bytes).map_err(|_| CliError::io())?;
     if bytes.last() == Some(&b'\n') { bytes.pop(); }
     if bytes.len() != 64 {
         return Err(CliError::usage("trusted-head file must contain 64 lowercase hex bytes, optionally LF"));
