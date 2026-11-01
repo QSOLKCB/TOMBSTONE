@@ -23,3 +23,7 @@ Evidence claims should distinguish:
 - `NOT_RUN`: provider correctness, full JSON parser/formatter proof, source-to-binary correctness and physical/historical deletion unless separately verified.
 
 Existing A04/A05 premises and issues #15–#18 remain open. Require current exact-head green CI and independent Codex review with no actionable defects before any owner-authorized merge. No automatic tag or release.
+
+## Phase 18 bridge fidelity caution
+
+The proof-only Phase 19 streaming SHA model has a private mutable state. Its actual `calculate_hash` proof target explicitly permits effects to that model state **in addition to the local 32-byte digest output**. Phase 18's original abstract `calculate_hash` specification permits only digest-output writes; these contracts are not syntactically identical. A passing Phase 19 hash proof therefore **does not by itself discharge Phase 18's stronger frame assumption**. A separately reviewed projection/heap-lifetime refinement is required to show that state changes are private to the provider and unobservable to callers. Do not report the P19-03 bridge as complete without it. Previous 37/46 attempts and their nine frame timeouts remain retained as negative evidence.
