@@ -15,7 +15,7 @@ TEST_UNIT := $(BUILD_DIR)/test_fingerprint $(BUILD_DIR)/test_deletion $(BUILD_DI
 TEST_INTEGRATION := $(BUILD_DIR)/test_public_link $(BUILD_DIR)/test_deletion_link
 TESTS := $(TEST_UNIT) $(TEST_INTEGRATION)
 
-.PHONY: all test clean docs-check sanitizer-test reproducibility rust-test rust-build tui-build gtk-test gtk-build
+.PHONY: all test clean docs-check sanitizer-test reproducibility rust-test rust-build tui-build gtk-test gtk-build fuzz
 all: $(LIB)
 
 $(BUILD_DIR):
@@ -78,6 +78,9 @@ gtk-test:
 
 gtk-build:
 	cargo build --manifest-path apps/gtk/Cargo.toml --release --offline --locked
+
+fuzz:
+	sh tools/run_fuzz.sh
 
 clean:
 	rm -rf build
