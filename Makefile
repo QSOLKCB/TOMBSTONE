@@ -15,7 +15,7 @@ TEST_UNIT := $(BUILD_DIR)/test_fingerprint $(BUILD_DIR)/test_deletion $(BUILD_DI
 TEST_INTEGRATION := $(BUILD_DIR)/test_public_link $(BUILD_DIR)/test_deletion_link
 TESTS := $(TEST_UNIT) $(TEST_INTEGRATION)
 
-.PHONY: all test clean docs-check sanitizer-test reproducibility rust-test rust-build
+.PHONY: all test clean docs-check sanitizer-test reproducibility rust-test rust-build tui-build
 all: $(LIB)
 
 $(BUILD_DIR):
@@ -69,6 +69,9 @@ rust-test:
 
 rust-build:
 	cargo build -p tombstone-cli --release --offline --locked
+
+tui-build:
+	cargo build -p tombstone-tui --release --offline --locked
 
 clean:
 	rm -rf build

@@ -1,6 +1,6 @@
 # Security and privacy model
 
-**Scope today:** Phase 1 implements C99 SHA-256 through OpenSSL EVP. Phase 2 adds caller-supplied, exact byte-splice verification and observed-transition classification, returning only in-memory digests/lengths/offset. Neither library function opens files, deletes data, logs removed bytes nor serializes receipts. Phase 3 adds deterministic receipt serialization, strict parsing, and hash-chain checking; secure erasure, historic attestation, trusted anchoring infrastructure, TUI and GTK are not implemented. Phase 4 provides only a Rust CLI that reads explicitly named inputs or stdin, bounded at 64 MiB per input. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
+**Scope today:** Phase 1 implements C99 SHA-256 through OpenSSL EVP. Phase 2 adds caller-supplied, exact byte-splice verification and observed-transition classification, returning only in-memory digests/lengths/offset. Neither library function opens files, deletes data, logs removed bytes nor serializes receipts. Phase 3 adds deterministic receipt serialization, strict parsing, and hash-chain checking; secure erasure, historic attestation, trusted anchoring infrastructure and GTK are not implemented. Phase 5 adds an interactive Rust ncurses TUI in PR. Phase 4 provides a Rust CLI that reads explicitly named inputs or stdin, bounded at 64 MiB per input. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
 
 ## Nonclaims
 
@@ -21,6 +21,10 @@ A self-hashed receipt or locally consistent chain is not an authenticated histor
 ## Phase 4 CLI and FFI boundary
 
 The new Rust CLI loads caller-selected files/standard input into process memory, calls the C99 core through a minimal Rust FFI and emits *only* C99-derived canonical receipts or deterministic status JSON. The command does not delete or modify any input files and does not print their names/content in receipt output or diagnostics. Memory allocation is bounded by a 64 MiB per-input cap, but copies may remain in process memory, OS swap or external backups. The Rust adapter checks C ABI versions and bounds output buffers; the C ABI itself cannot validate arbitrary foreign pointers. Only trusted final hashes independently preserved outside the local history can anchor chain authenticity. The tool operates offline and has no telemetry, interactive prompts or network calls.
+
+## Phase 5 interactive TUI boundary
+
+The TUI prompts for selected paths; these are visible while typed but are not included in receipt JSON, reports or sanitized errors. Display text is filtered to printable ASCII to avoid embedded terminal-control sequences. All buffers are binary-safe and bounded (64 MiB per data file, 16 KiB per receipt), with at most 64 chained receipts. The UI can emit a canonical receipt only through an explicit save request that creates a **new** output file (Unix mode 0600), never overwriting an existing file. It does not delete input files or sanitize memory/swap. It requires an interactive terminal, and the core/headless CLI do not link ncurses. An entered predecessor digest is only a caller claim, not independently validated history.
 
 ## Planned controls
 

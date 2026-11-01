@@ -2,6 +2,7 @@
 
 All files here are human-readable explanations. The machine-readable contract and examples live separately in [machine/](../machine/README.md).
 
+- [Rust ncurses TUI](TUI.md) — Phase 5 guided human inspection and verification, C99 interface boundary
 - [Rust CLI and FFI](CLI.md) — Phase 4 headless commands, statuses, C99 boundary and trust limits
 - [C99 receipt engine](RECEIPT_ENGINE.md) — Phase 3 canonical JSON, strict parser and SHA-256 chains
 - [C99 witnessed deletion API](DELETION_WITNESS.md) — Phase 2 exact splice vs snapshot comparison

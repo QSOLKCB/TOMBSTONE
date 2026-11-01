@@ -9,7 +9,7 @@
 
 TOMBSTONE is a **C99-first** project for deterministic, independently checkable evidence about file transitions and explicit caller-supplied deletion splices.
 
-**Status:** Phases 0–3 are merged. **Phase 4 adds a Rust CLI and safe FFI adapter (pending PR review)**. The C99 core remains authoritative for all hashing, splice validation, receipt encoding/parsing and chain verification. Rust provides argument handling and presentation. A Rust TUI (Phase 5) and optional GTK4 GUI (Phase 6) are still planned.
+**Status:** Phases 0–4 are merged. **Phase 5 introduces an interactive Rust/ncurses terminal interface (pending PR review)** for human receipt inspection, chain verification and guided evidence creation. C99 remains authoritative for cryptography and all evidence decisions; the separate headless Rust CLI stays unchanged. GTK4 remains optional for Phase 6.
 
 ## Try the CLI
 
@@ -17,7 +17,7 @@ Requires Ubuntu C99 toolchain, OpenSSL development libraries and Rust/Cargo:
 
 \`\`\`sh
 sudo apt-get install build-essential pkg-config libssl-dev cargo rustc
-cargo test --workspace --locked --offline
+cargo test -p tombstone-ffi -p tombstone-cli --locked --offline
 cargo build -p tombstone-cli --release --locked --offline
 
 target/release/tombstone hash tests/fixtures/before.txt
@@ -33,6 +33,18 @@ The chain command requires receipts in genesis-to-head order. Use the [CLI guide
 
 The CLI emits deterministic machine-readable JSON to stdout, diagnostics to stderr, and nonzero exit codes on failure. It has no interactive prompts, no network operations, and **never deletes a file**.
 
+## Interactive terminal UI (Phase 5)
+
+On Ubuntu install `libncurses-dev` in addition to the CLI prerequisites. With an interactive terminal (not a pipeline):
+
+```sh
+cargo test --workspace --offline --locked
+cargo build -p tombstone-tui --release --offline --locked
+target/release/tombstone-tui
+```
+
+Choose one of five workflows with arrows, `j/k`, or keys `1`–`5`; inspect validated receipts, check entire chains, and optionally save canonical JSON to a **new** file with `s`. Nothing is overwritten or deleted. The TUI requires ncurses but **the C99 core and headless CLI do not**. See [TUI guide](docs/TUI.md).
+
 ## Validate the C99 core
 
 \`\`\`sh
@@ -42,6 +54,7 @@ make reproducibility   # deterministic static archives
 make docs-check        # synthetic receipt fixture checks
 \`\`\`
 
+- [Rust ncurses TUI](docs/TUI.md)
 - [Rust CLI and FFI](docs/CLI.md)
 - [C99 receipt API](docs/RECEIPT_ENGINE.md)
 - [Witnessed splice API](docs/DELETION_WITNESS.md)
