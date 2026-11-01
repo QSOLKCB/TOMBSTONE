@@ -1,35 +1,31 @@
-# Getting started — Phase 1 fingerprint library
+# Getting started — C99 Phases 1–2
 
-TOMBSTONE has a working **C99 SHA-256 library**, not yet a command-line product. Phase 1 hashes **caller-supplied bytes**. It does not delete files, witness deletions, or create receipts.
+TOMBSTONE now has a SHA-256 core and a **caller-supplied deletion-splice verifier**, not a user CLI. It reads raw byte buffers, hashes them, and can mathematically verify a reported deletion; it does not edit files, collect editor history, or serialize receipts.
 
-## Requirements (Ubuntu)
+## Ubuntu dependencies and tests
 
 \`\`\`sh
 sudo apt-get install build-essential pkg-config libssl-dev python3
 git clone https://github.com/QSOLKCB/TOMBSTONE.git
 cd TOMBSTONE
+
+make                  # builds build/libtombstone.a
+make test             # fingerprinting, splice witnessing, independent C99 API linkage
+make sanitizer-test   # address and undefined-behaviour sanitizer tests
+make reproducibility  # two clean deterministic archive builds
+make docs-check       # existing synthetic receipt fixture checks
 \`\`\`
 
-On systems with the Phase 1 PR merged:
+The two public headers are [fingerprint.h](include/tombstone/fingerprint.h) and [deletion.h](include/tombstone/deletion.h). Begin with [Phase 2's API walkthrough](docs/DELETION_WITNESS.md) for the exact-splice contract. The [Phase 1 fingerprint guide](docs/FINGERPRINT_API.md) still applies.
 
-\`\`\`sh
-make                       # build/libtombstone.a
-make test                  # standalone C99 unit/integration tests
-make reproducibility       # compare independent reproducible builds
-make sanitizer-test        # ASan + UBSan instrumented tests
-make docs-check            # preserve Phase 0 documentation and toy fixtures
+## Conceptual example
+
+\`\`\`text
+before: 1 2 3 4 5
+removed: 3 4␠  (4 bytes at offset 4)
+after:  1 2 5
 \`\`\`
 
-The ABI is in [include/tombstone/fingerprint.h](include/tombstone/fingerprint.h), with [annotated examples and FFI rules](docs/FINGERPRINT_API.md). Use the API by linking against \`build/libtombstone.a\` and the system OpenSSL crypto library (\`pkg-config --libs openssl\`). No executable \`tombstone\` command exists yet.
+\`tb_witness_delete\` checks the **exact byte relationship** and returns only lengths and SHA-256 digests. \`tb_observe_transition\` checks before and after but makes **no deletion claim**. These are two different levels of supplied evidence, not proof a historical edit occurred.
 
-## What the tests establish
-
-Standard SHA-256 known-answer vectors for empty input, \`abc\`, the longer FIPS test string, a million \`a\` bytes, plus binary data (\`0x00\`, \`0xff\`, \`0x80\`), one-byte streaming, error codes, null-pointer handling, huge-length early rejection on 64-bit, post-final states, external C99 linkage, sanitizer instrumentation, and static-archive repeatability on the tested toolchain.
-
-Those tests do **not** prove secure deletion, hash preimage resistance by experiment, an authenticated receipt history, or cross-platform reproducibility beyond the tested environments.
-
-## Existing toy receipt documentation
-
-The *unimplemented* v1 proposal remains at [machine/schemas/receipt-v1.schema.json](machine/schemas/receipt-v1.schema.json); example receipts are synthetic and validated by \`make docs-check\`. Human explanations are in [docs/](docs/INDEX.md). A before/after hash mismatch never identifies which bytes were removed.
-
-For implementers: read [AGENTS.md](AGENTS.md), [INVARIANTS.md](INVARIANTS.md), and [SECURITY.md](SECURITY.md).
+The machine receipt v1 schema in [machine/](machine/README.md) is **still a Phase 3 proposal**; \`make docs-check\` is a restricted fixture checker, not a production receipt parser/verifier. Read [SECURITY.md](SECURITY.md) before using secret material.
