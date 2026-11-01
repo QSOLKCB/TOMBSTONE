@@ -61,6 +61,17 @@ FORMAT=r"""/*@
   ensures \result == TB_OK ==> *size < capacity;
 */
 """
+HASH_MARKER="static tb_status calculate_hash(const tb_receipt_v1 *r, unsigned char out[32])"
+OLD_HASH_CONTRACT=m.ANNOTATIONS[HASH_MARKER]
+# The abstract provider's private memory must be separated from actual C99
+# caller inputs and output: no provider aliasing of r or digest bytes.
+HASH_CONTRACT=OLD_HASH_CONTRACT.replace(
+    "  assigns out[0 .. 31];",
+    """  requires \\separated(r, &model_private_provider_state);
+  requires \\separated(out+(0 .. 31), &model_private_provider_state);
+  assigns out[0 .. 31];"""
+)
+
 GOOD=r"""/*@
   requires \valid_read(r);
   assigns \nothing;
@@ -72,6 +83,7 @@ def render():
     if m.git_blob(b)!=m.EXPECTED_BLOB:raise ValueError("source drift")
     source=b.decode("utf-8")
     rendered=m.render(source)
+    rendered=rendered.replace(OLD_HASH_CONTRACT, HASH_CONTRACT,1)
     if source.count(INCLUDES)!=1:raise ValueError("includes changed")
     rendered=rendered.replace(INCLUDES,INCLUDES+MODEL,1)
     insert={
@@ -82,7 +94,7 @@ def render():
         if source.count(marker)!=1:raise ValueError("missing private production helper")
         rendered=rendered.replace(marker,contract+marker,1)
     stripped=rendered.replace(MODEL,"",1)
-    for fragment in list(m.ANNOTATIONS.values())+list(insert.values()):
+    for fragment in [HASH_CONTRACT]+[v for k,v in m.ANNOTATIONS.items() if k!=HASH_MARKER]+list(insert.values()):
         stripped=stripped.replace(fragment,"",1)
     if stripped!=source:raise ValueError("not exact original production source")
     return rendered
