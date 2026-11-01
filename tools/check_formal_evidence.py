@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check Phase 11 evidence is pinned to the actual C99 and ACSL file blobs.
+"""Check executed Phase 11 and bounded Phase 13 evidence source identities.
 Does NOT independently prove properties or validate remote Actions results.
 """
 import json
@@ -27,3 +27,26 @@ assert record["wp_rte_enabled"] is True
 assert record["assumptions"] and record["excluded_claims"]
 print("PASS: Phase 11 proof source/overlay blob identity and 88-goal receipt are consistent")
 print("NOTE: Source identity check is not proof of Actions execution or external SHA provider.")
+
+phase13 = json.loads((root / "machine/formal/phase13-adapter-cbmc-v1.json").read_text())
+assert phase13["format"] == "tombstone.formal-proof-evidence"
+assert phase13["phase"] == 13 and phase13["version"] == 1
+assert phase13["checker"] == "CBMC" and phase13["checker_version"] == "6.11.0"
+assert phase13["total_properties"] == 584 and phase13["failed_properties"] == 0
+assert phase13["checks"] == [
+    {"function": "check_one_shot", "failed": 0, "total": 195},
+    {"function": "check_stream", "failed": 0, "total": 195},
+    {"function": "check_invalid", "failed": 0, "total": 194},
+]
+assert phase13["assumptions"] and phase13["excluded_claims"]
+assert "13" in phase13["run_url"] and phase13["github_run_id"] == 41321354704
+for key in ("source", "overlay"):
+    p = root / phase13[key + "_path"]
+    assert p.is_file(), f"missing Phase 13 proof input: {p}"
+    actual = subprocess.check_output(["git", "hash-object", str(p)], cwd=root, text=True).strip()
+    assert actual == phase13[key + "_git_blob_sha"], (
+        f"Phase 13 {key} changed without a newly executed CBMC run; "
+        f"expected {phase13[key + '_git_blob_sha']}, observed {actual}"
+    )
+print("PASS: Phase 13 source and bounded-CBMC harness pinned to 584/584 executed property results")
+print("NOTE: CBMC models the HACL boundary; not an SHA correctness or compiler proof.")
