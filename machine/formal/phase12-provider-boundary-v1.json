@@ -1,0 +1,31 @@
+{
+  "format": "tombstone.proof-boundary",
+  "version": 1,
+  "phase": 12,
+  "name": "Actual C99/OpenSSL SHA-256 provider API failure semantics",
+  "production_path": "src/crypto/fingerprint.c",
+  "production_git_blob_sha": "5d9e60f88305fd108405908269a023cdff8cb8ee",
+  "test_path": "tests/formal/test_provider_faults.c",
+  "faults": [
+    "calloc",
+    "EVP_MD_CTX_new",
+    "EVP_DigestInit_ex",
+    "EVP_DigestUpdate",
+    "EVP_DigestFinal_ex",
+    "digest output length"
+  ],
+  "executed_verification_required": [
+    "gcc",
+    "clang"
+  ],
+  "evidence_type": "test-only linker-wrap injected failure matrix plus actual real EVP known-answer success",
+  "explicit_nonclaims": [
+    "OpenSSL EVP formally verified",
+    "SHA-256 mathematically verified for all input",
+    "C99 tb_sha256_bytes formally proved",
+    "trusted compiler/OS/hardware",
+    "historical deletion or erasure"
+  ],
+  "release_unchanged": "v0.1.0",
+  "status": "proposed; require exact-head executed CI and independent review"
+}
