@@ -138,3 +138,20 @@ signer identity, clock correctness, filesystem deletion or storage erasure.
 A separately signed or timestamped external statement needs its own custody,
 key/identity/revocation model, not merely a new flag. Exact-head CI, no
 unproved claims and independent Codex review before merge; no automatic tag.
+
+## Phase 17 direct C99 chain verification discipline
+
+See [docs/PHASE17_CHAIN.md](docs/PHASE17_CHAIN.md) and issue #23.
+Use the **unchanged** actual `src/encoding/receipt.c` in
+`formal/cbmc/chain_v17_harness.c`. The pre-hash argument/genesis
+CBMC targets cannot be described as proving the hash-success chain
+path or arbitrary chain lengths. Keep bounds/pointer/overflow/unwind
+checks enabled, no vacuous or synthetic source stubs. Execute the
+exhaustive frozen-fixture native replay under both crypto providers
+on GCC/Clang x86-64/ARM64. Any modification to a pinned source/harness
+or historical receipt must fail `tools/check_phase17_evidence.py`
+until independently rerun; do not rewrite Phase 14/16 proof inputs
+to manufacture a pass. Existing v0.1.0 release and all v1 bytes
+remain immutable. External custody, physical deletion, provider and
+compiler proofs remain separately open. Require exact-head independent
+Codex review and green CI; do not auto-merge or tag.
