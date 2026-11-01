@@ -72,3 +72,9 @@ Frama-C/WP with `-wp-rte` must discharge **all nonzero goals** before any formal
 **Exploratory whole-wrapper WP negative evidence:** [run 41307132302](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41307132302) reported `Proved goals: 35 / 64` and 29 timed-out obligations. This is intentionally recorded as *incomplete*, not a proven full-wrapper theorem. The separately required Phase 10 CI checks the simpler production prehash helper under the same strictly fail-closed all-goals gate.
 
 **Strengthened Phase 10 prehash proof evidence:** [run 41308568840](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41308568840) discharged 25/25 WP goals (Qed 19, Alt-Ergo 2.5.4 6) on production C99 source blob `7f2e80d8f2d453d2c1b91ebebe323620c4ae5255`; the added goal establishes the reverse length-error implication. Native SHA failure-injection and the fail-closed proof log tests passed. This is a proof of the numeric prehash helper under the specified C model, not a whole-wrapper or SHA-256 proof.
+
+## Phase 11 — Whole-wrapper modular proof attempt
+
+The *actual* `src/core/deletion.c` is included by `formal/framac/witness_wrapper_v11.c`, which adds an ACSL contract for the existing `fingerprints` helper and specifies the public `tb_witness_delete` API. The independent Phase 9 and Phase 10 source proof gates stay enabled. Phase 11 deliberately uses two Frama-C/WP jobs, requiring complete nonzero goals for both `fingerprints` and `tb_witness_delete` rather than treating a helper contract as self-validating. See [Phase 11 obligations](PHASE11_WRAPPER.md).
+
+**Unproved pending CI:** the complete public wrapper. The external `tb_sha256_bytes` contract is an assumption concerning input validity, 32-byte writes and fail-no-write behaviour. Actual OpenSSL SHA-256, backend state and cryptographic digest correctness remain outside scope. The prior 35/64 result is preserved as negative evidence.

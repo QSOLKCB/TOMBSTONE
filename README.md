@@ -48,6 +48,10 @@ apps/gtk/target/release/tombstone-gtk
 
 The GUI offers fingerprint, observed-transition, witnessed-deletion, receipt inspection, chain verification and **explicit create-new receipt export**, using the same tested C99-backed workflows as the TUI. The **root Cargo workspace excludes GTK**, preserving all headless builds and tests.
 
+## Phase 11 — Whole-wrapper modular proof attempt
+
+The [Phase 11 draft](docs/PHASE11_WRAPPER.md) attempts to prove the actual public C99 `tb_witness_delete` function compositionally, with separate Frama-C/WP verification of the existing `fingerprints` helper under an explicit assumed SHA-256 provider contract. **This remains unproved until both source-level proof gates discharge every nonzero obligation.** It is not a proof of the OpenSSL provider or of compiled binaries.
+
 ## Phase 10 — Public C99 wrapper proof boundary
 
 Phase 10 adds a [source-level proof target](docs/PHASE10_WRAPPER.md) for the production prehash argument/length/mismatch decision helper used by `tb_witness_delete`, alongside native tests that inject errors at all three SHA-256 calls. An exploratory whole-wrapper ACSL model is retained with explicit external provider assumptions, but its full proof remains **incomplete** (initial 35/64 goals discharged). A synthetic-provider regression exercises all three SHA error sites without modifying the release engine. **The provider contract is an assumption, not a proof of OpenSSL.** Phase 10 is a development PR; exact-head WP and independent review are required before accepting its claims.
