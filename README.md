@@ -48,6 +48,10 @@ apps/gtk/target/release/tombstone-gtk
 
 The GUI offers fingerprint, observed-transition, witnessed-deletion, receipt inspection, chain verification and **explicit create-new receipt export**, using the same tested C99-backed workflows as the TUI. The **root Cargo workspace excludes GTK**, preserving all headless builds and tests.
 
+## Phase 12 — Auditing the SHA-256 provider boundary
+
+The [Assumption Ledger](docs/ASSUMPTION_LEDGER.md) tracks every outstanding proof or trust boundary. Phase 12 executes the **actual, unchanged C99 OpenSSL provider wrapper** with test-only injected allocation and EVP failures, checking output immutability, C99 cleanup and real SHA-256 known-answer vectors under GCC and Clang. [Executed CI](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41316764004) passed both toolchains. **These are tests, not a mathematical proof of OpenSSL/SHA-256.** The verified digest primitive, receipt engine, Rust FFI, compiler and target hardware remain separate closure milestones.
+
 ## Phase 11 — Whole-wrapper modular proof attempt
 
 The [Phase 11 modular proof](docs/PHASE11_WRAPPER.md) discharged **88/88 Frama-C/WP obligations** against the actual C99 source: `fingerprints` 18/18, `witness_stage` 23/23, and the public `tb_witness_delete` 47/47. The proof is **conditional on explicitly stated C memory-model and external SHA-256 provider contracts**, not an end-to-end proof of OpenSSL, compiled binaries, historical deletion or secure erasure. The immutable `v0.1.0` release is unchanged; Phase 11 still requires independent exact-head review before merge.

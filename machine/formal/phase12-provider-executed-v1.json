@@ -1,0 +1,25 @@
+{
+  "format": "tombstone.provider-boundary-executed-evidence",
+  "version": 1,
+  "phase": 12,
+  "source_path": "src/crypto/fingerprint.c",
+  "source_git_blob_sha": "5d9e60f88305fd108405908269a023cdff8cb8ee",
+  "run_id": 41316764004,
+  "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41316764004",
+  "reference_head": "4bbb5c8b07a6dcaf3da43e3eb37758c9782a947b",
+  "gcc": "success",
+  "clang": "success",
+  "observed": [
+    "actual production one-shot wrapper successfully hashes NIST abc via real EVP",
+    "calloc and EVP context/init/update/final and bad digest length injection map to expected statuses",
+    "caller output unchanged on induced non-success returns",
+    "C99-owned EVP context and allocation cleanup on injected paths",
+    "NULL/zero/oversize validation and streaming failed-state checks"
+  ],
+  "limitations": [
+    "This receipt is authored metadata, not a signature or independently verified Actions API record",
+    "GNU --wrap tests do not prove OpenSSL/EVP internals or SHA-256 semantics for arbitrary input",
+    "Neither target compilation correctness nor physical machine behaviour is formally proved"
+  ],
+  "note": "Release v0.1.0 remains immutable; exact PR head CI and independent review still required"
+}

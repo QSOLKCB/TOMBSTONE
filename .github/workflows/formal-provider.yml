@@ -1,0 +1,40 @@
+name: Phase 12 — C99/OpenSSL SHA provider fault evidence
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  provider:
+    name: Real provider fault injection (${{ matrix.compiler }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install C toolchains and OpenSSL
+        run: sudo apt-get update && sudo apt-get install -y gcc clang pkg-config libssl-dev python3
+      - name: Check source identity and honest trust ledger
+        run: python3 tools/check_provider_boundary.py
+      - name: Build real production SHA C99 with test-only linker wrappers
+        run: |
+          set -euo pipefail
+          ${{ matrix.compiler }} -O2 -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude \
+            tests/formal/test_provider_faults.c src/crypto/fingerprint.c \
+            -Wl,--wrap=calloc -Wl,--wrap=free \
+            -Wl,--wrap=EVP_MD_CTX_new -Wl,--wrap=EVP_MD_CTX_free \
+            -Wl,--wrap=EVP_DigestInit_ex -Wl,--wrap=EVP_DigestUpdate \
+            -Wl,--wrap=EVP_DigestFinal_ex $(pkg-config --cflags --libs openssl) \
+            -o /tmp/tombstone-provider-faults
+          /tmp/tombstone-provider-faults
+      - name: Verify actual OpenSSL NIST vectors and previous contracts
+        run: make test
