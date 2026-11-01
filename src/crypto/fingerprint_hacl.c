@@ -59,8 +59,8 @@ tb_status tb_sha256_update(tb_sha256_ctx *ctx, const void *data, size_t length)
             Hacl_Hash_SHA2_update_256(ctx->backend, (uint8_t *)p, chunk);
         if (rc != Hacl_Streaming_Types_Success) {
             ctx->failed = 1;
-            return rc == Hacl_Streaming_Types_MaximumLengthExceeded ?
-                TB_ERR_LENGTH : TB_ERR_CRYPTO;
+            return rc == Hacl_Streaming_Types_MaximumLengthExceeded ? TB_ERR_LENGTH :
+                rc == Hacl_Streaming_Types_OutOfMemory ? TB_ERR_MEMORY : TB_ERR_CRYPTO;
         }
         p += chunk;
         remaining -= chunk;
