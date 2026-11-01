@@ -29,14 +29,25 @@ void check_number(void)
     bytes[4] = 0;
     p.s = bytes; p.n = n; p.i = 0u;
     ok = number(&p, &result);
-    __CPROVER_assert(ok == 1, "short nonnegative decimal parses");
-    __CPROVER_assert(p.i > 0u && p.i <= n, "numeric parse cursor bounded");
-    for (j = 0u; j < p.i; ++j)
-        independent = independent * 10u + (unsigned int)(bytes[j] - '0');
-    __CPROVER_assert(result == (size_t)independent,
-                     "parsed number matches independent bounded decimal oracle");
-    if (bytes[0] == '0' && n > 1u)
-        __CPROVER_assert(p.i == 1u, "leading zero is not consumed as decimal");
+    if (bytes[0] == '0' && n > 1u) {
+        /* The actual strict JSON parser rejects multi-digit leading zeros
+         * before consuming the first byte or writing its output value. */
+        __CPROVER_assert(ok == 0, "leading-zero decimal is rejected");
+        __CPROVER_assert(p.i == 0u, "leading-zero rejection preserves cursor");
+        __CPROVER_assert(result == (size_t)0x5151u,
+                         "leading-zero rejection preserves caller output");
+    } else {
+        /* Every remaining bounded decimal is legal: no overflow at <=4 digits.
+         * Quantify all bytes, rather than exclude the invalid leading-zero
+         * family through an assumption. */
+        __CPROVER_assert(ok == 1, "legal short decimal parses");
+        __CPROVER_assert(p.i == n, "legal decimal consumes exactly n digits");
+        for (j = 0u; j < n; ++j)
+            independent = independent * 10u + (unsigned int)(bytes[j] - '0');
+        __CPROVER_assert(result == (size_t)independent,
+                         "parsed value matches independent decimal oracle");
+    }
+    __CPROVER_assert(p.i <= p.n, "numeric parse cursor always bounded");
 }
 
 void check_string_bounds(void)
