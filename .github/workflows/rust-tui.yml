@@ -33,6 +33,8 @@ jobs:
           fi
           test ! -s out.txt
           grep -q 'interactive terminal' err.txt
+      - name: Exercise actual ncurses in a pseudo-terminal
+        run: python3 tools/check_tui_pty.py target/release/tombstone-tui
       - name: Verify original CLI still works without TUI
         run: |
           cargo build -p tombstone-cli --release --locked --offline
