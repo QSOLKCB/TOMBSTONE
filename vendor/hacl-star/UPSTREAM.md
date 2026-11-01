@@ -17,3 +17,5 @@ HACL*'s upstream F*/Low* verification applies to its specified primitive
 and assumptions. It does not automatically prove this adapter's memory,
 chunking, Rust FFI, compiler, linker, hardware or the actual historical
 deletion of information.
+
+Every vendored source/header and the distribution license is pinned by its original upstream Git blob SHA in `SOURCES.json`. CI checks each Git blob; a modified dependency cannot silently inherit the upstream verification claim.
