@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/QSOLKCB/TOMBSTONE/blob/main/machine/schemas/receipt-v1.schema.json",
+  "title": "TOMBSTONE receipt v1 (proposed)",
+  "description": "Candidate receipt shape only; cryptographic, splice and chain verification require code.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "version",
+    "kind",
+    "before",
+    "after",
+    "deleted",
+    "previous_receipt_hash",
+    "receipt_hash"
+  ],
+  "properties": {
+    "format": {
+      "const": "tombstone.receipt"
+    },
+    "version": {
+      "const": 1
+    },
+    "kind": {
+      "enum": [
+        "explicit-delete",
+        "observed-transition",
+        "unchanged"
+      ]
+    },
+    "before": {
+      "$ref": "#/$defs/fingerprint"
+    },
+    "after": {
+      "$ref": "#/$defs/fingerprint"
+    },
+    "deleted": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/deletedSpan"
+        }
+      ]
+    },
+    "previous_receipt_hash": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/hash"
+        }
+      ]
+    },
+    "receipt_hash": {
+      "$ref": "#/$defs/hash"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "explicit-delete"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "deleted": {
+            "$ref": "#/$defs/deletedSpan"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "observed-transition",
+              "unchanged"
+            ]
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "deleted": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "fingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sha256",
+        "size"
+      ],
+      "properties": {
+        "sha256": {
+          "$ref": "#/$defs/hash"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "deletedSpan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sha256",
+        "size",
+        "offset"
+      ],
+      "properties": {
+        "sha256": {
+          "$ref": "#/$defs/hash"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      }
+    }
+  }
+}
