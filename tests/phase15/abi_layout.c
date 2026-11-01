@@ -1,28 +1,37 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 /* Phase 15: native C99 ABI facts, compiled/executed by the actual target CC.
  * This executable is a TEST ORACLE, not linked into TOMBSTONE production.
- * offsetof(struct { char c; TYPE value; }, value) is C99 alignment.
+ * Named C99 struct offsets measure alignment without compiler extensions.
  */
 #include "tombstone/receipt.h"
 #include <stddef.h>
 #include <stdio.h>
 
-#define ALIGNOF_TYPE(T) offsetof(struct { char c; T value; }, value)
+/* Declaring these at file scope avoids Clang's GNU-extension warning for
+ * defining anonymous types within __builtin_offsetof. */
+#define ALIGN_PROBE(Name, Type) struct Name { char c; Type value; }
+ALIGN_PROBE(align_size_t, size_t);
+ALIGN_PROBE(align_pointer, void *);
+ALIGN_PROBE(align_int, int);
+ALIGN_PROBE(align_status, tb_status);
+ALIGN_PROBE(align_kind, tb_evidence_kind);
+ALIGN_PROBE(align_evidence, tb_evidence_v1);
+ALIGN_PROBE(align_receipt, tb_receipt_v1);
 #define METRIC(name, value) do { \
     if (printf("%s=%zu\n", name, (size_t)(value)) < 0) return 1; \
 } while (0)
 #define FIELD(T, member) METRIC(#T "." #member, offsetof(T, member))
 #define SIZE(T) METRIC(#T ".size", sizeof(T))
-#define ALIGN(T) METRIC(#T ".align", ALIGNOF_TYPE(T))
+#define ALIGN(T, Name) METRIC(#T ".align", offsetof(struct Name, value))
 
 int main(void)
 {
-    SIZE(size_t); ALIGN(size_t);
-    SIZE(void *); ALIGN(void *);
-    SIZE(int); ALIGN(int);
-    SIZE(tb_status); ALIGN(tb_status);
-    SIZE(tb_evidence_kind); ALIGN(tb_evidence_kind);
-    SIZE(tb_evidence_v1); ALIGN(tb_evidence_v1);
+    SIZE(size_t); ALIGN(size_t, align_size_t);
+    SIZE(void *); ALIGN(void *, align_pointer);
+    SIZE(int); ALIGN(int, align_int);
+    SIZE(tb_status); ALIGN(tb_status, align_status);
+    SIZE(tb_evidence_kind); ALIGN(tb_evidence_kind, align_kind);
+    SIZE(tb_evidence_v1); ALIGN(tb_evidence_v1, align_evidence);
     FIELD(tb_evidence_v1, kind);
     FIELD(tb_evidence_v1, before_size);
     FIELD(tb_evidence_v1, after_size);
@@ -31,7 +40,7 @@ int main(void)
     FIELD(tb_evidence_v1, deleted_size);
     FIELD(tb_evidence_v1, deleted_offset);
     FIELD(tb_evidence_v1, deleted_sha256);
-    SIZE(tb_receipt_v1); ALIGN(tb_receipt_v1);
+    SIZE(tb_receipt_v1); ALIGN(tb_receipt_v1, align_receipt);
     FIELD(tb_receipt_v1, evidence);
     FIELD(tb_receipt_v1, has_previous);
     FIELD(tb_receipt_v1, previous_hash);
