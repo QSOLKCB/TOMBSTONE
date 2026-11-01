@@ -70,7 +70,7 @@ fn main() {
             run(
                 &cc,
                 &[
-                    "-std=c99", "-O2",
+                    "-std=c99", "-O2", "-D_DEFAULT_SOURCE",
                     "-I", root.join("include").to_str().expect("UTF-8 include").to_owned().as_str(),
                     "-I", hacl_inc.to_str().expect("UTF-8 HACL path"),
                     "-I", krml_inc.to_str().expect("UTF-8 KaRaMeL path"),
