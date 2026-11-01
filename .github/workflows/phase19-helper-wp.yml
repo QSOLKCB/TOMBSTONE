@@ -8,6 +8,30 @@ on:
 permissions:
   contents: read
 jobs:
+  native-helper-regressions:
+    name: Real C99 helper checks (${{ matrix.cc }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native libraries
+        run: sudo apt-get update && sudo apt-get install -y gcc clang pkg-config libssl-dev
+      - name: Pin existing C99 proof inputs and execute native helper checks
+        env:
+          CC: ${{ matrix.cc }}
+        run: |
+          set -euo pipefail
+          python3 tools/check_phase18_receipt.py
+          python3 tools/check_phase14_evidence.py
+          python3 tools/check_phase17_evidence.py
+          "$CC" -std=c99 -O2 -Wall -Wextra -Wpedantic -Werror -Iinclude \
+            tests/formal/test_phase19_native.c src/crypto/fingerprint.c \
+            $(pkg-config --libs openssl) -o "$RUNNER_TEMP/phase19-native"
+          "$RUNNER_TEMP/phase19-native"
   actual-calculate-hash-wp:
     name: Actual C99 calculate_hash under stated external provider assumptions
     runs-on: ubuntu-24.04
