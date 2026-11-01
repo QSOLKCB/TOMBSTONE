@@ -54,3 +54,7 @@ Review the **exact head SHA** and distinguish executed tests from inferred resul
 Run `make fuzz` (requires Clang/libFuzzer with sanitizers) and the GitHub Actions architecture/replay matrix. This adds only synthetic fuzz inputs: never include user secrets in corpora or failure artifacts. `tools/check_portability.py` is an **independent test oracle**, not a production canonicalization implementation. Do not silently alter existing v1 receipt hashes, C99 API, ABI or machine contracts.
 
 Before any tag, enforce [docs/RELEASE_GATE.md](docs/RELEASE_GATE.md): preserve source, distinguish executed from inferred platform coverage, exact-head independent review with no actionable defects, collect CI evidence, source/asset checksums, and explicit maintainer decision. **Do not create a tag automatically or merge based on a prior-head approval.**
+
+## Phase 9 proof discipline
+
+The actual production C99 `splice_equal` function has quantified ACSL contracts and loop invariants. Run the native tests and `formal-wp.yml` with Frama-C/WP and Alt-Ergo, then inspect *executed* proof counts. `tools/check_wp_proofs.py` must reject missing, partial or vacuously zero proof goals; never suppress RTE or loop-related obligations merely to obtain a green check. Report assumptions including `\\valid_read` and the separate SHA provider contract. A successful relation-helper proof is **not** an unbounded end-to-end proof of `tb_witness_delete`, OpenSSL, receipt JSON, compiler, memory faults or a different architecture.
