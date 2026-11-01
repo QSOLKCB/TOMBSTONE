@@ -60,6 +60,12 @@ cp "release/$VERSION/POST_MERGE_EVIDENCE.md" "$OUT/POST_MERGE_EVIDENCE.md"
   sha256sum "$ARCHIVE" SOURCE_COMMIT.txt POST_MERGE_EVIDENCE.md > SHA256SUMS.txt
   sha256sum --check --strict SHA256SUMS.txt
 )
+# Freeze the reviewed checksums: any change to source or evidence must fail.
+cmp "$OUT/SHA256SUMS.txt" "release/$VERSION/SHA256SUMS.txt" || {
+  echo "FAIL: candidate asset hashes diverged from frozen reviewed manifest" >&2
+  exit 1
+}
+echo "FROZEN_MANIFEST_MATCH=PASS"
 echo "SOURCE_COMMIT=$SOURCE_SHA"
 echo "CANDIDATE_ASSETS=$OUT"
 echo "ARCHIVE_REPRODUCIBILITY=PASS"
