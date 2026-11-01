@@ -1,0 +1,105 @@
+{
+  "format": "tombstone.phase19.helper-wp-evidence",
+  "version": 1,
+  "phase": 19,
+  "source": {
+    "path": "src/encoding/receipt.c",
+    "git_blob_sha": "6fe3e8014e9c38ea42c43b9133f026967a4158e3",
+    "source_main_commit": "8b4c87899c18524eb1ce3f6e89641504caff67cf"
+  },
+  "reported_execution": {
+    "pr_head_sha": "b62384ef6a86f2a50981dbe20c37e49f6a9f7982",
+    "ci_checkout_sha": "2cc0e2a300b98213ecc56fc170975ec96894bb7a",
+    "workflow_run_id": 41348552076,
+    "workflow_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41348552076",
+    "class": "provider-CI-executed-not-independent-replay",
+    "tool": "Frama-C/WP 32.1",
+    "prover": "Alt-Ergo 2.5.4",
+    "rte_enabled": true,
+    "memory_model": "Bytes"
+  },
+  "targets": [
+    {
+      "function": "equal32",
+      "goal_count": 11,
+      "proved": 11,
+      "job_id": 124973534748,
+      "overlay_path": "tools/phase19_equal32_overlay.py",
+      "overlay_git_blob_sha": "f5e3df395de2d7aff3a91c8c6566427721033eca",
+      "claim": "real_equal32_body_matches_32_byte_equality_and_no_write_under_explicit_proof_only_memcmp_semantics",
+      "external_assumptions": [
+        "proof-only phase19_memcmp contract maps bytes 0 through 31 to zero equality",
+        "actual libc memcmp and ABI not proved"
+      ],
+      "status": "PASS_CONDITIONAL"
+    },
+    {
+      "function": "calculate_hash",
+      "goal_count": 40,
+      "proved": 40,
+      "job_id": 124973534915,
+      "overlay_path": "tools/phase19_calculate_hash_overlay.py",
+      "overlay_git_blob_sha": "96441be54854339ae54ce104009d4ddb8a68164d",
+      "claim": "actual_C99_calculate_hash_body_satisfies_declared_status_and_output_plus_private_model_state_frame_under_external_format_sha_provider_contracts",
+      "external_assumptions": [
+        "proof-only private mutable provider state is modeled by distinct static object",
+        "good_receipt and format_json modular contracts are assumed",
+        "tb_sha256_new/update/final/free status and effect contracts assumed",
+        "actual provider heap lifetime, cleanup and cryptographic digest bytes not proved"
+      ],
+      "status": "PASS_CONDITIONAL"
+    }
+  ],
+  "native": {
+    "compilers": [
+      "gcc",
+      "clang"
+    ],
+    "status": "PASS",
+    "source": "tests/formal/test_phase19_native.c",
+    "scope": "finite actual OpenSSL helper tests on synthetic public fixture data"
+  },
+  "residual": [
+    {
+      "id": "P19-03",
+      "status": "NOT_PROVED",
+      "scope": "original Phase18 calculate_hash assigns out-only contract requires an observational/private-heap projection of Phase19 provider-state effects"
+    },
+    {
+      "id": "A04",
+      "status": "OPEN",
+      "scope": "actual OpenSSL/HACL SHA2 provider correctness and allocated context lifetime"
+    },
+    {
+      "id": "A05",
+      "status": "OPEN",
+      "scope": "complete canonical JSON parser/encoder and hash-domain/refinement"
+    }
+  ],
+  "rejected_attempts": [
+    {
+      "function": "equal32",
+      "proved": 13,
+      "total": 17,
+      "reason": "four Frama-C libc initialization/danglingness timeouts before explicit proof-only external memcmp contract"
+    },
+    {
+      "function": "calculate_hash",
+      "proved": 37,
+      "total": 46,
+      "reason": "nine private-provider-state frame timeouts before output-plus-private-state model; not retroactively a pass"
+    }
+  ],
+  "excluded_claims": [
+    "No actual libc memcmp implementation proof",
+    "No real SHA2 algorithm/provider, allocator lifetime or cleanup proof",
+    "No proof that the provider-only state projection discharges Phase18's stronger frame",
+    "No complete JSON parser or serializer proof",
+    "No source-to-binary, OS/hardware, independently trusted chronology, historical deletion or physical erasure"
+  ],
+  "release": {
+    "tag": "v0.1.0",
+    "modified": false
+  },
+  "promotion": "PROOF_SCOPED_CONDITIONAL_ONLY_BRIDGE_BLOCKED"
+}
