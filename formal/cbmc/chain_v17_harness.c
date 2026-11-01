@@ -14,7 +14,7 @@ void __CPROVER_assert(int, const char *);
 
 void check_null_and_empty(void)
 {
-    tb_receipt_v1 record;
+    tb_receipt_v1 record = {0};
     unsigned int n = nondet_uint();
     __CPROVER_assume(n <= 3u);
     tb_status rc = tb_receipt_verify_chain(NULL, (size_t)n, NULL);
@@ -25,7 +25,7 @@ void check_null_and_empty(void)
 
 void check_genesis_nonzero(void)
 {
-    tb_receipt_v1 record;
+    tb_receipt_v1 record = {0};
     record.has_previous = nondet_int();
     __CPROVER_assume(record.has_previous != 0);
     record.receipt_hash[0] = 0xa5;
@@ -40,7 +40,7 @@ void check_genesis_nonzero(void)
 
 void check_oversized_count(void)
 {
-    tb_receipt_v1 record;
+    tb_receipt_v1 record = {0};
     size_t size = (size_t)-1;
     tb_status rc = tb_receipt_verify_chain(&record, size, NULL);
     __CPROVER_assert(rc == TB_ERR_ARGUMENT,
