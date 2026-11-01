@@ -147,3 +147,38 @@ fn non_utf8_arguments_are_rejected_without_disclosing_paths() {
         b"tombstone: command arguments must be valid UTF-8\n"
     );
 }
+
+
+#[test]
+fn phase15_exact_64_mib_file_cap_and_no_data_on_failure() {
+    use std::fs::OpenOptions;
+    use std::time::{SystemTime, UNIX_EPOCH};
+
+    const LIMIT: u64 = 64 * 1024 * 1024;
+    let nonce = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos();
+    let path = std::env::temp_dir().join(format!(
+        "tombstone-phase15-cap-{}-{nonce}", std::process::id()
+    ));
+    // Sparse local fixture: allocates no persistent user data or huge in-memory Vec.
+    let file = OpenOptions::new().create_new(true).write(true).open(&path).unwrap();
+    let at_limit = (|| {
+        file.set_len(LIMIT).unwrap();
+        let valid = Command::new(env!("CARGO_BIN_EXE_tombstone"))
+            .args(["hash"]).arg(&path).output().unwrap();
+        assert_eq!(valid.status.code(), Some(0), "exactly 64 MiB must remain legal");
+        assert!(valid.stderr.is_empty());
+        assert!(string(&valid.stdout).contains("\"size\":67108864}"));
+        assert!(!string(&valid.stdout).contains("private"));
+
+        file.set_len(LIMIT + 1).unwrap();
+        for op in ["hash", "verify"] {
+            let invalid = Command::new(env!("CARGO_BIN_EXE_tombstone"))
+                .arg(op).arg(&path).output().unwrap();
+            assert_eq!(invalid.status.code(), Some(2), "oversize {op} must fail before C99");
+            assert!(invalid.stdout.is_empty(), "oversize {op} emitted success JSON");
+            assert_eq!(invalid.stderr, b"tombstone: input exceeds 64 MiB limit\n");
+        }
+    })();
+    std::fs::remove_file(&path).unwrap();
+    at_limit
+}
