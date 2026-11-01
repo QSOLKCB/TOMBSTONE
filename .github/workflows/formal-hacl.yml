@@ -31,6 +31,18 @@ jobs:
           set -euo pipefail
           make SHA256_BACKEND=openssl CC=${{ matrix.compiler }} test
           make SHA256_BACKEND=hacl CC=${{ matrix.compiler }} test
+      - name: Exercise HACL adapter allocation and update failures
+        run: |
+          set -euo pipefail
+          HACL_INC="-Ivendor/hacl-star/dist/gcc-compatible -Ivendor/hacl-star/dist/karamel/include -Ivendor/hacl-star/dist/karamel/krmllib/dist/minimal"
+          ${{ matrix.compiler }} -std=c99 -O2 -D_DEFAULT_SOURCE -Iinclude $HACL_INC \
+            tests/formal/test_hacl_adapter_faults.c build/hacl/libtombstone.a \
+            -Wl,--wrap=calloc -Wl,--wrap=malloc \
+            -Wl,--wrap=Hacl_Hash_SHA2_update_256 \
+            -o "$RUNNER_TEMP/tombstone-hacl-faults"
+          "$RUNNER_TEMP/tombstone-hacl-faults"
+      - name: HACL ASan and UBSan C99 tests
+        run: make SHA256_BACKEND=hacl CC=${{ matrix.compiler }} sanitizer-test
       - name: Build independent Rust CLI binaries
         run: |
           set -euo pipefail
