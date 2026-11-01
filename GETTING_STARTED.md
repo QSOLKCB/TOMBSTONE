@@ -1,31 +1,39 @@
-# Getting started — C99 Phases 1–3
+# Getting started — Phase 4 Rust CLI and C99 engine
 
-TOMBSTONE now has SHA-256 fingerprinting, caller-supplied deletion-splice verification, and canonical receipt/chain validation in C99, **but no user CLI**. It reads raw byte buffers, hashes them, and can mathematically verify a reported deletion; it does not edit files, collect editor history, or serialize receipts.
+TOMBSTONE can now fingerprint raw bytes, verify caller-supplied deletion-splice relationships, produce canonical JSON receipts, and validate receipt chains. The new Rust command uses the **existing C99 engine** through a narrow FFI boundary. It never erases, deletes or alters files.
 
-## Ubuntu dependencies and tests
+## Ubuntu dependencies
 
 \`\`\`sh
-sudo apt-get install build-essential pkg-config libssl-dev python3
+sudo apt-get install build-essential pkg-config libssl-dev python3 cargo rustc
 git clone https://github.com/QSOLKCB/TOMBSTONE.git
 cd TOMBSTONE
-
-make                  # builds build/libtombstone.a
-make test             # fingerprints, splices, receipt vectors/negative parsing, chain checks
-make sanitizer-test   # address and undefined-behaviour sanitizer tests
-make reproducibility  # two clean deterministic archive builds
-make docs-check       # existing synthetic receipt fixture checks
 \`\`\`
 
-The public headers are [fingerprint.h](include/tombstone/fingerprint.h), [deletion.h](include/tombstone/deletion.h) and [receipt.h](include/tombstone/receipt.h). Read [the Phase 3 API guide](docs/RECEIPT_ENGINE.md) for the new serializer, parser and chain verifier. Begin with [Phase 2's API walkthrough](docs/DELETION_WITNESS.md) for the exact-splice contract. The [Phase 1 fingerprint guide](docs/FINGERPRINT_API.md) still applies.
+## Native and Rust checks
 
-## Conceptual example
-
-\`\`\`text
-before: 1 2 3 4 5
-removed: 3 4␠  (4 bytes at offset 4)
-after:  1 2 5
+\`\`\`sh
+make test
+make sanitizer-test
+make reproducibility
+make docs-check
+cargo test --workspace --locked --offline
+cargo build -p tombstone-cli --release --locked --offline
 \`\`\`
 
-\`tb_witness_delete\` checks the **exact byte relationship** and returns only lengths and SHA-256 digests. \`tb_observe_transition\` checks before and after but makes **no deletion claim**. These are two different levels of supplied evidence, not proof a historical edit occurred.
+Run the completed binary:
 
-The machine receipt v1 schema in [machine/](machine/README.md) is now exercised by the C99 Phase 3 parser and the three preexisting golden receipts. \`make docs-check\` remains a separate Python fixture checker, not the engine's verifier. Read [SECURITY.md](SECURITY.md) before using secret material.
+\`\`\`sh
+target/release/tombstone hash tests/fixtures/before.txt
+target/release/tombstone observe tests/fixtures/before.txt tests/fixtures/after.txt
+target/release/tombstone delete tests/fixtures/before.txt tests/fixtures/deleted.txt tests/fixtures/after.txt 4
+
+target/release/tombstone verify-chain \
+    machine/examples/explicit-delete-v1.json \
+    machine/examples/observed-transition-v1.json \
+    machine/examples/unchanged-v1.json
+\`\`\`
+
+The last command verifies **local chain consistency only**. Supply \`--trusted-head\` with an independently known final SHA-256 to check an external commitment. The original golden fixtures are public synthetic test data. No real deleted information is retained by TOMBSTONE receipts.
+
+Read [docs/CLI.md](docs/CLI.md) for commands, exact stdout/exit contracts and security limits, and [SECURITY.md](SECURITY.md) for the distinction between a witnessed splice and real-world erasure. The TUI and GTK are not yet implemented.

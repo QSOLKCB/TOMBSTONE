@@ -1,6 +1,6 @@
 # Security and privacy model
 
-**Scope today:** Phase 1 implements C99 SHA-256 through OpenSSL EVP. Phase 2 adds caller-supplied, exact byte-splice verification and observed-transition classification (review pending), returning only in-memory digests/lengths/offset. Neither library function opens files, deletes data, logs removed bytes nor serializes receipts. Phase 3 adds deterministic receipt serialization, strict parsing, and hash-chain checking; secure erasure, historic attestation, trusted anchoring infrastructure and user interfaces are not implemented. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
+**Scope today:** Phase 1 implements C99 SHA-256 through OpenSSL EVP. Phase 2 adds caller-supplied, exact byte-splice verification and observed-transition classification, returning only in-memory digests/lengths/offset. Neither library function opens files, deletes data, logs removed bytes nor serializes receipts. Phase 3 adds deterministic receipt serialization, strict parsing, and hash-chain checking; secure erasure, historic attestation, trusted anchoring infrastructure, TUI and GTK are not implemented. Phase 4 provides only a Rust CLI that reads explicitly named inputs or stdin, bounded at 64 MiB per input. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
 
 ## Nonclaims
 
@@ -17,6 +17,10 @@ Witnessing verifies a mathematical splice identity, **not an externally authenti
 ## Phase 3 tamper boundary
 
 A self-hashed receipt or locally consistent chain is not an authenticated historical record: a malicious party can rewrite the whole chain. `tb_receipt_verify_chain` can compare the final digest with a caller-provided independently trusted head, but obtaining and safeguarding that trusted head is outside this library. The canonicalizer handles **only the fixed ASCII/JSON-safe integer receipt schema**, not arbitrary JSON. Receipts remain subject to dictionary guessing for short secret deleted spans.
+
+## Phase 4 CLI and FFI boundary
+
+The new Rust CLI loads caller-selected files/standard input into process memory, calls the C99 core through a minimal Rust FFI and emits *only* C99-derived canonical receipts or deterministic status JSON. The command does not delete or modify any input files and does not print their names/content in receipt output or diagnostics. Memory allocation is bounded by a 64 MiB per-input cap, but copies may remain in process memory, OS swap or external backups. The Rust adapter checks C ABI versions and bounds output buffers; the C ABI itself cannot validate arbitrary foreign pointers. Only trusted final hashes independently preserved outside the local history can anchor chain authenticity. The tool operates offline and has no telemetry, interactive prompts or network calls.
 
 ## Planned controls
 

@@ -1,0 +1,36 @@
+name: Rust CLI and C99 ABI Phase 4
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rust-cli:
+    name: Rust FFI / CLI integration / native C99 parity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm runner Rust toolchain
+        run: rustc --version && cargo --version
+      - name: Install C99 OpenSSL backend
+        run: sudo apt-get update && sudo apt-get install -y build-essential libssl-dev pkg-config
+      - name: Test offline, without third-party Rust crates
+        run: cargo test --workspace --offline --locked
+      - name: Build release command
+        run: cargo build -p tombstone-cli --release --offline --locked
+      - name: Verify built CLI with canonical fixture receipts
+        run: |
+          target/release/tombstone verify machine/examples/explicit-delete-v1.json
+          target/release/tombstone verify-chain \
+            machine/examples/explicit-delete-v1.json \
+            machine/examples/observed-transition-v1.json \
+            machine/examples/unchanged-v1.json \
+            --trusted-head 84c0b5f9e478c284553822fb95fe31a72ce71a35070e963d67c328fb777f25e6
+      - name: Phase 1–3 C99 regression tests
+        run: make test

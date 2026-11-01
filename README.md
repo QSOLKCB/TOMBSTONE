@@ -7,29 +7,47 @@
   <em>The data is gone from the receipt. The tombstone has a checksum.</em>
 </p>
 
-TOMBSTONE is a **C99-first** project for deterministic, independently checkable evidence about file transitions and explicit caller-witnessed deletion splices.
+TOMBSTONE is a **C99-first** project for deterministic, independently checkable evidence about file transitions and explicit caller-supplied deletion splices.
 
-**Implementation status:** Phases 0–2 are merged. **Phase 3 is implemented in a reviewable PR**, introducing deterministic canonical JSON v1 receipts, strict parsing, hash verification and optional externally anchored chain verification. No filesystem deletion, Rust CLI/TUI, or GTK exists yet. The receipt contract remains subject to Phase 3 review.
+**Status:** Phases 0–3 are merged. **Phase 4 adds a Rust CLI and safe FFI adapter (pending PR review)**. The C99 core remains authoritative for all hashing, splice validation, receipt encoding/parsing and chain verification. Rust provides argument handling and presentation. A Rust TUI (Phase 5) and optional GTK4 GUI (Phase 6) are still planned.
 
-- **C99 engine:** OpenSSL EVP SHA-256 (Phase 1), exact-splice witnessing and observed transitions (Phase 2), and canonical receipts/chain verification (Phase 3).
-- **Evidence boundary:** a verified splice establishes a mathematical relationship among supplied buffers—not who performed an edit, whether it happened historically, or whether bytes were securely erased.
-- **Rust CLI + TUI:** planned agent/human interfaces; **GTK4** remains optional.
-- **Document separation:** human prose in root Markdown and [docs](docs/INDEX.md), machine schemas/examples in [machine/](machine/README.md).
+## Try the CLI
 
-## Build and test
-
-Requires C99 compiler, GNU Make, GNU ar, pkg-config, and OpenSSL development libraries (Ubuntu: \`build-essential pkg-config libssl-dev\`).
+Requires Ubuntu C99 toolchain, OpenSSL development libraries and Rust/Cargo:
 
 \`\`\`sh
-make                  # build/libtombstone.a
-make test             # SHA-256, splice, canonical receipts, malformed/chain cases
-make sanitizer-test   # ASan + UBSan (GCC)
-make reproducibility  # compare two independent deterministic static archives
-make docs-check       # original machine receipt toy fixtures (not a verifier)
+sudo apt-get install build-essential pkg-config libssl-dev cargo rustc
+cargo test --workspace --locked --offline
+cargo build -p tombstone-cli --release --locked --offline
+
+target/release/tombstone hash tests/fixtures/before.txt
+target/release/tombstone delete tests/fixtures/before.txt \
+    tests/fixtures/deleted.txt tests/fixtures/after.txt 4
+target/release/tombstone verify-chain \
+    machine/examples/explicit-delete-v1.json \
+    machine/examples/observed-transition-v1.json \
+    machine/examples/unchanged-v1.json
 \`\`\`
 
-Public headers: [fingerprint.h](include/tombstone/fingerprint.h), [deletion.h](include/tombstone/deletion.h), [receipt.h](include/tombstone/receipt.h). See the [Phase 3 receipt API](docs/RECEIPT_ENGINE.md). See [Phase 2 API guide](docs/DELETION_WITNESS.md), [fingerprint API](docs/FINGERPRINT_API.md), and [getting started](GETTING_STARTED.md).
+The chain command requires receipts in genesis-to-head order. Use the [CLI guide](docs/CLI.md) for an example with an independently trusted head.
 
-**Privacy warning:** SHA-256 is not encryption. Fingerprints of short, guessable removed data can be brute-forced. No real deleted content is retained in the output evidence structure; callers are responsible for their own buffers, editor histories and backups.
+The CLI emits deterministic machine-readable JSON to stdout, diagnostics to stderr, and nonzero exit codes on failure. It has no interactive prompts, no network operations, and **never deletes a file**.
 
-Governance: [ARCHITECTURE.md](ARCHITECTURE.md), [INVARIANTS.md](INVARIANTS.md), [AGENTS.md](AGENTS.md), [ROADMAP.md](ROADMAP.md), [SECURITY.md](SECURITY.md). License: [Apache-2.0](LICENSE).
+## Validate the C99 core
+
+\`\`\`sh
+make test              # Phase 1–3 native tests
+make sanitizer-test    # ASan + UBSan
+make reproducibility   # deterministic static archives
+make docs-check        # synthetic receipt fixture checks
+\`\`\`
+
+- [Rust CLI and FFI](docs/CLI.md)
+- [C99 receipt API](docs/RECEIPT_ENGINE.md)
+- [Witnessed splice API](docs/DELETION_WITNESS.md)
+- [SHA-256 API](docs/FINGERPRINT_API.md)
+- [Architecture](ARCHITECTURE.md), [invariants](INVARIANTS.md), [agent instructions](AGENTS.md), [roadmap](ROADMAP.md), [security](SECURITY.md)
+
+**Trust boundary:** A valid receipt asserts a cryptographically consistent *caller-supplied* splice, not authenticated proof of an actual edit, authorship, time or erasure. An unanchored chain can be rewritten wholesale; SHA-256 of guessable deleted data does not conceal that data.
+
+Human prose is in root Markdown and \`docs/\`; the versioned machine contract is in \`machine/\`. License: [Apache-2.0](LICENSE).

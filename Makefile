@@ -15,7 +15,7 @@ TEST_UNIT := $(BUILD_DIR)/test_fingerprint $(BUILD_DIR)/test_deletion $(BUILD_DI
 TEST_INTEGRATION := $(BUILD_DIR)/test_public_link $(BUILD_DIR)/test_deletion_link
 TESTS := $(TEST_UNIT) $(TEST_INTEGRATION)
 
-.PHONY: all test clean docs-check sanitizer-test reproducibility
+.PHONY: all test clean docs-check sanitizer-test reproducibility rust-test rust-build
 all: $(LIB)
 
 $(BUILD_DIR):
@@ -63,6 +63,12 @@ reproducibility:
 
 docs-check:
 	python3 tools/check_docs.py
+
+rust-test:
+	cargo test --workspace --offline --locked
+
+rust-build:
+	cargo build -p tombstone-cli --release --offline --locked
 
 clean:
 	rm -rf build

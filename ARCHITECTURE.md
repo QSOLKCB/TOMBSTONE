@@ -2,7 +2,7 @@
 
 ## Boundary and maturity
 
-This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprinting and exact deletion-splice verification**. Phase 2 is merged. Phase 3 adds schema-limited RFC 8785 canonical receipt serialization, strict parsing and hash-link validation, pending review; no filesystem edit facility, Rust interface or GTK UI exists. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
+This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprinting and exact deletion-splice verification**. Phase 2 is merged. Phase 3 provides merged schema-limited RFC 8785 receipt serialization, strict parsing and hash-link validation. Phase 4 introduces a safe Rust FFI adapter and noninteractive CLI (in PR, pending review). No filesystem deletion, TUI or GTK UI exists. TOMBSTONE is a receipt system for *witnessed deletions* and *observed transitions*, not an archive of the deleted content.
 
 \`\`\`text
              Human terminal        Agents/scripts          Optional desktop
@@ -34,7 +34,7 @@ This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprint
 
 **Phase 2 merged:** `include/tombstone/deletion.h` and `src/core/deletion.c` classify full before/after buffers and validate caller-provided exact deletion splices, returning only hashes, sizes and the verified claimed offset. The output is an in-memory C99 struct, **not** JSON. An observed transition never infers a removed span; multiple offsets can satisfy repeated-byte cases.
 
-**Phase 3 implemented (review pending):** `include/tombstone/receipt.h` and `src/encoding/receipt.c` produce canonical v1 JSON (strictly limited to fixed ASCII fields and safe integers), parse validated records, recompute SHA-256 commitments and verify genesis/links/optional trusted head. This is a restricted RFC 8785 JCS implementation, **not** arbitrary JSON canonicalization or historical deletion attestation.
+**Phase 3 merged:** `include/tombstone/receipt.h` and `src/encoding/receipt.c` produce canonical v1 JSON (strictly limited to fixed ASCII fields and safe integers), parse validated records, recompute SHA-256 commitments and verify genesis/links/optional trusted head. This is a restricted RFC 8785 JCS implementation, **not** arbitrary JSON canonicalization or historical deletion attestation.
 
 **Later phases must add:**
 
@@ -44,10 +44,12 @@ This is a staged target design. **Phases 1–2 implement C99 SHA-256 fingerprint
 
 ### Rust frontends
 
-- \`bindings/rust/\`: minimum unsafe FFI surface; safe Rust errors and buffer ownership.
-- \`apps/cli/\`: noninteractive commands, pipe-safe stdout JSON and stderr diagnostics, stable exit codes; no implicit prompts in machine mode.
+- `bindings/rust/`: Phase 4 safe Rust FFI, with only an internal unsafe C ABI surface, Rust slice/ownership checks and native C99 archive linking.
+- `apps/cli/`: Phase 4 noninteractive commands, pipe-safe deterministic JSON and stderr diagnostics, stable exit codes; no implicit prompts.
 - \`apps/tui/\`: interactive receipt inspection and guided explicit-deletion workflows via the same adapter.
 - \`apps/gtk/\`: future, optional GTK4 desktop app; no product logic beyond UI orchestration.
+
+**Phase 4 build boundary:** Cargo build scripts compile the unchanged C99 source into a private native static archive linked with system OpenSSL. Rust never duplicates receipt serialization, hashing or evidence classification. The CLI reads bounded caller-controlled file bytes (or stdin) and supplies them to C99; the core itself still performs no filesystem I/O.
 
 ### Evidence classes
 
@@ -82,9 +84,10 @@ Persist only receipt metadata: event kind, digests, byte lengths, optional verif
 docs/                      human explanations, threat model, decisions, asset
 machine/                   JSON Schema and machine-readable example receipts
 include/tombstone/         public C99 fingerprint and deletion-evidence headers
-src/{core,crypto,encoding}/ implemented splice and crypto core; encoding planned
-bindings/rust/             Rust FFI adapter target
-apps/{cli,tui,gtk}/        Rust interface targets (GTK optional)
+src/{core,crypto,encoding}/ C99 implementation of splices, SHA-256 and receipts
+bindings/rust/             implemented safe Rust C99 adapter
+apps/cli/                   implemented headless Rust CLI (Phase 4)
+apps/{tui,gtk}/             planned terminal and optional desktop UIs
 tests/{unit,integration,fixtures}/ validation targets + public toy fixture
 tools/                     docs/fixture validation
 examples/                  later user-facing usage examples
