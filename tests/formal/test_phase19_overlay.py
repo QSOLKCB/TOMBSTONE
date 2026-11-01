@@ -11,7 +11,8 @@ p=load("phase18_overlay","phase18_wp_overlay.py")
 src=p.SOURCE.read_bytes().decode()
 out=m.render()
 assert out.count("static int equal32(const unsigned char *a, const unsigned char *b)")==1
-assert out.count("extern int memcmp(")==1
+assert out.count("extern int phase19_memcmp(")==1
+assert "#define memcmp phase19_memcmp" in out
 assert "ensures \\result == 1 <==>" in out
 assert "ensures \\result == 0 <==>" in out
 assert "assigns \\nothing;" in out
