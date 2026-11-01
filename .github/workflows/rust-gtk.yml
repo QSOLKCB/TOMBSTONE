@@ -1,0 +1,39 @@
+name: Optional GTK4 desktop Phase 6
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gtk:
+    name: GTK4 native build and Xvfb smoke (headless apps unchanged)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm compiler
+        run: rustc --version && cargo --version
+      - name: Install native GTK4/OpenSSL for optional GUI only
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev libgtk-4-dev libncurses-dev xvfb dbus
+      - name: Verify isolated GUI Cargo package and C99 parity tests
+        run: cargo test --manifest-path apps/gtk/Cargo.toml --offline --locked
+      - name: Build native desktop application
+        run: cargo build --manifest-path apps/gtk/Cargo.toml --release --offline --locked
+      - name: Exercise GTK4 activation, repeated activation, and C99 SHA-256 under Xvfb
+        run: |
+          xvfb-run -a apps/gtk/target/release/tombstone-gtk --smoke-test | tee gtk-smoke.txt
+          grep -q 'repeat activation reused one window' gtk-smoke.txt
+      - name: Verify second-process GTK activation through D-Bus
+        run: dbus-run-session -- xvfb-run -a python3 tools/check_gtk_ipc.py apps/gtk/target/release/tombstone-gtk
+      - name: Verify C99 tests and separate root Rust workspace
+        run: |
+          make test
+          make docs-check
+          cargo test --workspace --offline --locked
+          cargo build -p tombstone-cli --release --offline --locked
+          target/release/tombstone verify machine/examples/explicit-delete-v1.json

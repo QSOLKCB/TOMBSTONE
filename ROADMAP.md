@@ -1,25 +1,26 @@
 # TOMBSTONE roadmap
 
-**Phases 0–4 are merged. Phase 5 TUI is implemented in this PR and awaits independent exact-head review.** Phases 6–7 remain planned.
+**Phases 0–5 have merged. Phase 6 GTK4 desktop is implemented in this PR and awaits review and CI. Phase 7 is planned.**
 
 | Phase | Deliverable | Acceptance gate | Status |
 | --- | --- | --- | --- |
-| **0 — Foundation** | Human/machine documents, receipt schema and fixtures | Documentation tests | Merged |
-| **1 — C99 SHA-256** | EVP SHA-256 with versioned byte-safe C ABI | Vectors, sanitizers and reproducibility | Merged |
-| **2 — C99 splice evidence** | Exact deletion-splice validation and observed transitions | Negative/overflow/binary tests | Merged |
-| **3 — Canonical receipts** | Restricted RFC 8785 JSON and linked hash verification | Golden vectors, chain/parse adversarial tests | Merged |
-| **4 — Rust FFI and CLI** | Safe adapter and noninteractive deterministic JSON CLI | C99 parity, I/O privacy and argument regression tests | Merged |
-| **5 — Rust ncurses TUI** | Guided evidence creation, receipt inspection, full-chain checks, explicit saving | Independent Rust workflow tests, terminal check, C99 parity | In PR; pending review |
-| **6 — Optional GTK4** | Thin desktop UI, same C99 logic | Headless build unaffected, cross-interface parity | Planned |
-| **7 — Hardening / release** | Fuzzing, independent anchoring options, portability | Evidence-based review, immutable version tag | Planned |
+| **0 — Foundation** | Human/machine docs, receipt fixtures, project layout | Documentation checks | Merged |
+| **1 — C99 SHA-256** | OpenSSL EVP, byte-safe C ABI | Vectors, sanitizers, reproducibility | Merged |
+| **2 — C99 deletion witness** | Exact splice checking, observed transitions | Invalid-byte/offset tests | Merged |
+| **3 — Receipts/chains** | Restricted RFC 8785 JSON and linked hashes | Golden hashes, malformed/chain tests | Merged |
+| **4 — Rust FFI/CLI** | Safe C99 adapter and deterministic headless commands | CLI parity, safe errors | Merged |
+| **5 — Rust TUI** | ncurses-guided workflows, inspected receipts, create-new save | PTY and C99 parity | Merged |
+| **6 — GTK4 desktop** | Separate native GTK4 frontend using existing C99 evidence workflows | Isolated native build, Xvfb smoke, parity/no-overwrite tests, headless unaffected | In PR; review pending |
+| **7 — Hardening/release** | Fuzzing, portability, independent anchoring options | Independent exact-head review and immutable tag | Planned |
 
-## Phase 5 specifics
+## Phase 6 scope
 
-- `apps/tui` contains Rust workflows and a separate terminal executable linked to **system ncursesw** (no third-party Rust crates).
-- **All** hashing, splice validation, receipt generation/parsing and chain checking still run in C99 through the existing Rust FFI.
-- Interactive selection, scrolling, read-only receipt inspection, optional predecessor commitment, ordered chain validation and optional externally trusted head.
-- Explicit `s` export of **only** canonical JSON; create-new (no overwrite), Unix mode 0600. No automatic writes, filesystem deletion, recovery or secure erasure.
-- Standalone headless CLI and native C99 remain usable without ncurses; the TUI requires an interactive terminal and TERM configuration.
-- C99 and Rust regressions remain mandatory. Phase 6 will add a GTK desktop UI only after Phase 5 is reviewed.
+- `apps/gtk` is a **separate Cargo workspace** and remains excluded from the root. `libgtk-4-dev` is required only when building the GUI.
+- Six native GTK4 tabs: fingerprint, observe, verify supplied deletion, inspect receipt, verify ordered chain and explicitly save canonical JSON without overwrite.
+- The GUI calls the Phase 5 Rust workflow library and established FFI, which exclusively call C99 for evidence and cryptography. No duplicated hash/receipt code, Node.js or third-party Rust crates.
+- C99 golden-vector parity, anchored chain tests, input privacy and GTK startup tested under Xvfb. The original headless CLI/TUI/C99 jobs remain intact.
+- No automatic deletion, file replacement, remote services, signatures, credentials, history-author authentication or secure erasure claims.
 
-See [TUI guide](docs/TUI.md), [INVARIANTS.md](INVARIANTS.md) and [SECURITY.md](SECURITY.md). A verified splice is not proof of a real-world deletion and an unanchored chain is not authenticated history.
+**Next Phase 7:** fuzz input parsers and FFI, independently validate cross-platform replay, review anchoring/privacy tradeoffs and only then consider an immutable release.
+
+See [GTK guide](docs/GTK.md), [invariants](INVARIANTS.md) and [security](SECURITY.md).

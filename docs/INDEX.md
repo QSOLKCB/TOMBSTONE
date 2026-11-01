@@ -2,6 +2,7 @@
 
 All files here are human-readable explanations. The machine-readable contract and examples live separately in [machine/](../machine/README.md).
 
+- [Optional GTK4 desktop](GTK.md) — Phase 6 native interface, build isolation and privacy boundary
 - [Rust ncurses TUI](TUI.md) — Phase 5 guided human inspection and verification, C99 interface boundary
 - [Rust CLI and FFI](CLI.md) — Phase 4 headless commands, statuses, C99 boundary and trust limits
 - [C99 receipt engine](RECEIPT_ENGINE.md) — Phase 3 canonical JSON, strict parser and SHA-256 chains
