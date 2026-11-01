@@ -91,9 +91,15 @@ fn read_trusted_head_file(path: &str) -> Result<[u8; 32], CliError> {
     return Err(CliError::usage("trusted-head files require a supported Linux target"));
 
     #[cfg(target_os = "linux")]
-    let mut opened = {
+    let opened = {
         use std::os::unix::fs::OpenOptionsExt;
         const O_NONBLOCK: i32 = 0o4000;
+        // Linux AArch64 overrides asm-generic/fcntl.h: 0100000 is
+        // O_NOFOLLOW there, while x86-64 uses 0400000. The latter on
+        // AArch64 is O_LARGEFILE and silently follows symlinks.
+        #[cfg(target_arch = "aarch64")]
+        const O_NOFOLLOW: i32 = 0o100000;
+        #[cfg(target_arch = "x86_64")]
         const O_NOFOLLOW: i32 = 0o400000;
         std::fs::OpenOptions::new().read(true)
             .custom_flags(O_NONBLOCK | O_NOFOLLOW)
