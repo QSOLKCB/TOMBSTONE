@@ -80,6 +80,7 @@ record for that attempt, not current-head review approval. The local sanitizer
 attempt could not complete because LeakSanitizer could not inspect `/proc` in
 the execution environment; sanitizer coverage comes from the separate CI jobs.
 
-The PR remains draft while the stronger Phase 18 bridge and exact-head
-independent review are outstanding. A successful rerun of the unchanged
+PR #27 merged after exact-head review at `897a736d694ddcb9344ce9179cc473138e9247a5`.
+The separate [P19-03 follow-up](PHASE19_BRIDGE.md) addresses caller-memory
+composition and ownership; the literal global-frame/provider refinement remains open. A successful rerun of the unchanged
 54-goal Phase 18 workflow still assumes its original helper frame.

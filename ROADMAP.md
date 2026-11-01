@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–18 are merged; v0.1.0 remains immutable. Phase 19 (draft PR #27) targets actual C99 equal32 and calculate_hash helper refinement using the private tombstone_phase19 context. Source and provider assumptions remain explicit; actual WP evidence is required before declaring closure.**
+**Phases 0–18 are merged; v0.1.0 remains immutable. Phase 19 helper proofs merged in PR #27. P19-03 now targets caller-memory composition and ownership in a separate follow-up; see docs/PHASE19_BRIDGE.md. Source and provider assumptions remain explicit; actual WP evidence is required before declaring closure.**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -23,14 +23,14 @@
 | **16 — Platform and provenance closure** | Explicit C99 target model, externally supplied offline head file, source-linked proof/trust ledger and physical-event distinctions | Negative custody/claim-inflation tests, Linux GCC/Clang x86-64/ARM64, exact-head review | PR #22 merged; physical and identity/time claims remain external |
 | **17 — Direct receipt-chain verification gates** | Real C99 prehash rejection, all six frozen-fixture chain permutations and trusted-head controls | CBMC exact-source 3 targets, GCC/Clang x86-64/ARM64 × both SHA providers | PR #24 merged; prehash proof is bounded |
 | **18 — Unbounded receipt-chain WP** | Unchanged C99 verifier under explicitly assumed calculate_hash/equal32 contracts | Frama-C 32.1: 54/54 goals under RTE, unbounded invariants and source/frame gate; exact-head review | PR #26 merged; SHA/JSON/physical assumptions still open |
-| **19 — Real helper refinement** | Prove actual equal32 and calculate_hash contracts; connect conditional chain result | Exact-source Frama-C/WP with RTE, real libc/SHA assumptions, native controls and review | Draft PR #27; issue #28; unfinished obligations remain open |
+| **19 — Real helper refinement** | Prove actual equal32 and calculate_hash contracts; connect conditional chain result | Exact-source Frama-C/WP with RTE, real libc/SHA assumptions, native controls and review | PR #27 merged; P19-03 follow-up; issue #28 remains open |
 
 
 ## Phase 19 — Actual C99 helper refinement
 
 - Load the selective private `tombstone_phase19` reference route and revalidate the current source; no donor result becomes accepted proof automatically.
 - Target actual `equal32` under an explicit external `memcmp` contract; target actual `calculate_hash` under explicit formatter and streaming SHA provider contracts. All positive WP claims need executed complete goals.
-- Re-run the Phase 18 54/54 chain proof as a bridge once helper obligations are discharged; actual SHA digest correctness, whole JSON engine, runtime/compiler and historical claims remain open. See [Phase 19](docs/PHASE19_HELPERS.md) and issue #28.
+- Preserve and re-run the original Phase 18 54/54 theorem independently; the [P19-03 caller-frame composition](docs/PHASE19_BRIDGE.md) uses a separately named private-state frame and explicit ownership premises, not silent weakening of the original theorem; actual SHA digest correctness, whole JSON engine, runtime/compiler and historical claims remain open. See [Phase 19](docs/PHASE19_HELPERS.md) and issue #28.
 
 ## Phase 18 — Conditional unbounded C99 receipt-chain proof
 
