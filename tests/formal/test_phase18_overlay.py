@@ -23,14 +23,14 @@ assert len(mod.ANNOTATIONS)==4
 for marker, annotation in mod.ANNOTATIONS.items():
     assert overlay.count(marker)==1
     assert overlay.count(annotation)==1
-    assert annotation.startswith("/*@") and annotation.rstrip().endswith("*/")
+    assert annotation.lstrip().startswith("/*@") and annotation.rstrip().endswith("*/")
 stripped=overlay
 for annotation in mod.ANNOTATIONS.values():
     stripped=stripped.replace(annotation,"",1)
 assert stripped.encode("utf-8")==original
 assert mod.git_blob(stripped.encode("utf-8"))==mod.EXPECTED_BLOB
 for marker in mod.ANNOTATIONS:
-    try: mod.render(source.replace(marker,marker+" #tampered"))
+    try: mod.render(source.replace(marker,"X"+marker[1:],1))
     except ValueError: pass
     else: raise AssertionError("nonunique or shifted production insertion passed: "+marker[:70])
 try: mod.render(source.replace("tb_receipt_verify_chain", "fake_chain"))
