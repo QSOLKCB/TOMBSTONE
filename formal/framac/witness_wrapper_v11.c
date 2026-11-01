@@ -6,9 +6,9 @@
 #include "tombstone/deletion.h"
 
 /*@
-  requires length == 0 || \valid_read(((const unsigned char *)data)+(0 .. length-1));
+  requires length == 0 || \valid_read(((const char *)data)+(0 .. length-1));
   requires \valid(out+(0 .. TB_SHA256_DIGEST_SIZE-1));
-  requires \separated(((const unsigned char *)data)+(0 .. length-1),
+  requires \separated(((const char *)data)+(0 .. length-1),
                       out+(0 .. TB_SHA256_DIGEST_SIZE-1));
   assigns out[0 .. TB_SHA256_DIGEST_SIZE-1];
   ensures \result == TB_OK || \result == TB_ERR_CRYPTO || \result == TB_ERR_MEMORY;
@@ -25,11 +25,11 @@ tb_status tb_sha256_bytes(const void *data, size_t length,
 /*@
   requires \valid(temp);
   requires before_size == 0 ||
-    \valid_read(((const unsigned char *)before)+(0 .. before_size-1));
+    \valid_read(((const char *)before)+(0 .. before_size-1));
   requires after_size == 0 ||
-    \valid_read(((const unsigned char *)after)+(0 .. after_size-1));
-  requires \separated(temp, ((const unsigned char *)before)+(0 .. before_size-1));
-  requires \separated(temp, ((const unsigned char *)after)+(0 .. after_size-1));
+    \valid_read(((const char *)after)+(0 .. after_size-1));
+  requires \separated(temp, ((const char *)before)+(0 .. before_size-1));
+  requires \separated(temp, ((const char *)after)+(0 .. after_size-1));
   assigns temp->before_sha256[0 .. TB_SHA256_DIGEST_SIZE-1],
           temp->after_sha256[0 .. TB_SHA256_DIGEST_SIZE-1];
   ensures \result == TB_OK || \result == TB_ERR_CRYPTO ||
