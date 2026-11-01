@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BLOBS = {
     "src/encoding/receipt.c": "6fe3e8014e9c38ea42c43b9133f026967a4158e3",
     "formal/framac/receipt_v14.c": "d86fcf3dd1262c3061317fba715f12cfe864d87d",
-    "formal/cbmc/receipt_v14_harness.c": "d06a231aea7c844de2185755faab84d63acb876c",
+    "formal/cbmc/receipt_v14_harness.c": "34dc6462c8a0c34bbb223f16d115b4ec5aa8f461",
     "machine/examples/explicit-delete-v1.json": "3f3e1ba5f273bd266bcd764f10cd4e669f0dfc2d",
     "machine/examples/observed-transition-v1.json": "79dc897ad9192ed9eda8912213130c6556b72017",
     "machine/examples/unchanged-v1.json": "b712f23459b77ba7bb7fc9551df8af82ddc1ef33",
