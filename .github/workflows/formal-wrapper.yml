@@ -22,6 +22,10 @@ jobs:
           sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev
           make test
           gcc -std=c99 -I include -Wall -Wextra -Wpedantic -Werror -c formal/framac/witness_wrapper.c -o /tmp/tombstone-formal-wrapper.o
+      - name: Check all three SHA-256 failure sites without publishing plaintext
+        run: |
+          gcc -std=c99 -I include -Wall -Wextra -Wpedantic -Werror -O2 tests/formal/test_wrapper_hash_failures.c -o /tmp/test_wrapper_hash_failures
+          /tmp/test_wrapper_hash_failures
       - name: Prove actual C99 wrapper with Frama-C 32.1 and Alt-Ergo 2.5.4
         run: |
           set -euo pipefail
