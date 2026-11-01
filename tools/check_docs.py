@@ -176,8 +176,8 @@ def check() -> None:
 
     print("PASS: TOMBSTONE docs, SVG, restricted receipt v1 vectors, "
           "toy bytes, chain and negative samples")
-    print("NOTE: docs-only checks; no C99 engine, full JSON Schema or "
-          "general RFC 8785 verifier exists yet")
+    print("NOTE: docs-only checker; the separate C99 receipt-v1 engine is tested "
+          "by make test and does not implement arbitrary JSON Schema/JCS")
 
 
 if __name__ == "__main__":
