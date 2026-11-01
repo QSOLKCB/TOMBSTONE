@@ -192,15 +192,19 @@ static tb_status witness_stage(const void *before, size_t before_size,
 {
     tb_status st;
     memset(tmp, 0, sizeof(*tmp));
+    st = fingerprints(before, before_size, after, after_size, tmp);
+    if (st != TB_OK) return st;
+    st = tb_sha256_bytes(removed, removed_size, tmp->deleted_sha256);
+    if (st != TB_OK) return st;
+
+    /* Publish metadata only after every hash succeeds. This is still local
+     * staging; the caller's output is committed by tb_witness_delete later. */
     tmp->kind = TB_EVIDENCE_EXPLICIT_DELETE;
     tmp->before_size = before_size;
     tmp->after_size = after_size;
     tmp->deleted_size = removed_size;
     tmp->deleted_offset = offset;
-
-    st = fingerprints(before, before_size, after, after_size, tmp);
-    if (st != TB_OK) return st;
-    return tb_sha256_bytes(removed, removed_size, tmp->deleted_sha256);
+    return TB_OK;
 }
 
 tb_status tb_witness_delete(const void *before, size_t before_size,
