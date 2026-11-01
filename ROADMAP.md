@@ -28,7 +28,7 @@
 - The original OpenSSL provider is still the default and unchanged. `SHA256_BACKEND=hacl` selects a separately built C99 backend; Rust uses `TOMBSTONE_SHA256_BACKEND=hacl`.
 - Upstream HACL*/KaRaMeL C and header files are pinned byte-for-byte to Git commit `f557259007db9933442dde10aa995c1b00bd3446` with 16 expected Git blob hashes checked offline by `tools/check_hacl_source.py`.
 - The C adapter handles streaming, state, allocation failure and caller-output immutability. The test-only linker-wrap harness injects allocation and HACL update failures. CI independently checks exact receipt bytes with GCC/Clang and x86-64/ARM64; completion requires exact-head results.
-- **Still open:** actual F* verification replay at this revision, C adapter/ABI refinement under Frama-C or CBMC, source-to-binary proof and execution on arbitrary hardware. Upstream proof claims are conditional, and do not prove OpenSSL, the new adapter or historical deletion. Do not close issue #15 or merge/tag before meeting its remaining acceptance gates.
+- **Executed:** bounded CBMC 6.11.0 checked 584/584 properties with synthetic HACL allocation/update/digest calls in [run 41321354704](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704); source and model identities are pinned in `machine/formal/phase13-adapter-cbmc-v1.json`. **Still open:** actual F* verification replay at this revision, unbounded C adapter/ABI refinement against real HACL under Frama-C or CBMC, source-to-binary proof and execution on arbitrary hardware. Upstream proof claims are conditional, and do not prove OpenSSL, the new adapter or historical deletion. Do not close issue #15 or merge/tag before meeting its remaining acceptance gates.
 
 See [Phase 13 details](docs/PHASE13_HACL.md).
 
