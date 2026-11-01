@@ -11,6 +11,18 @@ permissions:
   contents: read
 
 jobs:
+  receipt-evidence-regression:
+    name: Reject stale Phase 14 proof pins and modified source/fixtures
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check live proof inputs and negative regression cases
+        run: |
+          set -euo pipefail
+          python3 tools/check_phase14_evidence.py
+          python3 tests/formal/test_phase14_evidence_gate.py
+
   receipt-runtime:
     name: C99 receipt negatives and backend parity (${{ matrix.compiler }} / ${{ matrix.runner }})
     runs-on: ${{ matrix.runner }}
@@ -85,7 +97,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check actual receipt source under direct proof overlay
-        run: gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c formal/cbmc/receipt_v14_harness.c -o /tmp/receipt-cbmc.o
+        run: |
+          python3 tools/check_phase14_evidence.py
+          gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c formal/cbmc/receipt_v14_harness.c -o /tmp/receipt-cbmc.o
       - name: Check bounded helpers, require complete loop unwinding
         run: |
           set -euo pipefail
