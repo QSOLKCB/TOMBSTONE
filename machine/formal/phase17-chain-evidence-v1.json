@@ -1,0 +1,81 @@
+{
+  "format": "tombstone.formal-proof-evidence",
+  "version": 1,
+  "phase": 17,
+  "scope": "actual-source-public-chain-verifier-prehash-rejection-only",
+  "checker": "CBMC",
+  "checker_version": "6.11.0",
+  "source_path": "src/encoding/receipt.c",
+  "source_git_blob_sha": "6fe3e8014e9c38ea42c43b9133f026967a4158e3",
+  "overlay_path": "formal/cbmc/chain_v17_harness.c",
+  "overlay_git_blob_sha": "19bd1fee64f2f54f339f2100d102855701ba954d",
+  "runtime_path": "tests/formal/test_chain_v17.c",
+  "runtime_git_blob_sha": "d798ab41664bf66b477ffeecadd0e5ed885f1d53",
+  "frozen_fixture_git_blobs": {
+    "machine/examples/explicit-delete-v1.json": "3f3e1ba5f273bd266bcd764f10cd4e669f0dfc2d",
+    "machine/examples/observed-transition-v1.json": "79dc897ad9192ed9eda8912213130c6556b72017",
+    "machine/examples/unchanged-v1.json": "b712f23459b77ba7bb7fc9551df8af82ddc1ef33"
+  },
+  "checked_commit_sha": "5079d73c5506b05f30b2030c47d99b0a0e8bf5db",
+  "github_run_id": 41333210346,
+  "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41333210346",
+  "checks": [
+    {
+      "function": "check_null_and_empty",
+      "total_properties": 843,
+      "failed_properties": 0
+    },
+    {
+      "function": "check_genesis_nonzero",
+      "total_properties": 843,
+      "failed_properties": 0
+    },
+    {
+      "function": "check_oversized_count",
+      "total_properties": 843,
+      "failed_properties": 0
+    }
+  ],
+  "total_properties": 2529,
+  "failed_properties": 0,
+  "model": {
+    "input_scope": "NULL/zero/oversized count and nonzero genesis prehash status paths",
+    "unwinding_assertions": true,
+    "bounds_check": true,
+    "pointer_check": true,
+    "signed_overflow_check": true,
+    "unsigned_overflow_check": true,
+    "unwind": 96
+  },
+  "native_matrix": {
+    "arches": [
+      "x86_64",
+      "aarch64"
+    ],
+    "compilers": [
+      "gcc",
+      "clang"
+    ],
+    "backends": [
+      "openssl",
+      "hacl"
+    ],
+    "passed_jobs": 8,
+    "executed_against_real_hash_providers": true
+  },
+  "assumptions": [
+    "CBMC source-level model, valid memory for provided one-element test records",
+    "Return occurs before external SHA provider for all formal targets",
+    "Native successful chain paths are finite frozen-fixture execution evidence, not mathematical theorem"
+  ],
+  "excluded_claims": [
+    "No full unbounded SHA-256 correctness or crypto provider refinement",
+    "No verified complete canonical JSON parser, encoder, or full chain proof",
+    "No proof of independently obtained anchor custody or trusted chronology",
+    "No inference of historical physical deletion, erasure, compiler or hardware correctness"
+  ],
+  "release_boundary": {
+    "tag": "v0.1.0",
+    "modified": false
+  }
+}
