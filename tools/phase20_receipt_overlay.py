@@ -211,11 +211,6 @@ HEX_LOOP = r"""    /*@
 """
 
 
-HEX_BOUNDS = r"""        /*@ assert byte_range: 0 <= (integer)digest[i] <= 255; */
-        /*@ assert high_nibble: 0 <= (digest[i] >> 4) <= 15; */
-"""
-
-
 def render_hex(backend):
     path = ROOT / ("src/crypto/fingerprint.c" if backend == "openssl" else "src/crypto/fingerprint_hacl.c")
     data = path.read_bytes()
@@ -226,11 +221,8 @@ def render_hex(backend):
     marker = "    for (i = 0u;" if backend == "openssl" else "    for (i = 0;"
     if body.count(marker) != 1:
         raise ValueError("actual hex loop marker drift")
-    byte_marker = "        out[2u * i]" if backend == "openssl" else "        out[2u*i]"
-    if body.count(byte_marker) != 1:
-        raise ValueError("actual hex write marker drift")
-    overlay = HEX + body.replace(marker,HEX_LOOP+marker,1).replace(byte_marker,HEX_BOUNDS+byte_marker,1)
-    if overlay.replace(HEX,"",1).replace(HEX_LOOP,"",1).replace(HEX_BOUNDS,"",1) != body:
+    overlay = HEX + body.replace(marker,HEX_LOOP+marker,1)
+    if overlay.replace(HEX,"",1).replace(HEX_LOOP,"",1) != body:
         raise ValueError("hex body changed")
     return '#include "tombstone/fingerprint.h"\n' + overlay
 

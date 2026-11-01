@@ -1,0 +1,942 @@
+﻿2026-11-01T22:35:02.4631858Z Current runner version: '2.338.2'
+2026-11-01T22:35:02.4648288Z ##[group]Runner Image Provisioner
+2026-11-01T22:35:02.4649048Z Hosted Compute Agent
+2026-11-01T22:35:02.4649515Z Version: 20261021.618
+2026-11-01T22:35:02.4649957Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-01T22:35:02.4650434Z Build Date: 2026-10-21T00:45:21Z
+2026-11-01T22:35:02.4650881Z Worker ID: {3af23ae7-b28e-4420-ba97-59f264473e80}
+2026-11-01T22:35:02.4651326Z Region: westus3
+2026-11-01T22:35:02.4651716Z Cloud: Azure
+2026-11-01T22:35:02.4652068Z ##[endgroup]
+2026-11-01T22:35:02.4652980Z ##[group]Operating System
+2026-11-01T22:35:02.4653379Z Ubuntu
+2026-11-01T22:35:02.4653717Z 24.04.5
+2026-11-01T22:35:02.4654084Z LTS
+2026-11-01T22:35:02.4654451Z ##[endgroup]
+2026-11-01T22:35:02.4654792Z ##[group]Runner Image
+2026-11-01T22:35:02.4655219Z Image: ubuntu-24.04
+2026-11-01T22:35:02.4655590Z Version: 20261025.353.1
+2026-11-01T22:35:02.4656407Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-01T22:35:02.4657356Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-01T22:35:02.4658007Z ##[endgroup]
+2026-11-01T22:35:02.4658796Z ##[group]GITHUB_TOKEN Permissions
+2026-11-01T22:35:02.4660015Z Contents: read
+2026-11-01T22:35:02.4660423Z Metadata: read
+2026-11-01T22:35:02.4660870Z ##[endgroup]
+2026-11-01T22:35:02.4662164Z Secret source: Actions
+2026-11-01T22:35:02.4662765Z Cache mode: write
+2026-11-01T22:35:02.4663252Z Prepare workflow directory
+2026-11-01T22:35:02.4869391Z Prepare all required actions
+2026-11-01T22:35:02.4901270Z Getting action download info
+2026-11-01T22:35:02.7699152Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-01T22:35:02.8878284Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-01T22:35:03.0690014Z Complete job name: Actual C99 prerequisites — hex
+2026-11-01T22:35:03.1194633Z ##[group]Run actions/checkout@v4
+2026-11-01T22:35:03.1195067Z with:
+2026-11-01T22:35:03.1195317Z   repository: QSOLKCB/TOMBSTONE
+2026-11-01T22:35:03.1197464Z   token: ***
+2026-11-01T22:35:03.1197707Z   ssh-strict: true
+2026-11-01T22:35:03.1197957Z   ssh-user: git
+2026-11-01T22:35:03.1198214Z   persist-credentials: true
+2026-11-01T22:35:03.1198484Z   clean: true
+2026-11-01T22:35:03.1198875Z   sparse-checkout-cone-mode: true
+2026-11-01T22:35:03.1199167Z   fetch-depth: 1
+2026-11-01T22:35:03.1199414Z   fetch-tags: false
+2026-11-01T22:35:03.1199663Z   show-progress: true
+2026-11-01T22:35:03.1199915Z   lfs: false
+2026-11-01T22:35:03.1200154Z   submodules: false
+2026-11-01T22:35:03.1200407Z   set-safe-directory: true
+2026-11-01T22:35:03.1200698Z   allow-unsafe-pr-checkout: false
+2026-11-01T22:35:03.1201065Z ##[endgroup]
+2026-11-01T22:35:03.3857676Z Syncing repository: QSOLKCB/TOMBSTONE
+2026-11-01T22:35:03.3859203Z ##[group]Getting Git version info
+2026-11-01T22:35:03.3859986Z Working directory is '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T22:35:03.3861002Z [command]/usr/bin/git version
+2026-11-01T22:35:03.3941431Z git version 2.56.0
+2026-11-01T22:35:03.3953046Z ##[endgroup]
+2026-11-01T22:35:03.3962645Z Temporarily overriding HOME='/home/runner/work/_temp/ced25775-d0af-45ba-95b2-aec3ff885074' before making global git config changes
+2026-11-01T22:35:03.3964521Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T22:35:03.3965976Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T22:35:03.4007995Z Deleting the contents of '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T22:35:03.4010863Z ##[group]Initializing the repository
+2026-11-01T22:35:03.4013023Z [command]/usr/bin/git init /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T22:35:03.4112014Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-01T22:35:03.4112666Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-01T22:35:03.4113475Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-01T22:35:03.4113945Z hint: call:
+2026-11-01T22:35:03.4114202Z hint:
+2026-11-01T22:35:03.4114538Z hint: 	git config --global init.defaultBranch <name>
+2026-11-01T22:35:03.4114919Z hint:
+2026-11-01T22:35:03.4115279Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-01T22:35:03.4115841Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-01T22:35:03.4116289Z hint:
+2026-11-01T22:35:03.4116560Z hint: 	git branch -m <name>
+2026-11-01T22:35:03.4116858Z hint:
+2026-11-01T22:35:03.4117247Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-01T22:35:03.4124272Z Initialized empty Git repository in /home/runner/work/TOMBSTONE/TOMBSTONE/.git/
+2026-11-01T22:35:03.4130584Z [command]/usr/bin/git remote add origin https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T22:35:03.4169082Z ##[endgroup]
+2026-11-01T22:35:03.4169867Z ##[group]Disabling automatic garbage collection
+2026-11-01T22:35:03.4171797Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-01T22:35:03.4225026Z ##[endgroup]
+2026-11-01T22:35:03.4225745Z ##[group]Setting up auth
+2026-11-01T22:35:03.4229808Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T22:35:03.4259015Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T22:35:03.4576894Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T22:35:03.4601189Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T22:35:03.4780334Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T22:35:03.4804796Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T22:35:03.4983619Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-01T22:35:03.5014119Z ##[endgroup]
+2026-11-01T22:35:03.5014588Z ##[group]Fetching the repository
+2026-11-01T22:35:03.5022514Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d9403487590872b0a40a60290d5875789ec1c387:refs/remotes/pull/30/merge
+2026-11-01T22:35:04.1180197Z From https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T22:35:04.1181768Z  * [new ref]         d9403487590872b0a40a60290d5875789ec1c387 -> pull/30/merge
+2026-11-01T22:35:04.1185174Z ##[endgroup]
+2026-11-01T22:35:04.1186153Z ##[group]Determining the checkout info
+2026-11-01T22:35:04.1187296Z ##[endgroup]
+2026-11-01T22:35:04.1191882Z [command]/usr/bin/git sparse-checkout disable
+2026-11-01T22:35:04.1240852Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-01T22:35:04.1265074Z ##[group]Checking out the ref
+2026-11-01T22:35:04.1266667Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/30/merge
+2026-11-01T22:35:04.1417044Z Note: switching to 'refs/remotes/pull/30/merge'.
+2026-11-01T22:35:04.1417662Z 
+2026-11-01T22:35:04.1418162Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-01T22:35:04.1419651Z changes and commit them, and you can discard any commits you make in this
+2026-11-01T22:35:04.1420867Z state without impacting any branches by switching back to a branch.
+2026-11-01T22:35:04.1421576Z 
+2026-11-01T22:35:04.1422052Z If you want to create a new branch to retain commits you create, you may
+2026-11-01T22:35:04.1423191Z do so (now or later) by using -c with the switch command. Example:
+2026-11-01T22:35:04.1423822Z 
+2026-11-01T22:35:04.1424129Z   git switch -c <new-branch-name>
+2026-11-01T22:35:04.1424750Z 
+2026-11-01T22:35:04.1425146Z Or undo this operation with:
+2026-11-01T22:35:04.1425786Z 
+2026-11-01T22:35:04.1426205Z   git switch -
+2026-11-01T22:35:04.1426630Z 
+2026-11-01T22:35:04.1427249Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-01T22:35:04.1428262Z 
+2026-11-01T22:35:04.1429438Z HEAD is now at d940348 Merge 1e7cfcf0123cac7d175489bec130122f6aa724b9 into f9140bdda31ea64f7e077115db6f0bb0622c7874
+2026-11-01T22:35:04.1432520Z ##[endgroup]
+2026-11-01T22:35:04.1457886Z [command]/usr/bin/git log -1 --format=%H
+2026-11-01T22:35:04.1477819Z d9403487590872b0a40a60290d5875789ec1c387
+2026-11-01T22:35:04.1702517Z ##[group]Run set -euo pipefail
+2026-11-01T22:35:04.1703381Z [36;1mset -euo pipefail[0m
+2026-11-01T22:35:04.1704203Z [36;1mpython3 tools/check_phase18_receipt.py[0m
+2026-11-01T22:35:04.1705233Z [36;1mpython3 tools/check_phase19_bridge_evidence.py[0m
+2026-11-01T22:35:04.1706288Z [36;1mpython3 tests/formal/test_phase20_overlay.py[0m
+2026-11-01T22:35:04.1707250Z [36;1mmkdir phase20-results[0m
+2026-11-01T22:35:04.1708026Z [36;1mchmod 777 phase20-results[0m
+2026-11-01T22:35:04.1709364Z [36;1mpython3 tools/phase20_receipt_overlay.py --output phase20-receipt.c[0m
+2026-11-01T22:35:04.1710554Z [36;1mfor backend in openssl hacl; do[0m
+2026-11-01T22:35:04.1711968Z [36;1m  python3 tools/phase20_receipt_overlay.py --hex-backend "$backend" --output "phase20-hex-$backend.c"[0m
+2026-11-01T22:35:04.1713379Z [36;1mdone[0m
+2026-11-01T22:35:04.1714174Z [36;1mfor mutant in accept-invalid bad-size error-size; do[0m
+2026-11-01T22:35:04.1715674Z [36;1m  python3 tools/phase20_receipt_overlay.py --mutant "$mutant" --output "phase20-$mutant.c"[0m
+2026-11-01T22:35:04.1716968Z [36;1mdone[0m
+2026-11-01T22:35:04.1717619Z [36;1mfor source in phase20-*.c; do[0m
+2026-11-01T22:35:04.1718984Z [36;1m  gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c "$source" -o /tmp/phase20-check.o[0m
+2026-11-01T22:35:04.1720260Z [36;1mdone[0m
+2026-11-01T22:35:04.1720899Z [36;1mgit rev-parse HEAD[0m
+2026-11-01T22:35:04.1721637Z [36;1msha256sum phase20-*.c[0m
+2026-11-01T22:35:04.1741098Z shell: /usr/bin/bash -e {0}
+2026-11-01T22:35:04.1741761Z env:
+2026-11-01T22:35:04.1742281Z   GROUP: hex
+2026-11-01T22:35:04.1742821Z ##[endgroup]
+2026-11-01T22:35:04.2037957Z PASS: 54/54 conditional unbounded WP proof receipt pinned to exact source, checkers, CI job
+2026-11-01T22:35:04.2040443Z LIMIT: prior evidence does not prove a new commit or the actual SHA-256 provider
+2026-11-01T22:35:04.2394310Z PASS: retained P19-03 source, 3 complete proofs, 3 semantic controls and original failed attempt
+2026-11-01T22:35:04.2396999Z LIMIT: conditional caller-frame/protocol evidence; no current-head review or real-provider closure
+2026-11-01T22:35:04.2634404Z PASS: unchanged bodies, stronger original contracts, preserved chain theorem, distinct semantic mutants
+2026-11-01T22:35:04.2890478Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:35:04.3124085Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:35:04.3373465Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:35:04.3617217Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:35:04.3854119Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:35:04.4088929Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:35:04.6524998Z d9403487590872b0a40a60290d5875789ec1c387
+2026-11-01T22:35:04.6545623Z d5561aa4ff18bbef00d8db93369c6fddefbe34a9eb0a25f3e06bb4e528ced59c  phase20-accept-invalid.c
+2026-11-01T22:35:04.6547593Z a4943158c2f73fb6d2779ee60d0701f9a9fa6f5511b52479d0a4a5020309d254  phase20-bad-size.c
+2026-11-01T22:35:04.6549693Z a7536b2beb613956a4d1e0b9ad09002e5c2801e2137ac165ab429d7cd9dda377  phase20-error-size.c
+2026-11-01T22:35:04.6552106Z 3ed3245e65c1a37e28ad195561d488002e626b0c664996e768ff2c45c736b6b4  phase20-hex-hacl.c
+2026-11-01T22:35:04.6554230Z 3ddd327e7102c6378afcb2f5e61fec0696a0eedd70a83466ff860c96aee048ea  phase20-hex-openssl.c
+2026-11-01T22:35:04.6555906Z 93fbce98d173e6a1a77178d594d9f64f3ac47cd78844210981c750ebc58bf200  phase20-receipt.c
+2026-11-01T22:35:04.6615062Z ##[group]Run set -euo pipefail
+2026-11-01T22:35:04.6615819Z [36;1mset -euo pipefail[0m
+2026-11-01T22:35:04.6616844Z [36;1mdocker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-results:/out" -e GROUP -w /tmp \[0m
+2026-11-01T22:35:04.6618480Z [36;1m  framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \[0m
+2026-11-01T22:35:04.6619873Z [36;1m  sh -c '[0m
+2026-11-01T22:35:04.6620460Z [36;1m    case "$GROUP" in[0m
+2026-11-01T22:35:04.6621395Z [36;1m      validators) targets="zero32 equal32 good_evidence good_receipt";;[0m
+2026-11-01T22:35:04.6622521Z [36;1m      formatters) targets="hex32 format_json";;[0m
+2026-11-01T22:35:04.6623635Z [36;1m      composition) targets="calculate_hash tb_receipt_verify_chain";;[0m
+2026-11-01T22:35:04.6624732Z [36;1m      hex) targets="hex-openssl hex-hacl";;[0m
+2026-11-01T22:35:04.6625732Z [36;1m      negative) targets="accept-invalid bad-size error-size";;[0m
+2026-11-01T22:35:04.6626678Z [36;1m    esac[0m
+2026-11-01T22:35:04.6627244Z [36;1m    status=0[0m
+2026-11-01T22:35:04.6627884Z [36;1m    for target in $targets; do[0m
+2026-11-01T22:35:04.6628795Z [36;1m      source=/repo/phase20-receipt.c[0m
+2026-11-01T22:35:04.6629614Z [36;1m      function=$target[0m
+2026-11-01T22:35:04.6630286Z [36;1m      timeout=35[0m
+2026-11-01T22:35:04.6630927Z [36;1m      case "$target" in[0m
+2026-11-01T22:35:04.6631855Z [36;1m        hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex;;[0m
+2026-11-01T22:35:04.6633303Z [36;1m        accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;[0m
+2026-11-01T22:35:04.6634950Z [36;1m        bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=10;;[0m
+2026-11-01T22:35:04.6636156Z [36;1m      esac[0m
+2026-11-01T22:35:04.6638620Z [36;1m      (frama-c -version && frama-c -wp -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1[0m
+2026-11-01T22:35:04.6641408Z [36;1m    done[0m
+2026-11-01T22:35:04.6641984Z [36;1m    cat /out/*.log[0m
+2026-11-01T22:35:04.6642629Z [36;1m    exit "$status"[0m
+2026-11-01T22:35:04.6643263Z [36;1m  '[0m
+2026-11-01T22:35:04.6660128Z shell: /usr/bin/bash -e {0}
+2026-11-01T22:35:04.6660747Z env:
+2026-11-01T22:35:04.6661250Z   GROUP: hex
+2026-11-01T22:35:04.6661782Z ##[endgroup]
+2026-11-01T22:35:04.7512530Z Unable to find image 'framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36' locally
+2026-11-01T22:35:05.3831048Z docker.io/framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36: Pulling from framac/frama-c
+2026-11-01T22:35:05.3840005Z 01cedcff86f8: Pulling fs layer
+2026-11-01T22:35:05.3840713Z 9bf581ba34fd: Pulling fs layer
+2026-11-01T22:35:05.3841385Z 6c4bd78e0c43: Pulling fs layer
+2026-11-01T22:35:05.3841962Z 799649323729: Pulling fs layer
+2026-11-01T22:35:05.3842682Z 1ae4fb0c8a4a: Pulling fs layer
+2026-11-01T22:35:05.3843026Z b237ecdf51a3: Pulling fs layer
+2026-11-01T22:35:05.3843304Z b16ee2e05313: Pulling fs layer
+2026-11-01T22:35:05.3843554Z adb989234928: Pulling fs layer
+2026-11-01T22:35:05.3843817Z e3a01a28a7ad: Pulling fs layer
+2026-11-01T22:35:05.3844071Z ca0e54137564: Pulling fs layer
+2026-11-01T22:35:05.3844317Z e88b1a083917: Pulling fs layer
+2026-11-01T22:35:05.3844586Z d10f17e04c11: Pulling fs layer
+2026-11-01T22:35:05.3844825Z d38ea67f8871: Pulling fs layer
+2026-11-01T22:35:05.3844996Z 8153ec1c4f57: Pulling fs layer
+2026-11-01T22:35:05.3845160Z 0546e39b6053: Pulling fs layer
+2026-11-01T22:35:05.3845322Z 5ebdad05b03e: Pulling fs layer
+2026-11-01T22:35:05.3845568Z 6435672f1863: Pulling fs layer
+2026-11-01T22:35:05.3846140Z 5c5711f4465e: Pulling fs layer
+2026-11-01T22:35:05.3846401Z 7264e6096409: Pulling fs layer
+2026-11-01T22:35:05.3846651Z 2202cd0e879d: Pulling fs layer
+2026-11-01T22:35:05.3847111Z c31277fa0297: Pulling fs layer
+2026-11-01T22:35:05.3847373Z 4f4fb700ef54: Pulling fs layer
+2026-11-01T22:35:05.3847620Z 8e159597691d: Pulling fs layer
+2026-11-01T22:35:05.3847974Z c0ebccf77ab9: Pulling fs layer
+2026-11-01T22:35:05.3848223Z b7093a70d5d5: Pulling fs layer
+2026-11-01T22:35:05.3848472Z f2a57dfa5358: Pulling fs layer
+2026-11-01T22:35:05.3848865Z 93b66eaa292a: Pulling fs layer
+2026-11-01T22:35:05.3849113Z 0aba2ee32120: Pulling fs layer
+2026-11-01T22:35:05.3849389Z 60033bb88c74: Pulling fs layer
+2026-11-01T22:35:05.3849704Z 883b72a7df53: Pulling fs layer
+2026-11-01T22:35:05.3849954Z 9aaba240d281: Pulling fs layer
+2026-11-01T22:35:05.3850202Z fd24333fa18a: Pulling fs layer
+2026-11-01T22:35:05.3850459Z ab20f402dc6f: Pulling fs layer
+2026-11-01T22:35:05.3850710Z a3afc412b613: Pulling fs layer
+2026-11-01T22:35:05.3850969Z 0a2200cec51c: Pulling fs layer
+2026-11-01T22:35:05.3851216Z f9b5b03a559e: Pulling fs layer
+2026-11-01T22:35:05.3851464Z 2becab109f47: Pulling fs layer
+2026-11-01T22:35:05.3851718Z 3b4307789f50: Pulling fs layer
+2026-11-01T22:35:05.3851961Z 58571fc518c5: Pulling fs layer
+2026-11-01T22:35:05.3852205Z b71b8622ab3f: Pulling fs layer
+2026-11-01T22:35:05.3852451Z d06dd6319b47: Pulling fs layer
+2026-11-01T22:35:05.3852695Z 51a56fdb7118: Pulling fs layer
+2026-11-01T22:35:05.3852941Z 8f235d762bf6: Pulling fs layer
+2026-11-01T22:35:05.3853202Z 37173500316b: Pulling fs layer
+2026-11-01T22:35:05.3853454Z fa11cfb60409: Pulling fs layer
+2026-11-01T22:35:05.3853703Z 2fdcc8b83d1d: Pulling fs layer
+2026-11-01T22:35:05.3853949Z 8103ae60d4a2: Pulling fs layer
+2026-11-01T22:35:05.3854194Z 0ac2d6f63403: Pulling fs layer
+2026-11-01T22:35:05.3854441Z dca9c53526f0: Pulling fs layer
+2026-11-01T22:35:05.3854685Z d62b4203b486: Pulling fs layer
+2026-11-01T22:35:05.3854929Z 262d0301190b: Pulling fs layer
+2026-11-01T22:35:05.3855182Z ab4fd71ce45a: Pulling fs layer
+2026-11-01T22:35:05.3855430Z 721b47947ac4: Pulling fs layer
+2026-11-01T22:35:05.3855676Z 4fe137cf5212: Pulling fs layer
+2026-11-01T22:35:05.3855927Z d44046465503: Pulling fs layer
+2026-11-01T22:35:05.3856172Z 26d82a051384: Pulling fs layer
+2026-11-01T22:35:05.3856440Z 799649323729: Waiting
+2026-11-01T22:35:05.3856660Z 1ae4fb0c8a4a: Waiting
+2026-11-01T22:35:05.3856880Z b237ecdf51a3: Waiting
+2026-11-01T22:35:05.3857096Z 9aaba240d281: Waiting
+2026-11-01T22:35:05.3857312Z b16ee2e05313: Waiting
+2026-11-01T22:35:05.3857526Z adb989234928: Waiting
+2026-11-01T22:35:05.3857741Z e3a01a28a7ad: Waiting
+2026-11-01T22:35:05.3857954Z ca0e54137564: Waiting
+2026-11-01T22:35:05.3858186Z 2fdcc8b83d1d: Waiting
+2026-11-01T22:35:05.3858387Z e88b1a083917: Waiting
+2026-11-01T22:35:05.3858531Z d10f17e04c11: Waiting
+2026-11-01T22:35:05.3858815Z 8103ae60d4a2: Waiting
+2026-11-01T22:35:05.3858992Z 0ac2d6f63403: Waiting
+2026-11-01T22:35:05.3859135Z dca9c53526f0: Waiting
+2026-11-01T22:35:05.3859277Z d38ea67f8871: Waiting
+2026-11-01T22:35:05.3859424Z d62b4203b486: Waiting
+2026-11-01T22:35:05.3859564Z 262d0301190b: Waiting
+2026-11-01T22:35:05.3859710Z ab4fd71ce45a: Waiting
+2026-11-01T22:35:05.3859886Z 721b47947ac4: Waiting
+2026-11-01T22:35:05.3860028Z 4fe137cf5212: Waiting
+2026-11-01T22:35:05.3860171Z d44046465503: Waiting
+2026-11-01T22:35:05.3860311Z 26d82a051384: Waiting
+2026-11-01T22:35:05.3860455Z ab20f402dc6f: Waiting
+2026-11-01T22:35:05.3860599Z a3afc412b613: Waiting
+2026-11-01T22:35:05.3860741Z 0a2200cec51c: Waiting
+2026-11-01T22:35:05.3860882Z f9b5b03a559e: Waiting
+2026-11-01T22:35:05.3861025Z 2becab109f47: Waiting
+2026-11-01T22:35:05.3861168Z 3b4307789f50: Waiting
+2026-11-01T22:35:05.3861308Z 0546e39b6053: Waiting
+2026-11-01T22:35:05.3861453Z 5ebdad05b03e: Waiting
+2026-11-01T22:35:05.3861593Z 6435672f1863: Waiting
+2026-11-01T22:35:05.3861736Z 5c5711f4465e: Waiting
+2026-11-01T22:35:05.3861878Z 7264e6096409: Waiting
+2026-11-01T22:35:05.3862020Z 58571fc518c5: Waiting
+2026-11-01T22:35:05.3862162Z b71b8622ab3f: Waiting
+2026-11-01T22:35:05.3862435Z d06dd6319b47: Waiting
+2026-11-01T22:35:05.3862579Z 51a56fdb7118: Waiting
+2026-11-01T22:35:05.3862726Z c0ebccf77ab9: Waiting
+2026-11-01T22:35:05.3862994Z b7093a70d5d5: Waiting
+2026-11-01T22:35:05.3863140Z f2a57dfa5358: Waiting
+2026-11-01T22:35:05.3863282Z 93b66eaa292a: Waiting
+2026-11-01T22:35:05.3863427Z 0aba2ee32120: Waiting
+2026-11-01T22:35:05.3863572Z 60033bb88c74: Waiting
+2026-11-01T22:35:05.3863730Z 883b72a7df53: Waiting
+2026-11-01T22:35:05.3863872Z 2202cd0e879d: Waiting
+2026-11-01T22:35:05.3864013Z c31277fa0297: Waiting
+2026-11-01T22:35:05.3864155Z 8f235d762bf6: Waiting
+2026-11-01T22:35:05.3864294Z 37173500316b: Waiting
+2026-11-01T22:35:05.3864436Z 4f4fb700ef54: Waiting
+2026-11-01T22:35:05.3864577Z 8e159597691d: Waiting
+2026-11-01T22:35:05.3864717Z fa11cfb60409: Waiting
+2026-11-01T22:35:05.3864860Z 8153ec1c4f57: Waiting
+2026-11-01T22:35:05.3865003Z fd24333fa18a: Waiting
+2026-11-01T22:35:05.5872053Z 6c4bd78e0c43: Verifying Checksum
+2026-11-01T22:35:05.5872392Z 6c4bd78e0c43: Download complete
+2026-11-01T22:35:05.5883951Z 9bf581ba34fd: Verifying Checksum
+2026-11-01T22:35:05.5888951Z 9bf581ba34fd: Download complete
+2026-11-01T22:35:05.7261562Z 01cedcff86f8: Download complete
+2026-11-01T22:35:05.7783995Z 1ae4fb0c8a4a: Verifying Checksum
+2026-11-01T22:35:05.7785360Z 1ae4fb0c8a4a: Download complete
+2026-11-01T22:35:05.8386562Z 799649323729: Verifying Checksum
+2026-11-01T22:35:05.8387239Z 799649323729: Download complete
+2026-11-01T22:35:05.9809985Z b16ee2e05313: Verifying Checksum
+2026-11-01T22:35:05.9819009Z b16ee2e05313: Download complete
+2026-11-01T22:35:06.0595642Z adb989234928: Verifying Checksum
+2026-11-01T22:35:06.0602707Z adb989234928: Download complete
+2026-11-01T22:35:06.1927565Z e3a01a28a7ad: Verifying Checksum
+2026-11-01T22:35:06.1928425Z e3a01a28a7ad: Download complete
+2026-11-01T22:35:06.2890071Z ca0e54137564: Verifying Checksum
+2026-11-01T22:35:06.2890880Z ca0e54137564: Download complete
+2026-11-01T22:35:06.3631397Z b237ecdf51a3: Verifying Checksum
+2026-11-01T22:35:06.3631894Z b237ecdf51a3: Download complete
+2026-11-01T22:35:06.4123629Z e88b1a083917: Verifying Checksum
+2026-11-01T22:35:06.4124168Z e88b1a083917: Download complete
+2026-11-01T22:35:06.5137842Z d10f17e04c11: Verifying Checksum
+2026-11-01T22:35:06.5138809Z d10f17e04c11: Download complete
+2026-11-01T22:35:06.5969513Z d38ea67f8871: Verifying Checksum
+2026-11-01T22:35:06.5969796Z d38ea67f8871: Download complete
+2026-11-01T22:35:06.6157059Z 8153ec1c4f57: Verifying Checksum
+2026-11-01T22:35:06.6157315Z 8153ec1c4f57: Download complete
+2026-11-01T22:35:06.6983247Z 0546e39b6053: Verifying Checksum
+2026-11-01T22:35:06.6983549Z 0546e39b6053: Download complete
+2026-11-01T22:35:06.8064191Z 5ebdad05b03e: Verifying Checksum
+2026-11-01T22:35:06.8064546Z 5ebdad05b03e: Download complete
+2026-11-01T22:35:06.8146507Z 6435672f1863: Download complete
+2026-11-01T22:35:06.9112056Z 5c5711f4465e: Verifying Checksum
+2026-11-01T22:35:06.9112534Z 5c5711f4465e: Download complete
+2026-11-01T22:35:06.9464069Z 01cedcff86f8: Pull complete
+2026-11-01T22:35:06.9894868Z 7264e6096409: Verifying Checksum
+2026-11-01T22:35:06.9895244Z 7264e6096409: Download complete
+2026-11-01T22:35:07.0261282Z 2202cd0e879d: Verifying Checksum
+2026-11-01T22:35:07.0261571Z 2202cd0e879d: Download complete
+2026-11-01T22:35:07.1156678Z c31277fa0297: Verifying Checksum
+2026-11-01T22:35:07.1156947Z c31277fa0297: Download complete
+2026-11-01T22:35:07.1663254Z 4f4fb700ef54: Verifying Checksum
+2026-11-01T22:35:07.1663537Z 4f4fb700ef54: Download complete
+2026-11-01T22:35:07.2067464Z 8e159597691d: Download complete
+2026-11-01T22:35:07.3031755Z c0ebccf77ab9: Verifying Checksum
+2026-11-01T22:35:07.3037518Z c0ebccf77ab9: Download complete
+2026-11-01T22:35:07.3772166Z b7093a70d5d5: Verifying Checksum
+2026-11-01T22:35:07.3772543Z b7093a70d5d5: Download complete
+2026-11-01T22:35:07.3923376Z f2a57dfa5358: Verifying Checksum
+2026-11-01T22:35:07.3923555Z f2a57dfa5358: Download complete
+2026-11-01T22:35:07.5263717Z 93b66eaa292a: Download complete
+2026-11-01T22:35:07.5749805Z 60033bb88c74: Verifying Checksum
+2026-11-01T22:35:07.5750412Z 60033bb88c74: Download complete
+2026-11-01T22:35:07.5881040Z 0aba2ee32120: Verifying Checksum
+2026-11-01T22:35:07.5881527Z 0aba2ee32120: Download complete
+2026-11-01T22:35:07.7337939Z 883b72a7df53: Verifying Checksum
+2026-11-01T22:35:07.7338253Z 883b72a7df53: Download complete
+2026-11-01T22:35:07.7586374Z 9aaba240d281: Verifying Checksum
+2026-11-01T22:35:07.7586630Z 9aaba240d281: Download complete
+2026-11-01T22:35:07.8033404Z fd24333fa18a: Verifying Checksum
+2026-11-01T22:35:07.8033673Z fd24333fa18a: Download complete
+2026-11-01T22:35:07.9338208Z a3afc412b613: Verifying Checksum
+2026-11-01T22:35:07.9338552Z a3afc412b613: Download complete
+2026-11-01T22:35:07.9361152Z ab20f402dc6f: Download complete
+2026-11-01T22:35:08.1110023Z f9b5b03a559e: Verifying Checksum
+2026-11-01T22:35:08.1110296Z f9b5b03a559e: Download complete
+2026-11-01T22:35:08.3282313Z 3b4307789f50: Verifying Checksum
+2026-11-01T22:35:08.3283057Z 3b4307789f50: Download complete
+2026-11-01T22:35:08.5147917Z 58571fc518c5: Verifying Checksum
+2026-11-01T22:35:08.5148430Z 58571fc518c5: Download complete
+2026-11-01T22:35:08.5687436Z 0a2200cec51c: Verifying Checksum
+2026-11-01T22:35:08.5688402Z 0a2200cec51c: Download complete
+2026-11-01T22:35:08.7160415Z b71b8622ab3f: Verifying Checksum
+2026-11-01T22:35:08.7160913Z b71b8622ab3f: Download complete
+2026-11-01T22:35:08.8969311Z 51a56fdb7118: Verifying Checksum
+2026-11-01T22:35:08.8969780Z 51a56fdb7118: Download complete
+2026-11-01T22:35:08.9166365Z 2becab109f47: Verifying Checksum
+2026-11-01T22:35:08.9166710Z 2becab109f47: Download complete
+2026-11-01T22:35:09.0842680Z 8f235d762bf6: Download complete
+2026-11-01T22:35:09.1255976Z 37173500316b: Verifying Checksum
+2026-11-01T22:35:09.1256245Z 37173500316b: Download complete
+2026-11-01T22:35:09.3219641Z fa11cfb60409: Verifying Checksum
+2026-11-01T22:35:09.3220226Z fa11cfb60409: Download complete
+2026-11-01T22:35:09.3243694Z 2fdcc8b83d1d: Verifying Checksum
+2026-11-01T22:35:09.3244100Z 2fdcc8b83d1d: Download complete
+2026-11-01T22:35:09.4159850Z d06dd6319b47: Verifying Checksum
+2026-11-01T22:35:09.4160120Z d06dd6319b47: Download complete
+2026-11-01T22:35:09.4975757Z 8103ae60d4a2: Verifying Checksum
+2026-11-01T22:35:09.4976040Z 8103ae60d4a2: Download complete
+2026-11-01T22:35:09.5407742Z 0ac2d6f63403: Verifying Checksum
+2026-11-01T22:35:09.5407995Z 0ac2d6f63403: Download complete
+2026-11-01T22:35:09.5967155Z dca9c53526f0: Verifying Checksum
+2026-11-01T22:35:09.5967412Z dca9c53526f0: Download complete
+2026-11-01T22:35:09.7195224Z 262d0301190b: Download complete
+2026-11-01T22:35:09.8372185Z ab4fd71ce45a: Verifying Checksum
+2026-11-01T22:35:09.8372455Z ab4fd71ce45a: Download complete
+2026-11-01T22:35:09.9633581Z 721b47947ac4: Verifying Checksum
+2026-11-01T22:35:09.9634176Z 721b47947ac4: Download complete
+2026-11-01T22:35:10.1429796Z d44046465503: Verifying Checksum
+2026-11-01T22:35:10.1430157Z d44046465503: Download complete
+2026-11-01T22:35:10.3241588Z 26d82a051384: Verifying Checksum
+2026-11-01T22:35:10.3250323Z 26d82a051384: Download complete
+2026-11-01T22:35:10.4653166Z 9bf581ba34fd: Pull complete
+2026-11-01T22:35:11.3090089Z d62b4203b486: Verifying Checksum
+2026-11-01T22:35:11.3090492Z d62b4203b486: Download complete
+2026-11-01T22:35:11.4832073Z 4fe137cf5212: Verifying Checksum
+2026-11-01T22:35:11.4832271Z 4fe137cf5212: Download complete
+2026-11-01T22:35:20.4969677Z 6c4bd78e0c43: Pull complete
+2026-11-01T22:35:20.7181584Z 799649323729: Pull complete
+2026-11-01T22:35:20.7265086Z 1ae4fb0c8a4a: Pull complete
+2026-11-01T22:35:26.7765826Z b237ecdf51a3: Pull complete
+2026-11-01T22:35:26.9371103Z b16ee2e05313: Pull complete
+2026-11-01T22:35:27.1134101Z adb989234928: Pull complete
+2026-11-01T22:35:27.3036138Z e3a01a28a7ad: Pull complete
+2026-11-01T22:35:27.4915701Z ca0e54137564: Pull complete
+2026-11-01T22:35:27.6838754Z e88b1a083917: Pull complete
+2026-11-01T22:35:27.8755882Z d10f17e04c11: Pull complete
+2026-11-01T22:35:28.0749682Z d38ea67f8871: Pull complete
+2026-11-01T22:35:28.1040464Z 8153ec1c4f57: Pull complete
+2026-11-01T22:35:28.1144609Z 0546e39b6053: Pull complete
+2026-11-01T22:35:28.1204086Z 5ebdad05b03e: Pull complete
+2026-11-01T22:35:28.1267086Z 6435672f1863: Pull complete
+2026-11-01T22:35:28.1325243Z 5c5711f4465e: Pull complete
+2026-11-01T22:35:28.4331701Z 7264e6096409: Pull complete
+2026-11-01T22:35:28.4396316Z 2202cd0e879d: Pull complete
+2026-11-01T22:35:28.4463683Z c31277fa0297: Pull complete
+2026-11-01T22:35:28.4527589Z 4f4fb700ef54: Pull complete
+2026-11-01T22:35:28.4593539Z 8e159597691d: Pull complete
+2026-11-01T22:35:28.4652201Z c0ebccf77ab9: Pull complete
+2026-11-01T22:35:28.4713414Z b7093a70d5d5: Pull complete
+2026-11-01T22:35:28.4788188Z f2a57dfa5358: Pull complete
+2026-11-01T22:35:28.4852459Z 93b66eaa292a: Pull complete
+2026-11-01T22:35:28.4922827Z 0aba2ee32120: Pull complete
+2026-11-01T22:35:28.4985177Z 60033bb88c74: Pull complete
+2026-11-01T22:35:28.5065110Z 883b72a7df53: Pull complete
+2026-11-01T22:35:28.5134409Z 9aaba240d281: Pull complete
+2026-11-01T22:35:28.5203152Z fd24333fa18a: Pull complete
+2026-11-01T22:35:28.5268597Z ab20f402dc6f: Pull complete
+2026-11-01T22:35:28.5334189Z a3afc412b613: Pull complete
+2026-11-01T22:35:57.1933211Z 0a2200cec51c: Pull complete
+2026-11-01T22:35:57.2070576Z f9b5b03a559e: Pull complete
+2026-11-01T22:35:58.7856319Z 2becab109f47: Pull complete
+2026-11-01T22:35:58.7992383Z 3b4307789f50: Pull complete
+2026-11-01T22:35:58.8050520Z 58571fc518c5: Pull complete
+2026-11-01T22:35:58.8137399Z b71b8622ab3f: Pull complete
+2026-11-01T22:36:04.4724405Z d06dd6319b47: Pull complete
+2026-11-01T22:36:04.4822283Z 51a56fdb7118: Pull complete
+2026-11-01T22:36:04.5007100Z 8f235d762bf6: Pull complete
+2026-11-01T22:36:04.5139760Z 37173500316b: Pull complete
+2026-11-01T22:36:04.8523393Z fa11cfb60409: Pull complete
+2026-11-01T22:36:04.8601158Z 2fdcc8b83d1d: Pull complete
+2026-11-01T22:36:04.8726169Z 8103ae60d4a2: Pull complete
+2026-11-01T22:36:04.9934267Z 0ac2d6f63403: Pull complete
+2026-11-01T22:36:04.9995804Z dca9c53526f0: Pull complete
+2026-11-01T22:36:34.6935345Z d62b4203b486: Pull complete
+2026-11-01T22:36:34.7049492Z 262d0301190b: Pull complete
+2026-11-01T22:36:34.7803517Z ab4fd71ce45a: Pull complete
+2026-11-01T22:36:36.9154640Z 721b47947ac4: Pull complete
+2026-11-01T22:36:54.0470875Z 4fe137cf5212: Pull complete
+2026-11-01T22:36:54.0601112Z d44046465503: Pull complete
+2026-11-01T22:37:16.0177357Z 26d82a051384: Pull complete
+2026-11-01T22:37:16.0185963Z Digest: sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T22:37:16.0192633Z Status: Downloaded newer image for framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T22:38:29.0701457Z 32.1 (Germanium)
+2026-11-01T22:38:29.0702037Z [kernel] Parsing /repo/phase20-hex-hacl.c (with preprocessing)
+2026-11-01T22:38:29.0703316Z [wp] Running WP plugin...
+2026-11-01T22:38:29.0705928Z [rte:annot] annotating function tb_sha256_hex
+2026-11-01T22:38:29.0706246Z [wp] 26 goals scheduled
+2026-11-01T22:38:29.0711241Z [wp] [Timeout] bytes_tb_sha256_hex_assert_rte_index_bound_2 (Qed 7ms) (Alt-Ergo)
+2026-11-01T22:38:29.0711981Z [wp] Proved goals:   27 / 28
+2026-11-01T22:38:29.0712350Z   Terminating:       1
+2026-11-01T22:38:29.0729949Z   Unreachable:       1
+2026-11-01T22:38:29.0730218Z   Qed:              14 (6ms-5ms-19ms)
+2026-11-01T22:38:29.0730477Z   Alt-Ergo 2.5.4:   11 (13ms-43ms-141ms)
+2026-11-01T22:38:29.0730732Z   Timeout:           1
+2026-11-01T22:38:29.0730951Z [wp] /repo/phase20-hex-hacl.c:10: Warning: 
+2026-11-01T22:38:29.0731159Z   Memory model hypotheses for function 'tb_sha256_hex':
+2026-11-01T22:38:29.0731440Z   /*@
+2026-11-01T22:38:29.0731619Z      behavior wp_bytes:
+2026-11-01T22:38:29.0731817Z        requires
+2026-11-01T22:38:29.0732170Z          \separated(digest + (..), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T22:38:29.0732518Z        requires
+2026-11-01T22:38:29.0732775Z          \separated(out + (..), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T22:38:29.0733097Z        requires
+2026-11-01T22:38:29.0733367Z          \separated(out + (0 .. 64), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T22:38:29.0734016Z      */
+2026-11-01T22:38:29.0734274Z   tb_status tb_sha256_hex(unsigned char const digest[32], char out[65]);
+2026-11-01T22:38:29.0734798Z [ { "goal": "bytes_tb_sha256_hex_ensures",
+2026-11-01T22:38:29.0735142Z     "property": "tb_sha256_hex_ensures", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T22:38:29.0735575Z     "line": 7, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0735897Z     "verdict": "valid",
+2026-11-01T22:38:29.0736158Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0736462Z     "proved": 1 },
+2026-11-01T22:38:29.0736699Z   { "goal": "bytes_tb_sha256_hex_ensures_nul_terminated",
+2026-11-01T22:38:29.0737023Z     "property": "tb_sha256_hex_ensures_nul_terminated",
+2026-11-01T22:38:29.0737331Z     "file": "/repo/phase20-hex-hacl.c", "line": 8,
+2026-11-01T22:38:29.0737656Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0737958Z     "verdict": "valid",
+2026-11-01T22:38:29.0738216Z     "provers": [ { "prover": "qed", "time": 0.0194, "success": 0 },
+2026-11-01T22:38:29.0738592Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0336, "success": 1 } ],
+2026-11-01T22:38:29.0740255Z     "proved": 1 },
+2026-11-01T22:38:29.0740466Z   { "goal": "bytes_tb_sha256_hex_loop_invariant_established",
+2026-11-01T22:38:29.0740669Z     "property": "tb_sha256_hex_loop_invariant",
+2026-11-01T22:38:29.0740858Z     "file": "/repo/phase20-hex-hacl.c", "line": 17,
+2026-11-01T22:38:29.0741070Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0741352Z     "verdict": "valid",
+2026-11-01T22:38:29.0741518Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0741699Z     "proved": 1 },
+2026-11-01T22:38:29.0741855Z   { "goal": "bytes_tb_sha256_hex_loop_invariant_preserved",
+2026-11-01T22:38:29.0742137Z     "property": "tb_sha256_hex_loop_invariant",
+2026-11-01T22:38:29.0742321Z     "file": "/repo/phase20-hex-hacl.c", "line": 17,
+2026-11-01T22:38:29.0742533Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0742720Z     "verdict": "valid",
+2026-11-01T22:38:29.0742977Z     "provers": [ { "prover": "qed", "time": 0.011, "success": 0 },
+2026-11-01T22:38:29.0743213Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0347, "success": 1 } ],
+2026-11-01T22:38:29.0743413Z     "proved": 1 },
+2026-11-01T22:38:29.0743587Z   { "goal": "bytes_tb_sha256_hex_assert_byte_range",
+2026-11-01T22:38:29.0743837Z     "property": "tb_sha256_hex_assert_byte_range",
+2026-11-01T22:38:29.0744116Z     "file": "/repo/phase20-hex-hacl.c", "line": 22,
+2026-11-01T22:38:29.0744480Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0744696Z     "verdict": "valid",
+2026-11-01T22:38:29.0744863Z     "provers": [ { "prover": "qed", "time": 0.00629, "success": 0 },
+2026-11-01T22:38:29.0745102Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0295, "success": 1 } ],
+2026-11-01T22:38:29.0745386Z     "proved": 1 },
+2026-11-01T22:38:29.0745531Z   { "goal": "bytes_tb_sha256_hex_assert_high_nibble",
+2026-11-01T22:38:29.0745725Z     "property": "tb_sha256_hex_assert_high_nibble",
+2026-11-01T22:38:29.0745911Z     "file": "/repo/phase20-hex-hacl.c", "line": 23,
+2026-11-01T22:38:29.0746194Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0746380Z     "verdict": "valid",
+2026-11-01T22:38:29.0746538Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0746719Z     "proved": 1 },
+2026-11-01T22:38:29.0746951Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound",
+2026-11-01T22:38:29.0747154Z     "property": "tb_sha256_hex_assert_rte_index_bound",
+2026-11-01T22:38:29.0747344Z     "file": "/repo/phase20-hex-hacl.c", "line": 24,
+2026-11-01T22:38:29.0747576Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0747823Z     "verdict": "valid",
+2026-11-01T22:38:29.0748379Z     "provers": [ { "prover": "qed", "time": 0.00746, "success": 0 },
+2026-11-01T22:38:29.0748874Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.141, "success": 1 } ],
+2026-11-01T22:38:29.0749197Z     "proved": 1 },
+2026-11-01T22:38:29.0749388Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound_2",
+2026-11-01T22:38:29.0749630Z     "property": "tb_sha256_hex_assert_rte_index_bound_2",
+2026-11-01T22:38:29.0749826Z     "file": "/repo/phase20-hex-hacl.c", "line": 24,
+2026-11-01T22:38:29.0750118Z     "function": "tb_sha256_hex", "smoke": false, "passed": false,
+2026-11-01T22:38:29.0750363Z     "verdict": "timeout",
+2026-11-01T22:38:29.0750556Z     "provers": [ { "prover": "qed", "time": 0.00741, "success": 0 },
+2026-11-01T22:38:29.0750797Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-01T22:38:29.0750987Z     "timeout": 1 },
+2026-11-01T22:38:29.0751135Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access",
+2026-11-01T22:38:29.0751332Z     "property": "tb_sha256_hex_assert_rte_mem_access",
+2026-11-01T22:38:29.0751618Z     "file": "/repo/phase20-hex-hacl.c", "line": 24,
+2026-11-01T22:38:29.0751940Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0752240Z     "verdict": "valid",
+2026-11-01T22:38:29.0752484Z     "provers": [ { "prover": "qed", "time": 0.0124, "success": 0 },
+2026-11-01T22:38:29.0752828Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.03, "success": 1 } ],
+2026-11-01T22:38:29.0753110Z     "proved": 1 },
+2026-11-01T22:38:29.0753333Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_2",
+2026-11-01T22:38:29.0753653Z     "property": "tb_sha256_hex_assert_rte_mem_access_2",
+2026-11-01T22:38:29.0753933Z     "file": "/repo/phase20-hex-hacl.c", "line": 24,
+2026-11-01T22:38:29.0754237Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0754515Z     "verdict": "valid",
+2026-11-01T22:38:29.0754767Z     "provers": [ { "prover": "qed", "time": 0.00884, "success": 0 },
+2026-11-01T22:38:29.0755125Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0314, "success": 1 } ],
+2026-11-01T22:38:29.0755391Z     "proved": 1 },
+2026-11-01T22:38:29.0755616Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound_3",
+2026-11-01T22:38:29.0755918Z     "property": "tb_sha256_hex_assert_rte_index_bound_3",
+2026-11-01T22:38:29.0756112Z     "file": "/repo/phase20-hex-hacl.c", "line": 25,
+2026-11-01T22:38:29.0756314Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0756500Z     "verdict": "valid",
+2026-11-01T22:38:29.0756661Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0756843Z     "proved": 1 },
+2026-11-01T22:38:29.0756991Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_3",
+2026-11-01T22:38:29.0757193Z     "property": "tb_sha256_hex_assert_rte_mem_access_3",
+2026-11-01T22:38:29.0757382Z     "file": "/repo/phase20-hex-hacl.c", "line": 25,
+2026-11-01T22:38:29.0757582Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0757767Z     "verdict": "valid",
+2026-11-01T22:38:29.0757930Z     "provers": [ { "prover": "qed", "time": 0.0104, "success": 0 },
+2026-11-01T22:38:29.0758168Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0442, "success": 1 } ],
+2026-11-01T22:38:29.0758363Z     "proved": 1 },
+2026-11-01T22:38:29.0758511Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_4",
+2026-11-01T22:38:29.0759023Z     "property": "tb_sha256_hex_assert_rte_mem_access_4",
+2026-11-01T22:38:29.0759297Z     "file": "/repo/phase20-hex-hacl.c", "line": 25,
+2026-11-01T22:38:29.0759722Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0759981Z     "verdict": "valid",
+2026-11-01T22:38:29.0760212Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0760440Z     "proved": 1 },
+2026-11-01T22:38:29.0760656Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_5",
+2026-11-01T22:38:29.0760979Z     "property": "tb_sha256_hex_assert_rte_mem_access_5",
+2026-11-01T22:38:29.0761406Z     "file": "/repo/phase20-hex-hacl.c", "line": 27,
+2026-11-01T22:38:29.0761611Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0761881Z     "verdict": "valid",
+2026-11-01T22:38:29.0762130Z     "provers": [ { "prover": "qed", "time": 0.00646, "success": 0 },
+2026-11-01T22:38:29.0762367Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0129, "success": 1 } ],
+2026-11-01T22:38:29.0762593Z     "proved": 1 },
+2026-11-01T22:38:29.0762740Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part1",
+2026-11-01T22:38:29.0763059Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T22:38:29.0763337Z     "file": "/repo/phase20-hex-hacl.c", "line": 18,
+2026-11-01T22:38:29.0763672Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0781816Z     "verdict": "valid",
+2026-11-01T22:38:29.0782095Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0782376Z     "proved": 1 },
+2026-11-01T22:38:29.0782605Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part2",
+2026-11-01T22:38:29.0782894Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T22:38:29.0783173Z     "file": "/repo/phase20-hex-hacl.c", "line": 18,
+2026-11-01T22:38:29.0783507Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0783728Z     "verdict": "valid",
+2026-11-01T22:38:29.0783896Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0784087Z     "proved": 1 },
+2026-11-01T22:38:29.0784236Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part3",
+2026-11-01T22:38:29.0784427Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T22:38:29.0784609Z     "file": "/repo/phase20-hex-hacl.c", "line": 18,
+2026-11-01T22:38:29.0784820Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0785012Z     "verdict": "valid",
+2026-11-01T22:38:29.0785183Z     "provers": [ { "prover": "qed", "time": 0.0118, "success": 0 },
+2026-11-01T22:38:29.0785432Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0372, "success": 1 } ],
+2026-11-01T22:38:29.0785634Z     "proved": 1 },
+2026-11-01T22:38:29.0785786Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part4",
+2026-11-01T22:38:29.0785974Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T22:38:29.0786157Z     "file": "/repo/phase20-hex-hacl.c", "line": 18,
+2026-11-01T22:38:29.0786367Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0786558Z     "verdict": "valid",
+2026-11-01T22:38:29.0786728Z     "provers": [ { "prover": "qed", "time": 0.0107, "success": 0 },
+2026-11-01T22:38:29.0786963Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0463, "success": 1 } ],
+2026-11-01T22:38:29.0787165Z     "proved": 1 },
+2026-11-01T22:38:29.0787305Z   { "goal": "bytes_tb_sha256_hex_assigns_part1",
+2026-11-01T22:38:29.0787536Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T22:38:29.0787805Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0788016Z     "verdict": "valid",
+2026-11-01T22:38:29.0788186Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0788372Z     "proved": 1 },
+2026-11-01T22:38:29.0788511Z   { "goal": "bytes_tb_sha256_hex_assigns_part2",
+2026-11-01T22:38:29.0788955Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T22:38:29.0789217Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0789425Z     "verdict": "valid",
+2026-11-01T22:38:29.0789590Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0789775Z     "proved": 1 },
+2026-11-01T22:38:29.0789915Z   { "goal": "bytes_tb_sha256_hex_assigns_part3",
+2026-11-01T22:38:29.0790137Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T22:38:29.0790397Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0790764Z     "verdict": "valid",
+2026-11-01T22:38:29.0790928Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0791200Z     "proved": 1 },
+2026-11-01T22:38:29.0791342Z   { "goal": "bytes_tb_sha256_hex_assigns_part4",
+2026-11-01T22:38:29.0791562Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T22:38:29.0791821Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0792022Z     "verdict": "valid",
+2026-11-01T22:38:29.0792188Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0792371Z     "proved": 1 },
+2026-11-01T22:38:29.0792508Z   { "goal": "bytes_tb_sha256_hex_assigns_part5",
+2026-11-01T22:38:29.0792727Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T22:38:29.0792986Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0793191Z     "verdict": "valid",
+2026-11-01T22:38:29.0793359Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0793541Z     "proved": 1 },
+2026-11-01T22:38:29.0793685Z   { "goal": "bytes_tb_sha256_hex_assigns_part6",
+2026-11-01T22:38:29.0793905Z     "property": "tb_sha256_hex_assigns", "file": "/repo/phase20-hex-hacl.c",
+2026-11-01T22:38:29.0794160Z     "line": 6, "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0794363Z     "verdict": "valid",
+2026-11-01T22:38:29.0794526Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0794711Z     "proved": 1 },
+2026-11-01T22:38:29.0794950Z   { "goal": "bytes_tb_sha256_hex_loop_variant_positive",
+2026-11-01T22:38:29.0795256Z     "property": "tb_sha256_hex_loop_variant",
+2026-11-01T22:38:29.0795553Z     "file": "/repo/phase20-hex-hacl.c", "line": 19,
+2026-11-01T22:38:29.0795898Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0796115Z     "verdict": "valid",
+2026-11-01T22:38:29.0796283Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0796577Z     "proved": 1 },
+2026-11-01T22:38:29.0796825Z   { "goal": "bytes_tb_sha256_hex_loop_variant_decrease",
+2026-11-01T22:38:29.0797032Z     "property": "tb_sha256_hex_loop_variant",
+2026-11-01T22:38:29.0797214Z     "file": "/repo/phase20-hex-hacl.c", "line": 19,
+2026-11-01T22:38:29.0797423Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0797690Z     "verdict": "valid",
+2026-11-01T22:38:29.0797875Z     "provers": [ { "prover": "qed", "time": 0.0103, "success": 0 },
+2026-11-01T22:38:29.0798114Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0329, "success": 1 } ],
+2026-11-01T22:38:29.0798416Z     "proved": 1 } ]
+2026-11-01T22:38:29.0798543Z 32.1 (Germanium)
+2026-11-01T22:38:29.0798840Z [kernel] Parsing /repo/phase20-hex-openssl.c (with preprocessing)
+2026-11-01T22:38:29.0799059Z [wp] Running WP plugin...
+2026-11-01T22:38:29.0799219Z [rte:annot] annotating function tb_sha256_hex
+2026-11-01T22:38:29.0799395Z [wp] 25 goals scheduled
+2026-11-01T22:38:29.0799595Z [wp] [Timeout] bytes_tb_sha256_hex_assert_rte_index_bound_2 (Qed 7ms) (Alt-Ergo)
+2026-11-01T22:38:29.0799830Z [wp] Proved goals:   26 / 27
+2026-11-01T22:38:29.0799976Z   Terminating:       1
+2026-11-01T22:38:29.0800110Z   Unreachable:       1
+2026-11-01T22:38:29.0800252Z   Qed:              13 (6ms-5ms-18ms)
+2026-11-01T22:38:29.0800416Z   Alt-Ergo 2.5.4:   11 (13ms-40ms-135ms)
+2026-11-01T22:38:29.0800645Z   Timeout:           1
+2026-11-01T22:38:29.0800798Z [wp] /repo/phase20-hex-openssl.c:10: Warning: 
+2026-11-01T22:38:29.0801002Z   Memory model hypotheses for function 'tb_sha256_hex':
+2026-11-01T22:38:29.0801181Z   /*@
+2026-11-01T22:38:29.0801299Z      behavior wp_bytes:
+2026-11-01T22:38:29.0801432Z        requires
+2026-11-01T22:38:29.0801612Z          \separated(digest + (..), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T22:38:29.0801819Z        requires
+2026-11-01T22:38:29.0801989Z          \separated(out + (..), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T22:38:29.0802305Z        requires
+2026-11-01T22:38:29.0802564Z          \separated(out + (0 .. 64), (char const *)tb_sha256_hex_digits + (..));
+2026-11-01T22:38:29.0802770Z      */
+2026-11-01T22:38:29.0802938Z   tb_status tb_sha256_hex(unsigned char const digest[32], char out[65]);
+2026-11-01T22:38:29.0803162Z [ { "goal": "bytes_tb_sha256_hex_ensures",
+2026-11-01T22:38:29.0803334Z     "property": "tb_sha256_hex_ensures",
+2026-11-01T22:38:29.0803522Z     "file": "/repo/phase20-hex-openssl.c", "line": 7,
+2026-11-01T22:38:29.0803740Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0803934Z     "verdict": "valid",
+2026-11-01T22:38:29.0804101Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0804287Z     "proved": 1 },
+2026-11-01T22:38:29.0804444Z   { "goal": "bytes_tb_sha256_hex_ensures_nul_terminated",
+2026-11-01T22:38:29.0804651Z     "property": "tb_sha256_hex_ensures_nul_terminated",
+2026-11-01T22:38:29.0804858Z     "file": "/repo/phase20-hex-openssl.c", "line": 8,
+2026-11-01T22:38:29.0805073Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0805263Z     "verdict": "valid",
+2026-11-01T22:38:29.0805435Z     "provers": [ { "prover": "qed", "time": 0.0184, "success": 0 },
+2026-11-01T22:38:29.0805674Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0267, "success": 1 } ],
+2026-11-01T22:38:29.0805873Z     "proved": 1 },
+2026-11-01T22:38:29.0806034Z   { "goal": "bytes_tb_sha256_hex_loop_invariant_established",
+2026-11-01T22:38:29.0806235Z     "property": "tb_sha256_hex_loop_invariant",
+2026-11-01T22:38:29.0806428Z     "file": "/repo/phase20-hex-openssl.c", "line": 19,
+2026-11-01T22:38:29.0806640Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0806826Z     "verdict": "valid",
+2026-11-01T22:38:29.0806988Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0807172Z     "proved": 1 },
+2026-11-01T22:38:29.0807327Z   { "goal": "bytes_tb_sha256_hex_loop_invariant_preserved",
+2026-11-01T22:38:29.0807525Z     "property": "tb_sha256_hex_loop_invariant",
+2026-11-01T22:38:29.0807720Z     "file": "/repo/phase20-hex-openssl.c", "line": 19,
+2026-11-01T22:38:29.0807929Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0808116Z     "verdict": "valid",
+2026-11-01T22:38:29.0808281Z     "provers": [ { "prover": "qed", "time": 0.0104, "success": 0 },
+2026-11-01T22:38:29.0808515Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0295, "success": 1 } ],
+2026-11-01T22:38:29.0808884Z     "proved": 1 },
+2026-11-01T22:38:29.0809054Z   { "goal": "bytes_tb_sha256_hex_assert_byte_range",
+2026-11-01T22:38:29.0809242Z     "property": "tb_sha256_hex_assert_byte_range",
+2026-11-01T22:38:29.0809435Z     "file": "/repo/phase20-hex-openssl.c", "line": 24,
+2026-11-01T22:38:29.0809643Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0809832Z     "verdict": "valid",
+2026-11-01T22:38:29.0809999Z     "provers": [ { "prover": "qed", "time": 0.00558, "success": 0 },
+2026-11-01T22:38:29.0810236Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.022, "success": 1 } ],
+2026-11-01T22:38:29.0810434Z     "proved": 1 },
+2026-11-01T22:38:29.0810579Z   { "goal": "bytes_tb_sha256_hex_assert_high_nibble",
+2026-11-01T22:38:29.0810773Z     "property": "tb_sha256_hex_assert_high_nibble",
+2026-11-01T22:38:29.0810967Z     "file": "/repo/phase20-hex-openssl.c", "line": 25,
+2026-11-01T22:38:29.0811176Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0811361Z     "verdict": "valid",
+2026-11-01T22:38:29.0811526Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0811706Z     "proved": 1 },
+2026-11-01T22:38:29.0811854Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound",
+2026-11-01T22:38:29.0812054Z     "property": "tb_sha256_hex_assert_rte_index_bound",
+2026-11-01T22:38:29.0812355Z     "file": "/repo/phase20-hex-openssl.c", "line": 26,
+2026-11-01T22:38:29.0812563Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0812876Z     "verdict": "valid",
+2026-11-01T22:38:29.0813089Z     "provers": [ { "prover": "qed", "time": 0.00691, "success": 0 },
+2026-11-01T22:38:29.0813321Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.135, "success": 1 } ],
+2026-11-01T22:38:29.0813517Z     "proved": 1 },
+2026-11-01T22:38:29.0813702Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound_2",
+2026-11-01T22:38:29.0813970Z     "property": "tb_sha256_hex_assert_rte_index_bound_2",
+2026-11-01T22:38:29.0814176Z     "file": "/repo/phase20-hex-openssl.c", "line": 26,
+2026-11-01T22:38:29.0814450Z     "function": "tb_sha256_hex", "smoke": false, "passed": false,
+2026-11-01T22:38:29.0814742Z     "verdict": "timeout",
+2026-11-01T22:38:29.0814996Z     "provers": [ { "prover": "qed", "time": 0.00668, "success": 0 },
+2026-11-01T22:38:29.0815364Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-01T22:38:29.0815673Z     "timeout": 1 },
+2026-11-01T22:38:29.0815836Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access",
+2026-11-01T22:38:29.0816040Z     "property": "tb_sha256_hex_assert_rte_mem_access",
+2026-11-01T22:38:29.0816234Z     "file": "/repo/phase20-hex-openssl.c", "line": 26,
+2026-11-01T22:38:29.0816539Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0816864Z     "verdict": "valid",
+2026-11-01T22:38:29.0817120Z     "provers": [ { "prover": "qed", "time": 0.0122, "success": 0 },
+2026-11-01T22:38:29.0817479Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0336, "success": 1 } ],
+2026-11-01T22:38:29.0817771Z     "proved": 1 },
+2026-11-01T22:38:29.0817922Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_2",
+2026-11-01T22:38:29.0818128Z     "property": "tb_sha256_hex_assert_rte_mem_access_2",
+2026-11-01T22:38:29.0818323Z     "file": "/repo/phase20-hex-openssl.c", "line": 26,
+2026-11-01T22:38:29.0818598Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0819031Z     "verdict": "valid",
+2026-11-01T22:38:29.0819276Z     "provers": [ { "prover": "qed", "time": 0.00806, "success": 0 },
+2026-11-01T22:38:29.0819617Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0312, "success": 1 } ],
+2026-11-01T22:38:29.0819915Z     "proved": 1 },
+2026-11-01T22:38:29.0820141Z   { "goal": "bytes_tb_sha256_hex_assert_rte_index_bound_3",
+2026-11-01T22:38:29.0820414Z     "property": "tb_sha256_hex_assert_rte_index_bound_3",
+2026-11-01T22:38:29.0820668Z     "file": "/repo/phase20-hex-openssl.c", "line": 27,
+2026-11-01T22:38:29.0820986Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0821265Z     "verdict": "valid",
+2026-11-01T22:38:29.0821471Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0821791Z     "proved": 1 },
+2026-11-01T22:38:29.0821969Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_3",
+2026-11-01T22:38:29.0822172Z     "property": "tb_sha256_hex_assert_rte_mem_access_3",
+2026-11-01T22:38:29.0822404Z     "file": "/repo/phase20-hex-openssl.c", "line": 27,
+2026-11-01T22:38:29.0822740Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0823031Z     "verdict": "valid",
+2026-11-01T22:38:29.0823296Z     "provers": [ { "prover": "qed", "time": 0.00972, "success": 0 },
+2026-11-01T22:38:29.0823685Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0414, "success": 1 } ],
+2026-11-01T22:38:29.0823915Z     "proved": 1 },
+2026-11-01T22:38:29.0824062Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_4",
+2026-11-01T22:38:29.0824314Z     "property": "tb_sha256_hex_assert_rte_mem_access_4",
+2026-11-01T22:38:29.0824625Z     "file": "/repo/phase20-hex-openssl.c", "line": 27,
+2026-11-01T22:38:29.0824963Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0825266Z     "verdict": "valid",
+2026-11-01T22:38:29.0825722Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0826009Z     "proved": 1 },
+2026-11-01T22:38:29.0826345Z   { "goal": "bytes_tb_sha256_hex_assert_rte_mem_access_5",
+2026-11-01T22:38:29.0826671Z     "property": "tb_sha256_hex_assert_rte_mem_access_5",
+2026-11-01T22:38:29.0826988Z     "file": "/repo/phase20-hex-openssl.c", "line": 29,
+2026-11-01T22:38:29.0827325Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0827629Z     "verdict": "valid",
+2026-11-01T22:38:29.0827881Z     "provers": [ { "prover": "qed", "time": 0.00642, "success": 0 },
+2026-11-01T22:38:29.0828234Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0128, "success": 1 } ],
+2026-11-01T22:38:29.0828540Z     "proved": 1 },
+2026-11-01T22:38:29.0828894Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part1",
+2026-11-01T22:38:29.0829082Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T22:38:29.0829374Z     "file": "/repo/phase20-hex-openssl.c", "line": 20,
+2026-11-01T22:38:29.0829703Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0829909Z     "verdict": "valid",
+2026-11-01T22:38:29.0830136Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0830416Z     "proved": 1 },
+2026-11-01T22:38:29.0830595Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part2",
+2026-11-01T22:38:29.0830782Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T22:38:29.0831092Z     "file": "/repo/phase20-hex-openssl.c", "line": 20,
+2026-11-01T22:38:29.0831397Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0831582Z     "verdict": "valid",
+2026-11-01T22:38:29.0831829Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0832009Z     "proved": 1 },
+2026-11-01T22:38:29.0832150Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part3",
+2026-11-01T22:38:29.0832334Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T22:38:29.0832595Z     "file": "/repo/phase20-hex-openssl.c", "line": 20,
+2026-11-01T22:38:29.0832919Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0833211Z     "verdict": "valid",
+2026-11-01T22:38:29.0833472Z     "provers": [ { "prover": "qed", "time": 0.011, "success": 0 },
+2026-11-01T22:38:29.0833838Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0323, "success": 1 } ],
+2026-11-01T22:38:29.0834145Z     "proved": 1 },
+2026-11-01T22:38:29.0834363Z   { "goal": "bytes_tb_sha256_hex_loop_assigns_part4",
+2026-11-01T22:38:29.0834648Z     "property": "tb_sha256_hex_loop_assigns",
+2026-11-01T22:38:29.0834935Z     "file": "/repo/phase20-hex-openssl.c", "line": 20,
+2026-11-01T22:38:29.0835258Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0835546Z     "verdict": "valid",
+2026-11-01T22:38:29.0835799Z     "provers": [ { "prover": "qed", "time": 0.0105, "success": 0 },
+2026-11-01T22:38:29.0836159Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0453, "success": 1 } ],
+2026-11-01T22:38:29.0836466Z     "proved": 1 },
+2026-11-01T22:38:29.0836677Z   { "goal": "bytes_tb_sha256_hex_assigns_part1",
+2026-11-01T22:38:29.0836955Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T22:38:29.0837233Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T22:38:29.0837555Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0837847Z     "verdict": "valid",
+2026-11-01T22:38:29.0838099Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0838380Z     "proved": 1 },
+2026-11-01T22:38:29.0838590Z   { "goal": "bytes_tb_sha256_hex_assigns_part2",
+2026-11-01T22:38:29.0838972Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T22:38:29.0839249Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T22:38:29.0839573Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0839866Z     "verdict": "valid",
+2026-11-01T22:38:29.0840118Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0840603Z     "proved": 1 },
+2026-11-01T22:38:29.0840820Z   { "goal": "bytes_tb_sha256_hex_assigns_part3",
+2026-11-01T22:38:29.0841197Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T22:38:29.0841487Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T22:38:29.0841763Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0842023Z     "verdict": "valid",
+2026-11-01T22:38:29.0842185Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0842364Z     "proved": 1 },
+2026-11-01T22:38:29.0842539Z   { "goal": "bytes_tb_sha256_hex_assigns_part4",
+2026-11-01T22:38:29.0842757Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T22:38:29.0842933Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T22:38:29.0843189Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0843476Z     "verdict": "valid",
+2026-11-01T22:38:29.0843733Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0844078Z     "proved": 1 },
+2026-11-01T22:38:29.0844320Z   { "goal": "bytes_tb_sha256_hex_assigns_part5",
+2026-11-01T22:38:29.0844520Z     "property": "tb_sha256_hex_assigns",
+2026-11-01T22:38:29.0844718Z     "file": "/repo/phase20-hex-openssl.c", "line": 6,
+2026-11-01T22:38:29.0844944Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0845128Z     "verdict": "valid",
+2026-11-01T22:38:29.0845312Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0845489Z     "proved": 1 },
+2026-11-01T22:38:29.0845658Z   { "goal": "bytes_tb_sha256_hex_loop_variant_positive",
+2026-11-01T22:38:29.0845868Z     "property": "tb_sha256_hex_loop_variant",
+2026-11-01T22:38:29.0846055Z     "file": "/repo/phase20-hex-openssl.c", "line": 21,
+2026-11-01T22:38:29.0846330Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0846520Z     "verdict": "valid",
+2026-11-01T22:38:29.0846683Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T22:38:29.0846859Z     "proved": 1 },
+2026-11-01T22:38:29.0847020Z   { "goal": "bytes_tb_sha256_hex_loop_variant_decrease",
+2026-11-01T22:38:29.0847210Z     "property": "tb_sha256_hex_loop_variant",
+2026-11-01T22:38:29.0847394Z     "file": "/repo/phase20-hex-openssl.c", "line": 21,
+2026-11-01T22:38:29.0847598Z     "function": "tb_sha256_hex", "smoke": false, "passed": true,
+2026-11-01T22:38:29.0847780Z     "verdict": "valid",
+2026-11-01T22:38:29.0847975Z     "provers": [ { "prover": "qed", "time": 0.0101, "success": 0 },
+2026-11-01T22:38:29.0848335Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.033, "success": 1 } ],
+2026-11-01T22:38:29.0848754Z     "proved": 1 } ]
+2026-11-01T22:38:29.1452712Z ##[group]Run set -euo pipefail
+2026-11-01T22:38:29.1452923Z [36;1mset -euo pipefail[0m
+2026-11-01T22:38:29.1453090Z [36;1mfor log in phase20-results/*.log; do[0m
+2026-11-01T22:38:29.1453270Z [36;1m  target=$(basename "$log" .log)[0m
+2026-11-01T22:38:29.1453485Z [36;1m  python3 tools/check_phase20_wp.py "$target" "$log"[0m
+2026-11-01T22:38:29.1453677Z [36;1mdone[0m
+2026-11-01T22:38:29.1471129Z shell: /usr/bin/bash -e {0}
+2026-11-01T22:38:29.1471279Z ##[endgroup]
+2026-11-01T22:38:29.1729315Z FAIL: Phase 20: positive proof is incomplete
+2026-11-01T22:38:29.1775449Z ##[error]Process completed with exit code 1.
+2026-11-01T22:38:29.1842425Z ##[group]Run actions/upload-artifact@v4
+2026-11-01T22:38:29.1842598Z with:
+2026-11-01T22:38:29.1842718Z   name: phase20-hex
+2026-11-01T22:38:29.1842861Z   path: phase20-results/
+phase20-*.c
+
+2026-11-01T22:38:29.1843024Z   retention-days: 30
+2026-11-01T22:38:29.1843157Z   if-no-files-found: warn
+2026-11-01T22:38:29.1843297Z   compression-level: 6
+2026-11-01T22:38:29.1843426Z   overwrite: false
+2026-11-01T22:38:29.1843553Z   include-hidden-files: false
+2026-11-01T22:38:29.1843697Z ##[endgroup]
+2026-11-01T22:38:29.2985514Z (node:2609) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-01T22:38:29.2986329Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-01T22:38:29.3045941Z With the provided path, there will be 8 files uploaded
+2026-11-01T22:38:29.3049081Z Artifact name is valid!
+2026-11-01T22:38:29.3049539Z Root directory input is valid!
+2026-11-01T22:38:29.6636785Z Beginning upload of artifact content to blob storage
+2026-11-01T22:38:29.6907324Z (node:2609) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-01T22:38:29.9619473Z Uploaded bytes 29835
+2026-11-01T22:38:30.0238374Z Finished uploading artifact content to blob storage!
+2026-11-01T22:38:30.0239185Z SHA256 digest of uploaded artifact zip is a495e020dbc9b5be632ba1e9f8b13f345ad0c935b4c768cb2ea64de7f4a6506f
+2026-11-01T22:38:30.0240613Z Finalizing artifact upload
+2026-11-01T22:38:30.4855819Z Artifact phase20-hex.zip successfully finalized. Artifact ID 13103732445
+2026-11-01T22:38:30.4856423Z Artifact phase20-hex has been successfully uploaded! Final size is 29835 bytes. Artifact ID is 13103732445
+2026-11-01T22:38:30.4860806Z Artifact download URL: https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41357853625/artifacts/13103732445
+2026-11-01T22:38:30.5089075Z Post job cleanup.
+2026-11-01T22:38:30.5655537Z [command]/usr/bin/git version
+2026-11-01T22:38:30.5684406Z git version 2.56.0
+2026-11-01T22:38:30.5706569Z Temporarily overriding HOME='/home/runner/work/_temp/7b053b78-b566-4563-a693-6054df7b6b4c' before making global git config changes
+2026-11-01T22:38:30.5706980Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T22:38:30.5710609Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T22:38:30.5738291Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T22:38:30.5763878Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T22:38:30.5942019Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T22:38:30.5963126Z http.https://github.com/.extraheader
+2026-11-01T22:38:30.5969419Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-01T22:38:30.5995710Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T22:38:30.6174531Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T22:38:30.6199125Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T22:38:30.6486428Z Cleaning up orphan processes
+2026-11-01T22:38:30.6749539Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

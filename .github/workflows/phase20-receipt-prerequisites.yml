@@ -78,7 +78,7 @@ jobs:
                 timeout=35
                 split=
                 case "$target" in
-                  hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex; split="-wp-split -wp-print";;
+                  hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex; split="-wp-auto wp:bitshift -wp-print";;
                   accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;
                   bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;
                 esac

@@ -26,6 +26,17 @@ establish the receipt digest equation. The hex proofs establish framing and
 termination, not the numeric meaning of every emitted hex digit. Native
 golden-byte tests remain a distinct evidence class.
 
+The native harness checks 160 validation cases and 2,530 formatter cases
+(including 30 injected failures) per compiler/provider tuple. Its independent
+Python oracle canonicalizes the frozen public toy fixtures and first checks
+their recorded digests. It exercises every capacity from 1 through two bytes
+past each expected output length, both `with_hash` branches, all observed
+format-call sites, input preservation and both surrounding buffer guards.
+Three compiled mutations must fail their designated semantic assertions.
+Fault builds disable `snprintf` builtin folding and fortification so the
+compiler cannot eliminate error branches before linker interposition. This
+is a finite fault-test configuration, separate from normal production builds.
+
 ## External premises
 
 The actual `snprintf` calls use four fixed literals and three argument shapes.
@@ -65,8 +76,15 @@ semantic mutant keeps the positive contracts: accept invalid receipts,
 return an out-of-bounds success size, or modify the size on a formatter error.
 It must leave the designated obligation unproved; a parser/tool failure does
 not count as semantic rejection. Original successful and failed logs must
-remain distinguishable. Initial goal inventories are NOT_RUN, and the gate
-fails until actual results and model diagnostics have been inspected and pinned.
+remain distinguishable. Execution is IN_PROGRESS: the retained validator and
+composition runs are complete, while formatter and hex results remain partial.
+The gate fails until every positive target is complete and its actual goal
+inventory and model diagnostics have been inspected and pinned.
+
+WP's summary includes automatic termination/unreachable CFG facts that its
+JSON report omits. The gate accounts for those separately and requires every
+scheduled goal to appear exactly once in the original structured report.
+An automatic CFG fact cannot substitute for a missing scheduled obligation.
 
 Keep issue #28 and the broader A04/A05 obligations open. Require fresh
 independent review of this PR's final exact head and all current CI. Review
