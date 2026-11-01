@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–13 are merged, while the unbounded HACL* adapter/provider proof remains open (#15). v0.1.0 is an immutable source release. Phase 14 is a draft PR targeting production receipt-v1 parsing and chain properties; neither partial helper proofs nor test parity establish the full receipt theorem. See the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md).**
+**Phases 0–14 are merged. The immutable v0.1.0 source release remains unchanged; the unbounded HACL* adapter/provider proof (#15) and full receipt-engine proof (#16) are still open. Phase 15 is a draft effort to measure real C/Rust ABI agreement and compiler-target reproducibility, not a verified binary proof. See the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md).**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -18,10 +18,17 @@
 | **11 — Whole-wrapper modular proof** | Actual public `tb_witness_delete`, `fingerprints` and `witness_stage` under assumed SHA provider contract | Frama-C/WP 18/18, 23/23, 47/47 (88/88), exact-head review | Merged |
 | **12 — Actual SHA provider boundary** | Actual C99 SHA wrapper + real EVP with test-only failure injection, source identity ledger | GCC + Clang negative/positive outcomes, exact-head CI/review | Merged in PR #14 — executed failure evidence, no SHA theorem |
 | **13 — Verified SHA digest primitive** | Pinned generated HACL* SHA2-256 as optional backend; existing API and receipt wire bytes | Immutable upstream identity, fault tests, GCC/Clang x86-64/ARM64, exact parity; separate adapter/refinement proof remains required | PR #19 merged; residual provider refinement tracked in #15 |
-| **14 — Canonical receipts and chains** | Actual C99 decimal-overflow and duplicate-bit WP obligations, bounded parser model, encoder/chain adversarial replay | Nonzero complete WP/CBMC goals, GCC/Clang x86-64/ARM64, frozen v1 blob identities | Draft PR #20 — partial proof attempt; full parser/chain WP remains outstanding |
-| **15 — Rust and compiler refinement** | FFI ownership/ABI and target-specific verified compilation | No C/Rust semantic gap for declared platforms | Planned |
+| **14 — Canonical receipts and chains** | Actual C99 decimal-overflow and duplicate-bit WP obligations, bounded parser model, encoder/chain adversarial replay | Nonzero complete WP/CBMC goals, GCC/Clang x86-64/ARM64, frozen v1 blob identities | PR #20 merged; full parser/chain proof still open in #16 |
+| **15 — Rust and compiler refinement** | Measured C99/Rust ABI, error/output parity, 64 MiB caps and two isolated release builds | GCC/Clang x86-64/ARM64 × OpenSSL/HACL execution, identical binary receipts, independent exact-head review | Draft implementation; source-to-binary formal refinement remains open in #17 |
 | **16 — Platform and provenance closure** | Trusted heads, witness signatures, target models, irreversible event caveats | Independent anchors where applicable; explicit unresolved physics/hardware premises | Planned |
 
+
+## Phase 15 — Rust FFI ABI and target-specific build evidence
+
+- Actual C99 header-derived sizes, alignments, offsets, enums and status discriminants are compared to the private `repr(C)` Rust FFI structs by a test-only oracle compiled on each target; no public ABI changes.
+- Rust/C99 error paths check no mutation of caller fields/buffers for failed calls. CLI cap tests require exactly 64 MiB to work and 64 MiB + 1 to fail with no stdout or pathname leak.
+- Each supported Linux x86-64/ARM64 GCC/Clang + OpenSSL/HACL configuration independently builds two Rust/C99 release executables, compares exact bytes, and stores a source/toolchain/target/binary SHA receipt. Negative controls reject missing/mismatched artifacts.
+- This is **not** formally verified source-to-binary translation. Compiler, optimization, linker, OS/hardware, FFI provenance and real-provider semantics remain scoped premises. See [Phase 15](docs/PHASE15_ABI.md) and issue #17.
 
 ## Phase 14 — Production canonical receipts and hash-chain assumptions
 
