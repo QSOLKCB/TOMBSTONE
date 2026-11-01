@@ -1,4 +1,4 @@
-name: Phase 13 — HACL SHA2-256 parity (${{ matrix.compiler }} and ${{ matrix.runner }})
+name: Phase 13 — pinned HACL SHA2-256 and receipt parity
 
 on:
   pull_request:
@@ -34,12 +34,12 @@ jobs:
       - name: Build independent Rust CLI binaries
         run: |
           set -euo pipefail
-          TOMBSTONE_SHA256_BACKEND=hacl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$${{ matrix.runner }}_TEMP/hacl" cargo build -p tombstone-cli --release --offline --locked
-          TOMBSTONE_SHA256_BACKEND=openssl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$${{ matrix.runner }}_TEMP/openssl" cargo build -p tombstone-cli --release --offline --locked
+          TOMBSTONE_SHA256_BACKEND=hacl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$RUNNER_TEMP/hacl" cargo build -p tombstone-cli --release --offline --locked
+          TOMBSTONE_SHA256_BACKEND=openssl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$RUNNER_TEMP/openssl" cargo build -p tombstone-cli --release --offline --locked
       - name: Independently check exact receipt fixtures and digest parity
         run: |
           python3 tools/check_portability.py \
-            "$${{ matrix.runner }}_TEMP/hacl/release/tombstone" \
-            "$${{ matrix.runner }}_TEMP/openssl/release/tombstone"
+            "$RUNNER_TEMP/hacl/release/tombstone" \
+            "$RUNNER_TEMP/openssl/release/tombstone"
       - name: Test complete HACL Rust FFI and CLI workspace
-        run: TOMBSTONE_SHA256_BACKEND=hacl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$${{ matrix.runner }}_TEMP/hacl-tests" cargo test --workspace --offline --locked
+        run: TOMBSTONE_SHA256_BACKEND=hacl CC=${{ matrix.compiler }} CARGO_TARGET_DIR="$RUNNER_TEMP/hacl-tests" cargo test --workspace --offline --locked
