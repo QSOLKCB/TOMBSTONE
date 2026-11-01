@@ -6,7 +6,7 @@ import hashlib
 ROOT = Path(__file__).resolve().parents[1]
 BLOBS = {
     "src/encoding/receipt.c": "6fe3e8014e9c38ea42c43b9133f026967a4158e3",
-    "formal/cbmc/chain_v17_harness.c": "01db6e5e89b4c2d837368dd711fe8fe34ff124e6",
+    "formal/cbmc/chain_v17_harness.c": "19bd1fee64f2f54f339f2100d102855701ba954d",
     "tests/formal/test_chain_v17.c": "d798ab41664bf66b477ffeecadd0e5ed885f1d53",
     "machine/examples/explicit-delete-v1.json": "3f3e1ba5f273bd266bcd764f10cd4e669f0dfc2d",
     "machine/examples/observed-transition-v1.json": "79dc897ad9192ed9eda8912213130c6556b72017",
