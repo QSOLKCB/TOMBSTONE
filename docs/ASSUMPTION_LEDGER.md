@@ -14,8 +14,8 @@ source identities, evidence and separately documented residual assumptions.
 | A05 | Canonical JSON/receipt parser and chain | Phase 14 actual-source numeric/field-mask ACSL targets and bounded parser/chain negative evidence (exact-head verification required) | Full unbounded production C99 encoder/parser/chain, hash-domain and no-write-on-error WP/refinement proofs remain open |
 | A06 | Rust FFI, CLI, TUI, GTK | Phase 15 direct C99/Rust ABI layout/discriminant and error/no-write tests on specific Linux targets (execution gate pending) | Unbounded ownership, pointer/aliasing, panics and ABI refinement proofs |
 | A07 | C source-to-executable compiler/linker semantics | Phase 15 independent repeat-build executable hashing and exact target/source/toolchain receipts (executed evidence only when CI passes) | CompCert or target-specific translation validation for actual binary and external calls |
-| A08 | OS, firmware and physical hardware | Model and executed target tests only | Explicit target-specific model and trusted hardware assumptions |
-| A09 | Historical deletion, time, author and secure erasure | **Never claimed** | Independent witness, trusted head, signature and separate storage-erasure evidence |
+| A08 | OS, firmware and physical hardware | Phase 16 C99 Linux 8-bit/little-endian/64-bit target probe and offline trust ledger; tests are not hardware proofs | Independently attested OS, firmware, memory and actual hardware fault model |
+| A09 | Historical deletion, time, author and secure erasure | Phase 16 strict offline externally supplied head comparison; does not establish head custody, identity, timing or an event | Independently retained head, witness/identity/time provenance, and device-specific forensic erasure evidence |
 
 ## Phase 12 — Executed C99/OpenSSL boundary fault evidence
 
@@ -114,3 +114,23 @@ soundness, target linker/OS behaviour or machine-code refinement. Failure
 of any individual ABI or executable identity test blocks the evidence claim,
 not grounds to relax safety checks. C99 remains authoritative and the
 immutable `v0.1.0` baseline stays untouched. A06/A07 remain conditional.
+
+## Phase 16 — Conditional target model and externally witnessed events
+
+The [Phase 16 trust boundary](PHASE16_TARGET_TRUST.md) is machine-readable in
+`machine/phase16/trust-boundaries-v1.json` with enforced A01–A09 categories,
+exact pre-existing source Git blobs and preserved `v0.1.0` identity. C99
+platform probes on GCC/Clang Linux x86-64 and AArch64 reject unsupported
+integer/endianness/ABI models; this is not a hardware or verified compiler
+attestation. The Rust CLI can optionally consume a strict, independently
+retained chain head from an offline regular file, then invoke **unchanged
+C99 chain verification**. No head is automatically generated, stored,
+signed or silently accepted by the CLI.
+
+A matching head establishes only equality to the *caller supplied* value.
+Independent custody, authenticated identity, trusted chronology, storage
+controller behavior and physical erasure cannot be derived from receipts.
+The machine contract rejects upgrading A08/A09 into proved code claims and
+separates verified splice relations from observed filesystem events and
+storage-erasure evidence. The live SHA provider and incomplete canonical
+receipt/FFI/source-to-binary proofs remain conditional (issues #15–#17).
