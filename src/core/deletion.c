@@ -60,6 +60,54 @@ tb_status tb_observe_transition(const void *before, size_t before_size,
     return TB_OK;
 }
 
+/* Exact byte-splice relation. This is production C99, not an independently
+ * invented formal model. Its ACSL contract is proved separately with WP.
+ * Caller first validates lengths and valid, disjoint readable buffers.
+ * The helper never reads or modifies secret data beyond its input buffers.
+ */
+/*@
+  requires removed_size > 0;
+  requires removed_size <= before_size;
+  requires offset <= before_size - removed_size;
+  requires after_size == before_size - removed_size;
+  requires \valid_read(before + (0 .. before_size-1));
+  requires \valid_read(removed + (0 .. removed_size-1));
+  requires \valid_read(after + (0 .. after_size-1));
+  assigns \nothing;
+  ensures \result == 0 || \result == 1;
+  ensures (\result == 1) <==>
+    ((\forall integer k; 0 <= k < removed_size ==>
+        before[offset+k] == removed[k]) &&
+     (\forall integer k; 0 <= k < after_size ==>
+        after[k] == before[k < offset ? k : k+removed_size]));
+*/
+static int splice_equal(const unsigned char *before, size_t before_size,
+                        const unsigned char *removed, size_t removed_size,
+                        size_t offset, const unsigned char *after, size_t after_size)
+{
+    size_t i;
+    (void)before_size; /* length validated by caller; ACSL precondition */
+    /*@ loop invariant 0 <= i <= removed_size;
+        loop invariant \forall integer k; 0 <= k < i ==> before[offset+k] == removed[k];
+        loop assigns i;
+        loop variant removed_size - i;
+    */
+    for (i = 0u; i < removed_size; ++i) {
+        if (before[offset+i] != removed[i]) return 0;
+    }
+    /*@ loop invariant 0 <= i <= after_size;
+        loop invariant \forall integer k; 0 <= k < removed_size ==> before[offset+k] == removed[k];
+        loop invariant \forall integer k; 0 <= k < i ==>
+          after[k] == before[k < offset ? k : k+removed_size];
+        loop assigns i;
+        loop variant after_size - i;
+    */
+    for (i = 0u; i < after_size; ++i) {
+        if (after[i] != before[i < offset ? i : i+removed_size]) return 0;
+    }
+    return 1;
+}
+
 tb_status tb_witness_delete(const void *before, size_t before_size,
                             const void *removed, size_t removed_size,
                             size_t offset,
@@ -68,7 +116,6 @@ tb_status tb_witness_delete(const void *before, size_t before_size,
 {
     const unsigned char *b;
     const unsigned char *a;
-    size_t suffix_size;
     tb_evidence_v1 tmp;
     tb_status st;
 
@@ -88,11 +135,8 @@ tb_status tb_witness_delete(const void *before, size_t before_size,
 
     b = (const unsigned char *)before;
     a = (const unsigned char *)after;
-    suffix_size = before_size - offset - removed_size;
-    if (memcmp(b + offset, removed, removed_size) != 0 ||
-        (offset != 0u && memcmp(b, a, offset) != 0) ||
-        (suffix_size != 0u &&
-         memcmp(b + offset + removed_size, a + offset, suffix_size) != 0)) {
+    if (!splice_equal(b, before_size, (const unsigned char *)removed,
+                      removed_size, offset, a, after_size)) {
         return TB_ERR_MISMATCH;
     }
 
