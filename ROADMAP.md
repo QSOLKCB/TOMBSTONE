@@ -1,6 +1,6 @@
 # TOMBSTONE roadmap
 
-**Phases 0–15 are merged; v0.1.0 remains an immutable source release. Phase 16 is a draft target-model/external-chain-head milestone. Outstanding SHA, receipt, FFI/compiler and physical-event premises remain explicit in the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md); no release or universal hardware/erasure proof is asserted.**
+**Phases 0–16 are merged; v0.1.0 remains an immutable source release. Phase 17 is a focused direct-C99 chain rejection and retained-head evidence milestone (PR #24 / issue #23). Outstanding SHA, full-receipt, FFI/compiler and physical-event premises remain explicit in the [Assumption Ledger](docs/ASSUMPTION_LEDGER.md); no release or universal hardware/erasure proof is asserted.**
 
 | Phase | Deliverable | Gate | Status |
 | --- | --- | --- | --- |
@@ -20,8 +20,15 @@
 | **13 — Verified SHA digest primitive** | Pinned generated HACL* SHA2-256 as optional backend; existing API and receipt wire bytes | Immutable upstream identity, fault tests, GCC/Clang x86-64/ARM64, exact parity; separate adapter/refinement proof remains required | PR #19 merged; residual provider refinement tracked in #15 |
 | **14 — Canonical receipts and chains** | Actual C99 decimal-overflow and duplicate-bit WP obligations, bounded parser model, encoder/chain adversarial replay | Nonzero complete WP/CBMC goals, GCC/Clang x86-64/ARM64, frozen v1 blob identities | PR #20 merged; full parser/chain proof still open in #16 |
 | **15 — Rust and compiler refinement** | Measured C99/Rust ABI, error/output parity, 64 MiB caps and two isolated release builds | GCC/Clang x86-64/ARM64 × OpenSSL/HACL execution, identical binary receipts, independent exact-head review | PR #21 merged; full source-to-binary refinement still open in #17 |
-| **16 — Platform and provenance closure** | Explicit C99 target model, externally supplied offline head file, source-linked proof/trust ledger and physical-event distinctions | Negative custody/claim-inflation tests, Linux GCC/Clang x86-64/ARM64, exact-head review | Draft PR #22; no built-in signing, real-world identity/time or secure-erasure proof |
+| **16 — Platform and provenance closure** | Explicit C99 target model, externally supplied offline head file, source-linked proof/trust ledger and physical-event distinctions | Negative custody/claim-inflation tests, Linux GCC/Clang x86-64/ARM64, exact-head review | PR #22 merged; physical and identity/time claims remain external |
+| **17 — Direct receipt-chain verification gates** | Real C99 pre-hash reject proof targets, exhaustive frozen-fixture chain order and retained-head negative controls | CBMC exact-source 3 targets, GCC/Clang x86-64/ARM64 × both SHA providers, historical pins and exact-head review | Draft PR #24; full unbounded chain/crypto proof remains open |
 
+
+## Phase 17 — Incremental A05 chain integrity
+
+- Production `src/encoding/receipt.c` remains byte-identical to Phase 14 and 16. Direct-source CBMC verifies argument/null/oversized and invalid genesis pre-hash rejection without assuming real-provider success.
+- Full production C99 replay checks all six frozen receipt orderings, correct and wrong trusted heads, prefixes, invalid predecessor states and digest tampering, across GCC/Clang Linux x86-64/ARM64 × OpenSSL/HACL.
+- Source-provenance and negative-evidence checks fail closed on changed proof inputs; `v0.1.0` and historical fixtures remain untouched. Full A05/actual SHA provider proofs remain conditional. See [Phase 17](docs/PHASE17_CHAIN.md), [issue #23](https://github.com/QSOLKCB/TOMBSTONE/issues/23).
 
 ## Phase 16 — Target assumptions and independent evidence boundary
 
