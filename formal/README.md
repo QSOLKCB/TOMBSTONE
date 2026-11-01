@@ -26,3 +26,7 @@ Run CI `.github/workflows/formal-wrapper.yml`. The proof gate requires all nonze
 ## Phase 11 — Whole-wrapper modular WP
 
 The verification-only `formal/framac/witness_wrapper_v11.c` includes the unchanged real C99 source, adds separately checkable contracts for the real `fingerprints` and production `witness_stage` helpers, and retains quantified splice/result and failure-no-write goals on `tb_witness_delete`. CI `.github/workflows/formal-v11.yml` checks **all three** functions with `-wp-rte` and rejects missing/zero/partial proof goal summaries. A green helper check alone is not a whole-wrapper proof. OpenSSL is an explicitly assumed dependency, not a proved primitive.
+
+### Phase 11 executed result
+
+[GitHub Actions run 41314458282](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41314458282) completed **18/18 `fingerprints`**, **23/23 `witness_stage`**, and **47/47 `tb_witness_delete`** Frama-C/WP obligations on the exact production source and proof overlay. The source-level proof is conditional on the external SHA provider and C memory-model assumptions. Evidence blobs are pinned and automatically checked by `tools/check_formal_evidence.py`. Source SHA changes must not inherit the old proof evidence.

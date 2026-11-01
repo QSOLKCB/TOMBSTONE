@@ -22,6 +22,8 @@ jobs:
           sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev
           make test
           gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -I include -c formal/framac/witness_wrapper_v11.c -o /tmp/tombstone-v11-proof.o
+      - name: Reject stale Phase 11 source/overlay proof evidence
+        run: python3 tools/check_formal_evidence.py
       - name: Verify external hash failure-path tests
         run: |
           gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -O2 -I include tests/formal/test_wrapper_hash_failures.c -o /tmp/tombstone-v11-hash-faults

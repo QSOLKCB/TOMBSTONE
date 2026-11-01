@@ -68,3 +68,5 @@ The public C99 wrapper's contracts are in `formal/framac/witness_wrapper.c`; the
 ## Phase 11 proof discipline
 
 `formal/framac/witness_wrapper_v11.c` is an overlay of **real production C99**; it may assume the explicitly documented external SHA-256 contract, but all internal `fingerprints`, `witness_stage` and wrapper proof goals must be discharged separately with `-wp-rte`. Require the existing Phase 9 and 10 workflow checks, all nonzero goals proved and reviewer approval for the **exact head**. A helper proof does not establish full-wrapper correctness. Unproved goals and solver timeouts block merge; do not weaken contracts or disable runtime safety to make CI green. Preserve v0.1.0.
+
+**Phase 11 executed result:** GitHub Actions run `41314458282` discharged 18/18 `fingerprints`, 23/23 `witness_stage` and 47/47 `tb_witness_delete` WP goals against the exact source blob pinned in `machine/formal/phase11-wp-evidence-v1.json`. Review the **current exact PR head**, not the historical proof-run head, and verify the blob identities remain the same; never mistake this conditional source-level proof for a proof of SHA-256/OpenSSL or a compiled executable.
