@@ -1,6 +1,6 @@
 # Phase 10 — Public witnessed-deletion validation proof
 
-**Executed verification:** [GitHub Actions run 41308068838](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41308068838) discharged **24/24 Frama-C/WP goals** for the actual production `witness_header_status` helper (source blob `b152e484cc8f14a2cfa38c559c929b474ef2b460`). Qed discharged 19 and Alt-Ergo 2.5.4 discharged 5. The final PR head must re-run this proof. This is **not** a completed whole-wrapper proof.
+**Executed strengthened verification:** [GitHub Actions run 41308568840](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41308568840) discharged **25/25 Frama-C/WP goals** for the actual production `witness_header_status` helper (source blob `7f2e80d8f2d453d2c1b91ebebe323620c4ae5255`). Qed discharged 19 and Alt-Ergo 2.5.4 discharged 6; the added obligation proves length errors must take precedence when applicable. The original 24/24 evidence remains preserved as a historical record. The final PR head must re-run these checks. This is **not** a completed whole-wrapper proof.
 
 The actual production `tb_witness_delete` now calls a small static
 `witness_header_status` helper that checks **all prehash public-API errors**
