@@ -1,0 +1,96 @@
+name: Phase 17 — direct C99 chain rejection and retained-head replay
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence:
+    name: Reject stale C99 proof inputs and historical fixtures
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute source identity gate and tamper negative controls
+        run: |
+          set -euo pipefail
+          python3 tools/check_phase17_evidence.py
+          python3 tests/formal/test_phase17_evidence_gate.py
+          python3 tools/check_phase14_evidence.py
+          python3 tools/check_phase16_model.py
+
+  direct-cbmc:
+    name: Actual C99 prehash status/no-write rejection — CBMC 6.11.0
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check exact C source and direct-inclusion C99 harness
+        run: |
+          python3 tools/check_phase17_evidence.py
+          gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude \
+            -c formal/cbmc/chain_v17_harness.c -o /tmp/chain_v17_harness.o
+      - name: Require all bounded rejection and unwinding assertions
+        run: |
+          set -euo pipefail
+          for target in check_null_and_empty check_genesis_nonzero check_oversized_count; do
+            timeout 300 docker run --rm --entrypoint cbmc -v "$PWD:/repo:ro" -w /repo \
+              ghcr.io/diffblue/cbmc:6.11.0 \
+              --function "$target" --unwind 96 --unwinding-assertions \
+              --bounds-check --pointer-check --signed-overflow-check --unsigned-overflow-check \
+              -I include formal/cbmc/chain_v17_harness.c \
+              2>&1 | tee "phase17-$target.log"
+            grep -q 'VERIFICATION SUCCESSFUL' "phase17-$target.log"
+          done
+      - name: Preserve solver reports including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tombstone-phase17-direct-cbmc
+          path: phase17-check_*.log
+          if-no-files-found: warn
+          retention-days: 30
+
+  native-replay:
+    name: Frozen v1 chain/anchor replay (${{ matrix.compiler }} / ${{ matrix.runner }} / ${{ matrix.backend }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+        compiler: [gcc, clang]
+        backend: [openssl, hacl]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install compiler and crypto dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc clang pkg-config libssl-dev
+      - name: Confirm the original evidence source identity
+        run: |
+          python3 tools/check_phase17_evidence.py
+          python3 tools/check_phase14_evidence.py
+          python3 tools/check_phase16_model.py
+      - name: Execute actual C99 chain and anchor with frozen fixtures
+        env:
+          CC: ${{ matrix.compiler }}
+          SHA256_BACKEND: ${{ matrix.backend }}
+        run: |
+          set -euo pipefail
+          make CC="$CC" SHA256_BACKEND="$SHA256_BACKEND" test
+          if [[ "$SHA256_BACKEND" == "hacl" ]]; then
+            lib=build/hacl/libtombstone.a
+            libs=""
+          else
+            lib=build/libtombstone.a
+            libs="$(pkg-config --libs openssl)"
+          fi
+          "$CC" -std=c99 -O2 -Wall -Wextra -Wpedantic -Werror -Iinclude \
+            tests/formal/test_chain_v17.c "$lib" $libs \
+            -o "$RUNNER_TEMP/phase17-chain-replay"
+          "$RUNNER_TEMP/phase17-chain-replay"
