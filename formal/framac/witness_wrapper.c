@@ -19,6 +19,9 @@
 tb_status tb_sha256_bytes(const void *data, size_t length,
                           unsigned char out[TB_SHA256_DIGEST_SIZE]);
 
+/* Exact byte identity is mandatory for any successful or hash-reached
+ * return. This is an INTENDED contract; full-wrapper WP is not yet proved.
+ */
 /*@
   requires out != \null ==> \valid(out);
   requires before != \null && before_size <= TB_EVIDENCE_MAX_BYTES ==>
@@ -37,9 +40,6 @@ tb_status tb_sha256_bytes(const void *data, size_t length,
   ensures \result == TB_OK || \result == TB_ERR_ARGUMENT ||
           \result == TB_ERR_LENGTH || \result == TB_ERR_MISMATCH ||
           \result == TB_ERR_CRYPTO || \result == TB_ERR_MEMORY;
-  /* Exact byte identity is mandatory for any successful or hash-reached
-   * return. This is an INTENDED contract; full-wrapper WP is not yet proved.
-   */
   ensures \result == TB_OK ==>
     (removed_size > 0 && removed_size <= before_size &&
      offset <= before_size - removed_size &&
