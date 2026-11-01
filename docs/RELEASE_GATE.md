@@ -1,7 +1,6 @@
 # Phase 7 release gate — TOMBSTONE
 
-**Status: proposed hardening PR. Not a signed release, not a release tag,
-and not a security certification.** The maintainer owns the final tag decision.
+**Status: Phases 0–7 merged; post-merge CI verified on `d6ae7d4`. A separate release-candidate packaging PR generates the actual source asset and checksum manifest. This is not a tag, release, signature or security certification.** The maintainer owns the final tag decision.
 
 ## Required gates before any immutable tag
 
@@ -46,16 +45,16 @@ security certification. No external trusted anchor is automatically produced.
 
 | Field | Current value |
 | --- | --- |
-| Candidate tag | Pending maintainer selection |
-| Exact reviewed head | Pending review |
-| Merged source commit | Pending merge |
-| x86-64 / ARM64 evidence | Pending exact-head CI |
-| GCC / Clang replay | Pending exact-head CI |
-| Fuzz evidence | Pending exact-head CI |
+| Candidate tag | Proposed `v0.1.0` — not created |
+| Exact reviewed Phase 7 head | `399a18a5449ca9f54df08f5468a363ac0b159b19` (no actionable findings) |
+| Merged source commit | `d6ae7d4016eb4efff6a684737711d809ec9d256f` |
+| x86-64 / ARM64 evidence | Completed: push run [41294274468](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41294274468) |
+| GCC / Clang replay | Completed: push run 41294274468, Linux x86-64 + aarch64 |
+| Fuzz evidence | Completed: 2,000 receipt + 2,000 splice iterations, fail-fast UBSan |
 | Known limitations | Pending review |
-| Asset checksum manifest | Not produced |
+| Asset checksum manifest | Produced by `tools/package_candidate.sh` and uploaded by the source-candidate workflow when successful; never predeclare digest values |
 | Immutable tag | Not created |
 
-A green workflow is necessary but insufficient for a release.
+Full post-merge run details are in [the v0.1.0 evidence record](release/v0.1.0/POST_MERGE_EVIDENCE.md). Download the produced Actions artifact, inspect and independently verify `SHA256SUMS.txt` before authorizing any tag. **A green workflow is necessary but insufficient for a release.**
 
 **Sanitizer gate regression:** `tools/check_sanitizer_gate.sh` deliberately triggers signed integer overflow in an isolated synthetic binary. It requires UBSan to report an error **and** return nonzero. `tools/run_fuzz.sh` also builds with `-fno-sanitize-recover=undefined` and sets `UBSAN_OPTIONS=halt_on_error=1`. This prevents recoverable undefined-behaviour reports from being mislabelled as passing fuzz runs.
