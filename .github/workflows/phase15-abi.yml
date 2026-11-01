@@ -23,7 +23,7 @@ jobs:
         backend: [openssl, hacl]
     env:
       CC: ${{ matrix.compiler }}
-      TOMBSTONE_SHA256_${{ matrix.backend }}: ${{ matrix.backend }}
+      TOMBSTONE_SHA256_BACKEND: ${{ matrix.backend }}
       CARGO_INCREMENTAL: "0"
     steps:
       - uses: actions/checkout@v4
@@ -41,33 +41,33 @@ jobs:
       - name: Test target C ABI oracle, Rust FFI and 64 MiB CLI
         run: |
           set -euo pipefail
-          CARGO_TARGET_DIR="$${{ matrix.runner }}_TEMP/phase15-tests" cargo test --workspace --offline --locked
+          CARGO_TARGET_DIR="$RUNNER_TEMP/phase15-tests" cargo test --workspace --offline --locked
           python3 tests/phase15/test_build_receipt_gate.py
-          make SHA256_${{ matrix.backend }}="$TOMBSTONE_SHA256_${{ matrix.backend }}" CC="$CC" test
+          make SHA256_BACKEND="$TOMBSTONE_SHA256_BACKEND" CC="$CC" test
       - name: Compile two isolated native Rust/C99 release executables
         run: |
           set -euo pipefail
-          CARGO_TARGET_DIR="$${{ matrix.runner }}_TEMP/phase15-build-a" cargo build -p tombstone-cli --release --offline --locked
-          CARGO_TARGET_DIR="$${{ matrix.runner }}_TEMP/phase15-build-b" cargo build -p tombstone-cli --release --offline --locked
+          CARGO_TARGET_DIR="$RUNNER_TEMP/phase15-build-a" cargo build -p tombstone-cli --release --offline --locked
+          CARGO_TARGET_DIR="$RUNNER_TEMP/phase15-build-b" cargo build -p tombstone-cli --release --offline --locked
       - name: Require byte equality and preserve source/toolchain identity
         run: |
           set -euo pipefail
           python3 tools/phase15_build_receipt.py \
-            --first "$${{ matrix.runner }}_TEMP/phase15-build-a/release/tombstone" \
-            --second "$${{ matrix.runner }}_TEMP/phase15-build-b/release/tombstone" \
-            --compiler "$CC" --backend "$TOMBSTONE_SHA256_${{ matrix.backend }}" \
-            --output "$${{ matrix.runner }}_TEMP/phase15-target-evidence.json"
+            --first "$RUNNER_TEMP/phase15-build-a/release/tombstone" \
+            --second "$RUNNER_TEMP/phase15-build-b/release/tombstone" \
+            --compiler "$CC" --backend "$TOMBSTONE_SHA256_BACKEND" \
+            --output "$RUNNER_TEMP/phase15-target-evidence.json"
       - name: Replay independent restricted-JCS/hash/anchor oracle
         run: |
           python3 tools/check_portability.py \
-            "$${{ matrix.runner }}_TEMP/phase15-build-a/release/tombstone" \
-            "$${{ matrix.runner }}_TEMP/phase15-build-b/release/tombstone"
+            "$RUNNER_TEMP/phase15-build-a/release/tombstone" \
+            "$RUNNER_TEMP/phase15-build-b/release/tombstone"
       - name: Upload exact target evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: phase15-${{ matrix.compiler }}-${{ matrix.runner }}-${{ matrix.backend }}
           path: |
-            ${{ matrix.runner }}_TEMP_EXPR/phase15-target-evidence.json
+            ${{ runner.temp }}/phase15-target-evidence.json
           if-no-files-found: warn
           retention-days: 30
