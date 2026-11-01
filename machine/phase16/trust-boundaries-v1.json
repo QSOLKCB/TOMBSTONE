@@ -1,0 +1,141 @@
+{
+  "format": "tombstone.phase16.trust-boundaries",
+  "version": 1,
+  "source_baseline_commit": "c8ea4efc98f25a68b42ed051bcded0358ceb1e0a",
+  "published_release": {
+    "tag": "v0.1.0",
+    "scope": "immutable-original-source-only"
+  },
+  "source_git_blobs": {
+    "src/core/deletion.c": "a3dce4e7a78b591028d33c230c2b417f12945729",
+    "src/crypto/fingerprint.c": "5d9e60f88305fd108405908269a023cdff8cb8ee",
+    "src/crypto/fingerprint_hacl.c": "a66d6a2aeb0064fbde04bd2fef34dface64e1c61",
+    "src/encoding/receipt.c": "6fe3e8014e9c38ea42c43b9133f026967a4158e3",
+    "include/tombstone/fingerprint.h": "620a7ecbeb5db90446bac329f6b321828fdfa16e",
+    "include/tombstone/deletion.h": "37c14d5f99cf731f19accbc8c16b0e558c2fb260",
+    "include/tombstone/receipt.h": "d77d60aa6cedc7b966ed2e44aa81815d5211be16",
+    "machine/examples/explicit-delete-v1.json": "3f3e1ba5f273bd266bcd764f10cd4e669f0dfc2d",
+    "machine/examples/observed-transition-v1.json": "79dc897ad9192ed9eda8912213130c6556b72017",
+    "machine/examples/unchanged-v1.json": "b712f23459b77ba7bb7fc9551df8af82ddc1ef33"
+  },
+  "supported_targets": {
+    "os": "linux",
+    "architectures": [
+      "x86_64",
+      "aarch64"
+    ],
+    "endianness": "little",
+    "char_bit": 8,
+    "pointer_bits": 64,
+    "size_t_bits": 64,
+    "compilers": [
+      "gcc",
+      "clang"
+    ],
+    "hash_backends": [
+      "openssl",
+      "hacl"
+    ],
+    "runtime_requirement": "valid-memory-no-undefined-behaviour"
+  },
+  "boundaries": [
+    {
+      "id": "A01",
+      "classification": "conditional-proof",
+      "scope": "Exact-splice helper quantified source-level proof with valid memory and provider assumptions",
+      "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41305390928"
+    },
+    {
+      "id": "A02",
+      "classification": "conditional-proof",
+      "scope": "Witness validation and modular C99 wrapper WP; SHA provider remains assumed",
+      "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41314458282"
+    },
+    {
+      "id": "A03",
+      "classification": "tested",
+      "scope": "Actual OpenSSL wrapper positive and injected negative executions, not unbounded EVP correctness",
+      "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41316764004"
+    },
+    {
+      "id": "A04",
+      "classification": "tested",
+      "scope": "OpenSSL NIST parity and opt-in pinned HACL*; upstream proof does not certify this adapter",
+      "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704"
+    },
+    {
+      "id": "A05",
+      "classification": "tested",
+      "scope": "Actual receipt parser modular WP and bounded CBMC; no complete receipt/chain theorem",
+      "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41323397223"
+    },
+    {
+      "id": "A06",
+      "classification": "tested",
+      "scope": "Measured native C/Rust ABI sizes and failure outputs on target matrix; ownership proof remains open",
+      "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41328416562"
+    },
+    {
+      "id": "A07",
+      "classification": "tested",
+      "scope": "Two identical repeat-build binaries per target/compiler/backend; compiler correctness unproved",
+      "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41328416562"
+    },
+    {
+      "id": "A08",
+      "classification": "trusted-assumption",
+      "scope": "OS, firmware, CPU, physical memory, time, entropy and failure-free hardware remain environmental premises",
+      "run_url": null
+    },
+    {
+      "id": "A09",
+      "classification": "requires-external-evidence",
+      "scope": "Historical deletion, author, trusted chronology, independent anchor custody and secure erasure require evidence outside TOMBSTONE",
+      "run_url": null
+    }
+  ],
+  "chain_head_anchor": {
+    "format": "64 lowercase sha256 hex bytes with optional final LF",
+    "provided_by": "caller-controlled externally retained regular file",
+    "used_by": "Rust CLI forwards 32 raw bytes to authoritative C99 verify_chain",
+    "proves": "equality to caller-supplied retained value, conditional on integrity/custody",
+    "does_not_prove": [
+      "independent custody",
+      "signer identity",
+      "author",
+      "chronology",
+      "file deletion",
+      "storage erasure"
+    ]
+  },
+  "physical_event_classes": [
+    {
+      "kind": "verified-splice-relation",
+      "evidence": "caller-provided before/removed/after buffers and offset, C99 checked",
+      "historical_claim_allowed": false
+    },
+    {
+      "kind": "observed-filesystem-event",
+      "evidence": "separately collected OS/filesystem audit or independent witness",
+      "historical_claim_allowed": false
+    },
+    {
+      "kind": "storage-erasure",
+      "evidence": "device-specific controller/storage/forensic evidence independent of this tool",
+      "historical_claim_allowed": false
+    }
+  ],
+  "prohibited_claims": [
+    "universally verified hardware",
+    "independently authenticated deletion",
+    "secure storage erasure",
+    "proof of authorship",
+    "trusted chronology without external witness",
+    "verified machine code from repeat-build hashes"
+  ],
+  "excluded_evidence": [
+    "No private plaintext, file paths, identity data or user anchors embedded",
+    "No private key or certificate provisioned; no signature-verification claim",
+    "No claim that a local anchor file establishes independent external custody"
+  ]
+}
