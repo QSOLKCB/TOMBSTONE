@@ -82,7 +82,7 @@ jobs:
           set -euo pipefail
           docker run --rm -v "$PWD:/repo:ro" -w /tmp \
             framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
-            sh -c 'frama-c -version && frama-c -wp -wp-fct equal32 -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 35 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19_equal32.c' \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct equal32 -wp-rte -wp-model Typed -wp-prover alt-ergo -wp-timeout 35 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19_equal32.c' \
             2>&1 | tee phase19-equal32.log
           python3 tools/check_wp_proofs.py phase19-equal32.log
           grep -q 'function equal32' phase19-equal32.log || grep -q 'equal32' phase19-equal32.log
