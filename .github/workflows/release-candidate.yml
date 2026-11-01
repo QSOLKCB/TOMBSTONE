@@ -1,0 +1,40 @@
+name: v0.1.0 source candidate and SHA256 evidence
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-assets:
+    name: Deterministic source archive and verified checksum manifest
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Confirm provenance and fixed source commit
+        run: |
+          git rev-parse HEAD
+          git cat-file -t d6ae7d4016eb4efff6a684737711d809ec9d256f
+          git show -s --format='%H%n%P%n%cI' d6ae7d4016eb4efff6a684737711d809ec9d256f
+      - name: Generate source package twice and verify SHA256SUMS
+        run: bash tools/package_candidate.sh
+      - name: Recheck archive, checksum manifest, and original fixture vectors
+        run: |
+          test -f dist/v0.1.0/TOMBSTONE-v0.1.0-source.tar.gz
+          test -f dist/v0.1.0/SHA256SUMS.txt
+          (cd dist/v0.1.0 && sha256sum -c --strict SHA256SUMS.txt)
+          python3 tools/check_docs.py
+      - name: Upload source and evidence without tagging or publishing
+        uses: actions/upload-artifact@v4
+        with:
+          name: TOMBSTONE-v0.1.0-source-candidate
+          path: dist/v0.1.0/
+          if-no-files-found: error
+          retention-days: 30
