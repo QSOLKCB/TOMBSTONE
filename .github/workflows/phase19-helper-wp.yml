@@ -8,6 +8,36 @@ on:
 permissions:
   contents: read
 jobs:
+  actual-calculate-hash-wp:
+    name: Actual C99 calculate_hash under stated external provider assumptions
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check exact C99 and model inputs
+        run: |
+          set -euo pipefail
+          python3 tools/phase19_calculate_hash_overlay.py --output phase19_calculate_hash.c
+          python3 tests/formal/test_phase19_calculate_hash_overlay.py
+          python3 tools/check_phase18_receipt.py
+          gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c phase19_calculate_hash.c -o /tmp/calchash19.o
+      - name: Prove actual calculate_hash under explicitly assumed provider state
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c 'frama-c -version && frama-c -wp -wp-fct calculate_hash -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 35 -wp-par 2 -cpp-extra-args="-I/repo/include" /repo/phase19_calculate_hash.c' \
+            2>&1 | tee phase19-calculate-hash.log
+          python3 tools/check_wp_proofs.py phase19-calculate-hash.log
+          grep -q calculate_hash phase19-calculate-hash.log
+      - name: Retain complete or failed solver output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tombstone-phase19-calculate-hash
+          path: phase19-calculate-hash.log
+          if-no-files-found: warn
+          retention-days: 30
   actual-equal32-wp:
     name: Actual C99 equal32 WP under documented libc memcmp semantics
     runs-on: ubuntu-24.04
