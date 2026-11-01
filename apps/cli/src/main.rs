@@ -15,7 +15,7 @@ Usage:
   tombstone observe <before> <after> [--previous <64-lowercase-hex>]
   tombstone delete <before> <removed> <after> <byte-offset> [--previous <64-lowercase-hex>]
   tombstone verify <receipt|->
-  tombstone verify-chain <receipt>... [--trusted-head <64-lowercase-hex>]
+  tombstone verify-chain <receipt>... [--trusted-head <64-lowercase-hex>|--trusted-head-file <path>]
   tombstone --help
 
 All evidence commands emit one JSON object and a newline to stdout.
@@ -25,6 +25,8 @@ Receipts contain no plaintext, file paths or timestamps. This tool never
 deletes files and does not prove historical edits or secure erasure.
 verify checks ONE receipt's self-hash; verify-chain checks a full genesis
 chain, optionally against an independently trusted final hash.
+--trusted-head-file reads a strict, externally retained 64-hex head (optional LF).
+A matching digest is not proof of a historical deletion, identity or time.
 Maximum input size per file or stdin: 64 MiB.
 ";
 
@@ -71,6 +73,31 @@ fn check_stdin_once(paths: &[&str]) -> Result<(), CliError> {
 
 fn parse_digest(text: &str) -> Result<[u8; 32], CliError> {
     core::parse_hex(text).map_err(|_| CliError::usage("expected 64 lowercase SHA-256 hex digits"))
+}
+
+/// Read a caller-selected, separately retained chain head. This file is
+/// neither generated from nor automatically trusted because of the receipts.
+/// Reject nonregular paths and keep all errors path-independent.
+fn read_trusted_head_file(path: &str) -> Result<[u8; 32], CliError> {
+    if path == "-" {
+        return Err(CliError::usage("trusted-head file must be a regular file, not stdin"));
+    }
+    let metadata = std::fs::symlink_metadata(path).map_err(|_| CliError::io())?;
+    if !metadata.file_type().is_file() {
+        return Err(CliError::usage("trusted-head file must be a regular file"));
+    }
+    // Bound memory before checking syntax: exactly 64 lowercase ASCII hex
+    // bytes, optionally terminated by one LF. No BOM/CR/extra whitespace.
+    let mut bytes = Vec::new();
+    File::open(path).map_err(|_| CliError::io())?
+        .take(66).read_to_end(&mut bytes).map_err(|_| CliError::io())?;
+    if bytes.last() == Some(&b'\n') { bytes.pop(); }
+    if bytes.len() != 64 {
+        return Err(CliError::usage("trusted-head file must contain 64 lowercase hex bytes, optionally LF"));
+    }
+    let hex = std::str::from_utf8(&bytes)
+        .map_err(|_| CliError::usage("trusted-head file must contain lowercase ASCII hex"))?;
+    parse_digest(hex)
 }
 
 fn previous(rest: &[String]) -> Result<Option<[u8; 32]>, CliError> {
@@ -149,9 +176,14 @@ fn run(args: &[String]) -> Result<(), CliError> {
             let trusted = if end >= 4 && args[end - 2] == "--trusted-head" {
                 end -= 2;
                 Some(parse_digest(&args[end + 1])?)
+            } else if end >= 4 && args[end - 2] == "--trusted-head-file" {
+                end -= 2;
+                Some(read_trusted_head_file(&args[end + 1])?)
             } else { None };
-            if end <= 1 || args[1..end].iter().any(|p| p == "--trusted-head") {
-                return Err(CliError::usage("verify-chain requires receipts followed by optional --trusted-head"));
+            if end <= 1 || args[1..end].iter()
+                .any(|p| p == "--trusted-head" || p == "--trusted-head-file")
+            {
+                return Err(CliError::usage("verify-chain requires receipts followed by one optional trusted-head source"));
             }
             let paths: Vec<&str> = args[1..end].iter().map(String::as_str).collect();
             check_stdin_once(&paths)?;
