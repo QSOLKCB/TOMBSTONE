@@ -11,7 +11,7 @@ source identities, evidence and separately documented residual assumptions.
 | A02 | C99 witness prehash status and whole wrapper | Phase 10 and Phase 11 ACSL/WP, conditional on SHA provider | Verify actual SHA wrapper rather than assume it |
 | A03 | C99 `tb_sha256_bytes` error/status/output/resource handling | Phase 12 injected failures against real C99 source and actual EVP on success — **executed tests, not full formal proof** | Source-level WP contracts for C99 wrapper under explicit EVP/allocator model |
 | A04 | SHA-256 computation and actual OpenSSL EVP internals | OpenSSL NIST vectors; Phase 13 opt-in pinned HACL* extracted-C candidate (upstream F* verification), **not proof of OpenSSL or adapter** | Reproduce F* proof on exact upstream revision; C adapter/ABI refinement and source-to-binary translation |
-| A05 | Canonical JSON/receipt parser and chain | Phase 14 actual-source numeric/field-mask ACSL targets and bounded parser/chain negative evidence (exact-head verification required) | Full unbounded production C99 encoder/parser/chain, hash-domain and no-write-on-error WP/refinement proofs remain open |
+| A05 | Canonical JSON/receipt parser and chain | Phase 14 modular ACSL/CBMC and Phase 17 actual C99 direct-source early-chain rejection proof plus exhaustive frozen-fixture permutation/anchor replay (exact-head evidence required) | Full unbounded production encoder/parser/chain, hash-domain and all-path no-write proof/refinement remain open |
 | A06 | Rust FFI, CLI, TUI, GTK | Phase 15 direct C99/Rust ABI layout/discriminant and error/no-write tests on specific Linux targets (execution gate pending) | Unbounded ownership, pointer/aliasing, panics and ABI refinement proofs |
 | A07 | C source-to-executable compiler/linker semantics | Phase 15 independent repeat-build executable hashing and exact target/source/toolchain receipts (executed evidence only when CI passes) | CompCert or target-specific translation validation for actual binary and external calls |
 | A08 | OS, firmware and physical hardware | Phase 16 C99 Linux 8-bit/little-endian/64-bit target probe and offline trust ledger; tests are not hardware proofs | Independently attested OS, firmware, memory and actual hardware fault model |
@@ -134,3 +134,20 @@ The machine contract rejects upgrading A08/A09 into proved code claims and
 separates verified splice relations from observed filesystem events and
 storage-erasure evidence. The live SHA provider and incomplete canonical
 receipt/FFI/source-to-binary proofs remain conditional (issues #15–#17).
+
+## Phase 17 — Actual chain verifier early rejection and frozen-fixture replay
+
+[Phase 17](PHASE17_CHAIN.md) targets the actual C99
+`tb_receipt_verify_chain`, preserving the exact Phase 14/16 production
+source blob and pinned original three receipt-v1 fixtures.
+The direct-source CBMC targets cover argument/count and invalid-genesis
+**prehash** rejection only; the complete verifier's digest-success and
+error-status propagation are outside those bounded proof goals.
+The native test exhaustively reorders the three frozen records,
+probes prefix/trusted-head consistency, tampers with each digest/link
+and uses a new valid genesis to prove that a locally consistent chain
+can still fail against an earlier independently supplied head.
+Even a green 8-target CI run would not prove universal SHA,
+canonicalization, source-to-machine semantics or external head custody.
+**A05 stays open** (issue #16); this milestone is an incremental proof
+gate, not proof completion.
