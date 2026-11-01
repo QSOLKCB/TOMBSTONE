@@ -77,7 +77,5 @@ allocation, pointer/length conversion, chunking, state transitions, the public
 ABI and no-write-on-failure discipline. The test-only linker injection plus
 GCC/Clang receipt parity are *executed evidence only when the exact-head CI
 jobs pass*, not a proof of these properties for all permitted inputs.
-Likewise the upstream F* proof and the KaRaMeL extraction pipeline have
-not been rerun or attested at the exact revision by TOMBSTONE. A separate
-Frama-C/CBMC refinement and target-specific compiler evidence remain open.
+Executed Phase 13 [run 41321354704](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41321354704) used CBMC 6.11.0 to check 584/584 bounded properties on the **actual adapter source** under a synthetic HACL boundary. The verified conditions are bounded status, failure-no-write and state transitions, NOT SHA-256 algorithmic correctness. The exact two proof-source blobs and conditions are in `machine/formal/phase13-adapter-cbmc-v1.json`, with an offline identity gate. The upstream F* proof and KaRaMeL extraction have **not** been independently rerun at the exact revision. The unbounded Frama-C/real-provider/ABI refinement and compiler evidence are still open.
 The published `v0.1.0` SHA-256 baseline is immutable.
