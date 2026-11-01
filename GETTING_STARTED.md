@@ -1,35 +1,35 @@
-# Getting started — documentation baseline
+# Getting started — Phase 1 fingerprint library
 
-TOMBSTONE currently has **no C99 engine or Rust interface executable**. These steps validate the repository's example receipt and public toy data; they do not perform real deletion.
+TOMBSTONE has a working **C99 SHA-256 library**, not yet a command-line product. Phase 1 hashes **caller-supplied bytes**. It does not delete files, witness deletions, or create receipts.
 
-## Requirements
-
-- GNU Make (optional; command can be run directly)
-- Python 3 (standard library only)
-- Git
+## Requirements (Ubuntu)
 
 \`\`\`sh
+sudo apt-get install build-essential pkg-config libssl-dev python3
 git clone https://github.com/QSOLKCB/TOMBSTONE.git
 cd TOMBSTONE
-make docs-check
-# equivalent:
-python3 tools/check_docs.py
 \`\`\`
 
-Check [machine/schemas/receipt-v1.schema.json](machine/schemas/receipt-v1.schema.json), then [machine/examples/explicit-delete-v1.json](machine/examples/explicit-delete-v1.json). Human explanations live under [docs/](docs/INDEX.md); machine JSON is deliberately separate.
+On systems with the Phase 1 PR merged:
 
-## A conceptual example
-
-\`\`\`text
-before: 1 2 3 4 5
-removed: 3 4␠       (four bytes, beginning at offset 4)
-after:  1 2 5
+\`\`\`sh
+make                       # build/libtombstone.a
+make test                  # standalone C99 unit/integration tests
+make reproducibility       # compare independent reproducible builds
+make sanitizer-test        # ASan + UBSan instrumented tests
+make docs-check            # preserve Phase 0 documentation and toy fixtures
 \`\`\`
 
-The toy fixture's four removed bytes are intentionally **public** for testing. In normal operation only their **SHA-256, size, and verified offset** belong in a receipt. The missing bytes cannot be recovered from a hash alone. \`explicit-delete\` is only valid when the exact removed span and resulting buffers are witnessed; snapshots alone produce an \`observed-transition\`.
+The ABI is in [include/tombstone/fingerprint.h](include/tombstone/fingerprint.h), with [annotated examples and FFI rules](docs/FINGERPRINT_API.md). Use the API by linking against \`build/libtombstone.a\` and the system OpenSSL crypto library (\`pkg-config --libs openssl\`). No executable \`tombstone\` command exists yet.
 
-The example illustrates a contract. **Do not treat it as the output of a released TOMBSTONE binary.** Consult [SECURITY.md](SECURITY.md) before using real confidential data.
+## What the tests establish
 
-## Implementer pathway
+Standard SHA-256 known-answer vectors for empty input, \`abc\`, the longer FIPS test string, a million \`a\` bytes, plus binary data (\`0x00\`, \`0xff\`, \`0x80\`), one-byte streaming, error codes, null-pointer handling, huge-length early rejection on 64-bit, post-final states, external C99 linkage, sanitizer instrumentation, and static-archive repeatability on the tested toolchain.
 
-Read [AGENTS.md](AGENTS.md), [INVARIANTS.md](INVARIANTS.md), [ARCHITECTURE.md](ARCHITECTURE.md), and [ROADMAP.md](ROADMAP.md). Phases 1–3 construct/verify the C99 engine; Rust CLI/TUI and optional GTK follow.
+Those tests do **not** prove secure deletion, hash preimage resistance by experiment, an authenticated receipt history, or cross-platform reproducibility beyond the tested environments.
+
+## Existing toy receipt documentation
+
+The *unimplemented* v1 proposal remains at [machine/schemas/receipt-v1.schema.json](machine/schemas/receipt-v1.schema.json); example receipts are synthetic and validated by \`make docs-check\`. Human explanations are in [docs/](docs/INDEX.md). A before/after hash mismatch never identifies which bytes were removed.
+
+For implementers: read [AGENTS.md](AGENTS.md), [INVARIANTS.md](INVARIANTS.md), and [SECURITY.md](SECURITY.md).

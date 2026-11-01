@@ -1,31 +1,40 @@
 # TOMBSTONE roadmap
 
-Documentation-first scope and release gates; **nothing listed below as planned is implemented** in this PR.
+Status is tracked per phase. **Phases 0 and 1 are implemented in source; Phase 1 remains subject to PR review/merge and release gates.** All later stages are unimplemented.
 
-| Phase | Target | Acceptance gate |
-| --- | --- | --- |
-| **0 — Foundation** | Architecture, invariants, security model, machine receipt proposal, human docs, banner, C99/Rust folders and fixture checks | Docs check passes; no false claims; review approves design |
-| **1 — C99 fingerprinting** | Binary-safe SHA-256 core with vetted backend, public minimal C ABI, input length and error handling | C99 tests, standard SHA-256 vectors, sanitizer build and reproducibility |
-| **2 — C99 explicit deletion** | Verified splice operations; observed transitions vs witnessed deletion; deterministic receipt production | Positive/negative tests including empty, replacement, repeated bytes, NUL and overflow |
-| **3 — Canonical receipts + chains** | Versioned RFC 8785 encoding, full strict parsing, linkage and independent verification | Golden vectors across platforms; malformed/duplicate-key corpus; tamper tests |
-| **4 — Rust adapter and CLI** | Safe FFI, deterministic noninteractive CLI/JSON for agents and scripts | Black-box CLI tests; bytes in = bytes out parity; stderr/stdout separation |
-| **5 — Rust TUI** | Human inspection, comparison and guided witnessed deletion workflows | Accessibility, terminal fallback, same receipts as CLI |
-| **6 — Optional GTK4** | Thin desktop presentation built on the same Rust/C adapter | GTK isolated from headless build; no semantic divergence |
-| **7 — Hardening / v1 release** | Cross-arch/OS replay, fuzzing, signed/anchored receipts considered, threat model and packaging | Independently reviewed evidence, immutable tag, released contract |
+| Phase | Target | Acceptance gate | Current status |
+| --- | --- | --- | --- |
+| **0 — Foundation** | Architecture, invariants, security, machine receipt proposal, prose/docs, banner, directories, fixtures | Documentation fixture validation | Complete (merged foundation) |
+| **1 — C99 fingerprinting** | Binary-safe SHA-256 core with vetted backend, public minimal C ABI, input length and errors | C99 known-answer vectors, sanitizer build, reproducible static archive | Implemented in Phase 1 PR; review/CI gate |
+| **2 — C99 explicit deletion** | Verified splice operations; distinguish witnessed deletion from observed transitions | Binary, repeated-byte, replacement, null, empty and overflow cases | Planned |
+| **3 — Canonical receipts + chains** | Strict versioned RFC 8785 receipt encoding, decoding and verification | Golden vectors, malicious records, chain tampering | Planned |
+| **4 — Rust adapter and CLI** | Thin safe FFI, deterministic CLI/JSON for agents and scripts | CLI tests, C99 parity, stderr/stdout separation | Planned |
+| **5 — Rust TUI** | Human inspection and guided witnessed-deletion workflows | Same receipts as CLI, terminal fallback | Planned |
+| **6 — Optional GTK4** | Thin desktop presentation | No semantic drift or GTK dependency for headless build | Planned |
+| **7 — Hardening / v1 release** | Cross-platform replay, fuzzing, anchor/signature options and packaging | Independent review, immutable tag, release proof | Planned |
+
+## Phase 1 delivered scope
+
+- \`include/tombstone/fingerprint.h\`: versioned, explicit-length C99 API.
+- \`src/crypto/fingerprint.c\`: OpenSSL EVP SHA-256 one-shot and streaming wrapper.
+- Tests for SHA-256 empty input, \`abc\`, FIPS longer input, one million \`a\` bytes, binary data including NUL/high bytes, state/error behaviour, and public static-library linkage.
+- Reproducibility check comparing two freshly built deterministic \`.a\` archives.
+- GCC/Clang CI jobs and ASan/UBSan job.
+
+This phase computes fingerprints only; **it neither deletes data nor claims knowledge of removed bytes**. Output hashes are based solely on the bytes the caller provides. No receipt serialization is implemented.
 
 ## Decisions and explicit exclusions
 
-- v1 receipts **do not include** deleted contents or identifiable file paths; toy test fixtures are separate from generated receipts.
-- Secure erasure, undelete, remote monitoring, system-wide editor hooks, authentication and signatures are **not** promised.
-- A SHA-256 digest of short, guessable information is vulnerable to guessing. Explore optional keyed commitments only after threat-model review; do not conflate them with normal SHA-256.
-- Linux-first is sensible for development, but the C99 library should remain portable. GTK is optional, not a condition of core correctness.
-- Roadmap phases can be smaller PRs. Each adds automated evidence before it can be marked complete.
+- Receipts must not include deleted plaintext or identifying paths; public synthetic fixtures are exceptions used for testing.
+- Secure erasure, undelete, system-wide editor hooks, remote monitoring, signatures, and authorship/timing proofs are not promised.
+- Guessable removed content is susceptible to dictionary attacks when represented by bare SHA-256 hashes.
+- Linux-first CI; C99 core avoids Linux-specific API use. OpenSSL is linked as a vetted backend, not vendored or reinvented.
+- Smaller PRs are encouraged; each phase requires executed evidence.
 
-## Near-term implementation PRs
+## Near-term next PRs
 
-1. C99 library skeleton + SHA-256 known-answer vectors.
-2. Explicit byte-splice and observed-transition classifications.
-3. Strict receipt v1 encoding + verification, replacing documentation-only checker assumptions with product tests.
-4. Rust safe adapter and noninteractive CLI; TUI next.
+1. Phase 2: C99 verified byte splice and evidence classification, including adversarial tests.
+2. Phase 3: strict RFC 8785 receipt creation/parsing/chain verification.
+3. Phase 4: Rust safe FFI and noninteractive CLI, followed by TUI.
 
 See [docs/decisions/0001-c99-core-rust-frontends.md](docs/decisions/0001-c99-core-rust-frontends.md).

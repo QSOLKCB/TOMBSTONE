@@ -1,6 +1,6 @@
 # Security and privacy model
 
-**Scope today:** documentation and illustrative fixtures; no product tool has yet been implemented. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
+**Scope today:** Phase 1 implements a pure C99 SHA-256 fingerprint library using OpenSSL EVP, alongside illustrative documentation fixtures. Deletion witnessing, receipts, secure erasure and user interfaces are not implemented. The new library accepts caller-supplied byte buffers, not filenames, and does not delete or save data. Report security concerns via a private maintainer channel or GitHub's private vulnerability reporting where enabled; do not post real removed secrets in issues.
 
 ## Nonclaims
 
