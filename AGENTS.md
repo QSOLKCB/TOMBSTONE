@@ -104,3 +104,18 @@ checks, GCC/Clang, and x86-64/ARM64 negative controls. WP proof of
 encoder, or chain is verified. External SHA-provider, Rust, compiler, anchor,
 historical deletion and physical erasure are explicit open premises. Draft
 until independent Codex exact-head review and all executed CI checks pass.
+
+## Phase 15 Rust FFI/compiled target discipline
+
+See [docs/PHASE15_ABI.md](docs/PHASE15_ABI.md). Compare the **actual**
+C99 sizes, alignment, offsets and discriminants with the Rust `repr(C)`
+structs per target, using `tests/phase15/abi_layout.c` and the in-crate
+Rust ABI tests. Keep C99 authoritative and the production ABI/receipt
+fixtures unchanged. Verify 64 MiB CLI limit, native error propagation and
+no output leak. Recompile independent release artifacts for each tuple,
+fail on byte differences, and preserve exact source, toolchain and executable
+hashes in the machine evidence artifact. Reproduced bytes are **not** a
+CompCert/ABI source-to-machine theorem. Do not assert proof of Rust pointer
+provenance, optimizer, linker, native crypto or hardware from executed tests.
+Require independent exact-head Codex review and all executed CI checks before
+merging; keep issue #17 open for remaining formal refinement.

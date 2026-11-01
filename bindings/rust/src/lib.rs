@@ -273,3 +273,122 @@ mod tests {
         assert!(verify_chain(&receipts[1..], None).is_err());
     }
 }
+
+
+// The ABI oracle is compiled and executed against each CI target's actual
+// C99 compiler. This is target-specific executed evidence, NOT a proof of
+// Rust's optimizer, C compilation, allocator, linker, or operating system.
+#[cfg(all(test, unix))]
+mod phase15_abi_tests {
+    use super::*;
+    use std::collections::BTreeMap;
+    use std::mem::{align_of, offset_of, size_of};
+    use std::path::PathBuf;
+    use std::process::Command;
+
+    #[test]
+    fn actual_target_c_layout_matches_rust_repr_c() {
+        let repo = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let directory = std::env::temp_dir().join(format!(
+            "tombstone-phase15-abi-{}-{:?}",
+            std::process::id(), std::thread::current().id()
+        ));
+        std::fs::create_dir(&directory).unwrap();
+        let executable = directory.join("c99-abi-oracle");
+        let cc = std::env::var("CC").unwrap_or_else(|_| "cc".to_string());
+        let compilation = Command::new(&cc)
+            .arg("-std=c99").arg("-Wall").arg("-Wextra").arg("-Wpedantic").arg("-Werror")
+            .arg("-I").arg(repo.join("include"))
+            .arg(repo.join("tests/phase15/abi_layout.c"))
+            .arg("-o").arg(&executable)
+            .output().expect("C99 compiler must be available for ABI verification");
+        assert!(compilation.status.success(), "C ABI oracle compilation failed: {}",
+                String::from_utf8_lossy(&compilation.stderr));
+        let outcome = Command::new(&executable).output().expect("run C99 ABI oracle");
+        assert!(outcome.status.success(), "C99 ABI oracle failed");
+        let mut observed = BTreeMap::new();
+        for row in String::from_utf8(outcome.stdout).unwrap().lines() {
+            let (key, value) = row.split_once('=').expect("key=value ABI row");
+            assert!(observed.insert(key.to_string(), value.parse::<usize>().unwrap()).is_none(),
+                    "duplicate C ABI metric {key}");
+        }
+        // Explicit list: additions to the oracle must also be reviewed here.
+        let expected: BTreeMap<String, usize> = [
+            ("size_t.size", size_of::<usize>()), ("size_t.align", align_of::<usize>()),
+            ("void *.size", size_of::<*const c_void>()),
+            ("void *.align", align_of::<*const c_void>()),
+            ("int.size", size_of::<c_int>()), ("int.align", align_of::<c_int>()),
+            ("tb_status.size", size_of::<c_int>()),
+            ("tb_status.align", align_of::<c_int>()),
+            ("tb_evidence_kind.size", size_of::<c_int>()),
+            ("tb_evidence_kind.align", align_of::<c_int>()),
+            ("tb_evidence_v1.size", size_of::<EvidenceRaw>()),
+            ("tb_evidence_v1.align", align_of::<EvidenceRaw>()),
+            ("tb_evidence_v1.kind", offset_of!(EvidenceRaw, kind)),
+            ("tb_evidence_v1.before_size", offset_of!(EvidenceRaw, before_size)),
+            ("tb_evidence_v1.after_size", offset_of!(EvidenceRaw, after_size)),
+            ("tb_evidence_v1.before_sha256", offset_of!(EvidenceRaw, before_sha256)),
+            ("tb_evidence_v1.after_sha256", offset_of!(EvidenceRaw, after_sha256)),
+            ("tb_evidence_v1.deleted_size", offset_of!(EvidenceRaw, deleted_size)),
+            ("tb_evidence_v1.deleted_offset", offset_of!(EvidenceRaw, deleted_offset)),
+            ("tb_evidence_v1.deleted_sha256", offset_of!(EvidenceRaw, deleted_sha256)),
+            ("tb_receipt_v1.size", size_of::<ReceiptRaw>()),
+            ("tb_receipt_v1.align", align_of::<ReceiptRaw>()),
+            ("tb_receipt_v1.evidence", offset_of!(ReceiptRaw, evidence)),
+            ("tb_receipt_v1.has_previous", offset_of!(ReceiptRaw, has_previous)),
+            ("tb_receipt_v1.previous_hash", offset_of!(ReceiptRaw, previous_hash)),
+            ("tb_receipt_v1.receipt_hash", offset_of!(ReceiptRaw, receipt_hash)),
+            ("TB_FINGERPRINT_ABI_VERSION", 1), ("TB_EVIDENCE_ABI_VERSION", 1),
+            ("TB_RECEIPT_ABI_VERSION", 1), ("TB_SHA256_DIGEST_SIZE", SHA_SIZE),
+            ("TB_RECEIPT_JSON_MAX", JSON_MAX),
+            ("TB_EVIDENCE_UNCHANGED", 1), ("TB_EVIDENCE_OBSERVED_TRANSITION", 2),
+            ("TB_EVIDENCE_EXPLICIT_DELETE", 3),
+            ("TB_OK", 0), ("TB_ERR_ARGUMENT", 1), ("TB_ERR_LENGTH", 2),
+            ("TB_ERR_MEMORY", 3), ("TB_ERR_CRYPTO", 4), ("TB_ERR_STATE", 5),
+            ("TB_ERR_MISMATCH", 6), ("TB_ERR_FORMAT", 7),
+        ].into_iter().map(|(k, v)| (k.to_string(), v)).collect();
+        assert_eq!(observed, expected, "C99 and Rust layout/status mismatch on this target");
+        std::fs::remove_dir_all(&directory).unwrap();
+    }
+
+    #[test]
+    fn native_error_paths_preserve_outputs_and_status_codes() {
+        let before = b"1 2 3 4 5";
+        let removed = b"3 4 ";
+        let after = b"1 2 5";
+        let mut digest = [0xa5u8; SHA_SIZE];
+        let rc = unsafe { tb_sha256_bytes(ptr::null(), 1, digest.as_mut_ptr()) };
+        assert_eq!(rc, 1);
+        assert_eq!(digest, [0xa5; SHA_SIZE]);
+
+        let mut evidence = EvidenceRaw::default();
+        evidence.before_size = 0x5151;
+        let before_evidence = format!("{evidence:?}");
+        let rc = unsafe {
+            tb_witness_delete(before.as_ptr().cast(), before.len(),
+                removed.as_ptr().cast(), removed.len(), 3,
+                after.as_ptr().cast(), after.len(), &mut evidence)
+        };
+        assert_eq!(rc, 6, "false splice must propagate native mismatch");
+        assert_eq!(format!("{evidence:?}"), before_evidence, "native error mutated evidence");
+        assert!(matches!(witness_delete(before, removed, after, 3), Err(Error::Native(6))));
+
+        let mut raw = ReceiptRaw::default();
+        raw.has_previous = 0x5151;
+        let prior = format!("{raw:?}");
+        let malformed = b"{\"version\":1,\"version\":1}";
+        let rc = unsafe { tb_receipt_parse(malformed.as_ptr().cast(), malformed.len(), &mut raw) };
+        assert_eq!(rc, 7);
+        assert_eq!(format!("{raw:?}"), prior, "parser error modified FFI receipt output");
+
+        let good = create_receipt(&witness_delete(before, removed, after, 4).unwrap(), None).unwrap();
+        let mut output = [0xa5u8; JSON_MAX];
+        let mut written = 0x5151usize;
+        let rc = unsafe {
+            tb_receipt_encode(&good.0, output.as_mut_ptr().cast(), 1, &mut written)
+        };
+        assert_eq!(rc, 2);
+        assert_eq!(output, [0xa5; JSON_MAX]);
+        assert_eq!(written, 0x5151);
+    }
+}

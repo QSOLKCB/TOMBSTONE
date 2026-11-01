@@ -1,0 +1,73 @@
+name: Phase 15 — Rust FFI ABI and target executable receipts
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  abi-and-executable:
+    name: FFI ABI and repeat-build parity (${{ matrix.compiler }} / ${{ matrix.runner }} / ${{ matrix.backend }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+        compiler: [gcc, clang]
+        backend: [openssl, hacl]
+    env:
+      CC: ${{ matrix.compiler }}
+      TOMBSTONE_SHA256_BACKEND: ${{ matrix.backend }}
+      CARGO_INCREMENTAL: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential gcc clang pkg-config libssl-dev libncurses-dev binutils
+      - name: Show exact execution target and compilers
+        run: |
+          uname -m
+          rustc -vV
+          cargo --version
+          "$CC" --version | head -n 1
+          ar --version | head -n 1
+      - name: Test target C ABI oracle, Rust FFI and 64 MiB CLI
+        run: |
+          set -euo pipefail
+          CARGO_TARGET_DIR="$RUNNER_TEMP/phase15-tests" cargo test --workspace --offline --locked
+          python3 tests/phase15/test_build_receipt_gate.py
+          make SHA256_BACKEND="$TOMBSTONE_SHA256_BACKEND" CC="$CC" test
+      - name: Compile two isolated native Rust/C99 release executables
+        run: |
+          set -euo pipefail
+          CARGO_TARGET_DIR="$RUNNER_TEMP/phase15-build-a" cargo build -p tombstone-cli --release --offline --locked
+          CARGO_TARGET_DIR="$RUNNER_TEMP/phase15-build-b" cargo build -p tombstone-cli --release --offline --locked
+      - name: Require byte equality and preserve source/toolchain identity
+        run: |
+          set -euo pipefail
+          python3 tools/phase15_build_receipt.py \
+            --first "$RUNNER_TEMP/phase15-build-a/release/tombstone" \
+            --second "$RUNNER_TEMP/phase15-build-b/release/tombstone" \
+            --compiler "$CC" --backend "$TOMBSTONE_SHA256_BACKEND" \
+            --output "$RUNNER_TEMP/phase15-target-evidence.json"
+      - name: Replay independent restricted-JCS/hash/anchor oracle
+        run: |
+          python3 tools/check_portability.py \
+            "$RUNNER_TEMP/phase15-build-a/release/tombstone" \
+            "$RUNNER_TEMP/phase15-build-b/release/tombstone"
+      - name: Upload exact target evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase15-${{ matrix.compiler }}-${{ matrix.runner }}-${{ matrix.backend }}
+          path: |
+            ${{ runner.temp }}/phase15-target-evidence.json
+          if-no-files-found: warn
+          retention-days: 30
