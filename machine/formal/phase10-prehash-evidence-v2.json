@@ -1,0 +1,33 @@
+{
+  "format": "tombstone.formal-proof-evidence",
+  "version": 2,
+  "phase": 10,
+  "subject": "production C99 witness_header_status unbounded prehash status/error precedence",
+  "source_path": "src/core/deletion.c",
+  "source_git_blob_sha": "7f2e80d8f2d453d2c1b91ebebe323620c4ae5255",
+  "proved_function": "witness_header_status",
+  "proof_type": "ACSL Frama-C/WP with RTE",
+  "reference_head": "09aacdc10630d15ff742e072fee1fb8ac07fedf9",
+  "github_run_id": 41308568840,
+  "run_url": "https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41308568840",
+  "tool": "Frama-C 32.1 Germanium",
+  "prover": "Alt-Ergo 2.5.4 and Qed",
+  "goals_proved": 25,
+  "goals_total": 25,
+  "qed_goals": 19,
+  "alt_ergo_goals": 6,
+  "negative_controls": "missing/zero/partial logs rejected",
+  "fault_injection": "Synthetic SHA provider failures on calls 1/2/3 leave public output unmodified",
+  "history": "phase10-prehash-evidence-v1.json records 24/24 goals against prior source blob; not overwritten",
+  "assumptions": [
+    "C99 size_t arithmetic of the configured target model",
+    "The prehash helper relies only on input pointers' nullness and integer lengths; it does not dereference the buffers"
+  ],
+  "unproved": [
+    "Full public tb_witness_delete under abstract SHA provider",
+    "Production OpenSSL/SHA-256",
+    "C99-to-binary, Rust, OS/hardware",
+    "Historical deletion authentication / secure erasure"
+  ],
+  "final_review_required": true
+}
