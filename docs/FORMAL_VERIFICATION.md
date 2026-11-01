@@ -19,7 +19,7 @@ with status-specific invalid-input errors, exact lengths/offset on success, and 
 | --- | --- | --- |
 | Mathematical identities | Rocq, Lean, Isabelle/HOL | Planned — no theorem-checked result yet |
 | Actual C99 splice/observation paths for 0–4-byte inputs | CBMC on unmodified `src/core/deletion.c` | New CI obligation; check exact-head logs before claiming PASS |
-| Unbounded production splice equality helper (`splice_equal`), with valid-buffer premises | ACSL/Frama-C/WP | **Phase 9: executable CI obligations; proof status read from exact-head logs** |
+| Unbounded production splice equality helper (`splice_equal`), with valid-buffer premises | ACSL/Frama-C/WP | **35/35 WP goals discharged on [executed CI run 41305390928](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41305390928) at source blob `ed0a2107…`; the final PR head requires its own CI rerun** |
 | Entire public `tb_witness_delete` wrapper and hash failure/ABI behaviour | Frama-C/WP | Not proved |
 | All C99 memory/crypto/receipt operations | Frama-C/WP plus dependent proof | Not proved |
 | Direct C99 source-to-machine refinement | Rocq/VST + CompCert | Not proved |
@@ -50,9 +50,11 @@ See `formal/README.md`. The existing fuzzing, reproducibility, release assets, o
 
 ## Phase 9 — Actual production C99 relation under ACSL/WP
 
-The live `tb_witness_delete` code calls a private `splice_equal` implemented in the *same* `src/core/deletion.c`. Its ACSL contract states that, for nonempty removed bytes, valid readable buffers, valid lengths, and a caller-supplied offset, it returns true **if and only if** the supplied buffers satisfy the exact deletion-splice identity. A quantified postcondition covers *all* byte positions, not a bounded four-byte model. Two loop invariants preserve the checked prefixes and bound all indices; loop variants require termination. The `assigns \\nothing` contract forbids any caller-visible writes.
+The live `tb_witness_delete` code calls a private `splice_equal` implemented in the *same* `src/core/deletion.c`. Its ACSL contract states that, for nonempty removed bytes, valid readable buffers, valid lengths, and a caller-supplied offset, it returns true **if and only if** the supplied buffers satisfy the exact deletion-splice identity. A quantified postcondition covers *all* byte positions, not a bounded four-byte model. Two loop invariants preserve the checked prefixes and bound all indices; loop variants require termination. The `assigns \nothing` contract forbids any caller-visible writes.
 
 The proof target is only the private helper. Frama-C/WP proofs on this helper do not imply that the public wrapper's error handling, output-write conditions, OpenSSL SHA-256 provider, receipt parser or compiled binary are proved. In particular the wrapper still requires separate contracts for the hash API, its fail-no-write guarantee, and the relationship between byte comparison and output status. Caller-supplied pointers must refer to genuine readable objects; invalid pointers and environmental faults are not proved away.
+
+**Executed verification:** Frama-C 32.1 (Germanium), Qed 20 goals, Alt-Ergo 2.5.4 13 goals, one termination and one reachability goal. [Job log from run 41305390928](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41305390928) records `Proved goals: 35 / 35` for production-source `splice_equal`, with `-wp-rte` enabled. This does not constitute proof of the public wrapper. The final PR head must repeat these checks.
 
 **Executed-gate commands:** `frama-c -wp -wp-fct splice_equal -wp-rte -wp-prover alt-ergo -cpp-extra-args="-Iinclude" src/core/deletion.c`, then `tools/check_wp_proofs.py` rejects zero goals or any unproved goal. Use the exact PR head's `formal-wp.yml` Actions run for the result. An ACSL annotation alone is never evidence of a completed theorem.
 

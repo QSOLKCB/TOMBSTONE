@@ -13,7 +13,7 @@
 | 6 — Optional GTK4 | Isolated desktop frontend over same FFI | Xvfb and independent builds | Merged |
 | **7 — Hardening/release gate** | Bounded C99 fuzzing, compiler/arch replay and release evidence | CI and independently reviewed frozen source | Merged; v0.1.0 released |
 | **8 — Direct C99 bounded verification** | CBMC on actual C99 splice and observation | Mandatory unwind checks, symbolic inputs ≤4 bytes | Merged |
-| **9 — Unbounded splice relation proof** | Production C99 splice helper with ACSL contracts and loop invariants | Frama-C/WP: all goals proved; no vacuous passes, C99 regressions, exact-head review | In PR; not merged |
+| **9 — Unbounded splice relation proof** | Production C99 splice helper with ACSL contracts and loop invariants | Frama-C/WP: all goals proved; no vacuous passes, C99 regressions, exact-head review | Source helper: executed WP 35/35; PR review/merge pending |
 | **Later proof expansion** | Wrapper error paths, hash provider, ABI/compiled code, receipt chain, VST/CompCert | Separate complete proofs and explicit assumptions | Planned |
 
 ## Phase 9 scope and limits

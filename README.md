@@ -50,7 +50,7 @@ The GUI offers fingerprint, observed-transition, witnessed-deletion, receipt ins
 
 ## Phase 9 — Source-level C99 proof obligations
 
-The **production** C99 byte-splice relation now carries an ACSL contract with quantified equality over arbitrary valid buffer lengths and loop invariants. [Frama-C/WP](docs/FORMAL_VERIFICATION.md) checks its actual source code; the CI gate requires every generated nonzero proof obligation to be discharged. This does **not** yet prove the entire public C99 wrapper, OpenSSL, compiled machine code or historical deletion events. Published `v0.1.0` remains immutable.
+The **production** C99 byte-splice relation now carries an ACSL contract with quantified equality over arbitrary valid buffer lengths and loop invariants. [Frama-C/WP](docs/FORMAL_VERIFICATION.md) checks its actual source code; the [Phase 9 CI verification](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41305390928) discharged **35/35 proof goals** on the production helper. The CI gate requires every generated nonzero obligation to be proved. This does **not** yet prove the entire public C99 wrapper, OpenSSL, compiled machine code or historical deletion events. Published `v0.1.0` remains immutable.
 
 ## Phase 7 hardening checks
 

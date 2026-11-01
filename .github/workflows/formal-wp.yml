@@ -21,6 +21,8 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev
           make test
+      - name: Fail-closed WP log checker negative controls
+        run: python3 tests/formal/test_wp_gate.py
       - name: Prove exact C99 splice relation with Frama-C and Alt-Ergo
         run: |
           set -euo pipefail
