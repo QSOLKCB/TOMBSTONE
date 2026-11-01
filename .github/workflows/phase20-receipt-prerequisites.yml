@@ -8,6 +8,22 @@ on:
 permissions:
   contents: read
 jobs:
+  formatter-diagnostics:
+    name: Formatter goal inspection (no proof credit)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print the unchanged formatter obligations without a prover
+        run: |
+          set -euo pipefail
+          python3 tools/phase20_receipt_overlay.py --output phase20-receipt.c
+          git rev-parse HEAD
+          sha256sum phase20-receipt.c
+          docker run --rm -v "$PWD:/repo:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            frama-c -wp -wp-fct format_json -wp-rte -wp-model Bytes -wp-prover none -wp-print \
+              -cpp-extra-args="-I/repo/include" /repo/phase20-receipt.c
   native:
     name: Actual formatter fault and byte checks — ${{ matrix.cc }} / ${{ matrix.backend }}
     runs-on: ubuntu-24.04
@@ -98,7 +114,7 @@ jobs:
                   accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;
                   bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;
                 esac
-                if [ "$function" = format_json ]; then provers=Z3:4.12.2; fi
+                if [ "$function" = format_json ]; then provers=alt-ergo; fi
                 (frama-c -version && frama-c -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover "$provers" -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1
               done
               cat /out/*.log
