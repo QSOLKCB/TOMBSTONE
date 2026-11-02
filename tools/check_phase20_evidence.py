@@ -21,6 +21,8 @@ INPUTS=previous.INPUTS | {
     "tools/check_phase20_evidence.py","tests/formal/test_phase20_overlay.py",
     "tests/formal/test_phase20_native.c","tests/formal/run_phase20_native.py",
     "tests/formal/test_phase20_gates.py","tools/check_portability.py",
+    "tests/formal/test_phase20_regressions.py","tests/formal/phase20_bytes_model_canary.mlw",
+    "tests/formal/run_phase20_model_canary.py","machine/formal/phase20-model-blocker-v1.json",
     ".github/workflows/phase20-receipt-prerequisites.yml",
     "machine/formal/phase20-goals-v1.json",
     "machine/formal/phase20-provers-v1.json",
@@ -128,7 +130,7 @@ def validate(record,root=ROOT,require_complete=True):
             if record["generated_sha256"][target] != digest or digest not in raw:
                 raise ValueError("generated source identity mismatch")
             result=gate.parse(log,target)
-            if result != inventory[target]:
+            if result != gate.inventory_entry(inventory[target]):
                 raise ValueError("retained goal inventory or diagnostics changed")
             found[target]=result
     if set(found) != set(gate.TARGETS):

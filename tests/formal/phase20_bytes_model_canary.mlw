@@ -1,0 +1,24 @@
+(* Regression for the exact Frama-C 32.1 Bytes theory, not a C implementation. *)
+module ByteCopyModelProbe
+  use int.Int
+  use map.Map
+  use map.Const
+  use frama_c_wp.memaddr.MemAddr
+  use frama_c_wp.membytes_le.MemBytes
+
+  constant start: addr = { base = 1; offset = 0 }
+  constant neighbour: addr = { base = 1; offset = 1 }
+  constant empty: memory = const (const 0)
+  constant destination: memory = write_uint8 empty neighbour 17
+  constant source: memory = write_uint8 empty neighbour 34
+  constant copied: memory = memcpy destination start source start 1
+
+  goal destination_before: read_uint8 destination neighbour = 17
+  goal source_before: read_uint8 source neighbour = 34
+  goal neighbour_is_separate: separated neighbour 1 start 1
+  goal library_frame_value: read_uint8 copied neighbour = 17
+  (* These must never be proved: the untouched byte cannot equal both values. *)
+  goal definition_value: read_uint8 copied neighbour = 34
+  goal contradictory_values:
+    read_uint8 copied neighbour = 17 /\ read_uint8 copied neighbour = 34
+end

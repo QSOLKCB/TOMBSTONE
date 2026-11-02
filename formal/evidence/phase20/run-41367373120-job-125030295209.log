@@ -1,0 +1,1902 @@
+﻿2026-11-02T00:28:59.0522954Z Current runner version: '2.338.2'
+2026-11-02T00:28:59.0548255Z ##[group]Runner Image Provisioner
+2026-11-02T00:28:59.0549105Z Hosted Compute Agent
+2026-11-02T00:28:59.0549817Z Version: 20261021.618
+2026-11-02T00:28:59.0550445Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-02T00:28:59.0551155Z Build Date: 2026-10-21T00:45:21Z
+2026-11-02T00:28:59.0551924Z Worker ID: {fde1fa1e-854e-47dd-8af6-9e2e4f21874d}
+2026-11-02T00:28:59.0553060Z Region: northcentralus
+2026-11-02T00:28:59.0553756Z Cloud: Azure
+2026-11-02T00:28:59.0554303Z ##[endgroup]
+2026-11-02T00:28:59.0555806Z ##[group]Operating System
+2026-11-02T00:28:59.0556556Z Ubuntu
+2026-11-02T00:28:59.0557327Z 24.04.5
+2026-11-02T00:28:59.0557943Z LTS
+2026-11-02T00:28:59.0558490Z ##[endgroup]
+2026-11-02T00:28:59.0559053Z ##[group]Runner Image
+2026-11-02T00:28:59.0559735Z Image: ubuntu-24.04
+2026-11-02T00:28:59.0560346Z Version: 20261025.353.1
+2026-11-02T00:28:59.0561677Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-02T00:28:59.0563615Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-02T00:28:59.0564657Z ##[endgroup]
+2026-11-02T00:28:59.0565781Z ##[group]GITHUB_TOKEN Permissions
+2026-11-02T00:28:59.0567785Z Contents: read
+2026-11-02T00:28:59.0568445Z Metadata: read
+2026-11-02T00:28:59.0569081Z ##[endgroup]
+2026-11-02T00:28:59.0571172Z Secret source: Actions
+2026-11-02T00:28:59.0572123Z Cache mode: write
+2026-11-02T00:28:59.0573442Z Prepare workflow directory
+2026-11-02T00:28:59.1002727Z Prepare all required actions
+2026-11-02T00:28:59.1071905Z Getting action download info
+2026-11-02T00:28:59.3691676Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-02T00:28:59.4743025Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-02T00:28:59.6811286Z Complete job name: Actual C99 prerequisites — negative-error
+2026-11-02T00:28:59.7679725Z ##[group]Run actions/checkout@v4
+2026-11-02T00:28:59.7680624Z with:
+2026-11-02T00:28:59.7681091Z   repository: QSOLKCB/TOMBSTONE
+2026-11-02T00:28:59.7685146Z   token: ***
+2026-11-02T00:28:59.7685589Z   ssh-strict: true
+2026-11-02T00:28:59.7686037Z   ssh-user: git
+2026-11-02T00:28:59.7686493Z   persist-credentials: true
+2026-11-02T00:28:59.7687002Z   clean: true
+2026-11-02T00:28:59.7687456Z   sparse-checkout-cone-mode: true
+2026-11-02T00:28:59.7687987Z   fetch-depth: 1
+2026-11-02T00:28:59.7688418Z   fetch-tags: false
+2026-11-02T00:28:59.7688864Z   show-progress: true
+2026-11-02T00:28:59.7689316Z   lfs: false
+2026-11-02T00:28:59.7689735Z   submodules: false
+2026-11-02T00:28:59.7690194Z   set-safe-directory: true
+2026-11-02T00:28:59.7690709Z   allow-unsafe-pr-checkout: false
+2026-11-02T00:28:59.7691521Z ##[endgroup]
+2026-11-02T00:29:00.0838131Z Syncing repository: QSOLKCB/TOMBSTONE
+2026-11-02T00:29:00.0841160Z ##[group]Getting Git version info
+2026-11-02T00:29:00.0842964Z Working directory is '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-02T00:29:00.0845011Z [command]/usr/bin/git version
+2026-11-02T00:29:00.0931137Z git version 2.56.0
+2026-11-02T00:29:00.0964346Z ##[endgroup]
+2026-11-02T00:29:00.0983632Z Temporarily overriding HOME='/home/runner/work/_temp/54a20d22-e5c0-490d-a273-c1525f8ca247' before making global git config changes
+2026-11-02T00:29:00.0985992Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-02T00:29:00.0991536Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-02T00:29:00.1051649Z Deleting the contents of '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-02T00:29:00.1057310Z ##[group]Initializing the repository
+2026-11-02T00:29:00.1063590Z [command]/usr/bin/git init /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-02T00:29:00.1214293Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-02T00:29:00.1216446Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-02T00:29:00.1219034Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-02T00:29:00.1220495Z hint: call:
+2026-11-02T00:29:00.1221394Z hint:
+2026-11-02T00:29:00.1222921Z hint: 	git config --global init.defaultBranch <name>
+2026-11-02T00:29:00.1224114Z hint:
+2026-11-02T00:29:00.1226205Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-02T00:29:00.1228233Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-02T00:29:00.1229528Z hint:
+2026-11-02T00:29:00.1230506Z hint: 	git branch -m <name>
+2026-11-02T00:29:00.1231468Z hint:
+2026-11-02T00:29:00.1238385Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-02T00:29:00.1241062Z Initialized empty Git repository in /home/runner/work/TOMBSTONE/TOMBSTONE/.git/
+2026-11-02T00:29:00.1250332Z [command]/usr/bin/git remote add origin https://github.com/QSOLKCB/TOMBSTONE
+2026-11-02T00:29:00.1303660Z ##[endgroup]
+2026-11-02T00:29:00.1305215Z ##[group]Disabling automatic garbage collection
+2026-11-02T00:29:00.1308794Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-02T00:29:00.1343539Z ##[endgroup]
+2026-11-02T00:29:00.1345133Z ##[group]Setting up auth
+2026-11-02T00:29:00.1351127Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-02T00:29:00.1387230Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-02T00:29:00.1785764Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-02T00:29:00.1829789Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-02T00:29:00.2067377Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-02T00:29:00.2100863Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-02T00:29:00.2348828Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-02T00:29:00.2388076Z ##[endgroup]
+2026-11-02T00:29:00.2389006Z ##[group]Fetching the repository
+2026-11-02T00:29:00.2401868Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a7e310c6d11d1baafc97b40028a8d2928c066186:refs/remotes/pull/30/merge
+2026-11-02T00:29:01.1948011Z From https://github.com/QSOLKCB/TOMBSTONE
+2026-11-02T00:29:01.1950850Z  * [new ref]         a7e310c6d11d1baafc97b40028a8d2928c066186 -> pull/30/merge
+2026-11-02T00:29:01.1974517Z ##[endgroup]
+2026-11-02T00:29:01.1976551Z ##[group]Determining the checkout info
+2026-11-02T00:29:01.1978758Z ##[endgroup]
+2026-11-02T00:29:01.1980163Z [command]/usr/bin/git sparse-checkout disable
+2026-11-02T00:29:01.2038671Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-02T00:29:01.2071659Z ##[group]Checking out the ref
+2026-11-02T00:29:01.2075847Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/30/merge
+2026-11-02T00:29:01.3027967Z Note: switching to 'refs/remotes/pull/30/merge'.
+2026-11-02T00:29:01.3028960Z 
+2026-11-02T00:29:01.3029738Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-02T00:29:01.3031611Z changes and commit them, and you can discard any commits you make in this
+2026-11-02T00:29:01.3033767Z state without impacting any branches by switching back to a branch.
+2026-11-02T00:29:01.3034863Z 
+2026-11-02T00:29:01.3035607Z If you want to create a new branch to retain commits you create, you may
+2026-11-02T00:29:01.3037253Z do so (now or later) by using -c with the switch command. Example:
+2026-11-02T00:29:01.3038203Z 
+2026-11-02T00:29:01.3038705Z   git switch -c <new-branch-name>
+2026-11-02T00:29:01.3039896Z 
+2026-11-02T00:29:01.3040471Z Or undo this operation with:
+2026-11-02T00:29:01.3041244Z 
+2026-11-02T00:29:01.3041746Z   git switch -
+2026-11-02T00:29:01.3042779Z 
+2026-11-02T00:29:01.3043876Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-02T00:29:01.3045311Z 
+2026-11-02T00:29:01.3047714Z HEAD is now at a7e310c Merge 30e7a7df4c37950618b5826a2ab137924560f6bf into f9140bdda31ea64f7e077115db6f0bb0622c7874
+2026-11-02T00:29:01.3055280Z ##[endgroup]
+2026-11-02T00:29:01.3100716Z [command]/usr/bin/git log -1 --format=%H
+2026-11-02T00:29:01.3125690Z a7e310c6d11d1baafc97b40028a8d2928c066186
+2026-11-02T00:29:01.3454665Z ##[group]Run set -euo pipefail
+2026-11-02T00:29:01.3456075Z [36;1mset -euo pipefail[0m
+2026-11-02T00:29:01.3457421Z [36;1mpython3 tools/check_phase18_receipt.py[0m
+2026-11-02T00:29:01.3459162Z [36;1mpython3 tools/check_phase19_bridge_evidence.py[0m
+2026-11-02T00:29:01.3460930Z [36;1mpython3 tests/formal/test_phase20_overlay.py[0m
+2026-11-02T00:29:01.3462711Z [36;1mmkdir phase20-results[0m
+2026-11-02T00:29:01.3463987Z [36;1mchmod 777 phase20-results[0m
+2026-11-02T00:29:01.3465884Z [36;1mpython3 tools/phase20_receipt_overlay.py --output phase20-receipt.c[0m
+2026-11-02T00:29:01.3467892Z [36;1mfor backend in openssl hacl; do[0m
+2026-11-02T00:29:01.3470296Z [36;1m  python3 tools/phase20_receipt_overlay.py --hex-backend "$backend" --output "phase20-hex-$backend.c"[0m
+2026-11-02T00:29:01.3473037Z [36;1mdone[0m
+2026-11-02T00:29:01.3474385Z [36;1mfor mutant in accept-invalid bad-size error-size; do[0m
+2026-11-02T00:29:01.3476966Z [36;1m  python3 tools/phase20_receipt_overlay.py --mutant "$mutant" --output "phase20-$mutant.c"[0m
+2026-11-02T00:29:01.3479179Z [36;1mdone[0m
+2026-11-02T00:29:01.3480238Z [36;1mfor source in phase20-*.c; do[0m
+2026-11-02T00:29:01.3482724Z [36;1m  gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c "$source" -o /tmp/phase20-check.o[0m
+2026-11-02T00:29:01.3484975Z [36;1mdone[0m
+2026-11-02T00:29:01.3486009Z [36;1mgit rev-parse HEAD[0m
+2026-11-02T00:29:01.3487228Z [36;1msha256sum phase20-*.c[0m
+2026-11-02T00:29:01.3512580Z shell: /usr/bin/bash -e {0}
+2026-11-02T00:29:01.3513713Z env:
+2026-11-02T00:29:01.3514612Z   GROUP: negative-error
+2026-11-02T00:29:01.3515651Z ##[endgroup]
+2026-11-02T00:29:01.3931998Z PASS: 54/54 conditional unbounded WP proof receipt pinned to exact source, checkers, CI job
+2026-11-02T00:29:01.3936600Z LIMIT: prior evidence does not prove a new commit or the actual SHA-256 provider
+2026-11-02T00:29:01.4482176Z PASS: retained P19-03 source, 3 complete proofs, 3 semantic controls and original failed attempt
+2026-11-02T00:29:01.4486690Z LIMIT: conditional caller-frame/protocol evidence; no current-head review or real-provider closure
+2026-11-02T00:29:01.4874707Z PASS: unchanged bodies, stronger original contracts, preserved chain theorem, distinct semantic mutants
+2026-11-02T00:29:01.5269102Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T00:29:01.5627513Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T00:29:01.5981082Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T00:29:01.6339791Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T00:29:01.6706234Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T00:29:01.7080508Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T00:29:02.0557686Z a7e310c6d11d1baafc97b40028a8d2928c066186
+2026-11-02T00:29:02.0581141Z 44863aae7121101b4fd946c732ef7f31748170240d8eba1943efdf2f75092e93  phase20-accept-invalid.c
+2026-11-02T00:29:02.0582592Z c73ee56e3f4bdc7e66142931afb1d7657e8ec380fc3d8e9c9dbd5f140a45c419  phase20-bad-size.c
+2026-11-02T00:29:02.0583765Z d7ab03c1ce93a016db21b31b6ad48191bcec929ee7e9a24e603dbfb8cf060937  phase20-error-size.c
+2026-11-02T00:29:02.0584748Z 3cc10a271b80b29cde4185140f47635404bb0a14c7174231702bbbdcc00cf427  phase20-hex-hacl.c
+2026-11-02T00:29:02.0585611Z 8b74da4865511573cba478df14b31998302790b3140027a041e45b70a315defb  phase20-hex-openssl.c
+2026-11-02T00:29:02.0586207Z f6bd2b44e5cf7658dab22e5c456ae05301178a247623f6b6c57e20d9c6ee2c91  phase20-receipt.c
+2026-11-02T00:29:02.0633805Z ##[group]Run set -euo pipefail
+2026-11-02T00:29:02.0634167Z [36;1mset -euo pipefail[0m
+2026-11-02T00:29:02.0634579Z [36;1mdocker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-results:/out" -e GROUP -w /tmp \[0m
+2026-11-02T00:29:02.0635257Z [36;1m  framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \[0m
+2026-11-02T00:29:02.0635753Z [36;1m  sh -c '[0m
+2026-11-02T00:29:02.0635977Z [36;1m    case "$GROUP" in[0m
+2026-11-02T00:29:02.0636353Z [36;1m      validators) targets="zero32 equal32 good_evidence good_receipt";;[0m
+2026-11-02T00:29:02.0636822Z [36;1m      formatters) targets="hex32 format_json";;[0m
+2026-11-02T00:29:02.0637248Z [36;1m      composition) targets="calculate_hash tb_receipt_verify_chain";;[0m
+2026-11-02T00:29:02.0637680Z [36;1m      hex) targets="hex-openssl hex-hacl";;[0m
+2026-11-02T00:29:02.0638037Z [36;1m      negative-invalid) targets="accept-invalid";;[0m
+2026-11-02T00:29:02.0638416Z [36;1m      negative-size) targets="bad-size";;[0m
+2026-11-02T00:29:02.0638743Z [36;1m      negative-error) targets="error-size";;[0m
+2026-11-02T00:29:02.0639032Z [36;1m    esac[0m
+2026-11-02T00:29:02.0639254Z [36;1m    frama-c -wp-detect || exit 1[0m
+2026-11-02T00:29:02.0639523Z [36;1m    status=0[0m
+2026-11-02T00:29:02.0639745Z [36;1m    for target in $targets; do[0m
+2026-11-02T00:29:02.0640039Z [36;1m      source=/repo/phase20-receipt.c[0m
+2026-11-02T00:29:02.0640332Z [36;1m      function=$target[0m
+2026-11-02T00:29:02.0640574Z [36;1m      timeout=35[0m
+2026-11-02T00:29:02.0640805Z [36;1m      provers=alt-ergo[0m
+2026-11-02T00:29:02.0641039Z [36;1m      split=[0m
+2026-11-02T00:29:02.0641251Z [36;1m      case "$target" in[0m
+2026-11-02T00:29:02.0641752Z [36;1m        hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex; split="-wp-auto wp:bitshift -wp-print";;[0m
+2026-11-02T00:29:02.0643040Z [36;1m        accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;[0m
+2026-11-02T00:29:02.0643732Z [36;1m        bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;[0m
+2026-11-02T00:29:02.0644214Z [36;1m      esac[0m
+2026-11-02T00:29:02.0644605Z [36;1m      if [ "$function" = format_json ]; then split="-wp-literals -wp-no-callee-precond"; fi[0m
+2026-11-02T00:29:02.0645862Z [36;1m      (frama-c -version && frama-c -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover "$provers" -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1[0m
+2026-11-02T00:29:02.0646962Z [36;1m    done[0m
+2026-11-02T00:29:02.0647164Z [36;1m    cat /out/*.log[0m
+2026-11-02T00:29:02.0647389Z [36;1m    exit "$status"[0m
+2026-11-02T00:29:02.0647611Z [36;1m  '[0m
+2026-11-02T00:29:02.0667710Z shell: /usr/bin/bash -e {0}
+2026-11-02T00:29:02.0667958Z env:
+2026-11-02T00:29:02.0668152Z   GROUP: negative-error
+2026-11-02T00:29:02.0668386Z ##[endgroup]
+2026-11-02T00:29:02.1735414Z Unable to find image 'framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36' locally
+2026-11-02T00:29:02.4843051Z docker.io/framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36: Pulling from framac/frama-c
+2026-11-02T00:29:02.4852619Z 01cedcff86f8: Pulling fs layer
+2026-11-02T00:29:02.4853334Z 9bf581ba34fd: Pulling fs layer
+2026-11-02T00:29:02.4854169Z 6c4bd78e0c43: Pulling fs layer
+2026-11-02T00:29:02.4855018Z 799649323729: Pulling fs layer
+2026-11-02T00:29:02.4855789Z 1ae4fb0c8a4a: Pulling fs layer
+2026-11-02T00:29:02.4856716Z b237ecdf51a3: Pulling fs layer
+2026-11-02T00:29:02.4857476Z b16ee2e05313: Pulling fs layer
+2026-11-02T00:29:02.4861522Z adb989234928: Pulling fs layer
+2026-11-02T00:29:02.4862574Z e3a01a28a7ad: Pulling fs layer
+2026-11-02T00:29:02.4864075Z ca0e54137564: Pulling fs layer
+2026-11-02T00:29:02.4864610Z e88b1a083917: Pulling fs layer
+2026-11-02T00:29:02.4865701Z d10f17e04c11: Pulling fs layer
+2026-11-02T00:29:02.4866238Z d38ea67f8871: Pulling fs layer
+2026-11-02T00:29:02.4866621Z 8153ec1c4f57: Pulling fs layer
+2026-11-02T00:29:02.4867209Z 0546e39b6053: Pulling fs layer
+2026-11-02T00:29:02.4867885Z 5ebdad05b03e: Pulling fs layer
+2026-11-02T00:29:02.4868546Z 6435672f1863: Pulling fs layer
+2026-11-02T00:29:02.4868991Z 5c5711f4465e: Pulling fs layer
+2026-11-02T00:29:02.4869405Z 7264e6096409: Pulling fs layer
+2026-11-02T00:29:02.4869935Z 2202cd0e879d: Pulling fs layer
+2026-11-02T00:29:02.4870332Z c31277fa0297: Pulling fs layer
+2026-11-02T00:29:02.4870825Z 4f4fb700ef54: Pulling fs layer
+2026-11-02T00:29:02.4871226Z 8e159597691d: Pulling fs layer
+2026-11-02T00:29:02.4871604Z c0ebccf77ab9: Pulling fs layer
+2026-11-02T00:29:02.4872082Z b7093a70d5d5: Pulling fs layer
+2026-11-02T00:29:02.4872624Z f2a57dfa5358: Pulling fs layer
+2026-11-02T00:29:02.4873082Z 93b66eaa292a: Pulling fs layer
+2026-11-02T00:29:02.4873657Z 0aba2ee32120: Pulling fs layer
+2026-11-02T00:29:02.4874270Z 60033bb88c74: Pulling fs layer
+2026-11-02T00:29:02.4874858Z 883b72a7df53: Pulling fs layer
+2026-11-02T00:29:02.4875272Z 9aaba240d281: Pulling fs layer
+2026-11-02T00:29:02.4875600Z fd24333fa18a: Pulling fs layer
+2026-11-02T00:29:02.4875840Z ab20f402dc6f: Pulling fs layer
+2026-11-02T00:29:02.4876083Z a3afc412b613: Pulling fs layer
+2026-11-02T00:29:02.4876313Z 0a2200cec51c: Pulling fs layer
+2026-11-02T00:29:02.4876544Z f9b5b03a559e: Pulling fs layer
+2026-11-02T00:29:02.4876777Z 2becab109f47: Pulling fs layer
+2026-11-02T00:29:02.4877002Z 3b4307789f50: Pulling fs layer
+2026-11-02T00:29:02.4877233Z 58571fc518c5: Pulling fs layer
+2026-11-02T00:29:02.4877462Z b71b8622ab3f: Pulling fs layer
+2026-11-02T00:29:02.4877691Z d06dd6319b47: Pulling fs layer
+2026-11-02T00:29:02.4877918Z 51a56fdb7118: Pulling fs layer
+2026-11-02T00:29:02.4878160Z 8f235d762bf6: Pulling fs layer
+2026-11-02T00:29:02.4878392Z 37173500316b: Pulling fs layer
+2026-11-02T00:29:02.4878618Z fa11cfb60409: Pulling fs layer
+2026-11-02T00:29:02.4878850Z 2fdcc8b83d1d: Pulling fs layer
+2026-11-02T00:29:02.4879083Z 8103ae60d4a2: Pulling fs layer
+2026-11-02T00:29:02.4879307Z 0ac2d6f63403: Pulling fs layer
+2026-11-02T00:29:02.4879533Z dca9c53526f0: Pulling fs layer
+2026-11-02T00:29:02.4879751Z 799649323729: Waiting
+2026-11-02T00:29:02.4879963Z d62b4203b486: Pulling fs layer
+2026-11-02T00:29:02.4880192Z 1ae4fb0c8a4a: Waiting
+2026-11-02T00:29:02.4880403Z 262d0301190b: Pulling fs layer
+2026-11-02T00:29:02.4880644Z ab4fd71ce45a: Pulling fs layer
+2026-11-02T00:29:02.4880869Z 883b72a7df53: Waiting
+2026-11-02T00:29:02.4881081Z 721b47947ac4: Pulling fs layer
+2026-11-02T00:29:02.4881331Z 4fe137cf5212: Pulling fs layer
+2026-11-02T00:29:02.4881553Z b16ee2e05313: Waiting
+2026-11-02T00:29:02.4881766Z d44046465503: Pulling fs layer
+2026-11-02T00:29:02.4881990Z 26d82a051384: Pulling fs layer
+2026-11-02T00:29:02.4882474Z adb989234928: Waiting
+2026-11-02T00:29:02.4882816Z 51a56fdb7118: Waiting
+2026-11-02T00:29:02.4883022Z e3a01a28a7ad: Waiting
+2026-11-02T00:29:02.4883219Z ca0e54137564: Waiting
+2026-11-02T00:29:02.4883444Z 8f235d762bf6: Waiting
+2026-11-02T00:29:02.4883717Z e88b1a083917: Waiting
+2026-11-02T00:29:02.4883905Z 37173500316b: Waiting
+2026-11-02T00:29:02.4884096Z fa11cfb60409: Waiting
+2026-11-02T00:29:02.4884288Z d10f17e04c11: Waiting
+2026-11-02T00:29:02.4884482Z 2fdcc8b83d1d: Waiting
+2026-11-02T00:29:02.4884678Z d38ea67f8871: Waiting
+2026-11-02T00:29:02.4884870Z 8153ec1c4f57: Waiting
+2026-11-02T00:29:02.4885061Z 0546e39b6053: Waiting
+2026-11-02T00:29:02.4885259Z 5ebdad05b03e: Waiting
+2026-11-02T00:29:02.4885449Z 6435672f1863: Waiting
+2026-11-02T00:29:02.4885640Z 5c5711f4465e: Waiting
+2026-11-02T00:29:02.4885834Z 7264e6096409: Waiting
+2026-11-02T00:29:02.4886025Z 2202cd0e879d: Waiting
+2026-11-02T00:29:02.4886222Z c31277fa0297: Waiting
+2026-11-02T00:29:02.4886430Z 4f4fb700ef54: Waiting
+2026-11-02T00:29:02.4886851Z 8e159597691d: Waiting
+2026-11-02T00:29:02.4887047Z c0ebccf77ab9: Waiting
+2026-11-02T00:29:02.4887246Z 8103ae60d4a2: Waiting
+2026-11-02T00:29:02.4887440Z b7093a70d5d5: Waiting
+2026-11-02T00:29:02.4887769Z 0ac2d6f63403: Waiting
+2026-11-02T00:29:02.4887970Z dca9c53526f0: Waiting
+2026-11-02T00:29:02.4888163Z f2a57dfa5358: Waiting
+2026-11-02T00:29:02.4888357Z 93b66eaa292a: Waiting
+2026-11-02T00:29:02.4888551Z d62b4203b486: Waiting
+2026-11-02T00:29:02.4888744Z 0aba2ee32120: Waiting
+2026-11-02T00:29:02.4888938Z 60033bb88c74: Waiting
+2026-11-02T00:29:02.4889126Z 262d0301190b: Waiting
+2026-11-02T00:29:02.4889316Z ab4fd71ce45a: Waiting
+2026-11-02T00:29:02.4889507Z 26d82a051384: Waiting
+2026-11-02T00:29:02.4889701Z b237ecdf51a3: Waiting
+2026-11-02T00:29:02.4889892Z 721b47947ac4: Waiting
+2026-11-02T00:29:02.4890091Z 4fe137cf5212: Waiting
+2026-11-02T00:29:02.4890283Z d44046465503: Waiting
+2026-11-02T00:29:02.4890474Z a3afc412b613: Waiting
+2026-11-02T00:29:02.4890669Z 0a2200cec51c: Waiting
+2026-11-02T00:29:02.4890869Z f9b5b03a559e: Waiting
+2026-11-02T00:29:02.4891063Z 2becab109f47: Waiting
+2026-11-02T00:29:02.4891256Z 3b4307789f50: Waiting
+2026-11-02T00:29:02.4891445Z 58571fc518c5: Waiting
+2026-11-02T00:29:02.4891641Z fd24333fa18a: Waiting
+2026-11-02T00:29:02.4891842Z b71b8622ab3f: Waiting
+2026-11-02T00:29:02.4892037Z d06dd6319b47: Waiting
+2026-11-02T00:29:02.4892685Z ab20f402dc6f: Waiting
+2026-11-02T00:29:02.5621495Z 6c4bd78e0c43: Verifying Checksum
+2026-11-02T00:29:02.5621989Z 6c4bd78e0c43: Download complete
+2026-11-02T00:29:02.5622634Z 9bf581ba34fd: Verifying Checksum
+2026-11-02T00:29:02.5623047Z 9bf581ba34fd: Download complete
+2026-11-02T00:29:02.6443349Z 1ae4fb0c8a4a: Download complete
+2026-11-02T00:29:02.7098629Z 799649323729: Verifying Checksum
+2026-11-02T00:29:02.7099163Z 799649323729: Download complete
+2026-11-02T00:29:02.7480623Z 01cedcff86f8: Verifying Checksum
+2026-11-02T00:29:02.7481701Z 01cedcff86f8: Download complete
+2026-11-02T00:29:02.8125775Z b16ee2e05313: Verifying Checksum
+2026-11-02T00:29:02.8127041Z b16ee2e05313: Download complete
+2026-11-02T00:29:02.8546342Z adb989234928: Verifying Checksum
+2026-11-02T00:29:02.8573821Z adb989234928: Download complete
+2026-11-02T00:29:02.9479962Z e3a01a28a7ad: Verifying Checksum
+2026-11-02T00:29:02.9480589Z e3a01a28a7ad: Download complete
+2026-11-02T00:29:02.9808022Z ca0e54137564: Verifying Checksum
+2026-11-02T00:29:02.9809411Z ca0e54137564: Download complete
+2026-11-02T00:29:03.0988795Z e88b1a083917: Verifying Checksum
+2026-11-02T00:29:03.0995605Z e88b1a083917: Download complete
+2026-11-02T00:29:03.1154282Z d10f17e04c11: Verifying Checksum
+2026-11-02T00:29:03.1159641Z d10f17e04c11: Download complete
+2026-11-02T00:29:03.2178315Z 8153ec1c4f57: Verifying Checksum
+2026-11-02T00:29:03.2181973Z 8153ec1c4f57: Download complete
+2026-11-02T00:29:03.2280469Z d38ea67f8871: Download complete
+2026-11-02T00:29:03.3055520Z 5ebdad05b03e: Verifying Checksum
+2026-11-02T00:29:03.3106460Z 0546e39b6053: Verifying Checksum
+2026-11-02T00:29:03.3106984Z 0546e39b6053: Download complete
+2026-11-02T00:29:03.3779400Z 6435672f1863: Verifying Checksum
+2026-11-02T00:29:03.3781347Z 6435672f1863: Download complete
+2026-11-02T00:29:03.4030734Z 5c5711f4465e: Verifying Checksum
+2026-11-02T00:29:03.4032467Z 5c5711f4465e: Download complete
+2026-11-02T00:29:03.4669546Z 7264e6096409: Download complete
+2026-11-02T00:29:03.4912122Z 2202cd0e879d: Verifying Checksum
+2026-11-02T00:29:03.4919082Z 2202cd0e879d: Download complete
+2026-11-02T00:29:03.5534210Z c31277fa0297: Verifying Checksum
+2026-11-02T00:29:03.5535099Z c31277fa0297: Download complete
+2026-11-02T00:29:03.5756271Z 4f4fb700ef54: Verifying Checksum
+2026-11-02T00:29:03.5759259Z 4f4fb700ef54: Download complete
+2026-11-02T00:29:03.6266562Z 8e159597691d: Verifying Checksum
+2026-11-02T00:29:03.6268315Z 8e159597691d: Download complete
+2026-11-02T00:29:03.6638731Z c0ebccf77ab9: Verifying Checksum
+2026-11-02T00:29:03.6639510Z c0ebccf77ab9: Download complete
+2026-11-02T00:29:03.6671671Z b237ecdf51a3: Verifying Checksum
+2026-11-02T00:29:03.6673018Z b237ecdf51a3: Download complete
+2026-11-02T00:29:03.6996203Z b7093a70d5d5: Verifying Checksum
+2026-11-02T00:29:03.6997951Z b7093a70d5d5: Download complete
+2026-11-02T00:29:03.7460623Z f2a57dfa5358: Verifying Checksum
+2026-11-02T00:29:03.7461499Z f2a57dfa5358: Download complete
+2026-11-02T00:29:03.7535406Z 93b66eaa292a: Verifying Checksum
+2026-11-02T00:29:03.7536316Z 93b66eaa292a: Download complete
+2026-11-02T00:29:03.7733688Z 0aba2ee32120: Verifying Checksum
+2026-11-02T00:29:03.7734187Z 0aba2ee32120: Download complete
+2026-11-02T00:29:03.8260808Z 60033bb88c74: Verifying Checksum
+2026-11-02T00:29:03.8261428Z 60033bb88c74: Download complete
+2026-11-02T00:29:03.8356438Z 883b72a7df53: Verifying Checksum
+2026-11-02T00:29:03.8357576Z 883b72a7df53: Download complete
+2026-11-02T00:29:03.8613367Z 9aaba240d281: Verifying Checksum
+2026-11-02T00:29:03.8615739Z 9aaba240d281: Download complete
+2026-11-02T00:29:03.9014298Z fd24333fa18a: Verifying Checksum
+2026-11-02T00:29:03.9014973Z fd24333fa18a: Download complete
+2026-11-02T00:29:03.9241126Z ab20f402dc6f: Verifying Checksum
+2026-11-02T00:29:03.9241848Z ab20f402dc6f: Download complete
+2026-11-02T00:29:03.9414051Z a3afc412b613: Verifying Checksum
+2026-11-02T00:29:03.9414537Z a3afc412b613: Download complete
+2026-11-02T00:29:04.0019356Z f9b5b03a559e: Verifying Checksum
+2026-11-02T00:29:04.0019884Z f9b5b03a559e: Download complete
+2026-11-02T00:29:04.0893183Z 3b4307789f50: Verifying Checksum
+2026-11-02T00:29:04.0893827Z 3b4307789f50: Download complete
+2026-11-02T00:29:04.1781432Z 58571fc518c5: Download complete
+2026-11-02T00:29:04.2528026Z b71b8622ab3f: Verifying Checksum
+2026-11-02T00:29:04.2531577Z b71b8622ab3f: Download complete
+2026-11-02T00:29:04.7491247Z 2becab109f47: Verifying Checksum
+2026-11-02T00:29:04.7492189Z 2becab109f47: Download complete
+2026-11-02T00:29:04.8240936Z 51a56fdb7118: Verifying Checksum
+2026-11-02T00:29:04.8241513Z 51a56fdb7118: Download complete
+2026-11-02T00:29:04.9165313Z 8f235d762bf6: Verifying Checksum
+2026-11-02T00:29:04.9166950Z 8f235d762bf6: Download complete
+2026-11-02T00:29:04.9883012Z 0a2200cec51c: Verifying Checksum
+2026-11-02T00:29:04.9884416Z 0a2200cec51c: Download complete
+2026-11-02T00:29:04.9913247Z 37173500316b: Verifying Checksum
+2026-11-02T00:29:04.9917061Z 37173500316b: Download complete
+2026-11-02T00:29:05.0841230Z 2fdcc8b83d1d: Verifying Checksum
+2026-11-02T00:29:05.0843100Z 2fdcc8b83d1d: Download complete
+2026-11-02T00:29:05.1425673Z fa11cfb60409: Verifying Checksum
+2026-11-02T00:29:05.1426767Z fa11cfb60409: Download complete
+2026-11-02T00:29:05.1501483Z d06dd6319b47: Verifying Checksum
+2026-11-02T00:29:05.1501991Z d06dd6319b47: Download complete
+2026-11-02T00:29:05.1739637Z 8103ae60d4a2: Download complete
+2026-11-02T00:29:05.1985919Z 01cedcff86f8: Pull complete
+2026-11-02T00:29:05.2249538Z dca9c53526f0: Verifying Checksum
+2026-11-02T00:29:05.2250309Z dca9c53526f0: Download complete
+2026-11-02T00:29:05.2514502Z 9bf581ba34fd: Pull complete
+2026-11-02T00:29:05.2959250Z 262d0301190b: Verifying Checksum
+2026-11-02T00:29:05.2959634Z 262d0301190b: Download complete
+2026-11-02T00:29:05.3054901Z 0ac2d6f63403: Verifying Checksum
+2026-11-02T00:29:05.3055988Z 0ac2d6f63403: Download complete
+2026-11-02T00:29:05.7365045Z 721b47947ac4: Verifying Checksum
+2026-11-02T00:29:05.7365605Z 721b47947ac4: Download complete
+2026-11-02T00:29:05.7423087Z ab4fd71ce45a: Verifying Checksum
+2026-11-02T00:29:05.7423801Z ab4fd71ce45a: Download complete
+2026-11-02T00:29:05.8282585Z d44046465503: Verifying Checksum
+2026-11-02T00:29:05.8283395Z d44046465503: Download complete
+2026-11-02T00:29:05.9165781Z 26d82a051384: Verifying Checksum
+2026-11-02T00:29:05.9166710Z 26d82a051384: Download complete
+2026-11-02T00:29:07.8670287Z 4fe137cf5212: Verifying Checksum
+2026-11-02T00:29:07.8670900Z 4fe137cf5212: Download complete
+2026-11-02T00:29:07.9806827Z d62b4203b486: Verifying Checksum
+2026-11-02T00:29:07.9807167Z d62b4203b486: Download complete
+2026-11-02T00:29:10.5662929Z 6c4bd78e0c43: Pull complete
+2026-11-02T00:29:10.7189837Z 799649323729: Pull complete
+2026-11-02T00:29:10.7312082Z 1ae4fb0c8a4a: Pull complete
+2026-11-02T00:29:16.6270392Z b237ecdf51a3: Pull complete
+2026-11-02T00:29:16.7220302Z b16ee2e05313: Pull complete
+2026-11-02T00:29:16.8155998Z adb989234928: Pull complete
+2026-11-02T00:29:16.9176376Z e3a01a28a7ad: Pull complete
+2026-11-02T00:29:17.0190106Z ca0e54137564: Pull complete
+2026-11-02T00:29:17.1272153Z e88b1a083917: Pull complete
+2026-11-02T00:29:17.2287610Z d10f17e04c11: Pull complete
+2026-11-02T00:29:17.3318451Z d38ea67f8871: Pull complete
+2026-11-02T00:29:17.3494687Z 8153ec1c4f57: Pull complete
+2026-11-02T00:29:17.3595188Z 0546e39b6053: Pull complete
+2026-11-02T00:29:17.3678473Z 5ebdad05b03e: Pull complete
+2026-11-02T00:29:17.3766730Z 6435672f1863: Pull complete
+2026-11-02T00:29:17.3840369Z 5c5711f4465e: Pull complete
+2026-11-02T00:29:17.3982072Z 7264e6096409: Pull complete
+2026-11-02T00:29:17.4069184Z 2202cd0e879d: Pull complete
+2026-11-02T00:29:17.4156620Z c31277fa0297: Pull complete
+2026-11-02T00:29:17.4244653Z 4f4fb700ef54: Pull complete
+2026-11-02T00:29:17.4332612Z 8e159597691d: Pull complete
+2026-11-02T00:29:17.4415201Z c0ebccf77ab9: Pull complete
+2026-11-02T00:29:17.4494431Z b7093a70d5d5: Pull complete
+2026-11-02T00:29:17.4593560Z f2a57dfa5358: Pull complete
+2026-11-02T00:29:17.4708493Z 93b66eaa292a: Pull complete
+2026-11-02T00:29:17.4795052Z 0aba2ee32120: Pull complete
+2026-11-02T00:29:17.4875109Z 60033bb88c74: Pull complete
+2026-11-02T00:29:17.4977157Z 883b72a7df53: Pull complete
+2026-11-02T00:29:17.5063981Z 9aaba240d281: Pull complete
+2026-11-02T00:29:17.5158632Z fd24333fa18a: Pull complete
+2026-11-02T00:29:17.5245595Z ab20f402dc6f: Pull complete
+2026-11-02T00:29:17.5347282Z a3afc412b613: Pull complete
+2026-11-02T00:29:51.9550709Z 0a2200cec51c: Pull complete
+2026-11-02T00:29:51.9650048Z f9b5b03a559e: Pull complete
+2026-11-02T00:29:52.8618442Z 2becab109f47: Pull complete
+2026-11-02T00:29:52.8754389Z 3b4307789f50: Pull complete
+2026-11-02T00:29:52.9035695Z 58571fc518c5: Pull complete
+2026-11-02T00:29:52.9114464Z b71b8622ab3f: Pull complete
+2026-11-02T00:29:57.8126356Z d06dd6319b47: Pull complete
+2026-11-02T00:29:57.8254508Z 51a56fdb7118: Pull complete
+2026-11-02T00:29:57.8489654Z 8f235d762bf6: Pull complete
+2026-11-02T00:29:57.8593975Z 37173500316b: Pull complete
+2026-11-02T00:29:58.0396285Z fa11cfb60409: Pull complete
+2026-11-02T00:29:58.0475212Z 2fdcc8b83d1d: Pull complete
+2026-11-02T00:29:58.0645769Z 8103ae60d4a2: Pull complete
+2026-11-02T00:29:58.1604068Z 0ac2d6f63403: Pull complete
+2026-11-02T00:29:58.1679162Z dca9c53526f0: Pull complete
+2026-11-02T00:30:33.2665356Z d62b4203b486: Pull complete
+2026-11-02T00:30:33.2776403Z 262d0301190b: Pull complete
+2026-11-02T00:30:33.3213917Z ab4fd71ce45a: Pull complete
+2026-11-02T00:30:36.1951751Z 721b47947ac4: Pull complete
+2026-11-02T00:30:50.8617741Z 4fe137cf5212: Pull complete
+2026-11-02T00:30:50.8711243Z d44046465503: Pull complete
+2026-11-02T00:31:22.2295372Z 26d82a051384: Pull complete
+2026-11-02T00:31:22.2321818Z Digest: sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-02T00:31:22.2328313Z Status: Downloaded newer image for framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-02T00:31:22.6395124Z [wp] Prover Alt-Ergo   2.5.4  [Alt-Ergo:2.5.4] (alt-ergo) (counter-examples)
+2026-11-02T00:46:10.5538952Z 32.1 (Germanium)
+2026-11-02T00:46:10.5540016Z [kernel] Parsing /repo/phase20-error-size.c (with preprocessing)
+2026-11-02T00:46:10.5541073Z [wp] Running WP plugin...
+2026-11-02T00:46:10.5541831Z [rte:annot] annotating function format_json
+2026-11-02T00:46:10.5543040Z [kernel:annot:missing-spec] /repo/phase20-error-size.c:96: Warning: 
+2026-11-02T00:46:10.5544343Z   Neither code nor explicit exits and terminates for function p20_snprintf_deleted,
+2026-11-02T00:46:10.5547727Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-02T00:46:10.5549412Z [kernel:annot:missing-spec] /repo/phase20-error-size.c:137: Warning: 
+2026-11-02T00:46:10.5550790Z   Neither code nor explicit exits and terminates for function p20_snprintf_string,
+2026-11-02T00:46:10.5552738Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-02T00:46:10.5553972Z [kernel:annot:missing-spec] /repo/phase20-error-size.c:319: Warning: 
+2026-11-02T00:46:10.5555568Z   Neither code nor explicit exits and terminates for function p20_snprintf_receipt,
+2026-11-02T00:46:10.5557009Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-02T00:46:10.5558329Z [kernel:annot:missing-spec] /repo/phase20-error-size.c:332: Warning: 
+2026-11-02T00:46:10.5559657Z   Neither code nor explicit exits and terminates for function p20_memcpy,
+2026-11-02T00:46:10.5561034Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-02T00:46:10.5562132Z [wp] Computing [100 goals...]
+2026-11-02T00:46:10.5563254Z [wp] 183 goals scheduled
+2026-11-02T00:46:10.5564183Z [wp] [Timeout] bytes_format_json_ensures_size_on_error (Qed 24.4s) (Alt-Ergo)
+2026-11-02T00:46:10.5565697Z [wp] [Timeout] bytes_format_json_ensures_input_unchanged (Qed 31.0s) (Alt-Ergo)
+2026-11-02T00:46:10.5567169Z [wp] [Timeout] bytes_format_json_assert_p20_kind_deleted_separation (Qed 505ms) (Alt-Ergo)
+2026-11-02T00:46:10.5568687Z [wp] [Timeout] bytes_format_json_assert_p20_kind_other_separation (Qed 921ms) (Alt-Ergo)
+2026-11-02T00:46:10.5570099Z [wp] [Timeout] bytes_format_json_assert_p20_deleted_null_byte (Qed 918ms) (Alt-Ergo)
+2026-11-02T00:46:10.5571505Z [wp] [Timeout] bytes_format_json_assert_p20_deleted_null_string (Qed 934ms) (Alt-Ergo)
+2026-11-02T00:46:10.5572894Z [wp] [Timeout] bytes_format_json_assert_p20_string_deleted_before (Qed 3.3s) (Alt-Ergo)
+2026-11-02T00:46:10.5574835Z [wp] [Timeout] bytes_format_json_assert_p20_string_deleted_after (Qed 3.2s) (Alt-Ergo)
+2026-11-02T00:46:10.5576171Z [wp] [Timeout] bytes_format_json_assert_p20_string_deleted_deleted (Qed 3.3s) (Alt-Ergo)
+2026-11-02T00:46:10.5577617Z [wp] [Timeout] bytes_format_json_assert_p20_string_deleted_prev (Qed 3.2s) (Alt-Ergo)
+2026-11-02T00:46:10.5579052Z [wp] [Timeout] bytes_format_json_assert_p20_string_deleted_own (Qed 3.2s) (Alt-Ergo)
+2026-11-02T00:46:10.5580487Z [wp] [Timeout] bytes_format_json_assert_p20_string_deleted_kind (Qed 3.2s) (Alt-Ergo)
+2026-11-02T00:46:10.5581922Z [wp] [Timeout] bytes_format_json_assert_p20_previous_null_byte (Qed 5.4s) (Alt-Ergo)
+2026-11-02T00:46:10.5583669Z [wp] [Timeout] bytes_format_json_assert_p20_string_previous_before (Qed 5.9s) (Alt-Ergo)
+2026-11-02T00:46:10.5584834Z [wp] [Timeout] bytes_format_json_assert_p20_string_previous_after (Qed 5.8s) (Alt-Ergo)
+2026-11-02T00:46:10.5585984Z [wp] [Timeout] bytes_format_json_assert_p20_string_previous_own (Qed 5.7s) (Alt-Ergo)
+2026-11-02T00:46:10.5587153Z [wp] [Timeout] bytes_format_json_assert_p20_string_previous_dfield (Qed 5.6s) (Alt-Ergo)
+2026-11-02T00:46:10.5588303Z [wp] [Timeout] bytes_format_json_assert_p20_string_previous_kind (Qed 5.7s) (Alt-Ergo)
+2026-11-02T00:46:10.5589454Z [wp] [Timeout] bytes_format_json_assert_p20_string_previous_pfield (Qed 4.7s) (Alt-Ergo)
+2026-11-02T00:46:10.5590600Z [wp] [Timeout] bytes_format_json_assert_p20_string_own_before (Qed 8.2s) (Alt-Ergo)
+2026-11-02T00:46:10.5591714Z [wp] [Timeout] bytes_format_json_assert_p20_string_own_after (Qed 8.5s) (Alt-Ergo)
+2026-11-02T00:46:10.5593040Z [wp] [Timeout] bytes_format_json_assert_p20_string_own_dfield (Qed 8.1s) (Alt-Ergo)
+2026-11-02T00:46:10.5594005Z [wp] [Timeout] bytes_format_json_assert_p20_string_own_kind (Qed 8.2s) (Alt-Ergo)
+2026-11-02T00:46:10.5594656Z [wp] [Timeout] bytes_format_json_assert_p20_string_own_pfield (Qed 8.4s) (Alt-Ergo)
+2026-11-02T00:46:10.5595281Z [wp] [Timeout] bytes_format_json_assert_p20_string_own_hfield (Qed 7.3s) (Alt-Ergo)
+2026-11-02T00:46:10.5595950Z [wp] Proved goals:  158 / 183
+2026-11-02T00:46:10.5596342Z   Qed:              92 (270ms-2.3s-31.0s)
+2026-11-02T00:46:10.5596721Z   Alt-Ergo 2.5.4:   66 (23ms-3.4s-21.3s)
+2026-11-02T00:46:10.5597239Z   Timeout:          25
+2026-11-02T00:46:10.5597674Z [wp:pedantic-assigns] /repo/phase20-error-size.c:332: Warning: 
+2026-11-02T00:46:10.5598682Z   No 'assigns \result \from ...' specification for function 'p20_memcpy'returning pointer type.
+2026-11-02T00:46:10.5599283Z   Callers assumptions might be imprecise.
+2026-11-02T00:46:10.5600093Z [wp] /repo/phase20-error-size.c:534: Warning: 
+2026-11-02T00:46:10.5600661Z   Memory model hypotheses for function 'format_json':
+2026-11-02T00:46:10.5601162Z   /*@
+2026-11-02T00:46:10.5601456Z      behavior wp_bytes:
+2026-11-02T00:46:10.5601862Z        requires
+2026-11-02T00:46:10.5602407Z          \separated(
+2026-11-02T00:46:10.5602798Z            buffer + (..), (char const *)__fc_lit_string2 + (..),
+2026-11-02T00:46:10.5603565Z            (char const *)__fc_lit_string6 + (..),
+2026-11-02T00:46:10.5604162Z            (char const *)__fc_lit_string8 + (..),
+2026-11-02T00:46:10.5604938Z            (char const *)__fc_lit_string9 + (..)
+2026-11-02T00:46:10.5605406Z            );
+2026-11-02T00:46:10.5605721Z        requires
+2026-11-02T00:46:10.5606043Z          \separated(
+2026-11-02T00:46:10.5606560Z            buffer + (0 .. capacity - 1), (char const *)__fc_lit_string2 + (..),
+2026-11-02T00:46:10.5607225Z            (char const *)__fc_lit_string6 + (..),
+2026-11-02T00:46:10.5607748Z            (char const *)__fc_lit_string8 + (..),
+2026-11-02T00:46:10.5608255Z            (char const *)__fc_lit_string9 + (..)
+2026-11-02T00:46:10.5608710Z            );
+2026-11-02T00:46:10.5609016Z        requires
+2026-11-02T00:46:10.5609255Z          \separated(
+2026-11-02T00:46:10.5609498Z            r + (..), (char const *)__fc_lit_string2 + (..),
+2026-11-02T00:46:10.5609807Z            (char const *)__fc_lit_string6 + (..),
+2026-11-02T00:46:10.5610087Z            (char const *)__fc_lit_string8 + (..),
+2026-11-02T00:46:10.5610368Z            (char const *)__fc_lit_string9 + (..)
+2026-11-02T00:46:10.5610625Z            );
+2026-11-02T00:46:10.5610802Z        requires
+2026-11-02T00:46:10.5610983Z          \separated(
+2026-11-02T00:46:10.5611213Z            size, (char const *)__fc_lit_string2 + (..),
+2026-11-02T00:46:10.5611530Z            (char const *)__fc_lit_string6 + (..),
+2026-11-02T00:46:10.5611820Z            (char const *)__fc_lit_string8 + (..),
+2026-11-02T00:46:10.5612100Z            (char const *)__fc_lit_string9 + (..)
+2026-11-02T00:46:10.5612652Z            );
+2026-11-02T00:46:10.5612963Z      */
+2026-11-02T00:46:10.5613426Z   static tb_status format_json(tb_receipt_v1 const *r, int with_hash,
+2026-11-02T00:46:10.5613841Z                                char *buffer, size_t capacity, size_t *size);
+2026-11-02T00:46:10.5614179Z [ { "goal": "bytes_format_json_terminates",
+2026-11-02T00:46:10.5614675Z     "property": "format_json_terminates", "file": "", "line": 0,
+2026-11-02T00:46:10.5615066Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5615480Z     "verdict": "valid",
+2026-11-02T00:46:10.5615824Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5616135Z     "proved": 1 },
+2026-11-02T00:46:10.5616439Z   { "goal": "bytes_format_json_ensures", "property": "format_json_ensures",
+2026-11-02T00:46:10.5617029Z     "file": "/repo/phase20-error-size.c", "line": 526,
+2026-11-02T00:46:10.5617519Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5618024Z     "verdict": "valid",
+2026-11-02T00:46:10.5618418Z     "provers": [ { "prover": "qed", "time": 27, "success": 0 },
+2026-11-02T00:46:10.5619133Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.11, "success": 1 } ],
+2026-11-02T00:46:10.5619718Z     "proved": 1 },
+2026-11-02T00:46:10.5620083Z   { "goal": "bytes_format_json_ensures_2",
+2026-11-02T00:46:10.5620527Z     "property": "format_json_ensures_2",
+2026-11-02T00:46:10.5620838Z     "file": "/repo/phase20-error-size.c", "line": 528,
+2026-11-02T00:46:10.5621201Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5621528Z     "verdict": "valid",
+2026-11-02T00:46:10.5621809Z     "provers": [ { "prover": "qed", "time": 18.3, "success": 0 },
+2026-11-02T00:46:10.5622751Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.245, "success": 1 } ],
+2026-11-02T00:46:10.5623604Z     "proved": 1 },
+2026-11-02T00:46:10.5624002Z   { "goal": "bytes_format_json_ensures_size_on_error",
+2026-11-02T00:46:10.5625041Z     "property": "format_json_ensures_size_on_error",
+2026-11-02T00:46:10.5625731Z     "file": "/repo/phase20-error-size.c", "line": 529,
+2026-11-02T00:46:10.5626430Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5627058Z     "verdict": "timeout",
+2026-11-02T00:46:10.5627600Z     "provers": [ { "prover": "qed", "time": 24.4, "success": 0 },
+2026-11-02T00:46:10.5628341Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5628980Z     "timeout": 1 },
+2026-11-02T00:46:10.5629388Z   { "goal": "bytes_format_json_ensures_terminated",
+2026-11-02T00:46:10.5629975Z     "property": "format_json_ensures_terminated",
+2026-11-02T00:46:10.5630560Z     "file": "/repo/phase20-error-size.c", "line": 530,
+2026-11-02T00:46:10.5631290Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5631683Z     "verdict": "valid",
+2026-11-02T00:46:10.5632077Z     "provers": [ { "prover": "qed", "time": 19.4, "success": 0 },
+2026-11-02T00:46:10.5632839Z                  { "prover": "Alt-Ergo:2.5.4", "time": 6.68, "success": 1 } ],
+2026-11-02T00:46:10.5633185Z     "proved": 1 },
+2026-11-02T00:46:10.5633439Z   { "goal": "bytes_format_json_ensures_input_unchanged",
+2026-11-02T00:46:10.5634108Z     "property": "format_json_ensures_input_unchanged",
+2026-11-02T00:46:10.5634728Z     "file": "/repo/phase20-error-size.c", "line": 531,
+2026-11-02T00:46:10.5635354Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5635971Z     "verdict": "timeout",
+2026-11-02T00:46:10.5636533Z     "provers": [ { "prover": "qed", "time": 31, "success": 0 },
+2026-11-02T00:46:10.5636933Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5637441Z     "timeout": 1 },
+2026-11-02T00:46:10.5637753Z   { "goal": "bytes_format_json_exits", "property": "format_json_exits",
+2026-11-02T00:46:10.5638351Z     "file": "", "line": 0, "function": "format_json", "smoke": false,
+2026-11-02T00:46:10.5638872Z     "passed": true, "verdict": "valid",
+2026-11-02T00:46:10.5639417Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5639787Z     "proved": 1 },
+2026-11-02T00:46:10.5640269Z   { "goal": "bytes_format_json_assert_p20_receipt_output_separation",
+2026-11-02T00:46:10.5640708Z     "property": "format_json_assert_p20_receipt_output_separation",
+2026-11-02T00:46:10.5641419Z     "file": "/repo/phase20-error-size.c", "line": 542,
+2026-11-02T00:46:10.5641828Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5642148Z     "verdict": "valid",
+2026-11-02T00:46:10.5642696Z     "provers": [ { "prover": "qed", "time": 0.289, "success": 0 },
+2026-11-02T00:46:10.5643278Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.023, "success": 1 } ],
+2026-11-02T00:46:10.5643630Z     "proved": 1 },
+2026-11-02T00:46:10.5643908Z   { "goal": "bytes_format_json_assert_p20_receipt_size_separation",
+2026-11-02T00:46:10.5644318Z     "property": "format_json_assert_p20_receipt_size_separation",
+2026-11-02T00:46:10.5644689Z     "file": "/repo/phase20-error-size.c", "line": 545,
+2026-11-02T00:46:10.5645037Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5645350Z     "verdict": "valid",
+2026-11-02T00:46:10.5645620Z     "provers": [ { "prover": "qed", "time": 0.27, "success": 0 },
+2026-11-02T00:46:10.5646030Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0227, "success": 1 } ],
+2026-11-02T00:46:10.5646369Z     "proved": 1 },
+2026-11-02T00:46:10.5646615Z   { "goal": "bytes_format_json_assert_p20_literal_bytes",
+2026-11-02T00:46:10.5646959Z     "property": "format_json_assert_p20_literal_bytes",
+2026-11-02T00:46:10.5647292Z     "file": "/repo/phase20-error-size.c", "line": 551,
+2026-11-02T00:46:10.5647642Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5648473Z     "verdict": "valid",
+2026-11-02T00:46:10.5648760Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5649191Z     "proved": 1 },
+2026-11-02T00:46:10.5649443Z   { "goal": "bytes_format_json_assert_p20_size_hex",
+2026-11-02T00:46:10.5649786Z     "property": "format_json_assert_p20_size_hex",
+2026-11-02T00:46:10.5650124Z     "file": "/repo/phase20-error-size.c", "line": 553,
+2026-11-02T00:46:10.5650487Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5650808Z     "verdict": "valid",
+2026-11-02T00:46:10.5651084Z     "provers": [ { "prover": "qed", "time": 0.388, "success": 0 },
+2026-11-02T00:46:10.5651485Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.557, "success": 1 } ],
+2026-11-02T00:46:10.5651830Z     "proved": 1 },
+2026-11-02T00:46:10.5652071Z   { "goal": "bytes_format_json_assert_p20_input_hex",
+2026-11-02T00:46:10.5652747Z     "property": "format_json_assert_p20_input_hex",
+2026-11-02T00:46:10.5653099Z     "file": "/repo/phase20-error-size.c", "line": 554,
+2026-11-02T00:46:10.5653454Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5653777Z     "verdict": "valid",
+2026-11-02T00:46:10.5654060Z     "provers": [ { "prover": "qed", "time": 0.423, "success": 0 },
+2026-11-02T00:46:10.5654459Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.872, "success": 1 } ],
+2026-11-02T00:46:10.5654797Z     "proved": 1 },
+2026-11-02T00:46:10.5655060Z   { "goal": "bytes_format_json_assert_p20_string_hex_before",
+2026-11-02T00:46:10.5655426Z     "property": "format_json_assert_p20_string_hex_before",
+2026-11-02T00:46:10.5655774Z     "file": "/repo/phase20-error-size.c", "line": 556,
+2026-11-02T00:46:10.5656126Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5656446Z     "verdict": "valid",
+2026-11-02T00:46:10.5656720Z     "provers": [ { "prover": "qed", "time": 0.451, "success": 0 },
+2026-11-02T00:46:10.5657116Z                  { "prover": "Alt-Ergo:2.5.4", "time": 9.41, "success": 1 } ],
+2026-11-02T00:46:10.5657446Z     "proved": 1 },
+2026-11-02T00:46:10.5657702Z   { "goal": "bytes_format_json_assert_p20_string_hex_after",
+2026-11-02T00:46:10.5658058Z     "property": "format_json_assert_p20_string_hex_after",
+2026-11-02T00:46:10.5658396Z     "file": "/repo/phase20-error-size.c", "line": 557,
+2026-11-02T00:46:10.5658743Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5659053Z     "verdict": "valid",
+2026-11-02T00:46:10.5659328Z     "provers": [ { "prover": "qed", "time": 0.422, "success": 0 },
+2026-11-02T00:46:10.5659712Z                  { "prover": "Alt-Ergo:2.5.4", "time": 9.87, "success": 1 } ],
+2026-11-02T00:46:10.5660037Z     "proved": 1 },
+2026-11-02T00:46:10.5660296Z   { "goal": "bytes_format_json_assert_p20_string_hex_deleted",
+2026-11-02T00:46:10.5660674Z     "property": "format_json_assert_p20_string_hex_deleted",
+2026-11-02T00:46:10.5661029Z     "file": "/repo/phase20-error-size.c", "line": 558,
+2026-11-02T00:46:10.5661377Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5661690Z     "verdict": "valid",
+2026-11-02T00:46:10.5661967Z     "provers": [ { "prover": "qed", "time": 0.466, "success": 0 },
+2026-11-02T00:46:10.5662682Z                  { "prover": "Alt-Ergo:2.5.4", "time": 10.1, "success": 1 } ],
+2026-11-02T00:46:10.5663019Z     "proved": 1 },
+2026-11-02T00:46:10.5663271Z   { "goal": "bytes_format_json_assert_p20_string_hex_prev",
+2026-11-02T00:46:10.5663629Z     "property": "format_json_assert_p20_string_hex_prev",
+2026-11-02T00:46:10.5663969Z     "file": "/repo/phase20-error-size.c", "line": 559,
+2026-11-02T00:46:10.5664320Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5664820Z     "verdict": "valid",
+2026-11-02T00:46:10.5665220Z     "provers": [ { "prover": "qed", "time": 0.471, "success": 0 },
+2026-11-02T00:46:10.5665981Z                  { "prover": "Alt-Ergo:2.5.4", "time": 10.7, "success": 1 } ],
+2026-11-02T00:46:10.5666542Z     "proved": 1 },
+2026-11-02T00:46:10.5666799Z   { "goal": "bytes_format_json_assert_p20_string_hex_own",
+2026-11-02T00:46:10.5667258Z     "property": "format_json_assert_p20_string_hex_own",
+2026-11-02T00:46:10.5667758Z     "file": "/repo/phase20-error-size.c", "line": 560,
+2026-11-02T00:46:10.5668153Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5668474Z     "verdict": "valid",
+2026-11-02T00:46:10.5668817Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5669259Z     "proved": 1 },
+2026-11-02T00:46:10.5669498Z   { "goal": "bytes_format_json_assert_rte_mem_access",
+2026-11-02T00:46:10.5669830Z     "property": "format_json_assert_rte_mem_access",
+2026-11-02T00:46:10.5670316Z     "file": "/repo/phase20-error-size.c", "line": 561,
+2026-11-02T00:46:10.5670671Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5670994Z     "verdict": "valid",
+2026-11-02T00:46:10.5671435Z     "provers": [ { "prover": "qed", "time": 0.505, "success": 0 },
+2026-11-02T00:46:10.5671840Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.05, "success": 1 } ],
+2026-11-02T00:46:10.5672666Z     "proved": 1 },
+2026-11-02T00:46:10.5672983Z   { "goal": "bytes_format_json_assert_p20_kind_deleted_nul",
+2026-11-02T00:46:10.5673343Z     "property": "format_json_assert_p20_kind_deleted_nul",
+2026-11-02T00:46:10.5673770Z     "file": "/repo/phase20-error-size.c", "line": 563,
+2026-11-02T00:46:10.5674202Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5674517Z     "verdict": "valid",
+2026-11-02T00:46:10.5674785Z     "provers": [ { "prover": "qed", "time": 0.509, "success": 0 },
+2026-11-02T00:46:10.5675345Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.185, "success": 1 } ],
+2026-11-02T00:46:10.5675680Z     "proved": 1 },
+2026-11-02T00:46:10.5675940Z   { "goal": "bytes_format_json_assert_p20_kind_deleted_string",
+2026-11-02T00:46:10.5676499Z     "property": "format_json_assert_p20_kind_deleted_string",
+2026-11-02T00:46:10.5676859Z     "file": "/repo/phase20-error-size.c", "line": 564,
+2026-11-02T00:46:10.5677277Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5677697Z     "verdict": "valid",
+2026-11-02T00:46:10.5677967Z     "provers": [ { "prover": "qed", "time": 0.505, "success": 0 },
+2026-11-02T00:46:10.5678355Z                  { "prover": "Alt-Ergo:2.5.4", "time": 12.1, "success": 1 } ],
+2026-11-02T00:46:10.5678840Z     "proved": 1 },
+2026-11-02T00:46:10.5679118Z   { "goal": "bytes_format_json_assert_p20_kind_deleted_separation",
+2026-11-02T00:46:10.5679524Z     "property": "format_json_assert_p20_kind_deleted_separation",
+2026-11-02T00:46:10.5680046Z     "file": "/repo/phase20-error-size.c", "line": 566,
+2026-11-02T00:46:10.5680401Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5680946Z     "verdict": "timeout",
+2026-11-02T00:46:10.5681260Z     "provers": [ { "prover": "qed", "time": 0.505, "success": 0 },
+2026-11-02T00:46:10.5681649Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5682070Z     "timeout": 1 },
+2026-11-02T00:46:10.5682482Z   { "goal": "bytes_format_json_assert_rte_mem_access_2",
+2026-11-02T00:46:10.5682825Z     "property": "format_json_assert_rte_mem_access_2",
+2026-11-02T00:46:10.5683312Z     "file": "/repo/phase20-error-size.c", "line": 567,
+2026-11-02T00:46:10.5683683Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5683997Z     "verdict": "valid",
+2026-11-02T00:46:10.5684326Z     "provers": [ { "prover": "qed", "time": 0.513, "success": 0 },
+2026-11-02T00:46:10.5684824Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.11, "success": 1 } ],
+2026-11-02T00:46:10.5685156Z     "proved": 1 },
+2026-11-02T00:46:10.5685397Z   { "goal": "bytes_format_json_assert_rte_mem_access_3",
+2026-11-02T00:46:10.5685900Z     "property": "format_json_assert_rte_mem_access_3",
+2026-11-02T00:46:10.5686412Z     "file": "/repo/phase20-error-size.c", "line": 567,
+2026-11-02T00:46:10.5687086Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5687607Z     "verdict": "valid",
+2026-11-02T00:46:10.5687910Z     "provers": [ { "prover": "qed", "time": 0.518, "success": 0 },
+2026-11-02T00:46:10.5688549Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.856, "success": 1 } ],
+2026-11-02T00:46:10.5688891Z     "proved": 1 },
+2026-11-02T00:46:10.5689154Z   { "goal": "bytes_format_json_assert_p20_size_deleted_call",
+2026-11-02T00:46:10.5689742Z     "property": "format_json_assert_p20_size_deleted_call",
+2026-11-02T00:46:10.5690104Z     "file": "/repo/phase20-error-size.c", "line": 570,
+2026-11-02T00:46:10.5690540Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5690978Z     "verdict": "valid",
+2026-11-02T00:46:10.5691262Z     "provers": [ { "prover": "qed", "time": 0.504, "success": 0 },
+2026-11-02T00:46:10.5691728Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.52, "success": 1 } ],
+2026-11-02T00:46:10.5692383Z     "proved": 1 },
+2026-11-02T00:46:10.5692654Z   { "goal": "bytes_format_json_assert_p20_input_deleted_call",
+2026-11-02T00:46:10.5693304Z     "property": "format_json_assert_p20_input_deleted_call",
+2026-11-02T00:46:10.5693668Z     "file": "/repo/phase20-error-size.c", "line": 571,
+2026-11-02T00:46:10.5694020Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5694632Z     "verdict": "valid",
+2026-11-02T00:46:10.5695089Z     "provers": [ { "prover": "qed", "time": 0.551, "success": 0 },
+2026-11-02T00:46:10.5695763Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.23, "success": 1 } ],
+2026-11-02T00:46:10.5696281Z     "proved": 1 },
+2026-11-02T00:46:10.5696530Z   { "goal": "bytes_format_json_assert_rte_mem_access_4",
+2026-11-02T00:46:10.5696866Z     "property": "format_json_assert_rte_mem_access_4",
+2026-11-02T00:46:10.5697362Z     "file": "/repo/phase20-error-size.c", "line": 573,
+2026-11-02T00:46:10.5697738Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5698118Z     "verdict": "valid",
+2026-11-02T00:46:10.5698657Z     "provers": [ { "prover": "qed", "time": 1.04, "success": 0 },
+2026-11-02T00:46:10.5699423Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.767, "success": 1 } ],
+2026-11-02T00:46:10.5700103Z     "proved": 1 },
+2026-11-02T00:46:10.5700485Z   { "goal": "bytes_format_json_assert_p20_dfield_length",
+2026-11-02T00:46:10.5701049Z     "property": "format_json_assert_p20_dfield_length",
+2026-11-02T00:46:10.5701701Z     "file": "/repo/phase20-error-size.c", "line": 574,
+2026-11-02T00:46:10.5702607Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5703192Z     "verdict": "valid",
+2026-11-02T00:46:10.5703480Z     "provers": [ { "prover": "qed", "time": 0.585, "success": 0 },
+2026-11-02T00:46:10.5704056Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.02, "success": 1 } ],
+2026-11-02T00:46:10.5704705Z     "proved": 1 },
+2026-11-02T00:46:10.5705161Z   { "goal": "bytes_format_json_assert_p20_dfield_nul",
+2026-11-02T00:46:10.5705796Z     "property": "format_json_assert_p20_dfield_nul",
+2026-11-02T00:46:10.5706447Z     "file": "/repo/phase20-error-size.c", "line": 575,
+2026-11-02T00:46:10.5706969Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5707573Z     "verdict": "valid",
+2026-11-02T00:46:10.5707982Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5708302Z     "proved": 1 },
+2026-11-02T00:46:10.5708650Z   { "goal": "bytes_format_json_assert_p20_dfield_string",
+2026-11-02T00:46:10.5709301Z     "property": "format_json_assert_p20_dfield_string",
+2026-11-02T00:46:10.5709817Z     "file": "/repo/phase20-error-size.c", "line": 576,
+2026-11-02T00:46:10.5710477Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5711050Z     "verdict": "valid",
+2026-11-02T00:46:10.5711440Z     "provers": [ { "prover": "qed", "time": 0.604, "success": 0 },
+2026-11-02T00:46:10.5712677Z                  { "prover": "Alt-Ergo:2.5.4", "time": 19, "success": 1 } ],
+2026-11-02T00:46:10.5713217Z     "proved": 1 },
+2026-11-02T00:46:10.5713743Z   { "goal": "bytes_format_json_assert_rte_mem_access_5",
+2026-11-02T00:46:10.5714129Z     "property": "format_json_assert_rte_mem_access_5",
+2026-11-02T00:46:10.5714545Z     "file": "/repo/phase20-error-size.c", "line": 578,
+2026-11-02T00:46:10.5715133Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5715457Z     "verdict": "valid",
+2026-11-02T00:46:10.5715731Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5716041Z     "proved": 1 },
+2026-11-02T00:46:10.5716290Z   { "goal": "bytes_format_json_assert_p20_kind_other_nul",
+2026-11-02T00:46:10.5716638Z     "property": "format_json_assert_p20_kind_other_nul",
+2026-11-02T00:46:10.5716980Z     "file": "/repo/phase20-error-size.c", "line": 580,
+2026-11-02T00:46:10.5717336Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5717663Z     "verdict": "valid",
+2026-11-02T00:46:10.5717938Z     "provers": [ { "prover": "qed", "time": 0.898, "success": 0 },
+2026-11-02T00:46:10.5718342Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.357, "success": 1 } ],
+2026-11-02T00:46:10.5718681Z     "proved": 1 },
+2026-11-02T00:46:10.5718937Z   { "goal": "bytes_format_json_assert_p20_kind_other_string",
+2026-11-02T00:46:10.5719308Z     "property": "format_json_assert_p20_kind_other_string",
+2026-11-02T00:46:10.5719659Z     "file": "/repo/phase20-error-size.c", "line": 581,
+2026-11-02T00:46:10.5720016Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5720332Z     "verdict": "valid",
+2026-11-02T00:46:10.5720601Z     "provers": [ { "prover": "qed", "time": 0.89, "success": 0 },
+2026-11-02T00:46:10.5720993Z                  { "prover": "Alt-Ergo:2.5.4", "time": 21.3, "success": 1 } ],
+2026-11-02T00:46:10.5721623Z     "proved": 1 },
+2026-11-02T00:46:10.5722129Z   { "goal": "bytes_format_json_assert_p20_kind_other_separation",
+2026-11-02T00:46:10.5723085Z     "property": "format_json_assert_p20_kind_other_separation",
+2026-11-02T00:46:10.5723785Z     "file": "/repo/phase20-error-size.c", "line": 583,
+2026-11-02T00:46:10.5724468Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5724957Z     "verdict": "timeout",
+2026-11-02T00:46:10.5725255Z     "provers": [ { "prover": "qed", "time": 0.921, "success": 0 },
+2026-11-02T00:46:10.5725650Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5725978Z     "timeout": 1 },
+2026-11-02T00:46:10.5726240Z   { "goal": "bytes_format_json_assert_p20_deleted_null_byte",
+2026-11-02T00:46:10.5726611Z     "property": "format_json_assert_p20_deleted_null_byte",
+2026-11-02T00:46:10.5726958Z     "file": "/repo/phase20-error-size.c", "line": 585,
+2026-11-02T00:46:10.5727310Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5727643Z     "verdict": "timeout",
+2026-11-02T00:46:10.5727926Z     "provers": [ { "prover": "qed", "time": 0.918, "success": 0 },
+2026-11-02T00:46:10.5728310Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5728625Z     "timeout": 1 },
+2026-11-02T00:46:10.5728883Z   { "goal": "bytes_format_json_assert_p20_deleted_null_string",
+2026-11-02T00:46:10.5729254Z     "property": "format_json_assert_p20_deleted_null_string",
+2026-11-02T00:46:10.5729607Z     "file": "/repo/phase20-error-size.c", "line": 586,
+2026-11-02T00:46:10.5729957Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5730268Z     "verdict": "timeout",
+2026-11-02T00:46:10.5730542Z     "provers": [ { "prover": "qed", "time": 0.934, "success": 0 },
+2026-11-02T00:46:10.5730917Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5731237Z     "timeout": 1 },
+2026-11-02T00:46:10.5731479Z   { "goal": "bytes_format_json_assert_p20_size_deleted",
+2026-11-02T00:46:10.5732954Z     "property": "format_json_assert_p20_size_deleted",
+2026-11-02T00:46:10.5733571Z     "file": "/repo/phase20-error-size.c", "line": 588,
+2026-11-02T00:46:10.5734421Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5735061Z     "verdict": "valid",
+2026-11-02T00:46:10.5735555Z     "provers": [ { "prover": "qed", "time": 3.35, "success": 0 },
+2026-11-02T00:46:10.5736138Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.491, "success": 1 } ],
+2026-11-02T00:46:10.5736485Z     "proved": 1 },
+2026-11-02T00:46:10.5736915Z   { "goal": "bytes_format_json_assert_p20_input_deleted",
+2026-11-02T00:46:10.5737523Z     "property": "format_json_assert_p20_input_deleted",
+2026-11-02T00:46:10.5738098Z     "file": "/repo/phase20-error-size.c", "line": 589,
+2026-11-02T00:46:10.5738716Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5739366Z     "verdict": "valid",
+2026-11-02T00:46:10.5739694Z     "provers": [ { "prover": "qed", "time": 3.56, "success": 0 },
+2026-11-02T00:46:10.5740104Z                  { "prover": "Alt-Ergo:2.5.4", "time": 2.56, "success": 1 } ],
+2026-11-02T00:46:10.5740594Z     "proved": 1 },
+2026-11-02T00:46:10.5741087Z   { "goal": "bytes_format_json_assert_p20_string_deleted_before",
+2026-11-02T00:46:10.5741852Z     "property": "format_json_assert_p20_string_deleted_before",
+2026-11-02T00:46:10.5742535Z     "file": "/repo/phase20-error-size.c", "line": 591,
+2026-11-02T00:46:10.5742966Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5743295Z     "verdict": "timeout",
+2026-11-02T00:46:10.5743680Z     "provers": [ { "prover": "qed", "time": 3.3, "success": 0 },
+2026-11-02T00:46:10.5744114Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5744584Z     "timeout": 1 },
+2026-11-02T00:46:10.5745089Z   { "goal": "bytes_format_json_assert_p20_string_deleted_after",
+2026-11-02T00:46:10.5745784Z     "property": "format_json_assert_p20_string_deleted_after",
+2026-11-02T00:46:10.5746461Z     "file": "/repo/phase20-error-size.c", "line": 592,
+2026-11-02T00:46:10.5747136Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5747731Z     "verdict": "timeout",
+2026-11-02T00:46:10.5748020Z     "provers": [ { "prover": "qed", "time": 3.24, "success": 0 },
+2026-11-02T00:46:10.5748432Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5748954Z     "timeout": 1 },
+2026-11-02T00:46:10.5749237Z   { "goal": "bytes_format_json_assert_p20_string_deleted_deleted",
+2026-11-02T00:46:10.5749910Z     "property": "format_json_assert_p20_string_deleted_deleted",
+2026-11-02T00:46:10.5750571Z     "file": "/repo/phase20-error-size.c", "line": 593,
+2026-11-02T00:46:10.5751215Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5751731Z     "verdict": "timeout",
+2026-11-02T00:46:10.5752015Z     "provers": [ { "prover": "qed", "time": 3.28, "success": 0 },
+2026-11-02T00:46:10.5763045Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5763662Z     "timeout": 1 },
+2026-11-02T00:46:10.5764133Z   { "goal": "bytes_format_json_assert_p20_string_deleted_prev",
+2026-11-02T00:46:10.5764745Z     "property": "format_json_assert_p20_string_deleted_prev",
+2026-11-02T00:46:10.5765116Z     "file": "/repo/phase20-error-size.c", "line": 594,
+2026-11-02T00:46:10.5765687Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5766019Z     "verdict": "timeout",
+2026-11-02T00:46:10.5766313Z     "provers": [ { "prover": "qed", "time": 3.19, "success": 0 },
+2026-11-02T00:46:10.5766994Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5767390Z     "timeout": 1 },
+2026-11-02T00:46:10.5767658Z   { "goal": "bytes_format_json_assert_p20_string_deleted_own",
+2026-11-02T00:46:10.5768268Z     "property": "format_json_assert_p20_string_deleted_own",
+2026-11-02T00:46:10.5768989Z     "file": "/repo/phase20-error-size.c", "line": 595,
+2026-11-02T00:46:10.5769578Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5770062Z     "verdict": "timeout",
+2026-11-02T00:46:10.5770480Z     "provers": [ { "prover": "qed", "time": 3.18, "success": 0 },
+2026-11-02T00:46:10.5770966Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5771300Z     "timeout": 1 },
+2026-11-02T00:46:10.5771680Z   { "goal": "bytes_format_json_assert_p20_string_deleted_dfield",
+2026-11-02T00:46:10.5772133Z     "property": "format_json_assert_p20_string_deleted_dfield",
+2026-11-02T00:46:10.5772699Z     "file": "/repo/phase20-error-size.c", "line": 596,
+2026-11-02T00:46:10.5773218Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5773542Z     "verdict": "valid",
+2026-11-02T00:46:10.5773812Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5774290Z     "proved": 1 },
+2026-11-02T00:46:10.5774556Z   { "goal": "bytes_format_json_assert_p20_string_deleted_kind",
+2026-11-02T00:46:10.5774946Z     "property": "format_json_assert_p20_string_deleted_kind",
+2026-11-02T00:46:10.5775453Z     "file": "/repo/phase20-error-size.c", "line": 597,
+2026-11-02T00:46:10.5775811Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5776132Z     "verdict": "timeout",
+2026-11-02T00:46:10.5776563Z     "provers": [ { "prover": "qed", "time": 3.24, "success": 0 },
+2026-11-02T00:46:10.5776955Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5777276Z     "timeout": 1 },
+2026-11-02T00:46:10.5777627Z   { "goal": "bytes_format_json_assert_rte_mem_access_6",
+2026-11-02T00:46:10.5778008Z     "property": "format_json_assert_rte_mem_access_6",
+2026-11-02T00:46:10.5778351Z     "file": "/repo/phase20-error-size.c", "line": 598,
+2026-11-02T00:46:10.5778953Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5779285Z     "verdict": "valid",
+2026-11-02T00:46:10.5779558Z     "provers": [ { "prover": "qed", "time": 3.31, "success": 0 },
+2026-11-02T00:46:10.5780097Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.69, "success": 1 } ],
+2026-11-02T00:46:10.5780596Z     "proved": 1 },
+2026-11-02T00:46:10.5781083Z   { "goal": "bytes_format_json_assert_p20_size_previous_call",
+2026-11-02T00:46:10.5781634Z     "property": "format_json_assert_p20_size_previous_call",
+2026-11-02T00:46:10.5782865Z     "file": "/repo/phase20-error-size.c", "line": 600,
+2026-11-02T00:46:10.5783260Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5783684Z     "verdict": "valid",
+2026-11-02T00:46:10.5784022Z     "provers": [ { "prover": "qed", "time": 3.24, "success": 0 },
+2026-11-02T00:46:10.5784422Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.468, "success": 1 } ],
+2026-11-02T00:46:10.5784835Z     "proved": 1 },
+2026-11-02T00:46:10.5785198Z   { "goal": "bytes_format_json_assert_p20_input_previous_call",
+2026-11-02T00:46:10.5785579Z     "property": "format_json_assert_p20_input_previous_call",
+2026-11-02T00:46:10.5786008Z     "file": "/repo/phase20-error-size.c", "line": 601,
+2026-11-02T00:46:10.5786550Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5786869Z     "verdict": "valid",
+2026-11-02T00:46:10.5787216Z     "provers": [ { "prover": "qed", "time": 3.3, "success": 0 },
+2026-11-02T00:46:10.5787937Z                  { "prover": "Alt-Ergo:2.5.4", "time": 4.21, "success": 1 } ],
+2026-11-02T00:46:10.5788588Z     "proved": 1 },
+2026-11-02T00:46:10.5788858Z   { "goal": "bytes_format_json_assert_p20_pfield_length",
+2026-11-02T00:46:10.5789201Z     "property": "format_json_assert_p20_pfield_length",
+2026-11-02T00:46:10.5789590Z     "file": "/repo/phase20-error-size.c", "line": 604,
+2026-11-02T00:46:10.5790219Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5790722Z     "verdict": "valid",
+2026-11-02T00:46:10.5791281Z     "provers": [ { "prover": "qed", "time": 3.38, "success": 0 },
+2026-11-02T00:46:10.5791864Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.49, "success": 1 } ],
+2026-11-02T00:46:10.5792802Z     "proved": 1 },
+2026-11-02T00:46:10.5793191Z   { "goal": "bytes_format_json_assert_p20_pfield_nul",
+2026-11-02T00:46:10.5793540Z     "property": "format_json_assert_p20_pfield_nul",
+2026-11-02T00:46:10.5793882Z     "file": "/repo/phase20-error-size.c", "line": 605,
+2026-11-02T00:46:10.5794409Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5794737Z     "verdict": "valid",
+2026-11-02T00:46:10.5795010Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5795470Z     "proved": 1 },
+2026-11-02T00:46:10.5795722Z   { "goal": "bytes_format_json_assert_p20_pfield_string",
+2026-11-02T00:46:10.5796072Z     "property": "format_json_assert_p20_pfield_string",
+2026-11-02T00:46:10.5796532Z     "file": "/repo/phase20-error-size.c", "line": 606,
+2026-11-02T00:46:10.5796919Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5797235Z     "verdict": "valid",
+2026-11-02T00:46:10.5797575Z     "provers": [ { "prover": "qed", "time": 3.37, "success": 0 },
+2026-11-02T00:46:10.5798054Z                  { "prover": "Alt-Ergo:2.5.4", "time": 17.6, "success": 1 } ],
+2026-11-02T00:46:10.5798385Z     "proved": 1 },
+2026-11-02T00:46:10.5798644Z   { "goal": "bytes_format_json_assert_p20_previous_null_byte",
+2026-11-02T00:46:10.5799167Z     "property": "format_json_assert_p20_previous_null_byte",
+2026-11-02T00:46:10.5799533Z     "file": "/repo/phase20-error-size.c", "line": 609,
+2026-11-02T00:46:10.5799980Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5800361Z     "verdict": "timeout",
+2026-11-02T00:46:10.5800637Z     "provers": [ { "prover": "qed", "time": 5.41, "success": 0 },
+2026-11-02T00:46:10.5801062Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5801494Z     "timeout": 1 },
+2026-11-02T00:46:10.5801743Z   { "goal": "bytes_format_json_assert_p20_size_previous",
+2026-11-02T00:46:10.5802089Z     "property": "format_json_assert_p20_size_previous",
+2026-11-02T00:46:10.5802774Z     "file": "/repo/phase20-error-size.c", "line": 610,
+2026-11-02T00:46:10.5803230Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5803543Z     "verdict": "valid",
+2026-11-02T00:46:10.5803812Z     "provers": [ { "prover": "qed", "time": 4.41, "success": 0 },
+2026-11-02T00:46:10.5804373Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.462, "success": 1 } ],
+2026-11-02T00:46:10.5804711Z     "proved": 1 },
+2026-11-02T00:46:10.5804962Z   { "goal": "bytes_format_json_assert_p20_input_previous",
+2026-11-02T00:46:10.5805465Z     "property": "format_json_assert_p20_input_previous",
+2026-11-02T00:46:10.5805802Z     "file": "/repo/phase20-error-size.c", "line": 611,
+2026-11-02T00:46:10.5806150Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5806630Z     "verdict": "valid",
+2026-11-02T00:46:10.5806910Z     "provers": [ { "prover": "qed", "time": 5.77, "success": 0 },
+2026-11-02T00:46:10.5807298Z                  { "prover": "Alt-Ergo:2.5.4", "time": 5.6, "success": 1 } ],
+2026-11-02T00:46:10.5807778Z     "proved": 1 },
+2026-11-02T00:46:10.5808057Z   { "goal": "bytes_format_json_assert_p20_string_previous_before",
+2026-11-02T00:46:10.5808458Z     "property": "format_json_assert_p20_string_previous_before",
+2026-11-02T00:46:10.5808979Z     "file": "/repo/phase20-error-size.c", "line": 613,
+2026-11-02T00:46:10.5809343Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5809670Z     "verdict": "timeout",
+2026-11-02T00:46:10.5810095Z     "provers": [ { "prover": "qed", "time": 5.87, "success": 0 },
+2026-11-02T00:46:10.5810490Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5810815Z     "timeout": 1 },
+2026-11-02T00:46:10.5811427Z   { "goal": "bytes_format_json_assert_p20_string_previous_after",
+2026-11-02T00:46:10.5811821Z     "property": "format_json_assert_p20_string_previous_after",
+2026-11-02T00:46:10.5812573Z     "file": "/repo/phase20-error-size.c", "line": 614,
+2026-11-02T00:46:10.5812988Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5813315Z     "verdict": "timeout",
+2026-11-02T00:46:10.5813597Z     "provers": [ { "prover": "qed", "time": 5.83, "success": 0 },
+2026-11-02T00:46:10.5813980Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5814308Z     "timeout": 1 },
+2026-11-02T00:46:10.5814573Z   { "goal": "bytes_format_json_assert_p20_string_previous_own",
+2026-11-02T00:46:10.5815135Z     "property": "format_json_assert_p20_string_previous_own",
+2026-11-02T00:46:10.5815499Z     "file": "/repo/phase20-error-size.c", "line": 615,
+2026-11-02T00:46:10.5815859Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5816184Z     "verdict": "timeout",
+2026-11-02T00:46:10.5816464Z     "provers": [ { "prover": "qed", "time": 5.68, "success": 0 },
+2026-11-02T00:46:10.5816869Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5817201Z     "timeout": 1 },
+2026-11-02T00:46:10.5817488Z   { "goal": "bytes_format_json_assert_p20_string_previous_dfield",
+2026-11-02T00:46:10.5817899Z     "property": "format_json_assert_p20_string_previous_dfield",
+2026-11-02T00:46:10.5818279Z     "file": "/repo/phase20-error-size.c", "line": 616,
+2026-11-02T00:46:10.5818791Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5819126Z     "verdict": "timeout",
+2026-11-02T00:46:10.5819404Z     "provers": [ { "prover": "qed", "time": 5.6, "success": 0 },
+2026-11-02T00:46:10.5819785Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5820109Z     "timeout": 1 },
+2026-11-02T00:46:10.5820373Z   { "goal": "bytes_format_json_assert_p20_string_previous_kind",
+2026-11-02T00:46:10.5820771Z     "property": "format_json_assert_p20_string_previous_kind",
+2026-11-02T00:46:10.5821134Z     "file": "/repo/phase20-error-size.c", "line": 617,
+2026-11-02T00:46:10.5821498Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5821817Z     "verdict": "timeout",
+2026-11-02T00:46:10.5822094Z     "provers": [ { "prover": "qed", "time": 5.67, "success": 0 },
+2026-11-02T00:46:10.5822757Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5823088Z     "timeout": 1 },
+2026-11-02T00:46:10.5823361Z   { "goal": "bytes_format_json_assert_p20_string_previous_pfield",
+2026-11-02T00:46:10.5823953Z     "property": "format_json_assert_p20_string_previous_pfield",
+2026-11-02T00:46:10.5824449Z     "file": "/repo/phase20-error-size.c", "line": 618,
+2026-11-02T00:46:10.5824942Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5825419Z     "verdict": "timeout",
+2026-11-02T00:46:10.5826009Z     "provers": [ { "prover": "qed", "time": 4.66, "success": 0 },
+2026-11-02T00:46:10.5826489Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5893448Z     "timeout": 1 },
+2026-11-02T00:46:10.5893991Z   { "goal": "bytes_format_json_assert_p20_size_own_call",
+2026-11-02T00:46:10.5894610Z     "property": "format_json_assert_p20_size_own_call",
+2026-11-02T00:46:10.5895186Z     "file": "/repo/phase20-error-size.c", "line": 621,
+2026-11-02T00:46:10.5895794Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5896348Z     "verdict": "valid",
+2026-11-02T00:46:10.5896811Z     "provers": [ { "prover": "qed", "time": 5.76, "success": 0 },
+2026-11-02T00:46:10.5897489Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.679, "success": 1 } ],
+2026-11-02T00:46:10.5898061Z     "proved": 1 },
+2026-11-02T00:46:10.5898485Z   { "goal": "bytes_format_json_assert_p20_input_own_call",
+2026-11-02T00:46:10.5899333Z     "property": "format_json_assert_p20_input_own_call",
+2026-11-02T00:46:10.5899921Z     "file": "/repo/phase20-error-size.c", "line": 622,
+2026-11-02T00:46:10.5900680Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5901231Z     "verdict": "valid",
+2026-11-02T00:46:10.5901685Z     "provers": [ { "prover": "qed", "time": 5.79, "success": 0 },
+2026-11-02T00:46:10.5902542Z                  { "prover": "Alt-Ergo:2.5.4", "time": 11.3, "success": 1 } ],
+2026-11-02T00:46:10.5903114Z     "proved": 1 },
+2026-11-02T00:46:10.5903519Z   { "goal": "bytes_format_json_assert_p20_hfield_length",
+2026-11-02T00:46:10.5904095Z     "property": "format_json_assert_p20_hfield_length",
+2026-11-02T00:46:10.5904656Z     "file": "/repo/phase20-error-size.c", "line": 625,
+2026-11-02T00:46:10.5905254Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5905800Z     "verdict": "valid",
+2026-11-02T00:46:10.5906245Z     "provers": [ { "prover": "qed", "time": 5.9, "success": 0 },
+2026-11-02T00:46:10.5906904Z                  { "prover": "Alt-Ergo:2.5.4", "time": 2.23, "success": 1 } ],
+2026-11-02T00:46:10.5907465Z     "proved": 1 },
+2026-11-02T00:46:10.5907866Z   { "goal": "bytes_format_json_assert_p20_hfield_nul",
+2026-11-02T00:46:10.5908418Z     "property": "format_json_assert_p20_hfield_nul",
+2026-11-02T00:46:10.5908971Z     "file": "/repo/phase20-error-size.c", "line": 626,
+2026-11-02T00:46:10.5909562Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5910099Z     "verdict": "valid",
+2026-11-02T00:46:10.5910552Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5911077Z     "proved": 1 },
+2026-11-02T00:46:10.5911483Z   { "goal": "bytes_format_json_assert_p20_hfield_string",
+2026-11-02T00:46:10.5912057Z     "property": "format_json_assert_p20_hfield_string",
+2026-11-02T00:46:10.5912797Z     "file": "/repo/phase20-error-size.c", "line": 627,
+2026-11-02T00:46:10.5913391Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5913935Z     "verdict": "valid",
+2026-11-02T00:46:10.5914386Z     "provers": [ { "prover": "qed", "time": 5.83, "success": 0 },
+2026-11-02T00:46:10.5915050Z                  { "prover": "Alt-Ergo:2.5.4", "time": 20.9, "success": 1 } ],
+2026-11-02T00:46:10.5915619Z     "proved": 1 },
+2026-11-02T00:46:10.5916006Z   { "goal": "bytes_format_json_assert_p20_size_own",
+2026-11-02T00:46:10.5916544Z     "property": "format_json_assert_p20_size_own",
+2026-11-02T00:46:10.5917093Z     "file": "/repo/phase20-error-size.c", "line": 629,
+2026-11-02T00:46:10.5917687Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5918238Z     "verdict": "valid",
+2026-11-02T00:46:10.5918691Z     "provers": [ { "prover": "qed", "time": 6.75, "success": 0 },
+2026-11-02T00:46:10.5919356Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.642, "success": 1 } ],
+2026-11-02T00:46:10.5919921Z     "proved": 1 },
+2026-11-02T00:46:10.5920307Z   { "goal": "bytes_format_json_assert_p20_input_own",
+2026-11-02T00:46:10.5920871Z     "property": "format_json_assert_p20_input_own",
+2026-11-02T00:46:10.5921420Z     "file": "/repo/phase20-error-size.c", "line": 630,
+2026-11-02T00:46:10.5922016Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5922701Z     "verdict": "valid",
+2026-11-02T00:46:10.5923152Z     "provers": [ { "prover": "qed", "time": 8.43, "success": 0 },
+2026-11-02T00:46:10.5923805Z                  { "prover": "Alt-Ergo:2.5.4", "time": 11.3, "success": 1 } ],
+2026-11-02T00:46:10.5924358Z     "proved": 1 },
+2026-11-02T00:46:10.5924849Z   { "goal": "bytes_format_json_assert_p20_string_own_before",
+2026-11-02T00:46:10.5925472Z     "property": "format_json_assert_p20_string_own_before",
+2026-11-02T00:46:10.5926058Z     "file": "/repo/phase20-error-size.c", "line": 632,
+2026-11-02T00:46:10.5926651Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5927198Z     "verdict": "timeout",
+2026-11-02T00:46:10.5927832Z     "provers": [ { "prover": "qed", "time": 8.15, "success": 0 },
+2026-11-02T00:46:10.5928475Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5929159Z     "timeout": 1 },
+2026-11-02T00:46:10.5929589Z   { "goal": "bytes_format_json_assert_p20_string_own_after",
+2026-11-02T00:46:10.5930195Z     "property": "format_json_assert_p20_string_own_after",
+2026-11-02T00:46:10.5930774Z     "file": "/repo/phase20-error-size.c", "line": 633,
+2026-11-02T00:46:10.5931379Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5931925Z     "verdict": "timeout",
+2026-11-02T00:46:10.5932552Z     "provers": [ { "prover": "qed", "time": 8.53, "success": 0 },
+2026-11-02T00:46:10.5933204Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5933743Z     "timeout": 1 },
+2026-11-02T00:46:10.5934165Z   { "goal": "bytes_format_json_assert_p20_string_own_dfield",
+2026-11-02T00:46:10.5934778Z     "property": "format_json_assert_p20_string_own_dfield",
+2026-11-02T00:46:10.5935367Z     "file": "/repo/phase20-error-size.c", "line": 634,
+2026-11-02T00:46:10.5935962Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5936511Z     "verdict": "timeout",
+2026-11-02T00:46:10.5936982Z     "provers": [ { "prover": "qed", "time": 8.13, "success": 0 },
+2026-11-02T00:46:10.5937619Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5938164Z     "timeout": 1 },
+2026-11-02T00:46:10.5938579Z   { "goal": "bytes_format_json_assert_p20_string_own_kind",
+2026-11-02T00:46:10.5939179Z     "property": "format_json_assert_p20_string_own_kind",
+2026-11-02T00:46:10.5939753Z     "file": "/repo/phase20-error-size.c", "line": 635,
+2026-11-02T00:46:10.5940345Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5940884Z     "verdict": "timeout",
+2026-11-02T00:46:10.5941341Z     "provers": [ { "prover": "qed", "time": 8.21, "success": 0 },
+2026-11-02T00:46:10.5941992Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5942699Z     "timeout": 1 },
+2026-11-02T00:46:10.5943130Z   { "goal": "bytes_format_json_assert_p20_string_own_pfield",
+2026-11-02T00:46:10.5943753Z     "property": "format_json_assert_p20_string_own_pfield",
+2026-11-02T00:46:10.5944333Z     "file": "/repo/phase20-error-size.c", "line": 636,
+2026-11-02T00:46:10.5944923Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5945465Z     "verdict": "timeout",
+2026-11-02T00:46:10.5945931Z     "provers": [ { "prover": "qed", "time": 8.44, "success": 0 },
+2026-11-02T00:46:10.5946571Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5947122Z     "timeout": 1 },
+2026-11-02T00:46:10.5947541Z   { "goal": "bytes_format_json_assert_p20_string_own_hfield",
+2026-11-02T00:46:10.5948153Z     "property": "format_json_assert_p20_string_own_hfield",
+2026-11-02T00:46:10.5948736Z     "file": "/repo/phase20-error-size.c", "line": 637,
+2026-11-02T00:46:10.5949329Z     "function": "format_json", "smoke": false, "passed": false,
+2026-11-02T00:46:10.5949869Z     "verdict": "timeout",
+2026-11-02T00:46:10.5950330Z     "provers": [ { "prover": "qed", "time": 7.35, "success": 0 },
+2026-11-02T00:46:10.5950966Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0, "success": 0 } ],
+2026-11-02T00:46:10.5951503Z     "timeout": 1 },
+2026-11-02T00:46:10.5951903Z   { "goal": "bytes_format_json_assert_rte_mem_access_7",
+2026-11-02T00:46:10.5952635Z     "property": "format_json_assert_rte_mem_access_7",
+2026-11-02T00:46:10.5953187Z     "file": "/repo/phase20-error-size.c", "line": 638,
+2026-11-02T00:46:10.5953776Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5954311Z     "verdict": "valid",
+2026-11-02T00:46:10.5954758Z     "provers": [ { "prover": "qed", "time": 8.41, "success": 0 },
+2026-11-02T00:46:10.5955410Z                  { "prover": "Alt-Ergo:2.5.4", "time": 2.31, "success": 1 } ],
+2026-11-02T00:46:10.5956131Z     "proved": 1 },
+2026-11-02T00:46:10.5956530Z   { "goal": "bytes_format_json_assert_rte_mem_access_8",
+2026-11-02T00:46:10.5957231Z     "property": "format_json_assert_rte_mem_access_8",
+2026-11-02T00:46:10.5957801Z     "file": "/repo/phase20-error-size.c", "line": 638,
+2026-11-02T00:46:10.5958394Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5958926Z     "verdict": "valid",
+2026-11-02T00:46:10.5959373Z     "provers": [ { "prover": "qed", "time": 8.21, "success": 0 },
+2026-11-02T00:46:10.5960027Z                  { "prover": "Alt-Ergo:2.5.4", "time": 2.37, "success": 1 } ],
+2026-11-02T00:46:10.5960582Z     "proved": 1 },
+2026-11-02T00:46:10.5960993Z   { "goal": "bytes_format_json_assert_p20_size_final_call",
+2026-11-02T00:46:10.5961593Z     "property": "format_json_assert_p20_size_final_call",
+2026-11-02T00:46:10.5962170Z     "file": "/repo/phase20-error-size.c", "line": 645,
+2026-11-02T00:46:10.5962941Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5963472Z     "verdict": "valid",
+2026-11-02T00:46:10.5963924Z     "provers": [ { "prover": "qed", "time": 8.38, "success": 0 },
+2026-11-02T00:46:10.5964591Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.208, "success": 1 } ],
+2026-11-02T00:46:10.5965158Z     "proved": 1 },
+2026-11-02T00:46:10.5965579Z   { "goal": "bytes_format_json_assert_p20_input_final_call",
+2026-11-02T00:46:10.5966189Z     "property": "format_json_assert_p20_input_final_call",
+2026-11-02T00:46:10.5966761Z     "file": "/repo/phase20-error-size.c", "line": 646,
+2026-11-02T00:46:10.5967352Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5967885Z     "verdict": "valid",
+2026-11-02T00:46:10.5968347Z     "provers": [ { "prover": "qed", "time": 8.76, "success": 0 },
+2026-11-02T00:46:10.5968998Z                  { "prover": "Alt-Ergo:2.5.4", "time": 3.77, "success": 1 } ],
+2026-11-02T00:46:10.5969556Z     "proved": 1 },
+2026-11-02T00:46:10.5969956Z   { "goal": "bytes_format_json_assert_p20_final_length",
+2026-11-02T00:46:10.5970515Z     "property": "format_json_assert_p20_final_length",
+2026-11-02T00:46:10.5971068Z     "file": "/repo/phase20-error-size.c", "line": 649,
+2026-11-02T00:46:10.5971654Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5972335Z     "verdict": "valid",
+2026-11-02T00:46:10.5972790Z     "provers": [ { "prover": "qed", "time": 8.79, "success": 0 },
+2026-11-02T00:46:10.5973439Z                  { "prover": "Alt-Ergo:2.5.4", "time": 3, "success": 1 } ],
+2026-11-02T00:46:10.5973979Z     "proved": 1 },
+2026-11-02T00:46:10.5974359Z   { "goal": "bytes_format_json_assert_p20_final_nul",
+2026-11-02T00:46:10.5974899Z     "property": "format_json_assert_p20_final_nul",
+2026-11-02T00:46:10.5975442Z     "file": "/repo/phase20-error-size.c", "line": 650,
+2026-11-02T00:46:10.5976025Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5976569Z     "verdict": "valid",
+2026-11-02T00:46:10.5977026Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5977557Z     "proved": 1 },
+2026-11-02T00:46:10.5978005Z   { "goal": "bytes_format_json_assert_p20_final_size_separation",
+2026-11-02T00:46:10.5978677Z     "property": "format_json_assert_p20_final_size_separation",
+2026-11-02T00:46:10.5979287Z     "file": "/repo/phase20-error-size.c", "line": 651,
+2026-11-02T00:46:10.5979876Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5980407Z     "verdict": "valid",
+2026-11-02T00:46:10.5980850Z     "provers": [ { "prover": "qed", "time": 8.99, "success": 0 },
+2026-11-02T00:46:10.5981499Z                  { "prover": "Alt-Ergo:2.5.4", "time": 2.79, "success": 1 } ],
+2026-11-02T00:46:10.5982057Z     "proved": 1 },
+2026-11-02T00:46:10.5982613Z   { "goal": "bytes_format_json_assert_rte_mem_access_9",
+2026-11-02T00:46:10.5983187Z     "property": "format_json_assert_rte_mem_access_9",
+2026-11-02T00:46:10.5983906Z     "file": "/repo/phase20-error-size.c", "line": 652,
+2026-11-02T00:46:10.5984507Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5985047Z     "verdict": "valid",
+2026-11-02T00:46:10.5985649Z     "provers": [ { "prover": "qed", "time": 8.89, "success": 0 },
+2026-11-02T00:46:10.5986311Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.35, "success": 1 } ],
+2026-11-02T00:46:10.5986869Z     "proved": 1 },
+2026-11-02T00:46:10.5987264Z   { "goal": "bytes_format_json_assigns_normal_part01",
+2026-11-02T00:46:10.5987938Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.5988722Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5989310Z     "verdict": "valid",
+2026-11-02T00:46:10.5989755Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5990281Z     "proved": 1 },
+2026-11-02T00:46:10.5990670Z   { "goal": "bytes_format_json_assigns_normal_part02",
+2026-11-02T00:46:10.5991340Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.5992111Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5992877Z     "verdict": "valid",
+2026-11-02T00:46:10.5993332Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5993855Z     "proved": 1 },
+2026-11-02T00:46:10.5994245Z   { "goal": "bytes_format_json_assigns_normal_part03",
+2026-11-02T00:46:10.5994908Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.5995672Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5996255Z     "verdict": "valid",
+2026-11-02T00:46:10.5996693Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.5997211Z     "proved": 1 },
+2026-11-02T00:46:10.5997594Z   { "goal": "bytes_format_json_assigns_normal_part04",
+2026-11-02T00:46:10.5998256Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.5999025Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.5999614Z     "verdict": "valid",
+2026-11-02T00:46:10.6000056Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6000575Z     "proved": 1 },
+2026-11-02T00:46:10.6000958Z   { "goal": "bytes_format_json_assigns_normal_part05",
+2026-11-02T00:46:10.6001617Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6002546Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6003138Z     "verdict": "valid",
+2026-11-02T00:46:10.6003576Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6004095Z     "proved": 1 },
+2026-11-02T00:46:10.6004485Z   { "goal": "bytes_format_json_assigns_normal_part06",
+2026-11-02T00:46:10.6005144Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6005912Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6006495Z     "verdict": "valid",
+2026-11-02T00:46:10.6006943Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6007463Z     "proved": 1 },
+2026-11-02T00:46:10.6007847Z   { "goal": "bytes_format_json_assigns_normal_part07",
+2026-11-02T00:46:10.6008522Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6009295Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6009891Z     "verdict": "valid",
+2026-11-02T00:46:10.6010349Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6010889Z     "proved": 1 },
+2026-11-02T00:46:10.6011291Z   { "goal": "bytes_format_json_assigns_normal_part08",
+2026-11-02T00:46:10.6011980Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6013362Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6013984Z     "verdict": "valid",
+2026-11-02T00:46:10.6014606Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6015159Z     "proved": 1 },
+2026-11-02T00:46:10.6015564Z   { "goal": "bytes_format_json_assigns_normal_part09",
+2026-11-02T00:46:10.6016258Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6017010Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6017612Z     "verdict": "valid",
+2026-11-02T00:46:10.6017975Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6018299Z     "proved": 1 },
+2026-11-02T00:46:10.6018676Z   { "goal": "bytes_format_json_assigns_normal_part10",
+2026-11-02T00:46:10.6019187Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6019805Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6020274Z     "verdict": "valid",
+2026-11-02T00:46:10.6020711Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6021262Z     "proved": 1 },
+2026-11-02T00:46:10.6021668Z   { "goal": "bytes_format_json_assigns_normal_part11",
+2026-11-02T00:46:10.6022518Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6023281Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6023895Z     "verdict": "valid",
+2026-11-02T00:46:10.6024363Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6024968Z     "proved": 1 },
+2026-11-02T00:46:10.6025348Z   { "goal": "bytes_format_json_assigns_normal_part12",
+2026-11-02T00:46:10.6026024Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6026586Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6027158Z     "verdict": "valid",
+2026-11-02T00:46:10.6027590Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6028119Z     "proved": 1 },
+2026-11-02T00:46:10.6028541Z   { "goal": "bytes_format_json_assigns_normal_part13",
+2026-11-02T00:46:10.6029142Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6029865Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6030459Z     "verdict": "valid",
+2026-11-02T00:46:10.6030940Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6031569Z     "proved": 1 },
+2026-11-02T00:46:10.6031816Z   { "goal": "bytes_format_json_assigns_normal_part14",
+2026-11-02T00:46:10.6032571Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6033167Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6033532Z     "verdict": "valid",
+2026-11-02T00:46:10.6033995Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6034321Z     "proved": 1 },
+2026-11-02T00:46:10.6034737Z   { "goal": "bytes_format_json_assigns_normal_part15",
+2026-11-02T00:46:10.6035361Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6035836Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6036402Z     "verdict": "valid",
+2026-11-02T00:46:10.6036813Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6037129Z     "proved": 1 },
+2026-11-02T00:46:10.6037365Z   { "goal": "bytes_format_json_assigns_normal_part16",
+2026-11-02T00:46:10.6037986Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6038451Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6038790Z     "verdict": "valid",
+2026-11-02T00:46:10.6039053Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6039560Z     "proved": 1 },
+2026-11-02T00:46:10.6039816Z   { "goal": "bytes_format_json_assigns_normal_part17",
+2026-11-02T00:46:10.6040330Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6040790Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6041132Z     "verdict": "valid",
+2026-11-02T00:46:10.6041400Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6041705Z     "proved": 1 },
+2026-11-02T00:46:10.6041934Z   { "goal": "bytes_format_json_assigns_normal_part18",
+2026-11-02T00:46:10.6042608Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6043069Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6043414Z     "verdict": "valid",
+2026-11-02T00:46:10.6043684Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6044000Z     "proved": 1 },
+2026-11-02T00:46:10.6044239Z   { "goal": "bytes_format_json_assigns_normal_part19",
+2026-11-02T00:46:10.6044641Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6045099Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6045450Z     "verdict": "valid",
+2026-11-02T00:46:10.6045724Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6046032Z     "proved": 1 },
+2026-11-02T00:46:10.6046267Z   { "goal": "bytes_format_json_assigns_normal_part20",
+2026-11-02T00:46:10.6046666Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6047108Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6047450Z     "verdict": "valid",
+2026-11-02T00:46:10.6047717Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6048025Z     "proved": 1 },
+2026-11-02T00:46:10.6048262Z   { "goal": "bytes_format_json_assigns_normal_part21",
+2026-11-02T00:46:10.6048652Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6049100Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6049448Z     "verdict": "valid",
+2026-11-02T00:46:10.6049720Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6050021Z     "proved": 1 },
+2026-11-02T00:46:10.6050255Z   { "goal": "bytes_format_json_assigns_normal_part22",
+2026-11-02T00:46:10.6050650Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6051096Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6051440Z     "verdict": "valid",
+2026-11-02T00:46:10.6051703Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6052007Z     "proved": 1 },
+2026-11-02T00:46:10.6052449Z   { "goal": "bytes_format_json_assigns_normal_part23",
+2026-11-02T00:46:10.6052962Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6053418Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6053760Z     "verdict": "valid",
+2026-11-02T00:46:10.6054029Z     "provers": [ { "prover": "qed", "time": 0.899, "success": 0 },
+2026-11-02T00:46:10.6054425Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.179, "success": 1 } ],
+2026-11-02T00:46:10.6054757Z     "proved": 1 },
+2026-11-02T00:46:10.6054991Z   { "goal": "bytes_format_json_assigns_normal_part24",
+2026-11-02T00:46:10.6055380Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6055823Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6056167Z     "verdict": "valid",
+2026-11-02T00:46:10.6056430Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6056885Z     "proved": 1 },
+2026-11-02T00:46:10.6057116Z   { "goal": "bytes_format_json_assigns_normal_part25",
+2026-11-02T00:46:10.6057602Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6058043Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6058383Z     "verdict": "valid",
+2026-11-02T00:46:10.6058643Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6058950Z     "proved": 1 },
+2026-11-02T00:46:10.6059179Z   { "goal": "bytes_format_json_assigns_normal_part26",
+2026-11-02T00:46:10.6059571Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6060009Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6060352Z     "verdict": "valid",
+2026-11-02T00:46:10.6060613Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6060918Z     "proved": 1 },
+2026-11-02T00:46:10.6061154Z   { "goal": "bytes_format_json_assigns_normal_part27",
+2026-11-02T00:46:10.6061541Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6061986Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6062704Z     "verdict": "valid",
+2026-11-02T00:46:10.6062998Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6063313Z     "proved": 1 },
+2026-11-02T00:46:10.6063547Z   { "goal": "bytes_format_json_assigns_normal_part28",
+2026-11-02T00:46:10.6063942Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6064390Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6064739Z     "verdict": "valid",
+2026-11-02T00:46:10.6065012Z     "provers": [ { "prover": "qed", "time": 3.23, "success": 0 },
+2026-11-02T00:46:10.6065412Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.204, "success": 1 } ],
+2026-11-02T00:46:10.6065753Z     "proved": 1 },
+2026-11-02T00:46:10.6065987Z   { "goal": "bytes_format_json_assigns_normal_part29",
+2026-11-02T00:46:10.6066379Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6066822Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6067162Z     "verdict": "valid",
+2026-11-02T00:46:10.6067425Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6067730Z     "proved": 1 },
+2026-11-02T00:46:10.6067964Z   { "goal": "bytes_format_json_assigns_normal_part30",
+2026-11-02T00:46:10.6068351Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6068789Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6069136Z     "verdict": "valid",
+2026-11-02T00:46:10.6069398Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6069706Z     "proved": 1 },
+2026-11-02T00:46:10.6069934Z   { "goal": "bytes_format_json_assigns_normal_part31",
+2026-11-02T00:46:10.6070320Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6070763Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6071105Z     "verdict": "valid",
+2026-11-02T00:46:10.6071411Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6071715Z     "proved": 1 },
+2026-11-02T00:46:10.6071945Z   { "goal": "bytes_format_json_assigns_normal_part32",
+2026-11-02T00:46:10.6072586Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6073079Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6073528Z     "verdict": "valid",
+2026-11-02T00:46:10.6073795Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6074099Z     "proved": 1 },
+2026-11-02T00:46:10.6074499Z   { "goal": "bytes_format_json_assigns_normal_part33",
+2026-11-02T00:46:10.6074884Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6075431Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6075779Z     "verdict": "valid",
+2026-11-02T00:46:10.6076046Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6076349Z     "proved": 1 },
+2026-11-02T00:46:10.6076577Z   { "goal": "bytes_format_json_assigns_normal_part34",
+2026-11-02T00:46:10.6076962Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6077404Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6077745Z     "verdict": "valid",
+2026-11-02T00:46:10.6078008Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6078317Z     "proved": 1 },
+2026-11-02T00:46:10.6078548Z   { "goal": "bytes_format_json_assigns_normal_part35",
+2026-11-02T00:46:10.6078945Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6079388Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6079734Z     "verdict": "valid",
+2026-11-02T00:46:10.6079995Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6080296Z     "proved": 1 },
+2026-11-02T00:46:10.6080527Z   { "goal": "bytes_format_json_assigns_normal_part36",
+2026-11-02T00:46:10.6080912Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6081356Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6081693Z     "verdict": "valid",
+2026-11-02T00:46:10.6081951Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6082550Z     "proved": 1 },
+2026-11-02T00:46:10.6082798Z   { "goal": "bytes_format_json_assigns_normal_part37",
+2026-11-02T00:46:10.6083198Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6083639Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6083979Z     "verdict": "valid",
+2026-11-02T00:46:10.6084242Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6084547Z     "proved": 1 },
+2026-11-02T00:46:10.6084778Z   { "goal": "bytes_format_json_assigns_normal_part38",
+2026-11-02T00:46:10.6085163Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6085612Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6085952Z     "verdict": "valid",
+2026-11-02T00:46:10.6086210Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6086514Z     "proved": 1 },
+2026-11-02T00:46:10.6086742Z   { "goal": "bytes_format_json_assigns_normal_part39",
+2026-11-02T00:46:10.6087131Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6087576Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6087916Z     "verdict": "valid",
+2026-11-02T00:46:10.6088181Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6088487Z     "proved": 1 },
+2026-11-02T00:46:10.6088724Z   { "goal": "bytes_format_json_assigns_exit_part01",
+2026-11-02T00:46:10.6089114Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6089554Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6089896Z     "verdict": "valid",
+2026-11-02T00:46:10.6090155Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6090458Z     "proved": 1 },
+2026-11-02T00:46:10.6090686Z   { "goal": "bytes_format_json_assigns_exit_part02",
+2026-11-02T00:46:10.6091073Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6091656Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6092006Z     "verdict": "valid",
+2026-11-02T00:46:10.6092539Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6093011Z     "proved": 1 },
+2026-11-02T00:46:10.6093362Z   { "goal": "bytes_format_json_assigns_exit_part03",
+2026-11-02T00:46:10.6094005Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6094786Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6095394Z     "verdict": "valid",
+2026-11-02T00:46:10.6095848Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6096381Z     "proved": 1 },
+2026-11-02T00:46:10.6096778Z   { "goal": "bytes_format_json_assigns_exit_part04",
+2026-11-02T00:46:10.6097471Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6098260Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6098872Z     "verdict": "valid",
+2026-11-02T00:46:10.6099326Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6099867Z     "proved": 1 },
+2026-11-02T00:46:10.6100259Z   { "goal": "bytes_format_json_assigns_exit_part05",
+2026-11-02T00:46:10.6100933Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6101704Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6102555Z     "verdict": "valid",
+2026-11-02T00:46:10.6103020Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6103560Z     "proved": 1 },
+2026-11-02T00:46:10.6103950Z   { "goal": "bytes_format_json_assigns_exit_part06",
+2026-11-02T00:46:10.6104611Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6105377Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6105984Z     "verdict": "valid",
+2026-11-02T00:46:10.6106425Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6106932Z     "proved": 1 },
+2026-11-02T00:46:10.6107310Z   { "goal": "bytes_format_json_assigns_exit_part07",
+2026-11-02T00:46:10.6107967Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6108759Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6109362Z     "verdict": "valid",
+2026-11-02T00:46:10.6109822Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6110369Z     "proved": 1 },
+2026-11-02T00:46:10.6110769Z   { "goal": "bytes_format_json_assigns_exit_part08",
+2026-11-02T00:46:10.6111450Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6112455Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6113078Z     "verdict": "valid",
+2026-11-02T00:46:10.6113551Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6114090Z     "proved": 1 },
+2026-11-02T00:46:10.6114477Z   { "goal": "bytes_format_json_assigns_exit_part09",
+2026-11-02T00:46:10.6115121Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6115838Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6116404Z     "verdict": "valid",
+2026-11-02T00:46:10.6116829Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6117569Z     "proved": 1 },
+2026-11-02T00:46:10.6118112Z   { "goal": "bytes_format_json_assigns_exit_part10",
+2026-11-02T00:46:10.6119024Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6119734Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6120087Z     "verdict": "valid",
+2026-11-02T00:46:10.6120361Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6120875Z     "proved": 1 },
+2026-11-02T00:46:10.6121112Z   { "goal": "bytes_format_json_assigns_exit_part11",
+2026-11-02T00:46:10.6121612Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6122063Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6122813Z     "verdict": "valid",
+2026-11-02T00:46:10.6123290Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6123804Z     "proved": 1 },
+2026-11-02T00:46:10.6124198Z   { "goal": "bytes_format_json_assigns_exit_part12",
+2026-11-02T00:46:10.6124944Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6125669Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6126021Z     "verdict": "valid",
+2026-11-02T00:46:10.6126480Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6126977Z     "proved": 1 },
+2026-11-02T00:46:10.6127217Z   { "goal": "bytes_format_json_assigns_exit_part13",
+2026-11-02T00:46:10.6127796Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6128584Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6129253Z     "verdict": "valid",
+2026-11-02T00:46:10.6129734Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6130275Z     "proved": 1 },
+2026-11-02T00:46:10.6130488Z   { "goal": "bytes_format_json_assigns_exit_part14",
+2026-11-02T00:46:10.6130800Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6130984Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6131063Z     "verdict": "valid",
+2026-11-02T00:46:10.6131259Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6131399Z     "proved": 1 },
+2026-11-02T00:46:10.6131574Z   { "goal": "bytes_format_json_assigns_exit_part15",
+2026-11-02T00:46:10.6131901Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6132129Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6132474Z     "verdict": "valid",
+2026-11-02T00:46:10.6132715Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6132854Z     "proved": 1 },
+2026-11-02T00:46:10.6133058Z   { "goal": "bytes_format_json_assigns_exit_part16",
+2026-11-02T00:46:10.6133410Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6133710Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6133857Z     "verdict": "valid",
+2026-11-02T00:46:10.6134110Z     "provers": [ { "prover": "qed", "time": 0.94, "success": 0 },
+2026-11-02T00:46:10.6134379Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.176, "success": 1 } ],
+2026-11-02T00:46:10.6134530Z     "proved": 1 },
+2026-11-02T00:46:10.6134740Z   { "goal": "bytes_format_json_assigns_exit_part17",
+2026-11-02T00:46:10.6135186Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6135475Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6135615Z     "verdict": "valid",
+2026-11-02T00:46:10.6135847Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6135981Z     "proved": 1 },
+2026-11-02T00:46:10.6136198Z   { "goal": "bytes_format_json_assigns_exit_part18",
+2026-11-02T00:46:10.6136516Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6136812Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6136944Z     "verdict": "valid",
+2026-11-02T00:46:10.6137189Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6137318Z     "proved": 1 },
+2026-11-02T00:46:10.6137793Z   { "goal": "bytes_format_json_assigns_exit_part19",
+2026-11-02T00:46:10.6138117Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6138571Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6138730Z     "verdict": "valid",
+2026-11-02T00:46:10.6138970Z     "provers": [ { "prover": "qed", "time": 3.22, "success": 0 },
+2026-11-02T00:46:10.6139246Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.197, "success": 1 } ],
+2026-11-02T00:46:10.6139376Z     "proved": 1 },
+2026-11-02T00:46:10.6139578Z   { "goal": "bytes_format_json_assigns_exit_part20",
+2026-11-02T00:46:10.6139894Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6140179Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6140315Z     "verdict": "valid",
+2026-11-02T00:46:10.6140549Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6140693Z     "proved": 1 },
+2026-11-02T00:46:10.6140889Z   { "goal": "bytes_format_json_assigns_exit_part21",
+2026-11-02T00:46:10.6141220Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6141516Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6141648Z     "verdict": "valid",
+2026-11-02T00:46:10.6141891Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6142019Z     "proved": 1 },
+2026-11-02T00:46:10.6142433Z   { "goal": "bytes_format_json_assigns_exit_part22",
+2026-11-02T00:46:10.6142764Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6143059Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6143196Z     "verdict": "valid",
+2026-11-02T00:46:10.6143534Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6143689Z     "proved": 1 },
+2026-11-02T00:46:10.6143888Z   { "goal": "bytes_format_json_assigns_exit_part23",
+2026-11-02T00:46:10.6144205Z     "property": "format_json_assigns", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6144509Z     "line": 525, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6144658Z     "verdict": "valid",
+2026-11-02T00:46:10.6144911Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6145041Z     "proved": 1 },
+2026-11-02T00:46:10.6145243Z   { "goal": "bytes_format_json_call_hex32_requires",
+2026-11-02T00:46:10.6145533Z     "property": "hex32_requires", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6145815Z     "line": 547, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6145941Z     "verdict": "valid",
+2026-11-02T00:46:10.6146186Z     "provers": [ { "prover": "qed", "time": 0.275, "success": 0 },
+2026-11-02T00:46:10.6146454Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.243, "success": 1 } ],
+2026-11-02T00:46:10.6146593Z     "proved": 1 },
+2026-11-02T00:46:10.6146796Z   { "goal": "bytes_format_json_call_hex32_requires_2",
+2026-11-02T00:46:10.6147119Z     "property": "hex32_requires_2", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6147449Z     "line": 547, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6147586Z     "verdict": "valid",
+2026-11-02T00:46:10.6147924Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6148073Z     "proved": 1 },
+2026-11-02T00:46:10.6148285Z   { "goal": "bytes_format_json_call_hex32_requires_3",
+2026-11-02T00:46:10.6148625Z     "property": "hex32_requires_3", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6148925Z     "line": 547, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6149068Z     "verdict": "valid",
+2026-11-02T00:46:10.6149313Z     "provers": [ { "prover": "qed", "time": 0.297, "success": 0 },
+2026-11-02T00:46:10.6149903Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0262, "success": 1 } ],
+2026-11-02T00:46:10.6150064Z     "proved": 1 },
+2026-11-02T00:46:10.6150567Z   { "goal": "bytes_format_json_call_hex32_2_requires",
+2026-11-02T00:46:10.6150912Z     "property": "hex32_requires_4", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6151217Z     "line": 547, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6151455Z     "verdict": "valid",
+2026-11-02T00:46:10.6151707Z     "provers": [ { "prover": "qed", "time": 0.332, "success": 0 },
+2026-11-02T00:46:10.6151982Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.484, "success": 1 } ],
+2026-11-02T00:46:10.6152124Z     "proved": 1 },
+2026-11-02T00:46:10.6152562Z   { "goal": "bytes_format_json_call_hex32_2_requires_2",
+2026-11-02T00:46:10.6152936Z     "property": "hex32_requires_5", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6153236Z     "line": 547, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6153388Z     "verdict": "valid",
+2026-11-02T00:46:10.6153626Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6153761Z     "proved": 1 },
+2026-11-02T00:46:10.6154071Z   { "goal": "bytes_format_json_call_hex32_2_requires_3",
+2026-11-02T00:46:10.6154383Z     "property": "hex32_requires_6", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6154753Z     "line": 547, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6154925Z     "verdict": "valid",
+2026-11-02T00:46:10.6155219Z     "provers": [ { "prover": "qed", "time": 0.347, "success": 0 },
+2026-11-02T00:46:10.6155532Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.12, "success": 1 } ],
+2026-11-02T00:46:10.6155680Z     "proved": 1 },
+2026-11-02T00:46:10.6155893Z   { "goal": "bytes_format_json_call_hex32_3_requires",
+2026-11-02T00:46:10.6156197Z     "property": "hex32_requires_7", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6156511Z     "line": 548, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6156654Z     "verdict": "valid",
+2026-11-02T00:46:10.6156907Z     "provers": [ { "prover": "qed", "time": 0.368, "success": 0 },
+2026-11-02T00:46:10.6157181Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.592, "success": 1 } ],
+2026-11-02T00:46:10.6157321Z     "proved": 1 },
+2026-11-02T00:46:10.6157534Z   { "goal": "bytes_format_json_call_hex32_3_requires_2",
+2026-11-02T00:46:10.6157821Z     "property": "hex32_requires_8", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6158105Z     "line": 548, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6158235Z     "verdict": "valid",
+2026-11-02T00:46:10.6158481Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6158625Z     "proved": 1 },
+2026-11-02T00:46:10.6158853Z   { "goal": "bytes_format_json_call_hex32_3_requires_3",
+2026-11-02T00:46:10.6159173Z     "property": "hex32_requires_9", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6159491Z     "line": 548, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6159641Z     "verdict": "valid",
+2026-11-02T00:46:10.6159892Z     "provers": [ { "prover": "qed", "time": 0.354, "success": 0 },
+2026-11-02T00:46:10.6160173Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.127, "success": 1 } ],
+2026-11-02T00:46:10.6160312Z     "proved": 1 },
+2026-11-02T00:46:10.6160485Z   { "goal": "bytes_format_json_call_hex32_4_requires",
+2026-11-02T00:46:10.6160667Z     "property": "hex32_requires_10", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6160834Z     "line": 549, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6160917Z     "verdict": "valid",
+2026-11-02T00:46:10.6161055Z     "provers": [ { "prover": "qed", "time": 0.364, "success": 0 },
+2026-11-02T00:46:10.6161209Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.678, "success": 1 } ],
+2026-11-02T00:46:10.6161477Z     "proved": 1 },
+2026-11-02T00:46:10.6161610Z   { "goal": "bytes_format_json_call_hex32_4_requires_2",
+2026-11-02T00:46:10.6161788Z     "property": "hex32_requires_11", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6162059Z     "line": 549, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6162146Z     "verdict": "valid",
+2026-11-02T00:46:10.6162647Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6162744Z     "proved": 1 },
+2026-11-02T00:46:10.6162866Z   { "goal": "bytes_format_json_call_hex32_4_requires_3",
+2026-11-02T00:46:10.6163187Z     "property": "hex32_requires_12", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6163458Z     "line": 549, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6163586Z     "verdict": "valid",
+2026-11-02T00:46:10.6163812Z     "provers": [ { "prover": "qed", "time": 0.393, "success": 0 },
+2026-11-02T00:46:10.6164070Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.126, "success": 1 } ],
+2026-11-02T00:46:10.6164213Z     "proved": 1 },
+2026-11-02T00:46:10.6164414Z   { "goal": "bytes_format_json_call_hex32_5_requires",
+2026-11-02T00:46:10.6164668Z     "property": "hex32_requires_13", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6164839Z     "line": 549, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6164917Z     "verdict": "valid",
+2026-11-02T00:46:10.6165057Z     "provers": [ { "prover": "qed", "time": 0.361, "success": 0 },
+2026-11-02T00:46:10.6165205Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.817, "success": 1 } ],
+2026-11-02T00:46:10.6165284Z     "proved": 1 },
+2026-11-02T00:46:10.6165403Z   { "goal": "bytes_format_json_call_hex32_5_requires_2",
+2026-11-02T00:46:10.6165577Z     "property": "hex32_requires_14", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6165743Z     "line": 549, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6165818Z     "verdict": "valid",
+2026-11-02T00:46:10.6165963Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6166037Z     "proved": 1 },
+2026-11-02T00:46:10.6166162Z   { "goal": "bytes_format_json_call_hex32_5_requires_3",
+2026-11-02T00:46:10.6166329Z     "property": "hex32_requires_15", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6166495Z     "line": 549, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6166580Z     "verdict": "valid",
+2026-11-02T00:46:10.6166716Z     "provers": [ { "prover": "qed", "time": 0.376, "success": 0 },
+2026-11-02T00:46:10.6166871Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.134, "success": 1 } ],
+2026-11-02T00:46:10.6166944Z     "proved": 1 },
+2026-11-02T00:46:10.6167109Z   { "goal": "bytes_format_json_call_p20_snprintf_deleted_requires",
+2026-11-02T00:46:10.6167224Z     "property": "p20_snprintf_deleted_requires",
+2026-11-02T00:46:10.6167355Z     "file": "/repo/phase20-error-size.c", "line": 567,
+2026-11-02T00:46:10.6167508Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6167587Z     "verdict": "valid",
+2026-11-02T00:46:10.6167728Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6167808Z     "proved": 1 },
+2026-11-02T00:46:10.6167980Z   { "goal": "bytes_format_json_call_p20_snprintf_deleted_requires_2",
+2026-11-02T00:46:10.6168101Z     "property": "p20_snprintf_deleted_requires_2",
+2026-11-02T00:46:10.6168227Z     "file": "/repo/phase20-error-size.c", "line": 567,
+2026-11-02T00:46:10.6168376Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6168454Z     "verdict": "valid",
+2026-11-02T00:46:10.6168595Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6168669Z     "proved": 1 },
+2026-11-02T00:46:10.6168836Z   { "goal": "bytes_format_json_call_p20_snprintf_deleted_requires_3",
+2026-11-02T00:46:10.6168950Z     "property": "p20_snprintf_deleted_requires_3",
+2026-11-02T00:46:10.6169216Z     "file": "/repo/phase20-error-size.c", "line": 567,
+2026-11-02T00:46:10.6169365Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6169441Z     "verdict": "valid",
+2026-11-02T00:46:10.6169658Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6169737Z     "proved": 1 },
+2026-11-02T00:46:10.6169902Z   { "goal": "bytes_format_json_call_p20_snprintf_deleted_requires_4",
+2026-11-02T00:46:10.6170014Z     "property": "p20_snprintf_deleted_requires_4",
+2026-11-02T00:46:10.6170139Z     "file": "/repo/phase20-error-size.c", "line": 567,
+2026-11-02T00:46:10.6170284Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6170363Z     "verdict": "valid",
+2026-11-02T00:46:10.6170504Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6170579Z     "proved": 1 },
+2026-11-02T00:46:10.6170791Z   { "goal": "bytes_format_json_call_p20_memcpy_requires",
+2026-11-02T00:46:10.6171049Z     "property": "p20_memcpy_requires", "file": "/repo/phase20-error-size.c",
+2026-11-02T00:46:10.6171231Z     "line": 584, "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6171322Z     "verdict": "valid",
+2026-11-02T00:46:10.6171461Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6171544Z     "proved": 1 },
+2026-11-02T00:46:10.6171678Z   { "goal": "bytes_format_json_call_p20_memcpy_requires_2",
+2026-11-02T00:46:10.6171871Z     "property": "p20_memcpy_requires_2",
+2026-11-02T00:46:10.6171994Z     "file": "/repo/phase20-error-size.c", "line": 584,
+2026-11-02T00:46:10.6172139Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6172448Z     "verdict": "valid",
+2026-11-02T00:46:10.6172615Z     "provers": [ { "prover": "qed", "time": 0.867, "success": 0 },
+2026-11-02T00:46:10.6172826Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.784, "success": 1 } ],
+2026-11-02T00:46:10.6172944Z     "proved": 1 },
+2026-11-02T00:46:10.6173089Z   { "goal": "bytes_format_json_call_p20_memcpy_requires_3",
+2026-11-02T00:46:10.6173184Z     "property": "p20_memcpy_requires_3",
+2026-11-02T00:46:10.6173307Z     "file": "/repo/phase20-error-size.c", "line": 584,
+2026-11-02T00:46:10.6173445Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6173529Z     "verdict": "valid",
+2026-11-02T00:46:10.6173674Z     "provers": [ { "prover": "qed", "time": 0.881, "success": 0 },
+2026-11-02T00:46:10.6173827Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.8, "success": 1 } ],
+2026-11-02T00:46:10.6173983Z     "proved": 1 },
+2026-11-02T00:46:10.6174132Z   { "goal": "bytes_format_json_call_p20_memcpy_requires_4",
+2026-11-02T00:46:10.6174234Z     "property": "p20_memcpy_requires_4",
+2026-11-02T00:46:10.6174351Z     "file": "/repo/phase20-error-size.c", "line": 584,
+2026-11-02T00:46:10.6174493Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6174577Z     "verdict": "valid",
+2026-11-02T00:46:10.6174719Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6174799Z     "proved": 1 },
+2026-11-02T00:46:10.6174950Z   { "goal": "bytes_format_json_call_p20_snprintf_string_requires",
+2026-11-02T00:46:10.6175067Z     "property": "p20_snprintf_string_requires",
+2026-11-02T00:46:10.6175182Z     "file": "/repo/phase20-error-size.c", "line": 599,
+2026-11-02T00:46:10.6175325Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6175408Z     "verdict": "valid",
+2026-11-02T00:46:10.6175545Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6175625Z     "proved": 1 },
+2026-11-02T00:46:10.6175782Z   { "goal": "bytes_format_json_call_p20_snprintf_string_requires_2",
+2026-11-02T00:46:10.6175904Z     "property": "p20_snprintf_string_requires_2",
+2026-11-02T00:46:10.6176017Z     "file": "/repo/phase20-error-size.c", "line": 599,
+2026-11-02T00:46:10.6176161Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6176390Z     "verdict": "valid",
+2026-11-02T00:46:10.6176525Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6176605Z     "proved": 1 },
+2026-11-02T00:46:10.6176862Z   { "goal": "bytes_format_json_call_p20_snprintf_string_requires_3",
+2026-11-02T00:46:10.6176986Z     "property": "p20_snprintf_string_requires_3",
+2026-11-02T00:46:10.6177108Z     "file": "/repo/phase20-error-size.c", "line": 599,
+2026-11-02T00:46:10.6177255Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6177338Z     "verdict": "valid",
+2026-11-02T00:46:10.6177473Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6177553Z     "proved": 1 },
+2026-11-02T00:46:10.6177708Z   { "goal": "bytes_format_json_call_p20_snprintf_string_requires_4",
+2026-11-02T00:46:10.6177825Z     "property": "p20_snprintf_string_requires_4",
+2026-11-02T00:46:10.6178047Z     "file": "/repo/phase20-error-size.c", "line": 599,
+2026-11-02T00:46:10.6178208Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6178291Z     "verdict": "valid",
+2026-11-02T00:46:10.6178426Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6178512Z     "proved": 1 },
+2026-11-02T00:46:10.6178642Z   { "goal": "bytes_format_json_call_p20_memcpy_2_requires",
+2026-11-02T00:46:10.6178745Z     "property": "p20_memcpy_requires_5",
+2026-11-02T00:46:10.6178918Z     "file": "/repo/phase20-error-size.c", "line": 607,
+2026-11-02T00:46:10.6179094Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6179179Z     "verdict": "valid",
+2026-11-02T00:46:10.6179311Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6179391Z     "proved": 1 },
+2026-11-02T00:46:10.6179526Z   { "goal": "bytes_format_json_call_p20_memcpy_2_requires_2",
+2026-11-02T00:46:10.6179626Z     "property": "p20_memcpy_requires_6",
+2026-11-02T00:46:10.6179740Z     "file": "/repo/phase20-error-size.c", "line": 607,
+2026-11-02T00:46:10.6179929Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6180051Z     "verdict": "valid",
+2026-11-02T00:46:10.6180207Z     "provers": [ { "prover": "qed", "time": 3.22, "success": 0 },
+2026-11-02T00:46:10.6180369Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.46, "success": 1 } ],
+2026-11-02T00:46:10.6180501Z     "proved": 1 },
+2026-11-02T00:46:10.6180695Z   { "goal": "bytes_format_json_call_p20_memcpy_2_requires_3",
+2026-11-02T00:46:10.6180793Z     "property": "p20_memcpy_requires_7",
+2026-11-02T00:46:10.6180912Z     "file": "/repo/phase20-error-size.c", "line": 607,
+2026-11-02T00:46:10.6181113Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6181220Z     "verdict": "valid",
+2026-11-02T00:46:10.6181367Z     "provers": [ { "prover": "qed", "time": 3.25, "success": 0 },
+2026-11-02T00:46:10.6181518Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.51, "success": 1 } ],
+2026-11-02T00:46:10.6181604Z     "proved": 1 },
+2026-11-02T00:46:10.6181737Z   { "goal": "bytes_format_json_call_p20_memcpy_2_requires_4",
+2026-11-02T00:46:10.6181841Z     "property": "p20_memcpy_requires_8",
+2026-11-02T00:46:10.6181962Z     "file": "/repo/phase20-error-size.c", "line": 607,
+2026-11-02T00:46:10.6182106Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6182189Z     "verdict": "valid",
+2026-11-02T00:46:10.6182583Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6182712Z     "proved": 1 },
+2026-11-02T00:46:10.6182907Z   { "goal": "bytes_format_json_call_p20_snprintf_string_2_requires",
+2026-11-02T00:46:10.6183031Z     "property": "p20_snprintf_string_requires_5",
+2026-11-02T00:46:10.6183145Z     "file": "/repo/phase20-error-size.c", "line": 620,
+2026-11-02T00:46:10.6183288Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6183372Z     "verdict": "valid",
+2026-11-02T00:46:10.6183572Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6183875Z     "proved": 1 },
+2026-11-02T00:46:10.6184142Z   { "goal": "bytes_format_json_call_p20_snprintf_string_2_requires_2",
+2026-11-02T00:46:10.6184506Z     "property": "p20_snprintf_string_requires_6",
+2026-11-02T00:46:10.6184722Z     "file": "/repo/phase20-error-size.c", "line": 620,
+2026-11-02T00:46:10.6184970Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6185112Z     "verdict": "valid",
+2026-11-02T00:46:10.6185357Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6185502Z     "proved": 1 },
+2026-11-02T00:46:10.6185789Z   { "goal": "bytes_format_json_call_p20_snprintf_string_2_requires_3",
+2026-11-02T00:46:10.6185997Z     "property": "p20_snprintf_string_requires_7",
+2026-11-02T00:46:10.6186204Z     "file": "/repo/phase20-error-size.c", "line": 620,
+2026-11-02T00:46:10.6186435Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6186577Z     "verdict": "valid",
+2026-11-02T00:46:10.6186807Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6186895Z     "proved": 1 },
+2026-11-02T00:46:10.6187062Z   { "goal": "bytes_format_json_call_p20_snprintf_string_2_requires_4",
+2026-11-02T00:46:10.6187176Z     "property": "p20_snprintf_string_requires_8",
+2026-11-02T00:46:10.6187293Z     "file": "/repo/phase20-error-size.c", "line": 620,
+2026-11-02T00:46:10.6187435Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6187518Z     "verdict": "valid",
+2026-11-02T00:46:10.6187651Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6187729Z     "proved": 1 },
+2026-11-02T00:46:10.6187882Z   { "goal": "bytes_format_json_call_p20_snprintf_receipt_requires",
+2026-11-02T00:46:10.6188000Z     "property": "p20_snprintf_receipt_requires",
+2026-11-02T00:46:10.6188117Z     "file": "/repo/phase20-error-size.c", "line": 638,
+2026-11-02T00:46:10.6188263Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6188348Z     "verdict": "valid",
+2026-11-02T00:46:10.6188494Z     "provers": [ { "prover": "qed", "time": 8.77, "success": 0 },
+2026-11-02T00:46:10.6188656Z                  { "prover": "Alt-Ergo:2.5.4", "time": 1.4, "success": 1 } ],
+2026-11-02T00:46:10.6188732Z     "proved": 1 },
+2026-11-02T00:46:10.6188901Z   { "goal": "bytes_format_json_call_p20_snprintf_receipt_requires_2",
+2026-11-02T00:46:10.6189019Z     "property": "p20_snprintf_receipt_requires_2",
+2026-11-02T00:46:10.6189144Z     "file": "/repo/phase20-error-size.c", "line": 638,
+2026-11-02T00:46:10.6189281Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6189364Z     "verdict": "valid",
+2026-11-02T00:46:10.6189506Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6189581Z     "proved": 1 },
+2026-11-02T00:46:10.6189859Z   { "goal": "bytes_format_json_call_p20_snprintf_receipt_requires_3",
+2026-11-02T00:46:10.6190058Z     "property": "p20_snprintf_receipt_requires_3",
+2026-11-02T00:46:10.6190256Z     "file": "/repo/phase20-error-size.c", "line": 638,
+2026-11-02T00:46:10.6190403Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6190492Z     "verdict": "valid",
+2026-11-02T00:46:10.6190634Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6190713Z     "proved": 1 },
+2026-11-02T00:46:10.6190952Z   { "goal": "bytes_format_json_call_p20_snprintf_receipt_requires_4",
+2026-11-02T00:46:10.6191153Z     "property": "p20_snprintf_receipt_requires_4",
+2026-11-02T00:46:10.6191368Z     "file": "/repo/phase20-error-size.c", "line": 638,
+2026-11-02T00:46:10.6191617Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6191768Z     "verdict": "valid",
+2026-11-02T00:46:10.6191999Z     "provers": [ { "prover": "qed", "time": 8.51, "success": 0 },
+2026-11-02T00:46:10.6192158Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.2, "success": 1 } ],
+2026-11-02T00:46:10.6192706Z     "proved": 1 },
+2026-11-02T00:46:10.6192883Z   { "goal": "bytes_format_json_call_p20_snprintf_receipt_requires_5",
+2026-11-02T00:46:10.6193116Z     "property": "p20_snprintf_receipt_requires_5",
+2026-11-02T00:46:10.6193241Z     "file": "/repo/phase20-error-size.c", "line": 638,
+2026-11-02T00:46:10.6193392Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6193563Z     "verdict": "valid",
+2026-11-02T00:46:10.6193811Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-02T00:46:10.6193960Z     "proved": 1 },
+2026-11-02T00:46:10.6194246Z   { "goal": "bytes_format_json_call_p20_snprintf_receipt_requires_6",
+2026-11-02T00:46:10.6194457Z     "property": "p20_snprintf_receipt_requires_6",
+2026-11-02T00:46:10.6194656Z     "file": "/repo/phase20-error-size.c", "line": 638,
+2026-11-02T00:46:10.6194877Z     "function": "format_json", "smoke": false, "passed": true,
+2026-11-02T00:46:10.6208061Z     "verdict": "valid",
+2026-11-02T00:46:10.6208430Z     "provers": [ { "prover": "qed", "time": 9.33, "success": 0 },
+2026-11-02T00:46:10.6208729Z                  { "prover": "Alt-Ergo:2.5.4", "time": 5.6, "success": 1 } ],
+2026-11-02T00:46:10.6208882Z     "proved": 1 } ]
+2026-11-02T00:46:10.6462804Z ##[group]Run set -euo pipefail
+2026-11-02T00:46:10.6463018Z [36;1mset -euo pipefail[0m
+2026-11-02T00:46:10.6463149Z [36;1mfor log in phase20-results/*.log; do[0m
+2026-11-02T00:46:10.6463262Z [36;1m  target=$(basename "$log" .log)[0m
+2026-11-02T00:46:10.6463421Z [36;1m  python3 tools/check_phase20_wp.py "$target" "$log"[0m
+2026-11-02T00:46:10.6463506Z [36;1mdone[0m
+2026-11-02T00:46:10.6483234Z shell: /usr/bin/bash -e {0}
+2026-11-02T00:46:10.6483373Z ##[endgroup]
+2026-11-02T00:46:10.6942596Z FAIL: Phase 20: negative control lacks a complete positive baseline
+2026-11-02T00:46:10.7014317Z ##[error]Process completed with exit code 1.
+2026-11-02T00:46:10.7121368Z ##[group]Run actions/upload-artifact@v4
+2026-11-02T00:46:10.7121477Z with:
+2026-11-02T00:46:10.7121617Z   name: phase20-negative-error
+2026-11-02T00:46:10.7121730Z   path: phase20-results/
+phase20-*.c
+
+2026-11-02T00:46:10.7121840Z   retention-days: 30
+2026-11-02T00:46:10.7122045Z   if-no-files-found: warn
+2026-11-02T00:46:10.7122207Z   compression-level: 6
+2026-11-02T00:46:10.7122575Z   overwrite: false
+2026-11-02T00:46:10.7122729Z   include-hidden-files: false
+2026-11-02T00:46:10.7122862Z ##[endgroup]
+2026-11-02T00:46:10.9015573Z (node:3128) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-02T00:46:10.9016412Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-02T00:46:10.9115834Z With the provided path, there will be 7 files uploaded
+2026-11-02T00:46:10.9121054Z Artifact name is valid!
+2026-11-02T00:46:10.9122876Z Root directory input is valid!
+2026-11-02T00:46:11.1951511Z Beginning upload of artifact content to blob storage
+2026-11-02T00:46:11.2366109Z (node:3128) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-02T00:46:11.3394930Z Uploaded bytes 39930
+2026-11-02T00:46:11.3710370Z Finished uploading artifact content to blob storage!
+2026-11-02T00:46:11.3711483Z SHA256 digest of uploaded artifact zip is 293d28dc16674901203420ec6936b7994c062de093ee92d8d8f49bfc829bc9c7
+2026-11-02T00:46:11.3714539Z Finalizing artifact upload
+2026-11-02T00:46:11.8323688Z Artifact phase20-negative-error.zip successfully finalized. Artifact ID 13107988995
+2026-11-02T00:46:11.8324987Z Artifact phase20-negative-error has been successfully uploaded! Final size is 39930 bytes. Artifact ID is 13107988995
+2026-11-02T00:46:11.8331239Z Artifact download URL: https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41367373120/artifacts/13107988995
+2026-11-02T00:46:11.8582168Z Post job cleanup.
+2026-11-02T00:46:11.9494760Z [command]/usr/bin/git version
+2026-11-02T00:46:11.9538898Z git version 2.56.0
+2026-11-02T00:46:11.9579238Z Temporarily overriding HOME='/home/runner/work/_temp/c70470ec-6960-47ae-94a1-fe5089200b87' before making global git config changes
+2026-11-02T00:46:11.9580109Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-02T00:46:11.9585979Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-02T00:46:11.9629560Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-02T00:46:11.9667585Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-02T00:46:11.9912065Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-02T00:46:11.9943217Z http.https://github.com/.extraheader
+2026-11-02T00:46:11.9955669Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-02T00:46:11.9993401Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-02T00:46:12.0233979Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-02T00:46:12.0304119Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-02T00:46:12.0741324Z Cleaning up orphan processes
+2026-11-02T00:46:12.1273479Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

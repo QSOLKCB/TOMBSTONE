@@ -7,6 +7,10 @@ independent Codex review of exact head
 composition. It preserves the production C99, headers, ABI, v1 fixtures,
 original Phase 18 theorem, and all Phase 19 proof/evidence files.
 
+**Acceptance is blocked by a reproduced inconsistency in the pinned Bytes
+theory, as well as incomplete formatter obligations.** New regression checks
+must not turn historical solver counts into trusted proof acceptance.
+
 ## Claims being checked
 
 | Actual body | Contract |
@@ -28,7 +32,13 @@ golden-byte tests remain a distinct evidence class.
 
 The native harness checks 160 validation cases and 2,530 formatter cases
 (including 30 injected failures) per compiler/provider tuple on Ubuntu 24.04
-x86-64. Its independent
+x86-64. It now adds 324 cases with receipt, output and size in disjoint regions
+of one allocation, including 180 injected failures. Both output/receipt orders,
+three output offsets, four boundary capacities, all fixture/hash branches and
+all observed fault sites are covered. Every byte outside the permitted output
+and size regions must stay unchanged. These added cases passed locally with
+GCC on both backends; current-head CI must independently execute all four
+compiler/provider tuples. Its independent
 Python oracle canonicalizes the frozen public toy fixtures and first checks
 their recorded digests. It exercises every capacity from 1 through two bytes
 past each expected output length, both `with_hash` branches, all observed
@@ -111,13 +121,67 @@ exact identifiers and original reports are retained; a proved top-level goal
 cannot discharge unproved supporting assertions. This is a proof-completion
 blocker, not an observed runtime failure.
 
-The next proof iteration splits the intermediate string conjunctions into
+The next proof iteration split the intermediate string conjunctions into
 individually checked assertions and adds checked byte-separation, length and
 NUL witnesses at the actual statement boundaries. These are additional WP
 obligations, not assumptions. It leaves every original function precondition,
 postcondition, external libc premise and production C statement unchanged.
 The retained 132/139 snapshot cannot certify a changed overlay; its source
 identity gate must reject it until fresh execution is recorded.
+
+At [run 41367373120](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41367373120),
+head `30e7a7df4c37950618b5826a2ab137924560f6bf` reported 158/182 formatter
+goals, 156/182 bad-size and 158/183 error-size. All 24 open positive goals
+are retained in the original logs; new checked assertions are obligations,
+not free assumptions. Composition still reported 51/51 and 62/62, but its
+inventory gate rejected source-line movement in otherwise identical warning
+text. A regression replays both original composition reports and now
+normalizes only line numbers in the six exact generated Phase 20 filenames.
+Filenames, warning text, goal IDs/counts and verdicts remain significant.
+This does not refresh any source identity or certify a changed overlay.
+
+The five red jobs in that run were the formatter, its two mutants, stale
+retained evidence and the diagnostic-location mismatch. The shared
+`NOT_YET_RECORDED` failure did not recur. There are 25 new focused diagnostic
+regression checks, run before evidence inspection so stale evidence cannot
+prevent the regressions from executing.
+
+## Byte-memory-model blocker
+
+`tests/formal/phase20_bytes_model_canary.mlw` imports the installed, unchanged
+Frama-C 32.1 `MemBytes` theory. It creates two memory states whose byte at
+offset 1 is respectively 17 and 34, then copies one byte at offset 0. That
+copy must preserve the destination's byte at offset 1. The theory's copy
+definition starts its update from the source block, while its separation
+lemma promises preservation from the destination block. Alt-Ergo 2.5.4
+accepts both resulting values and their conjunction. This is an executed
+contradiction in the imported theory, not an observed defect in TOMBSTONE's
+production C or a generic claim that solver timeouts imply unsoundness.
+
+The model SHA-256 is
+`16478d1b77f282539b642b174bbf8225a5d30fe0442e5e1cd46ada8e1f05c61a`.
+The same bytes occur in the pinned image and the
+[official Frama-C 32.1 source archive](https://www.frama-c.com/download/frama-c-32.1-Germanium.tar.gz).
+Local original solver outputs and machine results are retained in
+`formal/evidence/phase20/bytes-model-canary-local/` and
+`machine/formal/phase20-model-blocker-v1.json`. The local run used the exact
+image's Why3 1.8.2 and Alt-Ergo 2.5.4 binaries, exporting tasks before running
+Alt-Ergo directly. It did not substitute a hand-written memory implementation.
+
+The CI evidence job runs the same canary inside the digest-pinned image and
+retains its exported tasks and raw outputs. Four positive controls must pass;
+neither false byte-copy claim may be proved. A version/model mismatch, missing
+task, solver error or inconclusive control blocks the check. A passing canary
+would only exclude this specific contradiction, not prove model soundness.
+The current model is expected to fail explicitly. Do not patch the theory
+silently, drop its frame conditions or promote the other solver results.
+
+Next: independently assess the model definition/lemma mismatch and the
+Phase 18/19 dependency; choose and review a corrected pinned toolchain or an
+explicit model refinement; rerun this canary and all affected positive and
+negative proofs; then finish the formatter, refresh evidence and obtain fresh
+exact-head independent review. Actual SHA-provider refinement follows that
+gate. Issue #28 stays open.
 
 WP's summary includes automatic termination/unreachable CFG facts that its
 JSON report omits. The gate accounts for those separately and requires every

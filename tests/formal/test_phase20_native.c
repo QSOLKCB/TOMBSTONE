@@ -19,6 +19,7 @@ int p20_mutation_active;
 static volatile unsigned calls, fail_at;
 static volatile int truncate_result;
 static unsigned validation_cases, format_cases, fault_cases;
+static unsigned shared_cases, shared_faults;
 
 static int wrapped_format(char *s,size_t n,const char *format,va_list args)
 {
@@ -111,6 +112,53 @@ static void format_case(const tb_receipt_v1 *r,int with_hash,const char *expecte
     ++format_cases; fail_at=0;
 }
 
+/* Valid disjoint regions need not occupy different malloc allocations. Check
+ * every byte of this allocation outside the output and size write footprints,
+ * including padding and the unused region on the other side of the receipt. */
+static void shared_case(const tb_receipt_v1 *r,int with_hash,const char *expected,
+                        size_t capacity,unsigned injected_call,int truncation,
+                        int output_after,size_t offset)
+{
+    struct allocation {
+        unsigned char before[TB_RECEIPT_JSON_MAX+32];
+        tb_receipt_v1 receipt;
+        size_t written;
+        unsigned char after[TB_RECEIPT_JSON_MAX+32];
+    } *block=malloc(sizeof(*block));
+    unsigned char saved[sizeof(*block)],*bytes,*output;
+    size_t i,output_start,size_start,needed=strlen(expected);
+    tb_status status;
+    CHECK(block != NULL,"SHARED_ALLOCATION");
+    CHECK(capacity <= TB_RECEIPT_JSON_MAX && offset <= 16,"SHARED_CAPACITY");
+    memset(block,0xa5,sizeof(*block));
+    memcpy(&block->receipt,r,sizeof(*r)); block->written=(size_t)0xa5a5;
+    memcpy(saved,block,sizeof(*block)); bytes=(unsigned char *)block;
+    output=(output_after ? block->after : block->before)+offset;
+    output_start=(size_t)(output-bytes);
+    size_start=(size_t)((unsigned char *)&block->written-bytes);
+    calls=0; fail_at=injected_call; truncate_result=truncation;
+    status=format_json(&block->receipt,with_hash,(char *)output,capacity,&block->written);
+    for (i=0;i<sizeof(*block);++i) {
+        if (i>=output_start && i-output_start<capacity) continue;
+        if (i>=size_start && i-size_start<sizeof(block->written)) continue;
+        CHECK(bytes[i] == saved[i],"SHARED_CALLER_FRAME");
+    }
+    if (injected_call || capacity <= needed) {
+        CHECK(status == TB_ERR_LENGTH,"SHARED_ERROR_STATUS");
+        CHECK(block->written == (size_t)0xa5a5,"SHARED_ERROR_SIZE");
+        if (injected_call) {
+            CHECK(calls == injected_call,"SHARED_ERROR_STOPS_CALLS");
+            ++shared_faults;
+        }
+    } else {
+        CHECK(status == TB_OK,"SHARED_FORMAT_OK");
+        CHECK(block->written == needed && block->written < capacity,"SHARED_FORMAT_SIZE");
+        CHECK(output[block->written] == 0,"SHARED_FORMAT_NUL");
+        CHECK(memcmp(output,expected,needed) == 0,"SHARED_GOLDEN_BYTES");
+    }
+    ++shared_cases; fail_at=0; free(block);
+}
+
 int main(int argc,char **argv)
 {
     static const char *paths[]={"machine/examples/explicit-delete-v1.json",
@@ -154,9 +202,26 @@ int main(int argc,char **argv)
             for (call=1;call<=call_count;++call)
                 for (truncation=0;truncation<=1;++truncation)
                     format_case(&receipts[i],with_hash,expected,TB_RECEIPT_JSON_MAX,call,truncation);
+            {
+                static const size_t offsets[]={1,7,16};
+                size_t capacities[]={1,strlen(expected),strlen(expected)+1,TB_RECEIPT_JSON_MAX};
+                size_t o,c;
+                int after;
+                for (after=0;after<=1;++after) for (o=0;o<3;++o) {
+                    for (c=0;c<4;++c)
+                        shared_case(&receipts[i],with_hash,expected,capacities[c],0,0,after,offsets[o]);
+                    for (call=1;call<=call_count;++call)
+                        for (truncation=0;truncation<=1;++truncation)
+                            shared_case(&receipts[i],with_hash,expected,TB_RECEIPT_JSON_MAX,
+                                        call,truncation,after,offsets[o]);
+                }
+            }
         }
     }
     printf("PASS: %u validator cases; %u formatter cases including %u injected failures; frozen bytes, bounds and frames\n",
            validation_cases,format_cases,fault_cases);
+    CHECK(shared_cases == 324 && shared_faults == 180,"SHARED_CASE_INVENTORY");
+    printf("PASS: %u same-allocation cases including %u injected failures; disjoint regions, bytes and caller frames\n",
+           shared_cases,shared_faults);
     return 0;
 }

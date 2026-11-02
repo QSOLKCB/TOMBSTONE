@@ -13,12 +13,28 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - name: Replay diagnostic-location regressions without renewing proof evidence
+        run: python3 tests/formal/test_phase20_regressions.py
+      - name: Reject an inconsistent pinned byte-memory theory
+        run: |
+          set -euo pipefail
+          mkdir phase20-model-results
+          chmod 777 phase20-model-results
+          docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-model-results:/out" \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            python3 /repo/tests/formal/run_phase20_model_canary.py --output /out
       - name: Inspect retained evidence without promoting partial results
         run: python3 tools/check_phase20_evidence.py --inspect-incomplete
       - name: Reject altered, incomplete and promoted proof records
         run: python3 tests/formal/test_phase20_gates.py
       - name: Require complete positive proofs for acceptance
         run: python3 tools/check_phase20_evidence.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase20-model-canary
+          path: phase20-model-results/
+          retention-days: 30
   native:
     name: Actual formatter fault and byte checks — ${{ matrix.cc }} / ${{ matrix.backend }}
     runs-on: ubuntu-24.04

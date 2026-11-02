@@ -15,6 +15,21 @@ NEGATIVE = {"accept-invalid":"receipt_equivalence","bad-size":"ensures_2","error
 INVENTORY = ROOT / "machine/formal/phase20-goals-v1.json"
 
 
+def normalize_diagnostics(items):
+    """Ignore only line movement in the six known generated Phase 20 units.
+
+    Preserve the filename, warning text and all model premises. Source hashes
+    are checked separately; a location normalization cannot renew evidence.
+    """
+    location = r"(/repo/phase20-(?:receipt|hex-openssl|hex-hacl|accept-invalid|bad-size|error-size)\.c):\d+\b"
+    return sorted(re.sub(location, r"\1:LINE", item) for item in items)
+
+
+def inventory_entry(entry):
+    # Historical inventories retain their original line numbers on disk.
+    return dict(entry, diagnostics=normalize_diagnostics(entry["diagnostics"]))
+
+
 def parse(text,target):
     if target not in TARGETS:
         raise ValueError("unknown target")
@@ -69,7 +84,7 @@ def parse(text,target):
     if len(good) + sum(automatic.values()) != proved:
         raise ValueError("summary disagrees with goals")
     return {"proved":proved,"total":total,"scheduled":scheduled,"automatic":automatic,
-            "valid":sorted(good),"unproved":sorted(bad),"diagnostics":warnings(text)}
+            "valid":sorted(good),"unproved":sorted(bad),"diagnostics":normalize_diagnostics(warnings(text))}
 
 
 def validate(text,target,inventory):
@@ -87,7 +102,7 @@ def validate(text,target,inventory):
         raise ValueError("execution observed; exact inventory/diagnostics NOT_YET_RECORDED")
     if set(inventory) != set(TARGETS):
         raise ValueError("missing or unexpected proof target")
-    if result != inventory[target]:
+    if result != inventory_entry(inventory[target]):
         raise ValueError("changed goal inventory, verdicts or model diagnostics")
     return result
 
