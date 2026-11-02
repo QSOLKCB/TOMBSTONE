@@ -12,10 +12,11 @@
 <p align="center">
   <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/hardening.yml"><img alt="Clang fuzzing, sanitizers and architecture replay" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/hardening.yml/badge.svg?branch=main"></a>
   <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/docs-check.yml"><img alt="Schema, receipts and documentation" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/docs-check.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/release-candidate.yml"><img alt="Reproducible source candidate and SHA-256 manifest" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/release-candidate.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/phase20-receipt-prerequisites.yml"><img alt="Phase 20 — receipt contracts and model canaries" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/phase20-receipt-prerequisites.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/release-candidate.yml"><img alt="Frozen v0.1.0 source archive and checksum continuity" src="https://github.com/QSOLKCB/TOMBSTONE/actions/workflows/release-candidate.yml/badge.svg?branch=main"></a>
 </p>
 <p align="center">
-  <a href="https://github.com/QSOLKCB/TOMBSTONE/releases/tag/v0.1.0"><img alt="Release v0.1.0" src="https://img.shields.io/github/v/release/QSOLKCB/TOMBSTONE?style=flat-square"></a>
+  <a href="https://github.com/QSOLKCB/TOMBSTONE/releases/tag/v0.2.0"><img alt="Release v0.2.0" src="https://img.shields.io/github/v/release/QSOLKCB/TOMBSTONE?style=flat-square"></a>
   <a href="LICENSE"><img alt="Apache-2.0 license" src="https://img.shields.io/github/license/QSOLKCB/TOMBSTONE?style=flat-square"></a>
 </p>
 
@@ -26,13 +27,15 @@
 
 TOMBSTONE is a C99-first system for deterministic, independently checkable fingerprints of caller-supplied bytes, exact deletion-splice relationships and linked canonical receipt evidence.
 
-**Status:** [v0.1.0 — Initial Public Release](https://github.com/QSOLKCB/TOMBSTONE/releases/tag/v0.1.0), with Phases 0–7 merged, bounded C99 fuzzing, independent GCC/Clang and Linux x86-64/ARM64 receipt replay, and [reproducible source release evidence](docs/release/v0.1.0/POST_MERGE_EVIDENCE.md). C99 alone owns SHA-256, witnessed-splice validation, canonical receipt encoding and chain verification; Rust supplies the CLI, TUI and optional GTK4 desktop. Verification is not security certification, historical deletion attestation or secure erasure.
+**Current release:** [v0.2.0 — C99 Proofs & Verified Toolchain Reuse](https://github.com/QSOLKCB/TOMBSTONE/releases/tag/v0.2.0), published immutably at [`881e7db`](https://github.com/QSOLKCB/TOMBSTONE/commit/881e7db29054a02273b0e924b08409a777ce42ea). All **21 post-merge workflows** passed on that release commit. The release brings together the verification work introduced across Phases 8–20, an optional HACL* SHA2-256 backend, externally retained chain heads, and the first OPT-inspired toolchain reuse implementation. Remaining proof obligations are explicit; the programme is not an end-to-end verification of every dependency.
+
+C99 alone owns hashing, witnessed-splice validation, canonical receipt encoding and chain verification; Rust supplies the CLI, TUI and optional GTK4 desktop. The engine works offline, and receipt output contains digests and metadata without archiving the supplied plaintext. Verification is not security certification, historical deletion attestation or secure erasure.
 
 ## Interfaces
 
 | Interface | Build | Runtime requirements |
 | --- | --- | --- |
-| Native C99 core | `make test` | C99 + OpenSSL |
+| Native C99 core | `make test` | C99 + OpenSSL by default; optional HACL* backend |
 | Headless Rust CLI | `cargo build -p tombstone-cli --release --offline --locked` | Rust, OpenSSL |
 | ncurses Rust TUI | `cargo build -p tombstone-tui --release --offline --locked` | Rust, ncurses |
 | Optional GTK4 GUI | `cargo build --manifest-path apps/gtk/Cargo.toml --release --offline --locked` | Rust, GTK4 |
@@ -48,23 +51,59 @@ apps/gtk/target/release/tombstone-gtk
 
 The GUI offers fingerprint, observed-transition, witnessed-deletion, receipt inspection, chain verification and **explicit create-new receipt export**, using the same tested C99-backed workflows as the TUI. The **root Cargo workspace excludes GTK**, preserving all headless builds and tests.
 
-## Phase 12 — Auditing the SHA-256 provider boundary
+### Optional HACL* SHA2-256 backend
 
-The [Assumption Ledger](docs/ASSUMPTION_LEDGER.md) tracks every outstanding proof or trust boundary. Phase 12 executes the **actual, unchanged C99 OpenSSL provider wrapper** with test-only injected allocation and EVP failures, checking output immutability, C99 cleanup and real SHA-256 known-answer vectors under GCC and Clang. [Executed CI](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41316764004) passed both toolchains. **These are tests, not a mathematical proof of OpenSSL/SHA-256.** The verified digest primitive, receipt engine, Rust FFI, compiler and target hardware remain separate closure milestones.
+OpenSSL remains the default. To check the vendored source identities and test the optional HACL* backend:
 
-## Phase 11 — Whole-wrapper modular proof attempt
+```sh
+python3 tools/check_hacl_source.py
+make SHA256_BACKEND=hacl test
+TOMBSTONE_SHA256_BACKEND=hacl cargo test --workspace --offline --locked
+```
 
-The [Phase 11 modular proof](docs/PHASE11_WRAPPER.md) discharged **88/88 Frama-C/WP obligations** against the actual C99 source: `fingerprints` 18/18, `witness_stage` 23/23, and the public `tb_witness_delete` 47/47. The proof is **conditional on explicitly stated C memory-model and external SHA-256 provider contracts**, not an end-to-end proof of OpenSSL, compiled binaries, historical deletion or secure erasure. The immutable `v0.1.0` release is unchanged; Phase 11 still requires independent exact-head review before merge.
+The backend uses immutable upstream source and preserves the existing C99 API and receipt bytes. Upstream HACL* proofs do not automatically verify TOMBSTONE's adapter, allocation/lifetime handling or compiled executable. See [provider provenance and remaining refinement work](docs/PHASE13_HACL.md).
 
-## Phase 10 — Public C99 wrapper proof boundary
+### Check an independently retained chain head
 
-Phase 10 adds a [source-level proof target](docs/PHASE10_WRAPPER.md) for the production prehash argument/length/mismatch decision helper used by `tb_witness_delete`, alongside native tests that inject errors at all three SHA-256 calls. An exploratory whole-wrapper ACSL model is retained with explicit external provider assumptions, but its full proof remains **incomplete** (initial 35/64 goals discharged). A synthetic-provider regression exercises all three SHA error sites without modifying the release engine. **The provider contract is an assumption, not a proof of OpenSSL.** Phase 10 is a development PR; exact-head WP and independent review are required before accepting its claims.
+```sh
+target/release/tombstone verify-chain receipt-1.json receipt-2.json \
+  --trusted-head-file trusted-head.txt
+```
 
-## Phase 9 — Source-level C99 proof obligations
+Supply receipts in genesis-to-head order. The head file must contain exactly 64 lowercase hexadecimal digits, optionally followed by one LF. On the supported Linux targets, the reader rejects final-component symlinks, nonregular files and malformed contents. The head must come from an independently trusted source; a digest copied from the chain being checked does not establish independent trust. See [target and anchor boundaries](docs/PHASE16_TARGET_TRUST.md).
 
-The **production** C99 byte-splice relation now carries an ACSL contract with quantified equality over arbitrary valid buffer lengths and loop invariants. [Frama-C/WP](docs/FORMAL_VERIFICATION.md) checks its actual source code; the [Phase 9 CI verification](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41305390928) discharged **35/35 proof goals** on the production helper. The CI gate requires every generated nonzero obligation to be proved. This does **not** yet prove the entire public C99 wrapper, OpenSSL, compiled machine code or historical deletion events. Published `v0.1.0` remains immutable.
+## Verification included in v0.2.0
 
-## Phase 7 hardening checks
+Verification targets actual production source or overlays that must reproduce its exact bytes. CI distinguishes bounded symbolic checks, conditional deductive proofs and native execution evidence. Failed attempts remain recorded; missing, zero-goal, partial or misidentified proof results cannot be promoted to acceptance.
+
+| Work | Evidence and scope |
+| --- | --- |
+| **Phases 8–11: witnessed-byte relationships and witness API** | Bounded direct-source CBMC checks, unbounded splice and prehash contracts, and modular witness-wrapper WP evidence under explicit SHA-provider/model premises. [Foundations](docs/FORMAL_VERIFICATION.md) · [Wrapper scope](docs/PHASE11_WRAPPER.md) |
+| **Phases 12–13: provider boundary** | Actual OpenSSL failure injection, source-pinned HACL* integration, bounded adapter checks and provider parity. Real SHA-provider refinement remains open. [Assumption ledger](docs/ASSUMPTION_LEDGER.md) · [HACL*](docs/PHASE13_HACL.md) |
+| **Phases 14–17: receipts, ABI and anchors** | Decimal/duplicate-field contracts, bounded parser and chain-rejection checks, C99/Rust ABI comparisons, independent executable rebuilds, and external-head tests on supported Linux targets. [Receipts](docs/PHASE14_RECEIPTS.md) · [ABI](docs/PHASE15_ABI.md) · [Chain checks](docs/PHASE17_CHAIN.md) |
+| **Phases 18–19: chain and helper refinement** | Unbounded conditional chain verification, actual equality/hash helpers, and a separate caller-memory ownership composition that preserves the original Phase 18 theorem. [Chain theorem](docs/PHASE18_CHAIN_WP.md) · [Helpers](docs/PHASE19_HELPERS.md) · [Composition](docs/PHASE19_BRIDGE.md) |
+| **Phase 20: validator and formatter prerequisites** | **1,392/1,392 positive WP/runtime-error obligations**, three designated semantic negative controls, and original Phase 18/19 theorem replays using an explicitly corrected Bytes model. Formatter framing, bounds and termination do not establish full canonical-JSON contents. [Contracts](docs/PHASE20_RECEIPT_PREREQUISITES.md) · [Model correction](docs/PHASE20_MODEL_CORRECTION.md) |
+
+The [reviewed PR-head Phase 20 run](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41389325046) passed **14/14 jobs**, including unchanged original theorem replays of **54/54, 11/11, 40/40 and 41/41** goals. The [post-merge Phase 20 run](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41391635022) also passed on the v0.2.0 release source. These are recorded results for identified commits; live badges above describe the latest `main` runs.
+
+The corrected-model gate reproduces the original Bytes-theory contradiction, rejects the false claims under the isolated correction, and executes positive refutations, 48 affected library subgoals, readonly controls and a string-witness lemma. This is regression evidence and conditional source verification, not a general soundness proof of Frama-C, Why3 or Alt-Ergo.
+
+## Verified toolchain reuse
+
+The first OPT rollout restores one independently pinned corrected WP build only after checking its producer, effective build/policy inputs, ZIP/tar digests and complete file manifest. Changed inputs or unavailable approved artifacts require a cold build; integrity or provenance failures stop the job. The workflow's manual `force_cold` input bypasses reuse.
+
+**Every canary and proof still executes afresh. Proof-result caching remains disabled.** The implementation adds **34 reuse/replay-binding tests** alongside the existing **117 evidence-tamper checks**, without rewriting historical proof records.
+
+Three cold/reuse pairs in the [executed benchmark](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41389325039) measured:
+
+| Preparation mode | Median preparation plus fresh canaries |
+| --- | ---: |
+| Cold build | 65.469 seconds |
+| Verified reuse | 54.044 seconds |
+
+That is **11.425 seconds saved (17.45%)** for this stage on one Ubuntu 24.04 AMD64 runner. Shared container-image download time is excluded; these measurements do not represent whole-CI speedup or Actions cache-service latency. See [identities, measurement method and rollback](docs/PHASE20_TOOLCHAIN_REUSE.md).
+
+## Hardening and local checks
 
 Run the bounded sanitizer-backed C99 fuzzers and use the GitHub Actions x86-64/ARM64 matrix for independent replay:
 
@@ -72,9 +111,7 @@ Run the bounded sanitizer-backed C99 fuzzers and use the GitHub Actions x86-64/A
 make fuzz               # Clang libFuzzer, AddressSanitizer and UBSan
 ```
 
-The [release gate](docs/RELEASE_GATE.md), [v0.1.0 evidence record](docs/release/v0.1.0/POST_MERGE_EVIDENCE.md), [anchoring/privacy notes](docs/ANCHORING_PRIVACY.md) and [portability matrix](docs/PORTABILITY.md) document the completed checks and their limits. These tests do not prove deletion, confidentiality or erasure.
-
-## Verify the engine and existing interfaces
+Other local checks:
 
 ```sh
 make test
@@ -84,8 +121,14 @@ make docs-check
 cargo test --workspace --locked --offline
 ```
 
-Read the [Phase 7 release gate](docs/RELEASE_GATE.md), [GTK4 guide](docs/GTK.md), [TUI guide](docs/TUI.md), [CLI guide](docs/CLI.md), [architecture](ARCHITECTURE.md), [roadmap](ROADMAP.md), [invariants](INVARIANTS.md), and [security](SECURITY.md).
+The public C99 ABI and frozen v1 receipt fixtures are preserved. The immutable [v0.1.0 release](https://github.com/QSOLKCB/TOMBSTONE/releases/tag/v0.1.0) and its [source evidence](docs/release/v0.1.0/POST_MERGE_EVIDENCE.md) remain available. The source-candidate workflow intentionally rebuilds that historical v0.1.0 archive; it does not package v0.2.0 assets.
+
+## Remaining proof and trust boundaries
+
+Actual SHA-provider refinement, complete canonical-JSON/parser semantics, concrete backend allocation/lifetime guarantees, Rust ownership/FFI refinement and source-to-executable correctness remain open. The separate Phase 19 caller-memory result does not close the original literal global-frame obligation. Libc effects, model separation, compiler behaviour and OS/hardware reliability remain stated premises. See the [assumption ledger](docs/ASSUMPTION_LEDGER.md), [Phase 20 scope](docs/PHASE20_RECEIPT_PREREQUISITES.md) and [issue #28](https://github.com/QSOLKCB/TOMBSTONE/issues/28).
+
+A valid supplied byte-splice relationship does not prove that a deletion historically occurred or that data was securely erased. An unanchored chain can be rewritten wholesale, and SHA-256 commitments to short or predictable plaintext are susceptible to guessing. Receipts do not authenticate identity or time. See [anchoring and privacy](docs/ANCHORING_PRIVACY.md), [portability limits](docs/PORTABILITY.md) and [security](SECURITY.md).
+
+Read the [getting-started guide](GETTING_STARTED.md), [CLI guide](docs/CLI.md), [TUI guide](docs/TUI.md), [GTK4 guide](docs/GTK.md), [documentation index](docs/INDEX.md), [architecture](ARCHITECTURE.md), [roadmap](ROADMAP.md), [invariants](INVARIANTS.md), and [release gate](docs/RELEASE_GATE.md).
 
 Human prose lives in root Markdown and `docs/`; machine-readable receipts/schemas and synthetic fixtures live in `machine/`. [Apache-2.0](LICENSE).
-
-**Trust limits:** A valid supplied byte-splice relationship is not proof that a deletion historically took place or that data was securely erased. A local-only chain can be rewritten without an independently trusted head; SHA-256 of guessable plaintext is not confidential.
