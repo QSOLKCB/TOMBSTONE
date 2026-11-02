@@ -5,6 +5,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      force_cold:
+        description: Rebuild the corrected WP module and rerun every proof
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -12,21 +17,69 @@ jobs:
     name: Corrected Bytes model — regressions and string-witness lemma
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
+    env:
+      FORCE_COLD: ${{ inputs.force_cold == true && 'true' || 'false' }}
     steps:
       - uses: actions/checkout@v4
       - name: Reject canary and model-gate regressions
-        run: python3 tests/formal/test_phase20_model_gate.py
-      - name: Build isolated pinned correction and reject inconsistent models
+        run: |
+          set -euo pipefail
+          python3 tests/formal/test_phase20_model_gate.py
+          python3 tests/formal/test_phase20_toolchain_reuse.py
+          python3 tests/formal/test_phase20_replay_binding.py
+      - name: Select the complete toolchain identity
+        id: identity
+        run: |
+          set -euo pipefail
+          args=()
+          if [ "$FORCE_COLD" = true ]; then args+=(--force-cold); fi
+          python3 tools/phase20_toolchain_reuse.py key "${args[@]}" --github-output "$GITHUB_OUTPUT"
+      - name: Restore only the exact approved archive key
+        id: cache
+        if: steps.identity.outputs.eligible == 'true'
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: phase20-cache/approved.zip
+          key: ${{ steps.identity.outputs.key }}
+      - name: Verify approved archive or require a cold build
+        id: prepare
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_KEY: ${{ steps.identity.outputs.key }}
         run: |
           set -euo pipefail
           mkdir phase20-model-results
           chmod 777 phase20-model-results
+          args=()
+          if [ "$FORCE_COLD" = true ]; then args+=(--force-cold); fi
+          python3 tools/phase20_toolchain_reuse.py acquire "${args[@]}" \
+            --output phase20-model-results/model --expected-key "$EXPECTED_KEY" --github-output "$GITHUB_OUTPUT"
+      - name: Build isolated pinned correction when reuse is unavailable or disabled
+        if: steps.prepare.outputs.needs_build == 'true'
+        run: |
+          set -euo pipefail
           docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-model-results:/out" \
             framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
-            sh -ec '
-              python3 /repo/tools/phase20_model.py build --output /out/model
-              python3 /repo/tests/formal/run_phase20_model_canary.py --model /out/model --output /out/regressions
-            '
+            python3 /repo/tools/phase20_model.py build --output /out/model
+      - name: Execute fresh model canaries and string-witness lemma on every path
+        run: |
+          set -euo pipefail
+          test ! -e phase20-model-results/regressions
+          docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-model-results:/out" \
+            -v "$PWD/phase20-model-results/model:/model:ro" \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            python3 /repo/tests/formal/run_phase20_model_canary.py --model /model --output /out/regressions
+          python3 tools/phase20_toolchain_reuse.py complete --output phase20-model-results/model \
+            --canary phase20-model-results/regressions/result.json
+      - name: Publish only an approved archive after fresh canaries on main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.prepare.outputs.mode == 'REUSED_VERIFIED_TOOLCHAIN' && steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: phase20-cache/approved.zip
+          key: ${{ steps.identity.outputs.key }}
       - name: Preserve the complete toolchain tree during artifact transport
         run: tar -czf phase20-corrected-toolchain.tar.gz -C phase20-model-results/model .
       - uses: actions/upload-artifact@v4
@@ -39,6 +92,12 @@ jobs:
         with:
           name: phase20-model-regressions
           path: phase20-model-results/regressions/
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase20-toolchain-preparation
+          path: phase20-model-results/preparation.json
           retention-days: 30
   evidence:
     needs: model

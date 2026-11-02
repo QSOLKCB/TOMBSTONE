@@ -11,6 +11,7 @@ import check_phase20_wp as gate
 import phase20_receipt_overlay as overlay
 import check_phase20_model_evidence as model_evidence
 import phase20_model as corrected_model
+import check_phase20_replay_binding as replay_binding
 
 ROOT=Path(__file__).resolve().parents[1]
 RECORD=ROOT/"machine/formal/phase20-evidence-v2.json"
@@ -126,10 +127,7 @@ def validate(record,root=ROOT,require_complete=True):
         missing = sorted(INPUTS - set(record["source_blobs"]))
         unexpected = sorted(set(record["source_blobs"]) - INPUTS)
         raise ValueError(f"proof dependency mismatch: missing={missing}; unexpected={unexpected}")
-    for path,expected in record["source_blobs"].items():
-        p=root/path
-        if p.is_symlink() or overlay.bridge.p18.git_blob(p.read_bytes()) != expected:
-            raise ValueError("stale proof dependency: "+path)
+    replay_binding.validate(record["source_blobs"], root)
     build = model_evidence.validate(record["model_artifact"], root)
     current_jobs = (record["solver_jobs"] + record["native_jobs"] + record["diagnostic_jobs"]
                     + [record["model_job"], record["compatibility_job"]])
