@@ -79,10 +79,14 @@ def validate(text,target,inventory):
         needle="bytes_"+TARGETS[target]+("_" if suffix.startswith("ensures") else "_ensures_")+suffix
         if not result["unproved"] or needle not in result["unproved"]:
             raise ValueError("designated semantic obligation did not fail")
+        if inventory is not None and inventory[TARGETS[target]]["unproved"]:
+            raise ValueError("negative control lacks a complete positive baseline")
     elif result["unproved"]:
         raise ValueError("positive proof is incomplete")
     if inventory is None:
         raise ValueError("execution observed; exact inventory/diagnostics NOT_YET_RECORDED")
+    if set(inventory) != set(TARGETS):
+        raise ValueError("missing or unexpected proof target")
     if result != inventory[target]:
         raise ValueError("changed goal inventory, verdicts or model diagnostics")
     return result

@@ -8,6 +8,17 @@ on:
 permissions:
   contents: read
 jobs:
+  evidence:
+    name: Retained evidence integrity and proof acceptance
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect retained evidence without promoting partial results
+        run: python3 tools/check_phase20_evidence.py --inspect-incomplete
+      - name: Reject altered, incomplete and promoted proof records
+        run: python3 tests/formal/test_phase20_gates.py
+      - name: Require complete positive proofs for acceptance
+        run: python3 tools/check_phase20_evidence.py
   native:
     name: Actual formatter fault and byte checks — ${{ matrix.cc }} / ${{ matrix.backend }}
     runs-on: ubuntu-24.04

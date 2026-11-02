@@ -30,7 +30,7 @@
 
 - Check actual `good_receipt` and `format_json`, their internal validators and both actual hex encoders, while preserving the shared Phase 19 composition contracts.
 - Require exact-source WP with RTE, explicit libc format/string/frame premises, semantic controls, full execution evidence and fresh exact-head review. Canonical-byte meaning and actual streaming SHA-provider refinement remain separate obligations.
-- See [Phase 20 scope](docs/PHASE20_RECEIPT_PREREQUISITES.md). Draft PR #30 is executing these gates. Validators, both hex bodies and shared composition have complete runs; formatter proof obligations remain incomplete. No inherited proof acceptance.
+- See [Phase 20 scope](docs/PHASE20_RECEIPT_PREREQUISITES.md). Draft PR #30 records 289/289 goals across the nine other positive targets and 132/139 for the formatter. Exact inventories are recorded; the formatter and its formal mutation-control acceptance remain blocked. No inherited proof acceptance.
 
 ## Phase 19 — Actual C99 helper refinement
 

@@ -13,7 +13,7 @@ import check_phase20_wp as gate
 
 record=evidence.load(evidence.RECORD)
 inventory=evidence.load(gate.INVENTORY)
-evidence.validate(record)
+incomplete=evidence.validate(record,require_complete=False)
 logs={}
 for row in record["solver_jobs"]:
     logs.update(evidence.solver_logs((ROOT/row["path"]).read_text()))
@@ -30,7 +30,10 @@ def rejects(action,reason=None):
     checks+=1
 
 for target,log in logs.items():
-    gate.validate(log,target,inventory)
+    if target in incomplete or (target in gate.NEGATIVE and gate.TARGETS[target] in incomplete):
+        rejects(lambda:gate.validate(log,target,inventory))
+    else:
+        gate.validate(log,target,inventory)
     rejects(lambda:gate.validate(log.replace("32.1 (Germanium)","32.0 (Germanium)"),target,inventory))
     rejects(lambda:gate.validate(re.sub(r"\[rte:annot\] annotating function \w+","",log),target,inventory))
     rejects(lambda:gate.validate(log+"\n"+log,target,inventory))
@@ -47,9 +50,14 @@ def revised(items,prefix=log[:start]):
 rejects(lambda:gate.validate(revised(goals[:-1]),"good_receipt",inventory),"missing/duplicate individual goal")
 rejects(lambda:gate.validate(revised(goals+[goals[0]]),"good_receipt",inventory),"missing/duplicate individual goal")
 altered=copy.deepcopy(goals);altered[0]["verdict"]="timeout";altered[0]["passed"]=False
+rejects(lambda:gate.validate(revised(altered),"good_receipt",inventory),"goal and prover verdicts disagree")
+for prover in altered[0]["provers"]:
+    prover["success"]=0
 rejects(lambda:gate.validate(revised(altered),"good_receipt",inventory),"summary disagrees")
 altered=copy.deepcopy(goals);altered[0]["goal"]+="_silently_changed"
 rejects(lambda:gate.validate(revised(altered),"good_receipt",inventory),"changed goal inventory")
+altered=copy.deepcopy(goals);altered[0]["provers"][0]["prover"]="unrecorded-solver"
+rejects(lambda:gate.validate(revised(altered),"good_receipt",inventory),"unexpected or missing executed prover")
 rejects(lambda:gate.validate(log.replace('"goal":','"goal":"duplicate", "goal":',1),"good_receipt",inventory),"duplicate structured evidence key")
 rejects(lambda:gate.validate(log.replace("20 / 20","0 / 0"),"good_receipt",inventory))
 
@@ -58,14 +66,19 @@ for target in gate.NEGATIVE:
     # designated semantic rejection, even if someone edits the inventory too.
     rejects(lambda:gate.validate("32.1 (Germanium)\n[kernel:annot-error] Failure\n",target,inventory))
     replacement=logs[gate.TARGETS[target]]
-    forged={target:gate.parse(replacement,target)}
-    rejects(lambda:gate.validate(replacement,target,forged),"designated semantic obligation")
+    if gate.TARGETS[target] not in incomplete:
+        forged={target:gate.parse(replacement,target)}
+        rejects(lambda:gate.validate(replacement,target,forged),"designated semantic obligation")
 
 for field,value in (("actual_streaming_sha_provider","PROVED"),("canonical_json_theorem","PROVED"),
                     ("libc_implementation","PROVED"),("original_phase18_global_frame","PROVED"),
                     ("review","APPROVED"),("issue_28","CLOSED")):
     altered=copy.deepcopy(record);altered[field]=value
     rejects(lambda:evidence.validate(altered),"unsupported claim promotion")
+altered=copy.deepcopy(record);altered["version"]=True
+rejects(lambda:evidence.validate(altered),"invalid version")
+altered=copy.deepcopy(record);altered["unknown_claim"]="PROVED"
+rejects(lambda:evidence.validate(altered),"unknown/missing evidence field")
 altered=copy.deepcopy(record);altered["source_blobs"]["src/encoding/receipt.c"]="0"*40
 rejects(lambda:evidence.validate(altered),"stale proof dependency")
 altered=copy.deepcopy(record);altered["solver_jobs"][0]["sha256"]="0"*64
@@ -74,4 +87,10 @@ altered=copy.deepcopy(record);altered["native_jobs"].pop()
 rejects(lambda:evidence.validate(altered),"missing native compiler/provider tuple")
 altered=copy.deepcopy(record);altered["generated_sha256"]["good_receipt"]="0"*64
 rejects(lambda:evidence.validate(altered),"generated source identity mismatch")
-print(f"PASS: {checks} adversarial proof/evidence rejections; exact positive reports and semantic controls accepted")
+if incomplete:
+    rejects(lambda:evidence.validate(record),"positive proof is incomplete")
+    altered=copy.deepcopy(record);altered["solver_result"]="COMPLETE_UNDER_EXPLICIT_PREMISES"
+    rejects(lambda:evidence.validate(altered),"unsupported solver-result promotion")
+    altered=copy.deepcopy(record);altered["incomplete_targets"]=[]
+    rejects(lambda:evidence.validate(altered),"unsupported solver-result promotion")
+print(f"PASS: {checks} adversarial evidence rejections; incomplete proofs remain blocked")

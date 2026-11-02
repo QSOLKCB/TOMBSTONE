@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Bind the current proof inputs to preserved, original executed WP reports."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -11,6 +12,7 @@ import phase20_receipt_overlay as overlay
 
 ROOT=Path(__file__).resolve().parents[1]
 RECORD=ROOT/"machine/formal/phase20-evidence-v1.json"
+EXECUTION=('e8be500075ee00039a8edf88c013ad28ab9cb9a7', '8f159b36db6755744ebbc903d7fb7fd640b49baa', 41364071336, 'failure', 'PARTIAL_PROOF_AND_UNRECORDED_INVENTORY')
 INPUTS=previous.INPUTS | {
     "tools/check_phase19_bridge_evidence.py","tools/check_phase19_bridge_log.py",
     "machine/formal/phase19-bridge-evidence-v1.json",
@@ -21,7 +23,12 @@ INPUTS=previous.INPUTS | {
     "tests/formal/test_phase20_gates.py","tools/check_portability.py",
     ".github/workflows/phase20-receipt-prerequisites.yml",
     "machine/formal/phase20-goals-v1.json",
+    "machine/formal/phase20-provers-v1.json",
+    "Makefile","src/core/deletion.c","tools/check_hacl_source.py",
+    "vendor/hacl-star/SOURCES.json","vendor/hacl-star/UPSTREAM.md",
 }
+INPUTS |= {"vendor/hacl-star/"+path for path in
+           json.loads((ROOT/"vendor/hacl-star/SOURCES.json").read_text())["git_blobs_sha1"]}
 
 def load(path):
     return json.loads(Path(path).read_text(),object_pairs_hook=gate.unique_pairs)
@@ -62,10 +69,20 @@ def verified_log(row,root):
         raise ValueError("retained original log changed")
     return raw.decode()
 
-def validate(record,root=ROOT):
+def validate(record,root=ROOT,require_complete=True):
+    keys={"format","version","scope","head_sha","ci_checkout_sha","base_sha","run_id",
+          "workflow_conclusion","workflow_failure","tool","solver_result","incomplete_targets",
+          "canonical_json_theorem","actual_streaming_sha_provider","libc_implementation",
+          "model_separation","original_phase18_global_frame","review","issue_28",
+          "negative_controls","source_blobs","generated_sha256","solver_jobs","native_jobs",
+          "diagnostic_jobs","failed_attempts"}
+    if set(record) != keys or type(record["version"]) is not int:
+        raise ValueError("unknown/missing evidence field or invalid version")
     if (record["format"],record["version"],record["scope"]) != (
         "tombstone.phase20.evidence",1,"CONDITIONAL_RECEIPT_VALIDATION_AND_FORMATTER_FRAME"):
         raise ValueError("wrong evidence kind or scope")
+    if tuple(record[key] for key in ("head_sha","ci_checkout_sha","run_id","workflow_conclusion","workflow_failure")) != EXECUTION:
+        raise ValueError("historical execution was relabelled")
     for key in ("head_sha","ci_checkout_sha","base_sha"):
         if not re.fullmatch(r"[0-9a-f]{40}",record[key]):
             raise ValueError("unresolved execution identity")
@@ -73,11 +90,12 @@ def validate(record,root=ROOT):
         raise ValueError("PR and merge-checkout identities conflated")
     if record["tool"] != {
         "version":"32.1","model":"Bytes","prover":"Alt-Ergo 2.5.4","rte":True,
+        "formatter_options":["-wp-literals","-wp-no-callee-precond"],
+        "hex_strategy":"wp:bitshift",
         "container":"framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36",
     }:
         raise ValueError("tool/model/RTE identity changed")
     for key,value in {
-        "solver_result":"COMPLETE_UNDER_EXPLICIT_PREMISES",
         "canonical_json_theorem":"OPEN","actual_streaming_sha_provider":"OPEN",
         "libc_implementation":"ASSUMED","model_separation":"ASSUMED",
         "original_phase18_global_frame":"NOT_DISCHARGED",
@@ -95,6 +113,8 @@ def validate(record,root=ROOT):
     if set(inventory) != set(gate.TARGETS):
         raise ValueError("missing or unexpected proof target")
     found={}
+    if len({row["job_id"] for row in record["solver_jobs"]}) != len(record["solver_jobs"]):
+        raise ValueError("repeated solver job")
     for row in record["solver_jobs"]:
         raw=verified_log(row,root)
         if record["ci_checkout_sha"] not in raw:
@@ -107,19 +127,41 @@ def validate(record,root=ROOT):
             digest=hashlib.sha256(generated.encode()).hexdigest()
             if record["generated_sha256"][target] != digest or digest not in raw:
                 raise ValueError("generated source identity mismatch")
-            found[target]=gate.validate(log,target,inventory)
+            result=gate.parse(log,target)
+            if result != inventory[target]:
+                raise ValueError("retained goal inventory or diagnostics changed")
+            found[target]=result
     if set(found) != set(gate.TARGETS):
         raise ValueError("incomplete executed target set")
+    incomplete=sorted(target for target,result in found.items()
+                      if target not in gate.NEGATIVE and result["unproved"])
+    expected_result="INCOMPLETE" if incomplete else "COMPLETE_UNDER_EXPLICIT_PREMISES"
+    if record["solver_result"] != expected_result or record["incomplete_targets"] != incomplete:
+        raise ValueError("unsupported solver-result promotion")
+    for target in gate.NEGATIVE:
+        suffix=gate.NEGATIVE[target]
+        needle="bytes_"+gate.TARGETS[target]+("_" if suffix.startswith("ensures") else "_ensures_")+suffix
+        if needle not in found[target]["unproved"]:
+            raise ValueError("designated semantic obligation did not fail")
+    controls={target:("BLOCKED_BY_POSITIVE_BASELINE" if gate.TARGETS[target] in incomplete
+                       else "DESIGNATED_OBLIGATION_UNPROVED_AND_NATIVE_MUTANT_REJECTED")
+              for target in gate.NEGATIVE}
+    if record["negative_controls"] != controls:
+        raise ValueError("unsupported negative-control promotion")
     expected={(cc,backend) for cc in ("gcc","clang") for backend in ("openssl","hacl")}
     native=record["native_jobs"]
     if len(native) != 4 or {(r["cc"],r["backend"]) for r in native} != expected:
         raise ValueError("missing native compiler/provider tuple")
+    if len({row["job_id"] for row in native}) != 4:
+        raise ValueError("repeated native job")
     for row in native:
         raw=verified_log(row,root)
         if row["conclusion"] != "success":
             raise ValueError("native execution did not pass")
         if record["ci_checkout_sha"] not in raw:
             raise ValueError("native checkout mismatch")
+        if "run_phase20_native.py --cc "+row["cc"]+" --backend "+row["backend"] not in raw:
+            raise ValueError("native command tuple mismatch")
         for message in ("PASS: 160 validator cases; 2530 formatter cases including 30 injected failures",
                         "PASS: native accept-invalid rejected specifically by VALIDATION_REJECT",
                         "PASS: native bad-size rejected specifically by FORMAT_SIZE",
@@ -136,11 +178,21 @@ def validate(record,root=ROOT):
             raise ValueError("failed attempt was relabelled")
         for row in attempt["logs"]:
             verified_log(row,root)
+    if require_complete and incomplete:
+        raise ValueError("positive proof is incomplete: "+", ".join(incomplete))
+    return incomplete
 
 if __name__ == "__main__":
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--inspect-incomplete",action="store_true",
+                        help="check retained evidence integrity without granting proof acceptance")
+    args=parser.parse_args()
     try:
-        validate(load(RECORD))
+        incomplete=validate(load(RECORD),require_complete=not args.inspect_incomplete)
     except (ValueError,KeyError,TypeError,OSError) as error:
         raise SystemExit("FAIL: Phase 20 evidence: "+str(error)) from error
-    print("PASS: exact source, complete WP/RTE inventories, semantic controls and preserved original logs")
+    if incomplete:
+        print("INCOMPLETE: evidence integrity checked; proof acceptance BLOCKED: "+", ".join(incomplete))
+    else:
+        print("PASS: exact source, complete WP/RTE inventories, semantic controls and preserved original logs")
     print("LIMIT: conditional libc/provider/model premises; fresh exact-head review still required")

@@ -88,13 +88,52 @@ It must leave the designated obligation unproved; a parser/tool failure does
 not count as semantic rejection. Original successful and failed logs must
 remain distinguishable. Execution is IN_PROGRESS: the retained validator,
 hex and composition runs are complete, while the formatter remains partial.
-The gate fails until every positive target is complete and its actual goal
-inventory and model diagnostics have been inspected and pinned.
+The exact goal inventory and model diagnostics are now inspected and pinned
+in `machine/formal/phase20-goals-v1.json`. The gate still fails until every
+positive target is complete.
+
+At [run 41364071336](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41364071336),
+head `e8be500075ee00039a8edf88c013ad28ab9cb9a7` was tested through merge
+checkout `8f159b36db6755744ebbc903d7fb7fd640b49baa`:
+
+| Evidence | Executed result |
+| --- | --- |
+| Nine positive targets other than `format_json` | 289/289 WP/RTE goals |
+| `format_json` | 132/139; incomplete |
+| Accept-invalid mutant | 7/8; designated equivalence goal unproved, native mutant rejected |
+| Bad-size and error-size mutants | 131/139 and 132/140; formal acceptance blocked by the incomplete positive formatter |
+| Native GCC/Clang × OpenSSL/HACL | All four jobs passed the 160 validation / 2,530 formatting cases and all three semantic controls |
+
+The seven open formatter goals concern three intermediate string assertions,
+the final call's separation requirement, an intermediate receipt-frame
+assertion, final receipt preservation and successful NUL termination. Their
+exact identifiers and original reports are retained; a proved top-level goal
+cannot discharge unproved supporting assertions. This is a proof-completion
+blocker, not an observed runtime failure.
 
 WP's summary includes automatic termination/unreachable CFG facts that its
 JSON report omits. The gate accounts for those separately and requires every
 scheduled goal to appear exactly once in the original structured report.
 An automatic CFG fact cannot substitute for a missing scheduled obligation.
+
+Formatter runs export actual string-literal bytes with `-wp-literals` and
+use checked intermediate frame/string assertions. `-wp-no-callee-precond`
+removes redundant post-call precondition hypotheses; the call-site
+precondition obligations are still generated and must all pass. A literal
+byte assertion catches the default zero-string abstraction. The failed Z3
+experiment is retained as history, not an accepted prover dependency.
+The four finite format comparisons are expanded byte by byte, including
+the NUL. `sizeof` guards reject a different `PRIu64` expansion from this
+64-bit proof model instead of silently interpreting it as the recorded format.
+
+`check_phase20_evidence.py --inspect-incomplete` may validate the integrity
+of an explicitly incomplete snapshot; it prints `INCOMPLETE`, not proof
+acceptance. The default evidence command and individual positive WP gates
+reject every incomplete target. Formatter mutation results cannot count as
+accepted formal negative controls while their positive baseline is partial.
+Historical execution identities and current replay/validation dependencies
+are recorded separately from final-head CI and independent review. A
+consistent retained snapshot cannot grant current-head acceptance.
 
 Keep issue #28 and the broader A04/A05 obligations open. Require fresh
 independent review of this PR's final exact head and all current CI. Review
