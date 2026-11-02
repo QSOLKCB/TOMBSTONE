@@ -111,6 +111,14 @@ exact identifiers and original reports are retained; a proved top-level goal
 cannot discharge unproved supporting assertions. This is a proof-completion
 blocker, not an observed runtime failure.
 
+The next proof iteration splits the intermediate string conjunctions into
+individually checked assertions and adds checked byte-separation, length and
+NUL witnesses at the actual statement boundaries. These are additional WP
+obligations, not assumptions. It leaves every original function precondition,
+postcondition, external libc premise and production C statement unchanged.
+The retained 132/139 snapshot cannot certify a changed overlay; its source
+identity gate must reject it until fresh execution is recorded.
+
 WP's summary includes automatic termination/unreachable CFG facts that its
 JSON report omits. The gate accounts for those separately and requires every
 scheduled goal to appear exactly once in the original structured report.

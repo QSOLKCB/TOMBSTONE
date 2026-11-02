@@ -181,12 +181,22 @@ def frame_assertions(label):
 
 
 def string_assertion(label, pairs):
-    terms = [f"p20_cstr(&{name}[0],{bound})" for name,bound in pairs]
-    return "    /*@ assert p20_strings_"+label+": "+" && ".join(terms)+"; */\n"
+    # Separate checked cuts avoid asking one SMT query to transport every
+    # existential string witness through several unrelated output writes.
+    return "".join(f"    /*@ assert p20_string_{label}_{name}: "
+                   f"p20_cstr(&{name}[0],{bound}); */\n"
+                   for name,bound in pairs)
 
 
 HEX_STRINGS = [(name,65) for name in ("before","after","deleted","prev","own")]
 FORMAT_HINTS = {
+    "    if (!hex32(e->before_sha256,before) || !hex32(e->after_sha256,after) ||":
+        r"""    /*@ assert p20_receipt_output_separation: \forall integer j;
+      0 <= j < sizeof(*r) ==> \separated(((const unsigned char *)r)+j,
+                                         buffer+(0 .. capacity-1)); */
+    /*@ assert p20_receipt_size_separation: \forall integer j;
+      0 <= j < sizeof(*r) ==> \separated(((const unsigned char *)r)+j,size); */
+""",
     "    if (e->kind == TB_EVIDENCE_EXPLICIT_DELETE) {":
         r"""    /*@ assert p20_literal_bytes: p20_fmt_deleted[0] == '{' &&
       p20_fmt_previous[0] == '"' && p20_fmt_hash[0] == ',' && p20_fmt_receipt[0] == '{'; */
@@ -205,11 +215,49 @@ FORMAT_HINTS = {
         frame_assertions("own") + string_assertion("own",[("before",65),("after",65),("dfield",192),("kind",20),("pfield",96),("hfield",96)]),
     "    if (k < 0 || (size_t)k >= capacity) return TB_ERR_LENGTH;":
         frame_assertions("final_call"),
+    "    *size = (size_t)k;":
+        r"""    /*@ assert p20_final_length: 0 <= k < capacity; */
+    /*@ assert p20_final_nul: buffer[k] == '\0'; */
+    /*@ assert p20_final_size_separation: \separated(buffer+k,size); */
+""",
 }
+
+# These are proof assertions after existing statements, not assumed facts or
+# replacement implementations. Every assertion is part of the WP inventory.
+FORMAT_AFTER = {
+    '        kind = "explicit-delete";\n':
+        r"""        /*@ assert p20_kind_deleted_nul: kind[15] == '\0'; */
+        /*@ assert p20_kind_deleted_string: p20_cstr(kind,20); */
+        /*@ assert p20_kind_deleted_separation:
+          \separated(buffer+(0 .. capacity-1),kind+(..)); */
+""",
+    '        kind = e->kind == TB_EVIDENCE_UNCHANGED ? "unchanged" : "observed-transition";\n':
+        r"""        /*@ assert p20_kind_other_nul:
+          kind[e->kind == TB_EVIDENCE_UNCHANGED ? 9 : 19] == '\0'; */
+        /*@ assert p20_kind_other_string: p20_cstr(kind,20); */
+        /*@ assert p20_kind_other_separation:
+          \separated(buffer+(0 .. capacity-1),kind+(..)); */
+""",
+    '        memcpy(dfield,"null",5);\n':
+        r"""        /*@ assert p20_deleted_null_byte: ((unsigned char *)dfield)[4] == 0; */
+        /*@ assert p20_deleted_null_string: p20_cstr(&dfield[0],192); */
+""",
+    '    } else memcpy(pfield,"null",5);\n':
+        r"""    /*@ assert p20_previous_null_byte:
+      r->has_previous == 0 ==> ((unsigned char *)pfield)[4] == 0; */
+""",
+}
+for _field in ("dfield","pfield","hfield"):
+    FORMAT_AFTER[f"        if (k < 0 || (size_t)k >= sizeof({_field})) return TB_ERR_LENGTH;\n"] = (
+        f"        /*@ assert p20_{_field}_length: 0 <= k < sizeof({_field}); */\n"
+        f"        /*@ assert p20_{_field}_nul: {_field}[k] == '\\0'; */\n"
+        f"        /*@ assert p20_{_field}_string: p20_cstr(&{_field}[0],sizeof({_field})); */\n"
+    )
 
 
 def strip(text):
-    for fragment in (PREDICATES, LIBC, DECL, *EXTRA.values(), *FORMAT_HINTS.values()):
+    for fragment in (PREDICATES, LIBC, DECL, *EXTRA.values(),
+                     *FORMAT_HINTS.values(), *FORMAT_AFTER.values()):
         if text.count(fragment) != 1:
             raise ValueError("missing/duplicate Phase 20 proof fragment")
         text = text.replace(fragment,"",1)
@@ -232,6 +280,10 @@ def render():
         if body.count(marker) != 1:
             raise ValueError("formatter assertion site drift")
         body=body.replace(marker,assertion+marker,1)
+    for marker, assertion in FORMAT_AFTER.items():
+        if body.count(marker) != 1:
+            raise ValueError("formatter post-statement assertion site drift")
+        body=body.replace(marker,marker+assertion,1)
     text=text[:start]+body+text[end:]
     if strip(text) != bridge.p18.SOURCE.read_text():
         raise ValueError("receipt source bytes changed")
