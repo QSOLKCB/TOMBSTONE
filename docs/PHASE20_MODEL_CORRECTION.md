@@ -48,7 +48,11 @@ An actual-C readonly probe checks globals, lifted literals and mutable data;
 its writable-literal mutant must fail its designated assertion.
 
 The formatter keeps its original caller preconditions and guarantees.
-Checked ghost lengths preserve terminator witnesses through calls. The
+Checked ghost lengths preserve terminator witnesses through calls. A pure,
+empty ghost helper proves the elementary implication from a bounded readable
+NUL witness to `p20_cstr`. CI proves that exact helper separately and rejects
+its missing-NUL-premise mutant; its contract is not an external assumption.
+Every call-site precondition remains a formatter proof obligation. The
 signed-char memcpy postcondition is the view equivalence checked above;
 libc implementation correctness remains an external premise. Branch
 splitting decomposes proof obligations without removing any path or RTE
@@ -64,11 +68,22 @@ successful runs do not substitute for this replay.
 Executed locally: reproducible isolated WP build; original contradiction;
 corrected positive controls and rejection of both false claims; all seven
 copy/refutation goals; all 48 library subgoals; readonly positive checks;
-eight model-gate tests; 25 diagnostic regressions; exact-source overlay
+nine model-gate tests (including omitted/changed artifact files); 25 diagnostic regressions; exact-source overlay
 integrity. Local WP tasks were exported through the normal Why3 driver and
 executed directly with the pinned Alt-Ergo because the local host cannot
 run Why3's socket server. Export-only WP reports are not accepted as CI
 proof receipts.
+
+Run `41375387461` independently passed the corrected-model regressions and
+all four native compiler/provider tuples. Its downstream proof jobs rejected
+the model artifact before execution: upload omitted exactly `share/.gitignore`,
+`share/why3/.gitattributes` and `share/why3/.gitignore`. The downloaded ZIP
+matches GitHub's artifact digest, and all present share files match the build
+manifest. Attempt 18 and all fourteen original logs preserve that failure.
+Toolchain transport now uses a tar archive; the integrity checker still
+requires the complete manifest. The string-witness helper proved locally,
+its missing-premise mutation did not prove, and all 30 selected string
+assertion subgoals reduced to Qed with the proved helper.
 
 Full formatter, semantic mutants, compatibility replay and fresh exact-head
 CI evidence are still pending. The retained historical proof snapshot stays

@@ -41,6 +41,17 @@ PREDICATES = r"""/*@
     (\forall integer k; 0 <= k < n ==> a[k] == b[k]);
 */
 """
+STRING_LEMMA = r"""/*@ ghost
+/@
+  requires 0 <= k < bound;
+  requires \valid_read(s+(0 .. k));
+  requires s[k] == '\0';
+  assigns \nothing;
+  ensures p20_cstr((char *)s,bound);
+@/
+static void p20_string_witness(const char *s, int bound, int k) { }
+*/
+"""
 ZERO = r"""/*@
   requires \valid_read(p+(0 .. 31));
   assigns \nothing;
@@ -189,7 +200,9 @@ def string_assertion(label, pairs):
                "hfield":"p20_hlen", "kind":"p20_klen"}
     return "".join(f"    /*@ assert p20_witness_{label}_{name}: "
                    f"0 <= {lengths.get(name,'64')} < {bound} && "
-                   f"{name}[{lengths.get(name,'64')}] == '\\0'; */\n"
+                   f"{name}[{lengths.get(name,'64')}] == '\\0' && "
+                   f"\\valid_read(&{name}[0]+(0 .. {lengths.get(name,'64')})); */\n"
+                   f"    /*@ ghost p20_string_witness({name},{bound},{lengths.get(name,'64')}); */\n"
                    f"    /*@ assert p20_string_{label}_{name}: "
                    f"p20_cstr(&{name}[0],{bound}); */\n"
                    for name,bound in pairs)
@@ -236,6 +249,8 @@ FORMAT_AFTER = {
     '        kind = "explicit-delete";\n':
         r"""        /*@ ghost p20_klen=15; */
         /*@ assert p20_kind_deleted_nul: kind[15] == '\0'; */
+        /*@ assert p20_kind_deleted_readable: \valid_read(kind+(0 .. 15)); */
+        /*@ ghost p20_string_witness(kind,20,p20_klen); */
         /*@ assert p20_kind_deleted_string: p20_cstr(kind,20); */
         /*@ assert p20_kind_deleted_separation:
           \separated(buffer+(0 .. capacity-1),kind+(..)); */
@@ -244,12 +259,15 @@ FORMAT_AFTER = {
         r"""        /*@ ghost p20_klen=e->kind == TB_EVIDENCE_UNCHANGED ? 9 : 19; */
         /*@ assert p20_kind_other_nul:
           kind[e->kind == TB_EVIDENCE_UNCHANGED ? 9 : 19] == '\0'; */
+        /*@ assert p20_kind_other_readable: \valid_read(kind+(0 .. p20_klen)); */
+        /*@ ghost p20_string_witness(kind,20,p20_klen); */
         /*@ assert p20_kind_other_string: p20_cstr(kind,20); */
         /*@ assert p20_kind_other_separation:
           \separated(buffer+(0 .. capacity-1),kind+(..)); */
 """,
     '        memcpy(dfield,"null",5);\n':
         r"""        /*@ assert p20_deleted_null_byte: dfield[4] == 0; */
+        /*@ ghost p20_string_witness(dfield,192,p20_dlen); */
         /*@ assert p20_deleted_null_string: p20_cstr(&dfield[0],192); */
 """,
     '    } else memcpy(pfield,"null",5);\n':
@@ -266,12 +284,14 @@ for _field in ("dfield","pfield","hfield"):
         f"        /*@ ghost p20_{_field[0]}len=k; */\n"
         f"        /*@ assert p20_{_field}_length: 0 <= k < sizeof({_field}); */\n"
         f"        /*@ assert p20_{_field}_nul: {_field}[k] == '\\0'; */\n"
+        f"        /*@ assert p20_{_field}_readable: \\valid_read(&{_field}[0]+(0 .. k)); */\n"
+        f"        /*@ ghost p20_string_witness({_field},sizeof({_field}),p20_{_field[0]}len); */\n"
         f"        /*@ assert p20_{_field}_string: p20_cstr(&{_field}[0],sizeof({_field})); */\n"
     )
 
 
 def strip(text):
-    for fragment in (PREDICATES, LIBC, DECL, *EXTRA.values(),
+    for fragment in (PREDICATES, STRING_LEMMA, LIBC, DECL, *EXTRA.values(),
                      *FORMAT_HINTS.values(), *FORMAT_AFTER.values()):
         if text.count(fragment) != 1:
             raise ValueError("missing/duplicate Phase 20 proof fragment")
@@ -283,7 +303,7 @@ def strip(text):
 def render():
     source = bridge.render()
     text = source.replace(bridge.p19.GOOD,GOOD,1).replace(bridge.p19.FORMAT,FORMAT,1)
-    text = text.replace(bridge.eq.BEFORE,bridge.eq.BEFORE+PREDICATES+LIBC+DECL,1)
+    text = text.replace(bridge.eq.BEFORE,bridge.eq.BEFORE+PREDICATES+STRING_LEMMA+LIBC+DECL,1)
     for marker, contract in EXTRA.items():
         if text.count(marker) != 1:
             raise ValueError("actual source marker drift")

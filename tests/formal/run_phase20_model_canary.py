@@ -16,6 +16,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import phase20_model as model
+import phase20_receipt_overlay as overlay
 
 CONTROLS = {"destination_before", "source_before", "neighbour_is_separate", "library_frame_value"}
 NEGATIVES = {"definition_value", "contradictory_values"}
@@ -128,6 +129,54 @@ def readonly(args):
     return outcomes
 
 
+def string_lemma(args):
+    """Prove the exact ghost helper used by the actual-source overlay.
+
+    Its contract is not an external assumption: removing the NUL premise
+    must make the ensures obligation fail on the same empty ghost body.
+    """
+    outcomes = {}
+    for kind in ("positive", "negative"):
+        directory = args.output / ("string-lemma-" + kind)
+        directory.mkdir()
+        source = directory / "phase20-receipt.c"
+        text = overlay.render()
+        if kind == "negative":
+            altered = overlay.STRING_LEMMA.replace("  requires s[k] == '\\0';\n", "", 1)
+            if altered == overlay.STRING_LEMMA:
+                raise ValueError("string-lemma mutation did not apply")
+            text = text.replace(overlay.STRING_LEMMA, altered, 1)
+        source.write_text(text)
+        report = directory / "report.json"
+        result = run([sys.executable, str(ROOT / "tools/phase20_model.py"), "run",
+                      "--output", str(args.model), "--", "-wp", "-wp-rte", "-wp-model", "Bytes",
+                      "-wp-fct", "p20_string_witness", "-wp-prover", "alt-ergo", "-wp-timeout", "10",
+                      "-wp-report-json", str(report), "-cpp-extra-args=-I" + str(ROOT / "include"),
+                      str(source)], directory / "frama-c.log", timeout=180)
+        if result.returncode or "[rte:annot] annotating function p20_string_witness" not in result.stdout:
+            raise ValueError("string-lemma tool failure or missing RTE")
+        rows = json.loads(report.read_text())
+        if len(rows) != 2 or {r["goal"] for r in rows} != {
+            "bytes_p20_string_witness_ensures", "bytes_p20_string_witness_assigns"}:
+            raise ValueError("changed string-lemma goal inventory")
+        values = {}
+        for row in rows:
+            if (row["function"] != "p20_string_witness" or row["smoke"] is not False
+                    or row["verdict"] not in ("valid", "unknown", "timeout", "stepout")
+                    or row["passed"] is not (row["verdict"] == "valid") or not row["provers"]
+                    or any(p["prover"] not in ("qed", "Alt-Ergo:2.5.4") for p in row["provers"])
+                    or any(p["success"] not in (0, 1) for p in row["provers"])
+                    or any(p["success"] for p in row["provers"]) != row["passed"]):
+                raise ValueError("unexecuted or inconsistent string-lemma proof")
+            values[row["goal"].removeprefix("bytes_p20_string_witness_")] = (
+                "VALID" if row["passed"] else "NOT_PROVED")
+        negative = {"ensures"} if kind == "negative" else set()
+        require_results(values, {"ensures", "assigns"} - negative, negative)
+        outcomes[kind] = {"source_sha256":model.digest(source), "goals":values}
+        print(f"string-lemma/{kind}: {values}; source_sha256={model.digest(source)}", flush=True)
+    return outcomes
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--output", type=Path, required=True)
@@ -184,6 +233,8 @@ def main():
     if not args.theories_only:
         outcomes["readonly"] = readonly(args)
         print("PASS: readonly globals/literals and mutable global control; false writable-literal mutant rejected")
+        outcomes["string_lemma"] = string_lemma(args)
+        print("PASS: exact ghost string-witness lemma; missing-NUL-premise mutant rejected")
     report = {"format":"tombstone.phase20.corrected-model-regressions", "version":1,
               "build":receipt, "outcomes":outcomes,
               "status":"LOCAL_THEORY_DIAGNOSTICS_ONLY" if args.theories_only else "CANARY_PASSED_NOT_A_SOUNDNESS_PROOF"}

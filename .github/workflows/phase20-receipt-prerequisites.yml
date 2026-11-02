@@ -9,7 +9,7 @@ permissions:
   contents: read
 jobs:
   model:
-    name: Corrected Bytes model — contradiction and frame regressions
+    name: Corrected Bytes model — regressions and string-witness lemma
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -27,10 +27,12 @@ jobs:
               python3 /repo/tools/phase20_model.py build --output /out/model
               python3 /repo/tests/formal/run_phase20_model_canary.py --model /out/model --output /out/regressions
             '
+      - name: Preserve the complete toolchain tree during artifact transport
+        run: tar -czf phase20-corrected-toolchain.tar.gz -C phase20-model-results/model .
       - uses: actions/upload-artifact@v4
         with:
           name: phase20-corrected-toolchain
-          path: phase20-model-results/model/
+          path: phase20-corrected-toolchain.tar.gz
           retention-days: 30
       - uses: actions/upload-artifact@v4
         if: always()
@@ -83,6 +85,8 @@ jobs:
         with:
           name: phase20-corrected-toolchain
           path: phase20-toolchain
+      - name: Restore and validate the complete model artifact
+        run: tar -xzf phase20-toolchain/phase20-corrected-toolchain.tar.gz -C phase20-toolchain
       - name: Preserve previous proofs and generate exact-source units
         env:
           GROUP: ${{ matrix.group }}
@@ -167,6 +171,8 @@ jobs:
         with:
           name: phase20-corrected-toolchain
           path: phase20-toolchain
+      - name: Restore and validate the complete model artifact
+        run: tar -xzf phase20-toolchain/phase20-corrected-toolchain.tar.gz -C phase20-toolchain
       - name: Replay unchanged original contracts with RTE
         run: |
           set -euo pipefail
