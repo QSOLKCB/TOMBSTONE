@@ -17,6 +17,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/QSOLKCB/TOMBSTONE/releases/tag/v0.2.0"><img alt="Release v0.2.0" src="https://img.shields.io/github/v/release/QSOLKCB/TOMBSTONE?style=flat-square"></a>
+  <a href="https://doi.org/10.5281/zenodo.23876710"><img alt="Zenodo DOI: v0.2.0 formal verification and release evidence" src="https://zenodo.org/badge/DOI/10.5281/zenodo.23876710.svg"></a>
   <a href="LICENSE"><img alt="Apache-2.0 license" src="https://img.shields.io/github/license/QSOLKCB/TOMBSTONE?style=flat-square"></a>
 </p>
 
