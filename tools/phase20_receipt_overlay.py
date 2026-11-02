@@ -146,6 +146,8 @@ extern int p20_snprintf_receipt(char *dst,size_t n,const char *fmt,
   assigns ((unsigned char *)dst)[0 .. n-1];
   ensures \forall integer k; 0 <= k < n ==>
     ((unsigned char *)dst)[k] == \old(((const unsigned char *)src)[k]);
+  ensures \forall integer k; 0 <= k < n ==>
+    ((char *)dst)[k] == \old(((const char *)src)[k]);
 */
 extern void *p20_memcpy(void *dst,const void *src,size_t n);
 #define memcpy p20_memcpy
@@ -181,9 +183,14 @@ def frame_assertions(label):
 
 
 def string_assertion(label, pairs):
-    # Separate checked cuts avoid asking one SMT query to transport every
-    # existential string witness through several unrelated output writes.
-    return "".join(f"    /*@ assert p20_string_{label}_{name}: "
+    # Ghost lengths retain the actual terminator witnesses. Both the witness
+    # and the original existential assertion are checked goals, not premises.
+    lengths = {"dfield":"p20_dlen", "pfield":"p20_plen",
+               "hfield":"p20_hlen", "kind":"p20_klen"}
+    return "".join(f"    /*@ assert p20_witness_{label}_{name}: "
+                   f"0 <= {lengths.get(name,'64')} < {bound} && "
+                   f"{name}[{lengths.get(name,'64')}] == '\\0'; */\n"
+                   f"    /*@ assert p20_string_{label}_{name}: "
                    f"p20_cstr(&{name}[0],{bound}); */\n"
                    for name,bound in pairs)
 
@@ -191,7 +198,8 @@ def string_assertion(label, pairs):
 HEX_STRINGS = [(name,65) for name in ("before","after","deleted","prev","own")]
 FORMAT_HINTS = {
     "    if (!hex32(e->before_sha256,before) || !hex32(e->after_sha256,after) ||":
-        r"""    /*@ assert p20_receipt_output_separation: \forall integer j;
+        r"""    /*@ ghost int p20_dlen=4, p20_plen=4, p20_hlen=0, p20_klen=0; */
+    /*@ assert p20_receipt_output_separation: \forall integer j;
       0 <= j < sizeof(*r) ==> \separated(((const unsigned char *)r)+j,
                                          buffer+(0 .. capacity-1)); */
     /*@ assert p20_receipt_size_separation: \forall integer j;
@@ -226,29 +234,36 @@ FORMAT_HINTS = {
 # replacement implementations. Every assertion is part of the WP inventory.
 FORMAT_AFTER = {
     '        kind = "explicit-delete";\n':
-        r"""        /*@ assert p20_kind_deleted_nul: kind[15] == '\0'; */
+        r"""        /*@ ghost p20_klen=15; */
+        /*@ assert p20_kind_deleted_nul: kind[15] == '\0'; */
         /*@ assert p20_kind_deleted_string: p20_cstr(kind,20); */
         /*@ assert p20_kind_deleted_separation:
           \separated(buffer+(0 .. capacity-1),kind+(..)); */
 """,
     '        kind = e->kind == TB_EVIDENCE_UNCHANGED ? "unchanged" : "observed-transition";\n':
-        r"""        /*@ assert p20_kind_other_nul:
+        r"""        /*@ ghost p20_klen=e->kind == TB_EVIDENCE_UNCHANGED ? 9 : 19; */
+        /*@ assert p20_kind_other_nul:
           kind[e->kind == TB_EVIDENCE_UNCHANGED ? 9 : 19] == '\0'; */
         /*@ assert p20_kind_other_string: p20_cstr(kind,20); */
         /*@ assert p20_kind_other_separation:
           \separated(buffer+(0 .. capacity-1),kind+(..)); */
 """,
     '        memcpy(dfield,"null",5);\n':
-        r"""        /*@ assert p20_deleted_null_byte: ((unsigned char *)dfield)[4] == 0; */
+        r"""        /*@ assert p20_deleted_null_byte: dfield[4] == 0; */
         /*@ assert p20_deleted_null_string: p20_cstr(&dfield[0],192); */
 """,
     '    } else memcpy(pfield,"null",5);\n':
         r"""    /*@ assert p20_previous_null_byte:
-      r->has_previous == 0 ==> ((unsigned char *)pfield)[4] == 0; */
+      r->has_previous == 0 ==> pfield[4] == 0; */
+""",
+    '    *size = (size_t)k;\n':
+        r"""    /*@ assert p20_input_returned: \forall integer j; 0 <= j < sizeof(*r) ==>
+      ((const unsigned char *)r)[j] == \at(((const unsigned char *)r)[j],Pre); */
 """,
 }
 for _field in ("dfield","pfield","hfield"):
     FORMAT_AFTER[f"        if (k < 0 || (size_t)k >= sizeof({_field})) return TB_ERR_LENGTH;\n"] = (
+        f"        /*@ ghost p20_{_field[0]}len=k; */\n"
         f"        /*@ assert p20_{_field}_length: 0 <= k < sizeof({_field}); */\n"
         f"        /*@ assert p20_{_field}_nul: {_field}[k] == '\\0'; */\n"
         f"        /*@ assert p20_{_field}_string: p20_cstr(&{_field}[0],sizeof({_field})); */\n"

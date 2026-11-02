@@ -30,6 +30,14 @@ def inventory_entry(entry):
     return dict(entry, diagnostics=normalize_diagnostics(entry["diagnostics"]))
 
 
+def semantic_failures(result, target):
+    """The original semantic property, including its executed branch subgoals."""
+    suffix = NEGATIVE[target]
+    name = "bytes_" + TARGETS[target] + ("_" if suffix.startswith("ensures") else "_ensures_") + suffix
+    return [goal for goal in result["unproved"]
+            if re.fullmatch(re.escape(name) + r"(?:_part\d+)?", goal)]
+
+
 def parse(text,target):
     if target not in TARGETS:
         raise ValueError("unknown target")
@@ -90,9 +98,7 @@ def parse(text,target):
 def validate(text,target,inventory):
     result=parse(text,target)
     if target in NEGATIVE:
-        suffix=NEGATIVE[target]
-        needle="bytes_"+TARGETS[target]+("_" if suffix.startswith("ensures") else "_ensures_")+suffix
-        if not result["unproved"] or needle not in result["unproved"]:
+        if not semantic_failures(result, target):
             raise ValueError("designated semantic obligation did not fail")
         if inventory is not None and inventory[TARGETS[target]]["unproved"]:
             raise ValueError("negative control lacks a complete positive baseline")

@@ -1,0 +1,279 @@
+--- a/MemBytes.ml
++++ b/MemBytes.ml
+@@ -730,7 +730,8 @@
+             prefix vi.vorig_name vi.vid in
+         Definitions.define_symbol {
+           d_lfun = lfun ; d_types = 0 ; d_params = [ ] ;
+-          d_definition = Definitions.Function (result, Def, e_int vi.vid) ;
++          d_definition = Definitions.Function (result, Def,
++              e_int (if vi.vglob && acs_rd then -vi.vid else vi.vid)) ;
+           d_cluster = cluster_globals () ;
+         } ;
+         let prefix = Lang.Fun.debug lfun in
+--- a/share/why3/frama_c_wp/membytes_le.mlw
++++ b/share/why3/frama_c_wp/membytes_le.mlw
+@@ -1123,7 +1123,7 @@
+     (mtgt: map int (block 'a)) (ptgt: addr)
+     (msrc: map int (block 'a)) (psrc: addr) (size: int)
+     : map int (block 'a) =
+-    set mtgt ptgt.base (bwrite_seq (get msrc psrc.base) ptgt.offset (to_seq msrc[psrc.base] psrc.offset size))
++    set mtgt ptgt.base (bwrite_seq (get mtgt ptgt.base) ptgt.offset (to_seq msrc[psrc.base] psrc.offset (psrc.offset + size)))
+ 
+   predicate eqmem (m1 m2: map int (block 'a)) (a: addr) (size: int) =
+     beq_blocks (get m1 a.base) (get m2 a.base) (a.offset) size
+@@ -1193,7 +1193,7 @@
+       read_uint8 (memcpy mw aw mc ac size) ar = read_uint8 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint8 nb ar.offset = VB.bread_uint8 ob ar.offset
+     
+   lemma read_uint8_write_uint8_sep:
+@@ -1252,7 +1252,7 @@
+       read_uint16 (memcpy mw aw mc ac size) ar = read_uint16 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint16 nb ar.offset = VB.bread_uint16 ob ar.offset
+     
+   lemma read_uint16_write_uint8_sep:
+@@ -1311,7 +1311,7 @@
+       read_uint32 (memcpy mw aw mc ac size) ar = read_uint32 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint32 nb ar.offset = VB.bread_uint32 ob ar.offset
+     
+   lemma read_uint32_write_uint8_sep:
+@@ -1370,7 +1370,7 @@
+       read_uint64 (memcpy mw aw mc ac size) ar = read_uint64 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint64 nb ar.offset = VB.bread_uint64 ob ar.offset
+     
+   lemma read_uint64_write_uint8_sep:
+@@ -1429,7 +1429,7 @@
+       read_sint8 (memcpy mw aw mc ac size) ar = read_sint8 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint8 nb ar.offset = VB.bread_uint8 ob ar.offset
+     
+   lemma read_sint8_write_uint8_sep:
+@@ -1488,7 +1488,7 @@
+       read_sint16 (memcpy mw aw mc ac size) ar = read_sint16 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint16 nb ar.offset = VB.bread_uint16 ob ar.offset
+     
+   lemma read_sint16_write_uint8_sep:
+@@ -1547,7 +1547,7 @@
+       read_sint32 (memcpy mw aw mc ac size) ar = read_sint32 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint32 nb ar.offset = VB.bread_uint32 ob ar.offset
+     
+   lemma read_sint32_write_uint8_sep:
+@@ -1606,7 +1606,7 @@
+       read_sint64 (memcpy mw aw mc ac size) ar = read_sint64 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint64 nb ar.offset = VB.bread_uint64 ob ar.offset
+     
+   lemma read_sint64_write_uint8_sep:
+@@ -1683,7 +1683,7 @@
+       read_init8 (memcpy mw aw mc ac size) ar = read_init8 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> IB.bread_init8 nb ar.offset = IB.bread_init8 ob ar.offset
+     
+   lemma read_init8_write_init8_sep:
+@@ -1716,7 +1716,7 @@
+       read_init16 (memcpy mw aw mc ac size) ar = read_init16 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> IB.bread_init16 nb ar.offset = IB.bread_init16 ob ar.offset
+     
+   lemma read_init16_write_init8_sep:
+@@ -1749,7 +1749,7 @@
+       read_init32 (memcpy mw aw mc ac size) ar = read_init32 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> IB.bread_init32 nb ar.offset = IB.bread_init32 ob ar.offset
+     
+   lemma read_init32_write_init8_sep:
+@@ -1782,7 +1782,7 @@
+       read_init64 (memcpy mw aw mc ac size) ar = read_init64 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> IB.bread_init64 nb ar.offset = IB.bread_init64 ob ar.offset
+     
+   lemma read_init64_write_init8_sep:
+--- a/share/why3/frama_c_wp/membytes_be.mlw
++++ b/share/why3/frama_c_wp/membytes_be.mlw
+@@ -1123,7 +1123,7 @@
+     (mtgt: map int (block 'a)) (ptgt: addr)
+     (msrc: map int (block 'a)) (psrc: addr) (size: int)
+     : map int (block 'a) =
+-    set mtgt ptgt.base (bwrite_seq (get msrc psrc.base) ptgt.offset (to_seq msrc[psrc.base] psrc.offset size))
++    set mtgt ptgt.base (bwrite_seq (get mtgt ptgt.base) ptgt.offset (to_seq msrc[psrc.base] psrc.offset (psrc.offset + size)))
+ 
+   predicate eqmem (m1 m2: map int (block 'a)) (a: addr) (size: int) =
+     beq_blocks (get m1 a.base) (get m2 a.base) (a.offset) size
+@@ -1193,7 +1193,7 @@
+       read_uint8 (memcpy mw aw mc ac size) ar = read_uint8 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint8 nb ar.offset = VB.bread_uint8 ob ar.offset
+     
+   lemma read_uint8_write_uint8_sep:
+@@ -1252,7 +1252,7 @@
+       read_uint16 (memcpy mw aw mc ac size) ar = read_uint16 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint16 nb ar.offset = VB.bread_uint16 ob ar.offset
+     
+   lemma read_uint16_write_uint8_sep:
+@@ -1311,7 +1311,7 @@
+       read_uint32 (memcpy mw aw mc ac size) ar = read_uint32 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint32 nb ar.offset = VB.bread_uint32 ob ar.offset
+     
+   lemma read_uint32_write_uint8_sep:
+@@ -1370,7 +1370,7 @@
+       read_uint64 (memcpy mw aw mc ac size) ar = read_uint64 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint64 nb ar.offset = VB.bread_uint64 ob ar.offset
+     
+   lemma read_uint64_write_uint8_sep:
+@@ -1429,7 +1429,7 @@
+       read_sint8 (memcpy mw aw mc ac size) ar = read_sint8 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint8 nb ar.offset = VB.bread_uint8 ob ar.offset
+     
+   lemma read_sint8_write_uint8_sep:
+@@ -1488,7 +1488,7 @@
+       read_sint16 (memcpy mw aw mc ac size) ar = read_sint16 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint16 nb ar.offset = VB.bread_uint16 ob ar.offset
+     
+   lemma read_sint16_write_uint8_sep:
+@@ -1547,7 +1547,7 @@
+       read_sint32 (memcpy mw aw mc ac size) ar = read_sint32 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint32 nb ar.offset = VB.bread_uint32 ob ar.offset
+     
+   lemma read_sint32_write_uint8_sep:
+@@ -1606,7 +1606,7 @@
+       read_sint64 (memcpy mw aw mc ac size) ar = read_sint64 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> VB.bread_uint64 nb ar.offset = VB.bread_uint64 ob ar.offset
+     
+   lemma read_sint64_write_uint8_sep:
+@@ -1683,7 +1683,7 @@
+       read_init8 (memcpy mw aw mc ac size) ar = read_init8 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> IB.bread_init8 nb ar.offset = IB.bread_init8 ob ar.offset
+     
+   lemma read_init8_write_init8_sep:
+@@ -1716,7 +1716,7 @@
+       read_init16 (memcpy mw aw mc ac size) ar = read_init16 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> IB.bread_init16 nb ar.offset = IB.bread_init16 ob ar.offset
+     
+   lemma read_init16_write_init8_sep:
+@@ -1749,7 +1749,7 @@
+       read_init32 (memcpy mw aw mc ac size) ar = read_init32 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> IB.bread_init32 nb ar.offset = IB.bread_init32 ob ar.offset
+     
+   lemma read_init32_write_init8_sep:
+@@ -1782,7 +1782,7 @@
+       read_init64 (memcpy mw aw mc ac size) ar = read_init64 mw ar
+     by
+       let ob = mw[aw.base] in
+-      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in
++      let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in
+       aw.base = ar.base -> IB.bread_init64 nb ar.offset = IB.bread_init64 ob ar.offset
+     
+   lemma read_init64_write_init8_sep:
+--- a/share/why3/frama_c_wp/membytesgen.ml
++++ b/share/why3/frama_c_wp/membytesgen.ml
+@@ -496,7 +496,7 @@
+     (mtgt: map int (block 'a)) (ptgt: addr)
+     (msrc: map int (block 'a)) (psrc: addr) (size: int)
+     : map int (block 'a) =
+-    set mtgt ptgt.base (bwrite_seq (get msrc psrc.base) ptgt.offset (to_seq msrc[psrc.base] psrc.offset size))
++    set mtgt ptgt.base (bwrite_seq (get mtgt ptgt.base) ptgt.offset (to_seq msrc[psrc.base] psrc.offset (psrc.offset + size)))
+ 
+   predicate eqmem (m1 m2: map int (block 'a)) (a: addr) (size: int) =
+     beq_blocks (get m1 a.base) (get m2 a.base) (a.offset) size
+@@ -559,7 +559,7 @@
+   fprintf fmt "%t ->@,  %t@," guard eq ;
+   fprintf fmt "@[<v 2>by@," ;
+   fprintf fmt "let ob = mw[aw.base] in@," ;
+-  fprintf fmt "let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in@," ;
++  fprintf fmt "let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in@," ;
+   fprintf fmt "aw.base = ar.base -> " ;
+   fprintf fmt "VB.bread_uint%d nb ar.offset = VB.bread_uint%d ob ar.offset@]@,"
+     (snd rt) (snd rt) ;
+@@ -610,7 +610,7 @@
+   fprintf fmt "%t ->@,  %t@," guard eq ;
+   fprintf fmt "@[<v 2>by@," ;
+   fprintf fmt "let ob = mw[aw.base] in@," ;
+-  fprintf fmt "let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset size) in@," ;
++  fprintf fmt "let nb = bwrite_seq ob aw.offset (to_seq mc[ac.base] ac.offset (ac.offset + size)) in@," ;
+   fprintf fmt "aw.base = ar.base -> " ;
+   fprintf fmt "IB.bread_init%d nb ar.offset = IB.bread_init%d ob ar.offset@]@,"
+     rsize rsize ;

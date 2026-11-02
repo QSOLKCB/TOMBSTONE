@@ -23,6 +23,10 @@ INPUTS=previous.INPUTS | {
     "tests/formal/test_phase20_gates.py","tools/check_portability.py",
     "tests/formal/test_phase20_regressions.py","tests/formal/phase20_bytes_model_canary.mlw",
     "tests/formal/run_phase20_model_canary.py","machine/formal/phase20-model-blocker-v1.json",
+    "tools/phase20_model.py", "formal/framac/toolchain/phase20-bytes.patch",
+    "machine/formal/phase20-model-correction-v1.json",
+    "tests/formal/phase20_model_copy_regressions.mlw", "tests/formal/phase20_model_readonly.c",
+    "tests/formal/test_phase20_model_gate.py",
     ".github/workflows/phase20-receipt-prerequisites.yml",
     "machine/formal/phase20-goals-v1.json",
     "machine/formal/phase20-provers-v1.json",
@@ -141,9 +145,7 @@ def validate(record,root=ROOT,require_complete=True):
     if record["solver_result"] != expected_result or record["incomplete_targets"] != incomplete:
         raise ValueError("unsupported solver-result promotion")
     for target in gate.NEGATIVE:
-        suffix=gate.NEGATIVE[target]
-        needle="bytes_"+gate.TARGETS[target]+("_" if suffix.startswith("ensures") else "_ensures_")+suffix
-        if needle not in found[target]["unproved"]:
+        if not gate.semantic_failures(found[target], target):
             raise ValueError("designated semantic obligation did not fail")
     controls={target:("BLOCKED_BY_POSITIVE_BASELINE" if gate.TARGETS[target] in incomplete
                        else "DESIGNATED_OBLIGATION_UNPROVED_AND_NATIVE_MUTANT_REJECTED")

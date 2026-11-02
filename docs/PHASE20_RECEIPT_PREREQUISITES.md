@@ -1,5 +1,12 @@
 # Phase 20 — Actual receipt validation and formatter contracts
 
+The candidate correction for the pinned Bytes-model contradiction is
+documented in [PHASE20_MODEL_CORRECTION.md](PHASE20_MODEL_CORRECTION.md).
+It builds an isolated, explicitly identified WP module and requires new
+canary, library-lemma, formatter and original-theorem replays. Historical
+failures below remain evidence of the original toolchain, not acceptance of
+the corrected one.
+
 PR #29 merged at `f9140bdda31ea64f7e077115db6f0bb0622c7874` after clean
 independent Codex review of exact head
 `b13d1ba4e72ed697627c24e3cb90b62ff74eb8f8`. This follow-up targets the
