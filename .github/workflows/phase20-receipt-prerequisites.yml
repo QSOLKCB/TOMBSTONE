@@ -150,7 +150,7 @@ jobs:
           set -euo pipefail
           for log in phase20-results/*.log; do
             target=$(basename "$log" .log)
-            python3 tools/check_phase20_wp.py "$target" "$log"
+            python3 tools/check_phase20_wp.py "$target" "$log" --model phase20-toolchain
           done
       - uses: actions/upload-artifact@v4
         if: always()

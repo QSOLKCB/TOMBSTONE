@@ -103,11 +103,34 @@ semantic mutant keeps the positive contracts: accept invalid receipts,
 return an out-of-bounds success size, or modify the size on a formatter error.
 It must leave the designated obligation unproved; a parser/tool failure does
 not count as semantic rejection. Original successful and failed logs must
-remain distinguishable. Execution is IN_PROGRESS: the retained validator,
-hex and composition runs are complete, while the formatter remains partial.
-The exact goal inventory and model diagnostics are now inspected and pinned
-in `machine/formal/phase20-goals-v1.json`. The gate still fails until every
-positive target is complete.
+remain distinguishable. The corrected-model execution is recorded in
+`machine/formal/phase20-evidence-v2.json` and `phase20-goals-v2.json`.
+The original v1 snapshot remains unchanged historical failed evidence.
+
+At [run 41376577333](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41376577333),
+head `1117798e0de9e8122344dfb4882dd6a4056cffea` was tested through merge
+checkout `b860cda7cf56910f13fbf53cbc1464a76a9a111c` using the explicit
+[WP correction](PHASE20_MODEL_CORRECTION.md):
+
+| Evidence | Executed result |
+| --- | --- |
+| Actual `format_json` | 1,103/1,103 WP/RTE obligations |
+| Other nine positive targets | 289/289; 1,392/1,392 positive obligations in total |
+| Accept-invalid mutant | 7/8; designated receipt-equivalence failure |
+| Bad-size mutant | 1,087/1,103; eight size-bound and eight NUL-termination failures |
+| Error-size mutant | 1,105/1,107; two designated size-on-error failures |
+| Original Phase 18/19 replay | 54/54, 11/11, 40/40, 41/41; original contracts unchanged |
+| Native GCC/Clang × OpenSSL/HACL | All four tuples passed the validator, formatter, same-allocation and semantic controls |
+
+The run's four red jobs were stale evidence and inventory gates, after the
+proof executions above. Failed attempt 19 retains that workflow failure;
+it is not relabelled as a green workflow. The v2 record reconciles the actual
+reports with the current dependencies, model/ghost-lemma evidence and exact
+expanded inventories. Local validation passes 117 adversarial evidence
+rejections, nine model/transport tests and 25 diagnostic regressions. The
+new head must rerun CI and receive independent review before merge.
+
+### Historical original-model attempts
 
 At [run 41364071336](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41364071336),
 head `e8be500075ee00039a8edf88c013ad28ab9cb9a7` was tested through merge
@@ -121,11 +144,11 @@ checkout `8f159b36db6755744ebbc903d7fb7fd640b49baa`:
 | Bad-size and error-size mutants | 131/139 and 132/140; formal acceptance blocked by the incomplete positive formatter |
 | Native GCC/Clang × OpenSSL/HACL | All four jobs passed the 160 validation / 2,530 formatting cases and all three semantic controls |
 
-The seven open formatter goals concern three intermediate string assertions,
+The seven then-open formatter goals concerned three intermediate string assertions,
 the final call's separation requirement, an intermediate receipt-frame
 assertion, final receipt preservation and successful NUL termination. Their
 exact identifiers and original reports are retained; a proved top-level goal
-cannot discharge unproved supporting assertions. This is a proof-completion
+cannot discharge unproved supporting assertions. This was a proof-completion
 blocker, not an observed runtime failure.
 
 The next proof iteration split the intermediate string conjunctions into
@@ -175,20 +198,19 @@ Local original solver outputs and machine results are retained in
 image's Why3 1.8.2 and Alt-Ergo 2.5.4 binaries, exporting tasks before running
 Alt-Ergo directly. It did not substitute a hand-written memory implementation.
 
-The CI evidence job runs the same canary inside the digest-pinned image and
-retains its exported tasks and raw outputs. Four positive controls must pass;
-neither false byte-copy claim may be proved. A version/model mismatch, missing
-task, solver error or inconclusive control blocks the check. A passing canary
-would only exclude this specific contradiction, not prove model soundness.
-The current model is expected to fail explicitly. Do not patch the theory
-silently, drop its frame conditions or promote the other solver results.
+The model CI job retains the original contradiction as a negative control,
+then runs the same canary against the explicitly patched theory. Four
+positive controls must pass and neither false claim may be proved. Separate
+positive goals prove their negations. All 48 affected library subgoals,
+readonly controls and the ghost string-witness lemma must also pass; missing
+tasks, solver errors and inconclusive positive controls remain failures.
+This excludes the observed contradiction, not every possible soundness bug.
 
-Next: independently assess the model definition/lemma mismatch and the
-Phase 18/19 dependency; choose and review a corrected pinned toolchain or an
-explicit model refinement; rerun this canary and all affected positive and
-negative proofs; then finish the formatter, refresh evidence and obtain fresh
-exact-head independent review. Actual SHA-provider refinement follows that
-gate. Issue #28 stays open.
+The correction and all affected positive/negative replays have now executed;
+see [the correction and evidence](PHASE20_MODEL_CORRECTION.md). Next require
+fresh exact-head CI and independent review of the model patch and proof
+composition. Canonical JSON semantics and actual SHA-provider refinement
+remain subsequent obligations. Issue #28 stays open.
 
 WP's summary includes automatic termination/unreachable CFG facts that its
 JSON report omits. The gate accounts for those separately and requires every
@@ -196,7 +218,8 @@ scheduled goal to appear exactly once in the original structured report.
 An automatic CFG fact cannot substitute for a missing scheduled obligation.
 
 Formatter runs export actual string-literal bytes with `-wp-literals` and
-use checked intermediate frame/string assertions. `-wp-no-callee-precond`
+use checked intermediate frame/string assertions, ghost witnesses and
+`-wp-split` branch decomposition. `-wp-no-callee-precond`
 removes redundant post-call precondition hypotheses; the call-site
 precondition obligations are still generated and must all pass. A literal
 byte assertion catches the default zero-string abstraction. The failed Z3

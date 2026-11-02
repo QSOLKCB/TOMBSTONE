@@ -184,16 +184,19 @@ That review does not close the original global-frame or real-provider gap.
 
 [Draft PR #30](https://github.com/QSOLKCB/TOMBSTONE/pull/30) checks the actual
 validator, formatter and both hex bodies under the [explicit Phase 20
-premises](PHASE20_RECEIPT_PREREQUISITES.md). Historically complete solver targets include
+premises](PHASE20_RECEIPT_PREREQUISITES.md). Corrected-model complete solver targets include
 `zero32`, `equal32`, `good_evidence`, `good_receipt`, `hex32`, both actual
-`tb_sha256_hex` bodies, and the shared hash/chain composition. The formatter
-remains incomplete; these results do not yet discharge the combined
-prerequisite gate. A new executed model canary proves contradictory byte
-values using the pinned Frama-C 32.1 Bytes theory, so its consistency can no
-longer be treated as an unexamined premise for Phase 20 acceptance. See the
-[reproduction and blocker](PHASE20_RECEIPT_PREREQUISITES.md#byte-memory-model-blocker).
-Original Phase 18/19 records remain unchanged historical evidence; their
-dependency on the affected theory also needs assessment before renewed claims.
+`tb_sha256_hex` bodies, `format_json`, and the shared hash/chain composition.
+Run `41376577333` completed 1,392/1,392 positive obligations and the designated
+semantic mutations. Its original Phase 18/19 replay completed 54/54, 11/11,
+40/40 and 41/41 without changing those contracts or historical records.
+The original pinned Bytes theory admits an executed contradiction. The
+[explicit candidate correction](PHASE20_MODEL_CORRECTION.md) rejects it,
+proves its refutations and replays all 48 affected library subgoals. Readonly
+and ghost-lemma controls also pass. These are finite model regressions and
+conditional source proofs, not a general soundness proof of the toolchain.
+The v2 evidence reconciles the original reports and exact dependencies;
+final-head CI and independent review remain required.
 Failed parser, solver and timeout attempts are retained
 separately and cannot be counted as semantic negative controls.
 

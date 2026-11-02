@@ -13,7 +13,9 @@ import check_phase20_wp as gate
 
 old = evidence.solver_logs((ROOT / "formal/evidence/phase20/run-41365582954-job-125024927421.log").read_text())
 new = evidence.solver_logs((ROOT / "formal/evidence/phase20/run-41367373120-job-125030295346.log").read_text())
-inventory = evidence.load(gate.INVENTORY)
+# These location regressions deliberately replay historical original-model
+# records. They neither renew evidence nor use the corrected-model inventory.
+inventory = evidence.load(ROOT / "machine/formal/phase20-goals-v1.json")
 checks = 0
 
 

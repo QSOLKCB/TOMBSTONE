@@ -9,16 +9,19 @@ import re
 import check_phase19_bridge_evidence as previous
 import check_phase20_wp as gate
 import phase20_receipt_overlay as overlay
+import check_phase20_model_evidence as model_evidence
+import phase20_model as corrected_model
 
 ROOT=Path(__file__).resolve().parents[1]
-RECORD=ROOT/"machine/formal/phase20-evidence-v1.json"
-EXECUTION=('e8be500075ee00039a8edf88c013ad28ab9cb9a7', '8f159b36db6755744ebbc903d7fb7fd640b49baa', 41364071336, 'failure', 'PARTIAL_PROOF_AND_UNRECORDED_INVENTORY')
+RECORD=ROOT/"machine/formal/phase20-evidence-v2.json"
+EXECUTION=('1117798e0de9e8122344dfb4882dd6a4056cffea', 'b860cda7cf56910f13fbf53cbc1464a76a9a111c', 41376577333, 'failure', 'EVIDENCE_AND_INVENTORY_REFRESH_REQUIRED')
 INPUTS=previous.INPUTS | {
     "tools/check_phase19_bridge_evidence.py","tools/check_phase19_bridge_log.py",
     "machine/formal/phase19-bridge-evidence-v1.json",
     "machine/formal/phase19-bridge-goals-v1.json","machine/formal/phase19-bridge-diagnostics-v1.json",
     "tools/phase20_receipt_overlay.py","tools/check_phase20_wp.py",
     "tools/check_phase20_evidence.py","tests/formal/test_phase20_overlay.py",
+    "tools/check_phase20_model_evidence.py",
     "tests/formal/test_phase20_native.c","tests/formal/run_phase20_native.py",
     "tests/formal/test_phase20_gates.py","tools/check_portability.py",
     "tests/formal/test_phase20_regressions.py","tests/formal/phase20_bytes_model_canary.mlw",
@@ -29,6 +32,7 @@ INPUTS=previous.INPUTS | {
     "tests/formal/test_phase20_model_gate.py",
     ".github/workflows/phase20-receipt-prerequisites.yml",
     "machine/formal/phase20-goals-v1.json",
+    "machine/formal/phase20-goals-v2.json",
     "machine/formal/phase20-provers-v1.json",
     "Makefile","src/core/deletion.c","tools/check_hacl_source.py",
     "vendor/hacl-star/SOURCES.json","vendor/hacl-star/UPSTREAM.md",
@@ -39,7 +43,7 @@ INPUTS |= {"vendor/hacl-star/"+path for path in
 def load(path):
     return json.loads(Path(path).read_text(),object_pairs_hook=gate.unique_pairs)
 
-def solver_logs(raw):
+def invocations(raw):
     """Extract every invocation through the end of its original JSON report.
 
     Only the GitHub timestamp prefix is removed. No reconstructed solver text,
@@ -47,13 +51,22 @@ def solver_logs(raw):
     """
     text=re.sub(r"^\d{4}-\d\d-\d\dT\S+Z ","",raw,flags=re.M)
     parts=re.split(r"(?=^32\.1 \(Germanium\)\s*$)",text,flags=re.M)[1:]
-    result={}
+    result=[]
     for part in parts:
         start=re.search(r'(?m)^\[\s*\{\s*"goal"\s*:',part)
         if start is None:
             raise ValueError("original structured report is missing")
         _,end=json.JSONDecoder(object_pairs_hook=gate.unique_pairs).raw_decode(part[start.start():])
         log=part[:start.start()+end]+"\n"
+        result.append(log)
+    if not result:
+        raise ValueError("no original solver invocation")
+    return result
+
+
+def solver_logs(raw):
+    result={}
+    for log in invocations(raw):
         source=re.findall(r"\[kernel\] Parsing /repo/phase20-([^ ]+)\.c",log)
         function=re.findall(r"\[rte:annot\] annotating function (\w+)",log)
         if len(source) != 1 or len(function) != 1:
@@ -62,8 +75,6 @@ def solver_logs(raw):
         if target not in gate.TARGETS or target in result:
             raise ValueError("unknown or repeated retained target")
         result[target]=log
-    if not result:
-        raise ValueError("no original solver invocation")
     return result
 
 def verified_log(row,root):
@@ -81,11 +92,12 @@ def validate(record,root=ROOT,require_complete=True):
           "canonical_json_theorem","actual_streaming_sha_provider","libc_implementation",
           "model_separation","original_phase18_global_frame","review","issue_28",
           "negative_controls","source_blobs","generated_sha256","solver_jobs","native_jobs",
-          "diagnostic_jobs","failed_attempts"}
+          "diagnostic_jobs","failed_attempts","model_job","model_artifact",
+          "compatibility_job","compatibility_goals"}
     if set(record) != keys or type(record["version"]) is not int:
         raise ValueError("unknown/missing evidence field or invalid version")
     if (record["format"],record["version"],record["scope"]) != (
-        "tombstone.phase20.evidence",1,"CONDITIONAL_RECEIPT_VALIDATION_AND_FORMATTER_FRAME"):
+        "tombstone.phase20.evidence",2,"CONDITIONAL_RECEIPT_VALIDATION_AND_FORMATTER_FRAME"):
         raise ValueError("wrong evidence kind or scope")
     if tuple(record[key] for key in ("head_sha","ci_checkout_sha","run_id","workflow_conclusion","workflow_failure")) != EXECUTION:
         raise ValueError("historical execution was relabelled")
@@ -96,7 +108,8 @@ def validate(record,root=ROOT,require_complete=True):
         raise ValueError("PR and merge-checkout identities conflated")
     if record["tool"] != {
         "version":"32.1","model":"Bytes","prover":"Alt-Ergo 2.5.4","rte":True,
-        "formatter_options":["-wp-literals","-wp-no-callee-precond"],
+        "formatter_options":["-wp-literals","-wp-no-callee-precond","-wp-split"],
+        "correction_spec_sha256":corrected_model.digest(corrected_model.SPEC),
         "hex_strategy":"wp:bitshift",
         "container":"framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36",
     }:
@@ -110,12 +123,39 @@ def validate(record,root=ROOT,require_complete=True):
         if record[key] != value:
             raise ValueError("unsupported claim promotion: "+key)
     if set(record["source_blobs"]) != INPUTS:
-        raise ValueError("missing or unexpected proof dependency")
+        missing = sorted(INPUTS - set(record["source_blobs"]))
+        unexpected = sorted(set(record["source_blobs"]) - INPUTS)
+        raise ValueError(f"proof dependency mismatch: missing={missing}; unexpected={unexpected}")
     for path,expected in record["source_blobs"].items():
         p=root/path
         if p.is_symlink() or overlay.bridge.p18.git_blob(p.read_bytes()) != expected:
             raise ValueError("stale proof dependency: "+path)
-    inventory=load(root/"machine/formal/phase20-goals-v1.json")
+    build = model_evidence.validate(record["model_artifact"], root)
+    current_jobs = (record["solver_jobs"] + record["native_jobs"] + record["diagnostic_jobs"]
+                    + [record["model_job"], record["compatibility_job"]])
+    if len(current_jobs) != 14 or len({row["job_id"] for row in current_jobs}) != 14:
+        raise ValueError("missing or duplicate current-run evidence job")
+    for row in current_jobs:
+        if row["path"] != f"formal/evidence/phase20/run-{record['run_id']}-job-{row['job_id']}.log":
+            raise ValueError("job path does not belong to the recorded execution")
+    model_log = verified_log(record["model_job"], root)
+    if record["model_job"]["conclusion"] != "success" or record["ci_checkout_sha"] not in model_log:
+        raise ValueError("corrected model and lemma job did not pass on recorded checkout")
+    for message in ("PASS: 48/48 affected library subgoals across both byte orders",
+                    "PASS: exact ghost string-witness lemma; missing-NUL-premise mutant rejected",
+                    "PASS: original contradiction reproduced; corrected model rejects it"):
+        if message not in model_log:
+            raise ValueError("missing original corrected-model result")
+    artifact = re.findall(r"Artifact phase20-model-regressions\.zip successfully finalized\. Artifact ID (\d+)", model_log)
+    before_upload = model_log.split("Artifact phase20-model-regressions.zip successfully finalized.")[0]
+    digests = re.findall(r"SHA256 digest of uploaded artifact zip is ([0-9a-f]{64})", before_upload)
+    if artifact != [str(record["model_artifact"]["artifact_id"])] or not digests or digests[-1] != record["model_artifact"]["archive_sha256"]:
+        raise ValueError("model artifact identity disagrees with original CI upload")
+    for row in record["diagnostic_jobs"]:
+        if record["ci_checkout_sha"] not in verified_log(row, root):
+            raise ValueError("diagnostic checkout mismatch")
+    compatibility(record, root, build)
+    inventory=load(root/"machine/formal/phase20-goals-v2.json")
     if set(inventory) != set(gate.TARGETS):
         raise ValueError("missing or unexpected proof target")
     found={}
@@ -126,6 +166,7 @@ def validate(record,root=ROOT,require_complete=True):
         if record["ci_checkout_sha"] not in raw:
             raise ValueError("original log checkout mismatch")
         for target,log in solver_logs(raw).items():
+            model_evidence.identity(log, build)
             if target in found:
                 raise ValueError("duplicate target across jobs")
             generated=(overlay.render_hex(target[4:]) if target.startswith("hex-") else
@@ -167,6 +208,7 @@ def validate(record,root=ROOT,require_complete=True):
         if "run_phase20_native.py --cc "+row["cc"]+" --backend "+row["backend"] not in raw:
             raise ValueError("native command tuple mismatch")
         for message in ("PASS: 160 validator cases; 2530 formatter cases including 30 injected failures",
+                        "PASS: 324 same-allocation cases including 180 injected failures; disjoint regions, bytes and caller frames",
                         "PASS: native accept-invalid rejected specifically by VALIDATION_REJECT",
                         "PASS: native bad-size rejected specifically by FORMAT_SIZE",
                         "PASS: native error-size rejected specifically by ERROR_SIZE"):
@@ -185,6 +227,29 @@ def validate(record,root=ROOT,require_complete=True):
     if require_complete and incomplete:
         raise ValueError("positive proof is incomplete: "+", ".join(incomplete))
     return incomplete
+
+
+def compatibility(record, root, build):
+    row = record["compatibility_job"]
+    raw = verified_log(row, root)
+    if row["conclusion"] != "success" or record["ci_checkout_sha"] not in raw:
+        raise ValueError("original theorem replay did not pass on recorded checkout")
+    targets = {"chain":("tb_receipt_verify_chain",54), "equal32":("equal32",11),
+               "calculate_hash":("calculate_hash",40), "calculate_hash_errors":("calculate_hash",41)}
+    found = {}
+    for log in invocations(raw):
+        names = re.findall(r"\[kernel\] Parsing /repo/phase20-original-(\w+)\.c", log)
+        if len(names) != 1 or names[0] not in targets or names[0] in found:
+            raise ValueError("unknown or duplicate original theorem replay")
+        name = names[0]
+        function, expected = targets[name]
+        model_evidence.identity(log, build)
+        result = gate.parse(log, function)
+        if result["unproved"] or result["proved"] != expected or result["total"] != expected:
+            raise ValueError("original Phase 18/19 theorem is incomplete or changed")
+        found[name] = result
+    if set(found) != set(targets) or found != record["compatibility_goals"]:
+        raise ValueError("original theorem inventory or diagnostics changed")
 
 if __name__ == "__main__":
     parser=argparse.ArgumentParser()

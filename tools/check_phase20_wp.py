@@ -12,7 +12,7 @@ TARGETS = {s:s for s in ("zero32","equal32","good_evidence","good_receipt","hex3
 TARGETS.update({"hex-openssl":"tb_sha256_hex","hex-hacl":"tb_sha256_hex",
                 "accept-invalid":"good_receipt","bad-size":"format_json","error-size":"format_json"})
 NEGATIVE = {"accept-invalid":"receipt_equivalence","bad-size":"ensures_2","error-size":"size_on_error"}
-INVENTORY = ROOT / "machine/formal/phase20-goals-v1.json"
+INVENTORY = ROOT / "machine/formal/phase20-goals-v2.json"
 
 
 def normalize_diagnostics(items):
@@ -115,9 +115,14 @@ def validate(text,target,inventory):
 
 if __name__ == "__main__":
     ap=argparse.ArgumentParser();ap.add_argument("target",choices=TARGETS);ap.add_argument("log",type=Path)
+    ap.add_argument("--model",type=Path,required=True,
+                    help="current run's intact, corrected WP build")
     args=ap.parse_args()
     try:
         inventory=json.loads(INVENTORY.read_text(),object_pairs_hook=unique_pairs) if INVENTORY.exists() else None
+        import phase20_model
+        from check_phase20_model_evidence import identity
+        identity(args.log.read_text(), phase20_model.check(args.model))
         result=validate(args.log.read_text(),args.target,inventory)
     except (ValueError,KeyError,OSError,TypeError) as error:
         raise SystemExit("FAIL: Phase 20: "+str(error)) from error

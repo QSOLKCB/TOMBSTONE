@@ -30,7 +30,7 @@
 
 - Check actual `good_receipt` and `format_json`, their internal validators and both actual hex encoders, while preserving the shared Phase 19 composition contracts.
 - Require exact-source WP with RTE, explicit libc format/string/frame premises, semantic controls, full execution evidence and fresh exact-head review. Canonical-byte meaning and actual streaming SHA-provider refinement remain separate obligations.
-- See [Phase 20 scope](docs/PHASE20_RECEIPT_PREREQUISITES.md). Draft PR #30 retains the latest 158/182 formatter result and a reproduced contradiction in the pinned Bytes theory. Resolve the model inconsistency before trusting new proof results; then finish the formatter and its formal mutation controls, refresh evidence and obtain exact-head independent review. Historical counts are not proof acceptance.
+- See [Phase 20 scope](docs/PHASE20_RECEIPT_PREREQUISITES.md). Draft PR #30 records the explicit Bytes correction, 1,392/1,392 positive WP/RTE obligations, all three designated semantic mutations, and unchanged Phase 18/19 theorem replays. The v2 evidence preserves the original-model failures and reconciles executed model, source and inventory identities. Require fresh final-head CI and independent review before closing this gate; canonical JSON meaning and actual streaming SHA refinement remain open.
 
 ## Phase 19 — Actual C99 helper refinement
 

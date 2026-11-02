@@ -63,7 +63,7 @@ module. A separate compatibility job replays the unchanged original Phase
 18 chain theorem and Phase 19 equality/hash/error contracts. Their old
 successful runs do not substitute for this replay.
 
-## Execution status before CI renewal
+## Executed correction and replay
 
 Executed locally: reproducible isolated WP build; original contradiction;
 corrected positive controls and rejection of both false claims; all seven
@@ -85,8 +85,25 @@ requires the complete manifest. The string-witness helper proved locally,
 its missing-premise mutation did not prove, and all 30 selected string
 assertion subgoals reduced to Qed with the proved helper.
 
-Full formatter, semantic mutants, compatibility replay and fresh exact-head
-CI evidence are still pending. The retained historical proof snapshot stays
-blocked until actual complete reports and their identities are recorded.
-Issue #28 and the independent review gate remain open. No merge, tag or
-release is authorized by these tests.
+Run `41376577333`, head `1117798e0de9e8122344dfb4882dd6a4056cffea`, then
+passed the corrected-model and ghost-lemma checks, all four native tuples,
+1,392/1,392 positive WP/RTE obligations, and the unchanged original theorem
+replays (54/54, 11/11, 40/40, 41/41). The formatter accounts for 1,103 of those
+positive obligations. Its bad-size mutant leaves only eight size-bound and
+eight termination obligations unproved; its error-size mutant leaves only
+the two size-on-error obligations unproved. Accept-invalid retains its
+designated receipt-equivalence failure.
+
+The workflow still failed its old evidence/inventory gates. The v2 evidence
+records that failure honestly and preserves all fourteen original logs and
+105 original model-result/log files. It binds every target to the same
+recorded model build and validates the original canary, library, readonly,
+ghost-lemma and compatibility reports. A new CI run validates the current
+build identity independently; historical binary hashes are not substituted
+for the current run's artifact.
+
+The old v1 evidence and inventories remain unchanged. Local acceptance and
+117 adversarial evidence rejections pass, including dependency-name errors,
+wrong model identities, altered canaries and missing theorem replays. Final
+exact-head CI and independent review are still required. Issue #28 remains
+open. No merge, tag or release is authorized by these tests.
