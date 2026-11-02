@@ -1,0 +1,1411 @@
+﻿2026-11-01T22:58:33.1142855Z Current runner version: '2.338.2'
+2026-11-01T22:58:33.1163810Z ##[group]Runner Image Provisioner
+2026-11-01T22:58:33.1164520Z Hosted Compute Agent
+2026-11-01T22:58:33.1165119Z Version: 20261021.618
+2026-11-01T22:58:33.1165698Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-01T22:58:33.1166365Z Build Date: 2026-10-21T00:45:21Z
+2026-11-01T22:58:33.1166971Z Worker ID: {6543d221-f529-4233-8754-20f294da67e8}
+2026-11-01T22:58:33.1167553Z Region: westus3
+2026-11-01T22:58:33.1168086Z Cloud: Azure
+2026-11-01T22:58:33.1168553Z ##[endgroup]
+2026-11-01T22:58:33.1169728Z ##[group]Operating System
+2026-11-01T22:58:33.1170310Z Ubuntu
+2026-11-01T22:58:33.1170770Z 24.04.5
+2026-11-01T22:58:33.1171257Z LTS
+2026-11-01T22:58:33.1171774Z ##[endgroup]
+2026-11-01T22:58:33.1172273Z ##[group]Runner Image
+2026-11-01T22:58:33.1172837Z Image: ubuntu-24.04
+2026-11-01T22:58:33.1173493Z Version: 20261025.353.1
+2026-11-01T22:58:33.1174599Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-01T22:58:33.1175890Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-01T22:58:33.1176739Z ##[endgroup]
+2026-11-01T22:58:33.1177633Z ##[group]GITHUB_TOKEN Permissions
+2026-11-01T22:58:33.1179297Z Contents: read
+2026-11-01T22:58:33.1179813Z Metadata: read
+2026-11-01T22:58:33.1180411Z ##[endgroup]
+2026-11-01T22:58:33.1182098Z Secret source: Actions
+2026-11-01T22:58:33.1182971Z Cache mode: write
+2026-11-01T22:58:33.1183842Z Prepare workflow directory
+2026-11-01T22:58:33.1481249Z Prepare all required actions
+2026-11-01T22:58:33.1518986Z Getting action download info
+2026-11-01T22:58:33.4223109Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-01T22:58:33.6770167Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-01T22:58:33.8914437Z Complete job name: Actual C99 prerequisites — composition
+2026-11-01T22:58:33.9610628Z ##[group]Run actions/checkout@v4
+2026-11-01T22:58:33.9611359Z with:
+2026-11-01T22:58:33.9611754Z   repository: QSOLKCB/TOMBSTONE
+2026-11-01T22:58:33.9615521Z   token: ***
+2026-11-01T22:58:33.9615923Z   ssh-strict: true
+2026-11-01T22:58:33.9616330Z   ssh-user: git
+2026-11-01T22:58:33.9616726Z   persist-credentials: true
+2026-11-01T22:58:33.9617167Z   clean: true
+2026-11-01T22:58:33.9617562Z   sparse-checkout-cone-mode: true
+2026-11-01T22:58:33.9618021Z   fetch-depth: 1
+2026-11-01T22:58:33.9618404Z   fetch-tags: false
+2026-11-01T22:58:33.9618813Z   show-progress: true
+2026-11-01T22:58:33.9619215Z   lfs: false
+2026-11-01T22:58:33.9619598Z   submodules: false
+2026-11-01T22:58:33.9620002Z   set-safe-directory: true
+2026-11-01T22:58:33.9620457Z   allow-unsafe-pr-checkout: false
+2026-11-01T22:58:33.9621087Z ##[endgroup]
+2026-11-01T22:58:35.2154773Z Syncing repository: QSOLKCB/TOMBSTONE
+2026-11-01T22:58:35.2157008Z ##[group]Getting Git version info
+2026-11-01T22:58:35.2157931Z Working directory is '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T22:58:35.2159544Z [command]/usr/bin/git version
+2026-11-01T22:58:35.2219732Z git version 2.56.0
+2026-11-01T22:58:35.2234611Z ##[endgroup]
+2026-11-01T22:58:35.2245607Z Temporarily overriding HOME='/home/runner/work/_temp/a999faa5-38f1-4745-98d7-2cff9ec41ad2' before making global git config changes
+2026-11-01T22:58:35.2247640Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T22:58:35.2249689Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T22:58:35.2289211Z Deleting the contents of '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T22:58:35.2292722Z ##[group]Initializing the repository
+2026-11-01T22:58:35.2296130Z [command]/usr/bin/git init /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T22:58:35.2386170Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-01T22:58:35.2388271Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-01T22:58:35.2390615Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-01T22:58:35.2392513Z hint: call:
+2026-11-01T22:58:35.2393898Z hint:
+2026-11-01T22:58:35.2395259Z hint: 	git config --global init.defaultBranch <name>
+2026-11-01T22:58:35.2396668Z hint:
+2026-11-01T22:58:35.2398059Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-01T22:58:35.2400014Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-01T22:58:35.2402061Z hint:
+2026-11-01T22:58:35.2402985Z hint: 	git branch -m <name>
+2026-11-01T22:58:35.2404230Z hint:
+2026-11-01T22:58:35.2405585Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-01T22:58:35.2407941Z Initialized empty Git repository in /home/runner/work/TOMBSTONE/TOMBSTONE/.git/
+2026-11-01T22:58:35.2411349Z [command]/usr/bin/git remote add origin https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T22:58:35.2459293Z ##[endgroup]
+2026-11-01T22:58:35.2461374Z ##[group]Disabling automatic garbage collection
+2026-11-01T22:58:35.2463355Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-01T22:58:35.2487826Z ##[endgroup]
+2026-11-01T22:58:35.2489256Z ##[group]Setting up auth
+2026-11-01T22:58:35.2491880Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T22:58:35.2523655Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T22:58:35.2808940Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T22:58:35.2836691Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T22:58:35.3027992Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T22:58:35.3055292Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T22:58:35.3244223Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-01T22:58:35.3360065Z ##[endgroup]
+2026-11-01T22:58:35.3361720Z ##[group]Fetching the repository
+2026-11-01T22:58:35.3370760Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +035d8e9ebf2778fa4f36fcd8522132b30b9e0984:refs/remotes/pull/30/merge
+2026-11-01T22:58:35.9492339Z From https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T22:58:35.9493399Z  * [new ref]         035d8e9ebf2778fa4f36fcd8522132b30b9e0984 -> pull/30/merge
+2026-11-01T22:58:35.9495801Z ##[endgroup]
+2026-11-01T22:58:35.9496266Z ##[group]Determining the checkout info
+2026-11-01T22:58:35.9498359Z ##[endgroup]
+2026-11-01T22:58:35.9503913Z [command]/usr/bin/git sparse-checkout disable
+2026-11-01T22:58:35.9549345Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-01T22:58:35.9573622Z ##[group]Checking out the ref
+2026-11-01T22:58:35.9576524Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/30/merge
+2026-11-01T22:58:35.9776687Z Note: switching to 'refs/remotes/pull/30/merge'.
+2026-11-01T22:58:35.9776921Z 
+2026-11-01T22:58:35.9777094Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-01T22:58:35.9777485Z changes and commit them, and you can discard any commits you make in this
+2026-11-01T22:58:35.9777863Z state without impacting any branches by switching back to a branch.
+2026-11-01T22:58:35.9778097Z 
+2026-11-01T22:58:35.9778309Z If you want to create a new branch to retain commits you create, you may
+2026-11-01T22:58:35.9778660Z do so (now or later) by using -c with the switch command. Example:
+2026-11-01T22:58:35.9778860Z 
+2026-11-01T22:58:35.9779011Z   git switch -c <new-branch-name>
+2026-11-01T22:58:35.9779396Z 
+2026-11-01T22:58:35.9779483Z Or undo this operation with:
+2026-11-01T22:58:35.9779615Z 
+2026-11-01T22:58:35.9779688Z   git switch -
+2026-11-01T22:58:35.9779824Z 
+2026-11-01T22:58:35.9780222Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-01T22:58:35.9780528Z 
+2026-11-01T22:58:35.9781140Z HEAD is now at 035d8e9 Merge ec71245fea96efcb4a5a0959493111a1212508eb into f9140bdda31ea64f7e077115db6f0bb0622c7874
+2026-11-01T22:58:35.9816696Z ##[endgroup]
+2026-11-01T22:58:35.9819700Z [command]/usr/bin/git log -1 --format=%H
+2026-11-01T22:58:35.9839963Z 035d8e9ebf2778fa4f36fcd8522132b30b9e0984
+2026-11-01T22:58:36.0054979Z ##[group]Run set -euo pipefail
+2026-11-01T22:58:36.0055298Z [36;1mset -euo pipefail[0m
+2026-11-01T22:58:36.0055548Z [36;1mpython3 tools/check_phase18_receipt.py[0m
+2026-11-01T22:58:36.0055863Z [36;1mpython3 tools/check_phase19_bridge_evidence.py[0m
+2026-11-01T22:58:36.0056166Z [36;1mpython3 tests/formal/test_phase20_overlay.py[0m
+2026-11-01T22:58:36.0056448Z [36;1mmkdir phase20-results[0m
+2026-11-01T22:58:36.0056665Z [36;1mchmod 777 phase20-results[0m
+2026-11-01T22:58:36.0057006Z [36;1mpython3 tools/phase20_receipt_overlay.py --output phase20-receipt.c[0m
+2026-11-01T22:58:36.0057331Z [36;1mfor backend in openssl hacl; do[0m
+2026-11-01T22:58:36.0057731Z [36;1m  python3 tools/phase20_receipt_overlay.py --hex-backend "$backend" --output "phase20-hex-$backend.c"[0m
+2026-11-01T22:58:36.0058117Z [36;1mdone[0m
+2026-11-01T22:58:36.0058345Z [36;1mfor mutant in accept-invalid bad-size error-size; do[0m
+2026-11-01T22:58:36.0058788Z [36;1m  python3 tools/phase20_receipt_overlay.py --mutant "$mutant" --output "phase20-$mutant.c"[0m
+2026-11-01T22:58:36.0059134Z [36;1mdone[0m
+2026-11-01T22:58:36.0059350Z [36;1mfor source in phase20-*.c; do[0m
+2026-11-01T22:58:36.0059714Z [36;1m  gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c "$source" -o /tmp/phase20-check.o[0m
+2026-11-01T22:58:36.0060064Z [36;1mdone[0m
+2026-11-01T22:58:36.0060247Z [36;1mgit rev-parse HEAD[0m
+2026-11-01T22:58:36.0060470Z [36;1msha256sum phase20-*.c[0m
+2026-11-01T22:58:36.0081036Z shell: /usr/bin/bash -e {0}
+2026-11-01T22:58:36.0081259Z env:
+2026-11-01T22:58:36.0081432Z   GROUP: composition
+2026-11-01T22:58:36.0081619Z ##[endgroup]
+2026-11-01T22:58:36.0415161Z PASS: 54/54 conditional unbounded WP proof receipt pinned to exact source, checkers, CI job
+2026-11-01T22:58:36.0415770Z LIMIT: prior evidence does not prove a new commit or the actual SHA-256 provider
+2026-11-01T22:58:36.0855056Z PASS: retained P19-03 source, 3 complete proofs, 3 semantic controls and original failed attempt
+2026-11-01T22:58:36.0855755Z LIMIT: conditional caller-frame/protocol evidence; no current-head review or real-provider closure
+2026-11-01T22:58:36.1145322Z PASS: unchanged bodies, stronger original contracts, preserved chain theorem, distinct semantic mutants
+2026-11-01T22:58:36.1452164Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:58:36.1729584Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:58:36.2008045Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:58:36.2288233Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:58:36.2569533Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:58:36.2856519Z GENERATED: exact production body with explicit external libc premises
+2026-11-01T22:58:36.5740997Z 035d8e9ebf2778fa4f36fcd8522132b30b9e0984
+2026-11-01T22:58:36.5758423Z d5561aa4ff18bbef00d8db93369c6fddefbe34a9eb0a25f3e06bb4e528ced59c  phase20-accept-invalid.c
+2026-11-01T22:58:36.5759275Z a4943158c2f73fb6d2779ee60d0701f9a9fa6f5511b52479d0a4a5020309d254  phase20-bad-size.c
+2026-11-01T22:58:36.5760053Z a7536b2beb613956a4d1e0b9ad09002e5c2801e2137ac165ab429d7cd9dda377  phase20-error-size.c
+2026-11-01T22:58:36.5760822Z 3cc10a271b80b29cde4185140f47635404bb0a14c7174231702bbbdcc00cf427  phase20-hex-hacl.c
+2026-11-01T22:58:36.5761877Z 8b74da4865511573cba478df14b31998302790b3140027a041e45b70a315defb  phase20-hex-openssl.c
+2026-11-01T22:58:36.5762663Z 93fbce98d173e6a1a77178d594d9f64f3ac47cd78844210981c750ebc58bf200  phase20-receipt.c
+2026-11-01T22:58:36.5822900Z ##[group]Run set -euo pipefail
+2026-11-01T22:58:36.5823454Z [36;1mset -euo pipefail[0m
+2026-11-01T22:58:36.5823792Z [36;1mdocker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-results:/out" -e GROUP -w /tmp \[0m
+2026-11-01T22:58:36.5824288Z [36;1m  framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \[0m
+2026-11-01T22:58:36.5824673Z [36;1m  sh -c '[0m
+2026-11-01T22:58:36.5824886Z [36;1m    if [ -d /repo/phase20-provers ]; then[0m
+2026-11-01T22:58:36.5825230Z [36;1m      export PATH=/repo/phase20-provers/z3-4.12.2-x64-glibc-2.31/bin:$PATH[0m
+2026-11-01T22:58:36.5825554Z [36;1m      why3 config detect || exit 1[0m
+2026-11-01T22:58:36.5825767Z [36;1m    fi[0m
+2026-11-01T22:58:36.5825937Z [36;1m    case "$GROUP" in[0m
+2026-11-01T22:58:36.5826226Z [36;1m      validators) targets="zero32 equal32 good_evidence good_receipt";;[0m
+2026-11-01T22:58:36.5826554Z [36;1m      formatters) targets="hex32 format_json";;[0m
+2026-11-01T22:58:36.5826906Z [36;1m      composition) targets="calculate_hash tb_receipt_verify_chain";;[0m
+2026-11-01T22:58:36.5827224Z [36;1m      hex) targets="hex-openssl hex-hacl";;[0m
+2026-11-01T22:58:36.5827519Z [36;1m      negative) targets="accept-invalid bad-size error-size";;[0m
+2026-11-01T22:58:36.5827790Z [36;1m    esac[0m
+2026-11-01T22:58:36.5827975Z [36;1m    frama-c -wp-detect || exit 1[0m
+2026-11-01T22:58:36.5828186Z [36;1m    status=0[0m
+2026-11-01T22:58:36.5828373Z [36;1m    for target in $targets; do[0m
+2026-11-01T22:58:36.5828615Z [36;1m      source=/repo/phase20-receipt.c[0m
+2026-11-01T22:58:36.5828840Z [36;1m      function=$target[0m
+2026-11-01T22:58:36.5829036Z [36;1m      timeout=35[0m
+2026-11-01T22:58:36.5829233Z [36;1m      provers=alt-ergo[0m
+2026-11-01T22:58:36.5829427Z [36;1m      split=[0m
+2026-11-01T22:58:36.5829602Z [36;1m      case "$target" in[0m
+2026-11-01T22:58:36.5829985Z [36;1m        hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex; split="-wp-auto wp:bitshift -wp-print";;[0m
+2026-11-01T22:58:36.5830501Z [36;1m        accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;[0m
+2026-11-01T22:58:36.5830987Z [36;1m        bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;[0m
+2026-11-01T22:58:36.5831326Z [36;1m      esac[0m
+2026-11-01T22:58:36.5831574Z [36;1m      if [ "$function" = format_json ]; then provers=alt-ergo,z3; fi[0m
+2026-11-01T22:58:36.5832431Z [36;1m      (frama-c -version && frama-c -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover "$provers" -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1[0m
+2026-11-01T22:58:36.5833588Z [36;1m    done[0m
+2026-11-01T22:58:36.5833753Z [36;1m    cat /out/*.log[0m
+2026-11-01T22:58:36.5833943Z [36;1m    exit "$status"[0m
+2026-11-01T22:58:36.5834135Z [36;1m  '[0m
+2026-11-01T22:58:36.5850603Z shell: /usr/bin/bash -e {0}
+2026-11-01T22:58:36.5850803Z env:
+2026-11-01T22:58:36.5850976Z   GROUP: composition
+2026-11-01T22:58:36.5851152Z ##[endgroup]
+2026-11-01T22:58:36.7994807Z Unable to find image 'framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36' locally
+2026-11-01T22:58:37.3812200Z docker.io/framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36: Pulling from framac/frama-c
+2026-11-01T22:58:37.3821974Z 01cedcff86f8: Pulling fs layer
+2026-11-01T22:58:37.3823650Z 9bf581ba34fd: Pulling fs layer
+2026-11-01T22:58:37.3824052Z 6c4bd78e0c43: Pulling fs layer
+2026-11-01T22:58:37.3825355Z 799649323729: Pulling fs layer
+2026-11-01T22:58:37.3827315Z 1ae4fb0c8a4a: Pulling fs layer
+2026-11-01T22:58:37.3829711Z b237ecdf51a3: Pulling fs layer
+2026-11-01T22:58:37.3831565Z b16ee2e05313: Pulling fs layer
+2026-11-01T22:58:37.3832084Z adb989234928: Pulling fs layer
+2026-11-01T22:58:37.3832529Z e3a01a28a7ad: Pulling fs layer
+2026-11-01T22:58:37.3833391Z ca0e54137564: Pulling fs layer
+2026-11-01T22:58:37.3833887Z e88b1a083917: Pulling fs layer
+2026-11-01T22:58:37.3834328Z d10f17e04c11: Pulling fs layer
+2026-11-01T22:58:37.3834747Z d38ea67f8871: Pulling fs layer
+2026-11-01T22:58:37.3835160Z 8153ec1c4f57: Pulling fs layer
+2026-11-01T22:58:37.3835580Z 0546e39b6053: Pulling fs layer
+2026-11-01T22:58:37.3835996Z 5ebdad05b03e: Pulling fs layer
+2026-11-01T22:58:37.3836419Z 6435672f1863: Pulling fs layer
+2026-11-01T22:58:37.3836852Z 5c5711f4465e: Pulling fs layer
+2026-11-01T22:58:37.3837324Z 7264e6096409: Pulling fs layer
+2026-11-01T22:58:37.3837771Z 2202cd0e879d: Pulling fs layer
+2026-11-01T22:58:37.3838171Z c31277fa0297: Pulling fs layer
+2026-11-01T22:58:37.3838593Z 4f4fb700ef54: Pulling fs layer
+2026-11-01T22:58:37.3839031Z 8e159597691d: Pulling fs layer
+2026-11-01T22:58:37.3839476Z c0ebccf77ab9: Pulling fs layer
+2026-11-01T22:58:37.3839912Z b7093a70d5d5: Pulling fs layer
+2026-11-01T22:58:37.3840339Z f2a57dfa5358: Pulling fs layer
+2026-11-01T22:58:37.3840782Z 93b66eaa292a: Pulling fs layer
+2026-11-01T22:58:37.3841224Z 0aba2ee32120: Pulling fs layer
+2026-11-01T22:58:37.3841648Z 60033bb88c74: Pulling fs layer
+2026-11-01T22:58:37.3842075Z 883b72a7df53: Pulling fs layer
+2026-11-01T22:58:37.3842497Z 9aaba240d281: Pulling fs layer
+2026-11-01T22:58:37.3842926Z fd24333fa18a: Pulling fs layer
+2026-11-01T22:58:37.3843605Z ab20f402dc6f: Pulling fs layer
+2026-11-01T22:58:37.3844048Z a3afc412b613: Pulling fs layer
+2026-11-01T22:58:37.3844493Z 0a2200cec51c: Pulling fs layer
+2026-11-01T22:58:37.3844930Z f9b5b03a559e: Pulling fs layer
+2026-11-01T22:58:37.3845346Z 2becab109f47: Pulling fs layer
+2026-11-01T22:58:37.3845762Z 3b4307789f50: Pulling fs layer
+2026-11-01T22:58:37.3846178Z 58571fc518c5: Pulling fs layer
+2026-11-01T22:58:37.3846589Z b71b8622ab3f: Pulling fs layer
+2026-11-01T22:58:37.3847207Z d06dd6319b47: Pulling fs layer
+2026-11-01T22:58:37.3847639Z 51a56fdb7118: Pulling fs layer
+2026-11-01T22:58:37.3848069Z 8f235d762bf6: Pulling fs layer
+2026-11-01T22:58:37.3848499Z 37173500316b: Pulling fs layer
+2026-11-01T22:58:37.3848912Z fa11cfb60409: Pulling fs layer
+2026-11-01T22:58:37.3849329Z 2fdcc8b83d1d: Pulling fs layer
+2026-11-01T22:58:37.3849772Z 8103ae60d4a2: Pulling fs layer
+2026-11-01T22:58:37.3850206Z 0ac2d6f63403: Pulling fs layer
+2026-11-01T22:58:37.3850509Z dca9c53526f0: Pulling fs layer
+2026-11-01T22:58:37.3850793Z d62b4203b486: Pulling fs layer
+2026-11-01T22:58:37.3851066Z 262d0301190b: Pulling fs layer
+2026-11-01T22:58:37.3851308Z ab4fd71ce45a: Pulling fs layer
+2026-11-01T22:58:37.3851495Z 721b47947ac4: Pulling fs layer
+2026-11-01T22:58:37.3851678Z 4fe137cf5212: Pulling fs layer
+2026-11-01T22:58:37.3851861Z 2202cd0e879d: Waiting
+2026-11-01T22:58:37.3852044Z d44046465503: Pulling fs layer
+2026-11-01T22:58:37.3852243Z 26d82a051384: Pulling fs layer
+2026-11-01T22:58:37.3852431Z c31277fa0297: Waiting
+2026-11-01T22:58:37.3852603Z 0ac2d6f63403: Waiting
+2026-11-01T22:58:37.3852776Z 3b4307789f50: Waiting
+2026-11-01T22:58:37.3852935Z dca9c53526f0: Waiting
+2026-11-01T22:58:37.3853102Z 4f4fb700ef54: Waiting
+2026-11-01T22:58:37.3853705Z 8e159597691d: Waiting
+2026-11-01T22:58:37.3853949Z 58571fc518c5: Waiting
+2026-11-01T22:58:37.3854242Z d62b4203b486: Waiting
+2026-11-01T22:58:37.3854580Z b71b8622ab3f: Waiting
+2026-11-01T22:58:37.3854796Z d06dd6319b47: Waiting
+2026-11-01T22:58:37.3854954Z 262d0301190b: Waiting
+2026-11-01T22:58:37.3855115Z c0ebccf77ab9: Waiting
+2026-11-01T22:58:37.3855317Z b7093a70d5d5: Waiting
+2026-11-01T22:58:37.3855562Z ab4fd71ce45a: Waiting
+2026-11-01T22:58:37.3855727Z f2a57dfa5358: Waiting
+2026-11-01T22:58:37.3855891Z 721b47947ac4: Waiting
+2026-11-01T22:58:37.3856051Z 93b66eaa292a: Waiting
+2026-11-01T22:58:37.3856280Z 4fe137cf5212: Waiting
+2026-11-01T22:58:37.3856467Z 0aba2ee32120: Waiting
+2026-11-01T22:58:37.3856628Z 60033bb88c74: Waiting
+2026-11-01T22:58:37.3857003Z 883b72a7df53: Waiting
+2026-11-01T22:58:37.3857238Z d44046465503: Waiting
+2026-11-01T22:58:37.3857412Z 9aaba240d281: Waiting
+2026-11-01T22:58:37.3857573Z 26d82a051384: Waiting
+2026-11-01T22:58:37.3857894Z 51a56fdb7118: Waiting
+2026-11-01T22:58:37.3858080Z 8f235d762bf6: Waiting
+2026-11-01T22:58:37.3858244Z 37173500316b: Waiting
+2026-11-01T22:58:37.3858402Z fd24333fa18a: Waiting
+2026-11-01T22:58:37.3858563Z ab20f402dc6f: Waiting
+2026-11-01T22:58:37.3858729Z a3afc412b613: Waiting
+2026-11-01T22:58:37.3858893Z 0a2200cec51c: Waiting
+2026-11-01T22:58:37.3859051Z fa11cfb60409: Waiting
+2026-11-01T22:58:37.3859207Z 2fdcc8b83d1d: Waiting
+2026-11-01T22:58:37.3859366Z 2becab109f47: Waiting
+2026-11-01T22:58:37.3859524Z 799649323729: Waiting
+2026-11-01T22:58:37.3859684Z 1ae4fb0c8a4a: Waiting
+2026-11-01T22:58:37.3859838Z adb989234928: Waiting
+2026-11-01T22:58:37.3860008Z b237ecdf51a3: Waiting
+2026-11-01T22:58:37.3860166Z e3a01a28a7ad: Waiting
+2026-11-01T22:58:37.3860323Z b16ee2e05313: Waiting
+2026-11-01T22:58:37.3860491Z ca0e54137564: Waiting
+2026-11-01T22:58:37.3860651Z d10f17e04c11: Waiting
+2026-11-01T22:58:37.3860808Z e88b1a083917: Waiting
+2026-11-01T22:58:37.3860969Z d38ea67f8871: Waiting
+2026-11-01T22:58:37.3861138Z 5ebdad05b03e: Waiting
+2026-11-01T22:58:37.3861300Z 8103ae60d4a2: Waiting
+2026-11-01T22:58:37.3861457Z 6435672f1863: Waiting
+2026-11-01T22:58:37.3861626Z 5c5711f4465e: Waiting
+2026-11-01T22:58:37.3861791Z 0546e39b6053: Waiting
+2026-11-01T22:58:37.3861953Z 7264e6096409: Waiting
+2026-11-01T22:58:37.3862114Z 8153ec1c4f57: Waiting
+2026-11-01T22:58:37.7740601Z 6c4bd78e0c43: Verifying Checksum
+2026-11-01T22:58:37.7740988Z 6c4bd78e0c43: Download complete
+2026-11-01T22:58:37.7741286Z 9bf581ba34fd: Verifying Checksum
+2026-11-01T22:58:37.7741597Z 9bf581ba34fd: Download complete
+2026-11-01T22:58:37.9295666Z 01cedcff86f8: Verifying Checksum
+2026-11-01T22:58:37.9296053Z 01cedcff86f8: Download complete
+2026-11-01T22:58:37.9488420Z 1ae4fb0c8a4a: Verifying Checksum
+2026-11-01T22:58:37.9488788Z 1ae4fb0c8a4a: Download complete
+2026-11-01T22:58:38.0087219Z 799649323729: Verifying Checksum
+2026-11-01T22:58:38.0087483Z 799649323729: Download complete
+2026-11-01T22:58:38.1692147Z b16ee2e05313: Verifying Checksum
+2026-11-01T22:58:38.1697430Z b16ee2e05313: Download complete
+2026-11-01T22:58:38.2040848Z adb989234928: Verifying Checksum
+2026-11-01T22:58:38.2045592Z adb989234928: Download complete
+2026-11-01T22:58:38.3772812Z e3a01a28a7ad: Verifying Checksum
+2026-11-01T22:58:38.3773390Z e3a01a28a7ad: Download complete
+2026-11-01T22:58:38.4080336Z ca0e54137564: Verifying Checksum
+2026-11-01T22:58:38.4081735Z ca0e54137564: Download complete
+2026-11-01T22:58:38.5797511Z e88b1a083917: Verifying Checksum
+2026-11-01T22:58:38.5799566Z e88b1a083917: Download complete
+2026-11-01T22:58:38.6062432Z d10f17e04c11: Verifying Checksum
+2026-11-01T22:58:38.6062905Z d10f17e04c11: Download complete
+2026-11-01T22:58:38.7230910Z b237ecdf51a3: Verifying Checksum
+2026-11-01T22:58:38.7232276Z b237ecdf51a3: Download complete
+2026-11-01T22:58:38.7771424Z d38ea67f8871: Verifying Checksum
+2026-11-01T22:58:38.7772673Z d38ea67f8871: Download complete
+2026-11-01T22:58:38.8094034Z 8153ec1c4f57: Verifying Checksum
+2026-11-01T22:58:38.8094475Z 8153ec1c4f57: Download complete
+2026-11-01T22:58:38.8996973Z 0546e39b6053: Verifying Checksum
+2026-11-01T22:58:38.8997534Z 0546e39b6053: Download complete
+2026-11-01T22:58:38.9491460Z 5ebdad05b03e: Verifying Checksum
+2026-11-01T22:58:39.0074058Z 6435672f1863: Verifying Checksum
+2026-11-01T22:58:39.0074711Z 6435672f1863: Download complete
+2026-11-01T22:58:39.0710423Z 5c5711f4465e: Verifying Checksum
+2026-11-01T22:58:39.0711705Z 5c5711f4465e: Download complete
+2026-11-01T22:58:39.1500114Z 7264e6096409: Verifying Checksum
+2026-11-01T22:58:39.1500637Z 7264e6096409: Download complete
+2026-11-01T22:58:39.1801854Z 2202cd0e879d: Verifying Checksum
+2026-11-01T22:58:39.1805124Z 2202cd0e879d: Download complete
+2026-11-01T22:58:39.2474087Z c31277fa0297: Verifying Checksum
+2026-11-01T22:58:39.2474459Z c31277fa0297: Download complete
+2026-11-01T22:58:39.3239439Z 4f4fb700ef54: Download complete
+2026-11-01T22:58:39.3880275Z 8e159597691d: Verifying Checksum
+2026-11-01T22:58:39.3880728Z 8e159597691d: Download complete
+2026-11-01T22:58:39.4242620Z c0ebccf77ab9: Verifying Checksum
+2026-11-01T22:58:39.4243009Z c0ebccf77ab9: Download complete
+2026-11-01T22:58:39.4281230Z 01cedcff86f8: Pull complete
+2026-11-01T22:58:39.5203328Z b7093a70d5d5: Verifying Checksum
+2026-11-01T22:58:39.5203688Z b7093a70d5d5: Download complete
+2026-11-01T22:58:39.5685616Z f2a57dfa5358: Verifying Checksum
+2026-11-01T22:58:39.5689413Z f2a57dfa5358: Download complete
+2026-11-01T22:58:39.5977772Z 93b66eaa292a: Download complete
+2026-11-01T22:58:39.7197291Z 0aba2ee32120: Verifying Checksum
+2026-11-01T22:58:39.7198184Z 0aba2ee32120: Download complete
+2026-11-01T22:58:39.7670787Z 60033bb88c74: Verifying Checksum
+2026-11-01T22:58:39.7672063Z 60033bb88c74: Download complete
+2026-11-01T22:58:39.7987368Z 883b72a7df53: Verifying Checksum
+2026-11-01T22:58:39.7987790Z 883b72a7df53: Download complete
+2026-11-01T22:58:39.8960610Z 9aaba240d281: Verifying Checksum
+2026-11-01T22:58:39.8960976Z 9aaba240d281: Download complete
+2026-11-01T22:58:39.9415290Z fd24333fa18a: Verifying Checksum
+2026-11-01T22:58:39.9415802Z fd24333fa18a: Download complete
+2026-11-01T22:58:40.0067387Z ab20f402dc6f: Verifying Checksum
+2026-11-01T22:58:40.0067780Z ab20f402dc6f: Download complete
+2026-11-01T22:58:40.0742584Z a3afc412b613: Verifying Checksum
+2026-11-01T22:58:40.0742960Z a3afc412b613: Download complete
+2026-11-01T22:58:40.2109484Z f9b5b03a559e: Verifying Checksum
+2026-11-01T22:58:40.2110390Z f9b5b03a559e: Download complete
+2026-11-01T22:58:40.3955256Z 3b4307789f50: Download complete
+2026-11-01T22:58:40.5695171Z 58571fc518c5: Verifying Checksum
+2026-11-01T22:58:40.5695568Z 58571fc518c5: Download complete
+2026-11-01T22:58:40.7463329Z 2becab109f47: Verifying Checksum
+2026-11-01T22:58:40.7463704Z 2becab109f47: Download complete
+2026-11-01T22:58:40.7690357Z b71b8622ab3f: Verifying Checksum
+2026-11-01T22:58:40.7692811Z b71b8622ab3f: Download complete
+2026-11-01T22:58:41.2255360Z 51a56fdb7118: Download complete
+2026-11-01T22:58:41.2551542Z 0a2200cec51c: Verifying Checksum
+2026-11-01T22:58:41.2556172Z 0a2200cec51c: Download complete
+2026-11-01T22:58:41.4314384Z 37173500316b: Verifying Checksum
+2026-11-01T22:58:41.4314903Z 37173500316b: Download complete
+2026-11-01T22:58:41.4354785Z 8f235d762bf6: Verifying Checksum
+2026-11-01T22:58:41.4355550Z 8f235d762bf6: Download complete
+2026-11-01T22:58:41.6144361Z 2fdcc8b83d1d: Verifying Checksum
+2026-11-01T22:58:41.6148697Z 2fdcc8b83d1d: Download complete
+2026-11-01T22:58:41.6730759Z fa11cfb60409: Verifying Checksum
+2026-11-01T22:58:41.6731754Z fa11cfb60409: Download complete
+2026-11-01T22:58:41.7322906Z d06dd6319b47: Verifying Checksum
+2026-11-01T22:58:41.7323423Z d06dd6319b47: Download complete
+2026-11-01T22:58:41.7928682Z 8103ae60d4a2: Verifying Checksum
+2026-11-01T22:58:41.7929251Z 8103ae60d4a2: Download complete
+2026-11-01T22:58:41.9084520Z dca9c53526f0: Verifying Checksum
+2026-11-01T22:58:41.9084963Z dca9c53526f0: Download complete
+2026-11-01T22:58:41.9160554Z 0ac2d6f63403: Verifying Checksum
+2026-11-01T22:58:41.9160914Z 0ac2d6f63403: Download complete
+2026-11-01T22:58:42.1091907Z 262d0301190b: Verifying Checksum
+2026-11-01T22:58:42.1093602Z 262d0301190b: Download complete
+2026-11-01T22:58:42.2338260Z ab4fd71ce45a: Verifying Checksum
+2026-11-01T22:58:42.2338948Z ab4fd71ce45a: Download complete
+2026-11-01T22:58:42.3111593Z 721b47947ac4: Verifying Checksum
+2026-11-01T22:58:42.3112398Z 721b47947ac4: Download complete
+2026-11-01T22:58:42.4877262Z d44046465503: Verifying Checksum
+2026-11-01T22:58:42.4879159Z d44046465503: Download complete
+2026-11-01T22:58:42.6630474Z 26d82a051384: Download complete
+2026-11-01T22:58:43.4280981Z d62b4203b486: Verifying Checksum
+2026-11-01T22:58:43.4281590Z d62b4203b486: Download complete
+2026-11-01T22:58:44.0728294Z 4fe137cf5212: Verifying Checksum
+2026-11-01T22:58:44.0728574Z 4fe137cf5212: Download complete
+2026-11-01T22:58:45.3027087Z 9bf581ba34fd: Pull complete
+2026-11-01T22:58:51.7928734Z 6c4bd78e0c43: Pull complete
+2026-11-01T22:58:52.0167218Z 799649323729: Pull complete
+2026-11-01T22:58:52.0474614Z 1ae4fb0c8a4a: Pull complete
+2026-11-01T22:58:58.7351979Z b237ecdf51a3: Pull complete
+2026-11-01T22:58:58.9195280Z b16ee2e05313: Pull complete
+2026-11-01T22:58:59.0877137Z adb989234928: Pull complete
+2026-11-01T22:58:59.2682742Z e3a01a28a7ad: Pull complete
+2026-11-01T22:58:59.4600192Z ca0e54137564: Pull complete
+2026-11-01T22:58:59.6406276Z e88b1a083917: Pull complete
+2026-11-01T22:58:59.8487275Z d10f17e04c11: Pull complete
+2026-11-01T22:59:00.2019586Z d38ea67f8871: Pull complete
+2026-11-01T22:59:00.2306776Z 8153ec1c4f57: Pull complete
+2026-11-01T22:59:00.2382124Z 0546e39b6053: Pull complete
+2026-11-01T22:59:00.2451963Z 5ebdad05b03e: Pull complete
+2026-11-01T22:59:00.3856286Z 6435672f1863: Pull complete
+2026-11-01T22:59:00.3935920Z 5c5711f4465e: Pull complete
+2026-11-01T22:59:00.4163568Z 7264e6096409: Pull complete
+2026-11-01T22:59:00.4248208Z 2202cd0e879d: Pull complete
+2026-11-01T22:59:00.4352749Z c31277fa0297: Pull complete
+2026-11-01T22:59:00.4413811Z 4f4fb700ef54: Pull complete
+2026-11-01T22:59:00.4501481Z 8e159597691d: Pull complete
+2026-11-01T22:59:00.4582252Z c0ebccf77ab9: Pull complete
+2026-11-01T22:59:00.4676527Z b7093a70d5d5: Pull complete
+2026-11-01T22:59:00.4801092Z f2a57dfa5358: Pull complete
+2026-11-01T22:59:00.4879026Z 93b66eaa292a: Pull complete
+2026-11-01T22:59:00.5004973Z 0aba2ee32120: Pull complete
+2026-11-01T22:59:00.5680780Z 60033bb88c74: Pull complete
+2026-11-01T22:59:00.9077527Z 883b72a7df53: Pull complete
+2026-11-01T22:59:00.9233891Z 9aaba240d281: Pull complete
+2026-11-01T22:59:00.9319067Z fd24333fa18a: Pull complete
+2026-11-01T22:59:00.9391838Z ab20f402dc6f: Pull complete
+2026-11-01T22:59:00.9479678Z a3afc412b613: Pull complete
+2026-11-01T22:59:35.4071749Z 0a2200cec51c: Pull complete
+2026-11-01T22:59:35.4154319Z f9b5b03a559e: Pull complete
+2026-11-01T22:59:37.0727061Z 2becab109f47: Pull complete
+2026-11-01T22:59:37.1008546Z 3b4307789f50: Pull complete
+2026-11-01T22:59:37.1086849Z 58571fc518c5: Pull complete
+2026-11-01T22:59:37.1207936Z b71b8622ab3f: Pull complete
+2026-11-01T22:59:43.3252789Z d06dd6319b47: Pull complete
+2026-11-01T22:59:43.3361459Z 51a56fdb7118: Pull complete
+2026-11-01T22:59:43.3652888Z 8f235d762bf6: Pull complete
+2026-11-01T22:59:43.3723802Z 37173500316b: Pull complete
+2026-11-01T22:59:43.8079694Z fa11cfb60409: Pull complete
+2026-11-01T22:59:43.8151652Z 2fdcc8b83d1d: Pull complete
+2026-11-01T22:59:43.8518324Z 8103ae60d4a2: Pull complete
+2026-11-01T22:59:43.9728585Z 0ac2d6f63403: Pull complete
+2026-11-01T22:59:43.9873823Z dca9c53526f0: Pull complete
+2026-11-01T23:00:19.1028785Z d62b4203b486: Pull complete
+2026-11-01T23:00:19.1146785Z 262d0301190b: Pull complete
+2026-11-01T23:00:19.2555293Z ab4fd71ce45a: Pull complete
+2026-11-01T23:00:21.9621090Z 721b47947ac4: Pull complete
+2026-11-01T23:00:45.5154835Z 4fe137cf5212: Pull complete
+2026-11-01T23:00:45.5213726Z d44046465503: Pull complete
+2026-11-01T23:01:12.2001051Z 26d82a051384: Pull complete
+2026-11-01T23:01:12.2029268Z Digest: sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T23:01:12.2035560Z Status: Downloaded newer image for framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-01T23:01:12.5433963Z [wp] Prover Alt-Ergo   2.5.4  [Alt-Ergo:2.5.4] (alt-ergo) (counter-examples)
+2026-11-01T23:01:24.0188802Z 32.1 (Germanium)
+2026-11-01T23:01:24.0189215Z [kernel] Parsing /repo/phase20-receipt.c (with preprocessing)
+2026-11-01T23:01:24.0189621Z [wp] Running WP plugin...
+2026-11-01T23:01:24.0189946Z [rte:annot] annotating function calculate_hash
+2026-11-01T23:01:24.0190447Z [kernel:annot:missing-spec] /repo/include/tombstone/fingerprint.h:52: Warning: 
+2026-11-01T23:01:24.0191042Z   Neither code nor explicit exits and terminates for function tb_sha256_new,
+2026-11-01T23:01:24.0191631Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-01T23:01:24.0192212Z [kernel:annot:missing-spec] /repo/include/tombstone/fingerprint.h:53: Warning: 
+2026-11-01T23:01:24.0193443Z   Neither code nor explicit exits and terminates for function tb_sha256_update,
+2026-11-01T23:01:24.0194258Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-01T23:01:24.0194866Z [kernel:annot:missing-spec] /repo/include/tombstone/fingerprint.h:54: Warning: 
+2026-11-01T23:01:24.0195525Z   Neither code nor explicit exits and terminates for function tb_sha256_final,
+2026-11-01T23:01:24.0196086Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-01T23:01:24.0196588Z [kernel:annot:missing-spec] /repo/include/tombstone/fingerprint.h:56: Warning: 
+2026-11-01T23:01:24.0197125Z   Neither code nor explicit exits and terminates for function tb_sha256_free,
+2026-11-01T23:01:24.0197611Z    generating default clauses. See -generated-spec-* options for more info
+2026-11-01T23:01:24.0198008Z [wp] 51 goals scheduled
+2026-11-01T23:01:24.0198242Z [wp] Proved goals:   51 / 51
+2026-11-01T23:01:24.0198524Z   Qed:              43 (7ms-34ms-563ms)
+2026-11-01T23:01:24.0198809Z   Alt-Ergo 2.5.4:    8 (15ms-63ms-153ms)
+2026-11-01T23:01:24.0199180Z [wp:pedantic-assigns] /repo/phase20-receipt.c:117: Warning: 
+2026-11-01T23:01:24.0199612Z   No \from specification for assigned pointer '*out_ctx'.
+2026-11-01T23:01:24.0199998Z   Callers assumptions might be imprecise.
+2026-11-01T23:01:24.0200396Z [wp:pedantic-assigns] /repo/phase20-receipt.c:117: Warning: 
+2026-11-01T23:01:24.0200840Z   No \from specification for assigned pointer 'p19_owner'.
+2026-11-01T23:01:24.0201225Z   Callers assumptions might be imprecise.
+2026-11-01T23:01:24.0201617Z [wp] /repo/include/tombstone/fingerprint.h:52: Warning: 
+2026-11-01T23:01:24.0202032Z   Memory model hypotheses for function 'tb_sha256_new':
+2026-11-01T23:01:24.0202501Z   /*@
+2026-11-01T23:01:24.0202729Z      behavior wp_bytes:
+2026-11-01T23:01:24.0203110Z        requires \separated(out_ctx, &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0203839Z        ensures \separated(out_ctx, &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0204255Z      */
+2026-11-01T23:01:24.0204519Z   tb_status tb_sha256_new(tb_sha256_ctx **out_ctx);
+2026-11-01T23:01:24.0204942Z [wp] /repo/include/tombstone/fingerprint.h:53: Warning: 
+2026-11-01T23:01:24.0205398Z   Memory model hypotheses for function 'tb_sha256_update':
+2026-11-01T23:01:24.0205765Z   /*@
+2026-11-01T23:01:24.0205980Z      behavior wp_bytes:
+2026-11-01T23:01:24.0206366Z        requires \separated(ctx + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0206921Z        requires \separated(data + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0207384Z      */
+2026-11-01T23:01:24.0207741Z   tb_status tb_sha256_update(tb_sha256_ctx *ctx, void const *data,
+2026-11-01T23:01:24.0208199Z                              size_t length);
+2026-11-01T23:01:24.0208620Z [wp] /repo/include/tombstone/fingerprint.h:54: Warning: 
+2026-11-01T23:01:24.0209163Z   Memory model hypotheses for function 'tb_sha256_final':
+2026-11-01T23:01:24.0209600Z   /*@
+2026-11-01T23:01:24.0209912Z      behavior wp_bytes:
+2026-11-01T23:01:24.0210345Z        requires \separated(ctx + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0210968Z        requires \separated(out + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0211516Z        requires
+2026-11-01T23:01:24.0211924Z          \separated(out + (0 .. 31), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0212371Z      */
+2026-11-01T23:01:24.0212707Z   tb_status tb_sha256_final(tb_sha256_ctx *ctx, unsigned char out[32]);
+2026-11-01T23:01:24.0213327Z [wp:pedantic-assigns] /repo/phase20-receipt.c:154: Warning: 
+2026-11-01T23:01:24.0213784Z   No \from specification for assigned pointer 'p19_owner'.
+2026-11-01T23:01:24.0214194Z   Callers assumptions might be imprecise.
+2026-11-01T23:01:24.0214618Z [wp] /repo/include/tombstone/fingerprint.h:56: Warning: 
+2026-11-01T23:01:24.0215043Z   Memory model hypotheses for function 'tb_sha256_free':
+2026-11-01T23:01:24.0215446Z   /*@
+2026-11-01T23:01:24.0215600Z      behavior wp_bytes:
+2026-11-01T23:01:24.0215858Z        requires \separated(ctx + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0216354Z      */
+2026-11-01T23:01:24.0216576Z   void tb_sha256_free(tb_sha256_ctx *ctx);
+2026-11-01T23:01:24.0216989Z [wp:pedantic-assigns] /repo/phase20-receipt.c:339: Warning: 
+2026-11-01T23:01:24.0217346Z   No \from specification for assigned pointer 'p19_owner'.
+2026-11-01T23:01:24.0217678Z   Callers assumptions might be imprecise.
+2026-11-01T23:01:24.0217910Z [wp] /repo/phase20-receipt.c:349: Warning: 
+2026-11-01T23:01:24.0218247Z   Memory model hypotheses for function 'calculate_hash':
+2026-11-01T23:01:24.0218500Z   /*@
+2026-11-01T23:01:24.0218655Z      behavior wp_bytes:
+2026-11-01T23:01:24.0218926Z        requires \separated(out + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0219277Z        requires
+2026-11-01T23:01:24.0219498Z          \separated(out + (0 .. 31), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0219920Z        requires \separated(r + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0220182Z      */
+2026-11-01T23:01:24.0220445Z   static tb_status calculate_hash(tb_receipt_v1 const *r, unsigned char out[32]);
+2026-11-01T23:01:24.0220924Z [ { "goal": "bytes_calculate_hash_terminates",
+2026-11-01T23:01:24.0221350Z     "property": "calculate_hash_terminates", "file": "", "line": 0,
+2026-11-01T23:01:24.0221727Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0222143Z     "verdict": "valid",
+2026-11-01T23:01:24.0222412Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0222663Z     "proved": 1 },
+2026-11-01T23:01:24.0222840Z   { "goal": "bytes_calculate_hash_ensures",
+2026-11-01T23:01:24.0223659Z     "property": "calculate_hash_ensures", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0224105Z     "line": 340, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0224375Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0224715Z     "provers": [ { "prover": "qed", "time": 0.503, "success": 0 },
+2026-11-01T23:01:24.0225035Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0405, "success": 1 } ],
+2026-11-01T23:01:24.0225346Z     "proved": 1 },
+2026-11-01T23:01:24.0225613Z   { "goal": "bytes_calculate_hash_ensures_failure_preserves_output",
+2026-11-01T23:01:24.0225939Z     "property": "calculate_hash_ensures_failure_preserves_output",
+2026-11-01T23:01:24.0245007Z     "file": "/repo/phase20-receipt.c", "line": 343,
+2026-11-01T23:01:24.0245418Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0245769Z     "verdict": "valid",
+2026-11-01T23:01:24.0246016Z     "provers": [ { "prover": "qed", "time": 0.558, "success": 0 },
+2026-11-01T23:01:24.0246347Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.153, "success": 1 } ],
+2026-11-01T23:01:24.0246696Z     "proved": 1 },
+2026-11-01T23:01:24.0246897Z   { "goal": "bytes_calculate_hash_ensures_cleanup",
+2026-11-01T23:01:24.0247190Z     "property": "calculate_hash_ensures_cleanup",
+2026-11-01T23:01:24.0247514Z     "file": "/repo/phase20-receipt.c", "line": 345,
+2026-11-01T23:01:24.0247813Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0248161Z     "verdict": "valid",
+2026-11-01T23:01:24.0248384Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0248627Z     "proved": 1 },
+2026-11-01T23:01:24.0248916Z   { "goal": "bytes_calculate_hash_ensures_caller_receipt",
+2026-11-01T23:01:24.0249202Z     "property": "calculate_hash_ensures_caller_receipt",
+2026-11-01T23:01:24.0249467Z     "file": "/repo/phase20-receipt.c", "line": 346,
+2026-11-01T23:01:24.0249826Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0250076Z     "verdict": "valid",
+2026-11-01T23:01:24.0250295Z     "provers": [ { "prover": "qed", "time": 0.563, "success": 0 },
+2026-11-01T23:01:24.0250880Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.133, "success": 1 } ],
+2026-11-01T23:01:24.0251188Z     "proved": 1 },
+2026-11-01T23:01:24.0251577Z   { "goal": "bytes_calculate_hash_exits", "property": "calculate_hash_exits",
+2026-11-01T23:01:24.0251962Z     "file": "", "line": 0, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0252283Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0252533Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0252774Z     "proved": 1 },
+2026-11-01T23:01:24.0253051Z   { "goal": "bytes_calculate_hash_assigns_normal_part01",
+2026-11-01T23:01:24.0253554Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0253888Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0254153Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0254492Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0254755Z     "proved": 1 },
+2026-11-01T23:01:24.0254958Z   { "goal": "bytes_calculate_hash_assigns_normal_part02",
+2026-11-01T23:01:24.0255272Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0255594Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0255844Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0256091Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0256334Z     "proved": 1 },
+2026-11-01T23:01:24.0256695Z   { "goal": "bytes_calculate_hash_assigns_normal_part03",
+2026-11-01T23:01:24.0257017Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0257335Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0257581Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0257825Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0258063Z     "proved": 1 },
+2026-11-01T23:01:24.0258262Z   { "goal": "bytes_calculate_hash_assigns_normal_part04",
+2026-11-01T23:01:24.0258566Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0258886Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0259129Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0259366Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0259597Z     "proved": 1 },
+2026-11-01T23:01:24.0259783Z   { "goal": "bytes_calculate_hash_assigns_normal_part05",
+2026-11-01T23:01:24.0260081Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0260481Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0260727Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0260967Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0261203Z     "proved": 1 },
+2026-11-01T23:01:24.0261392Z   { "goal": "bytes_calculate_hash_assigns_normal_part06",
+2026-11-01T23:01:24.0261698Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0262012Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0262250Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0262488Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0262730Z     "proved": 1 },
+2026-11-01T23:01:24.0262919Z   { "goal": "bytes_calculate_hash_assigns_normal_part07",
+2026-11-01T23:01:24.0263389Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0263863Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0264234Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0264588Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0264848Z     "proved": 1 },
+2026-11-01T23:01:24.0265046Z   { "goal": "bytes_calculate_hash_assigns_normal_part08",
+2026-11-01T23:01:24.0265484Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0265823Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0266168Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0266419Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0266665Z     "proved": 1 },
+2026-11-01T23:01:24.0266864Z   { "goal": "bytes_calculate_hash_assigns_normal_part09",
+2026-11-01T23:01:24.0267179Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0267589Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0267837Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0268080Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0268324Z     "proved": 1 },
+2026-11-01T23:01:24.0268529Z   { "goal": "bytes_calculate_hash_assigns_normal_part10",
+2026-11-01T23:01:24.0268838Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0269151Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0269394Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0269628Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0269861Z     "proved": 1 },
+2026-11-01T23:01:24.0270052Z   { "goal": "bytes_calculate_hash_assigns_normal_part11",
+2026-11-01T23:01:24.0270350Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0270657Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0270905Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0271137Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0271373Z     "proved": 1 },
+2026-11-01T23:01:24.0271563Z   { "goal": "bytes_calculate_hash_assigns_normal_part12",
+2026-11-01T23:01:24.0271859Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0272171Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0272414Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0272645Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0272874Z     "proved": 1 },
+2026-11-01T23:01:24.0273068Z   { "goal": "bytes_calculate_hash_assigns_normal_part13",
+2026-11-01T23:01:24.0273528Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0273838Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0274074Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0274305Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0274535Z     "proved": 1 },
+2026-11-01T23:01:24.0274721Z   { "goal": "bytes_calculate_hash_assigns_normal_part14",
+2026-11-01T23:01:24.0275018Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0275331Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0275588Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0275828Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0276060Z     "proved": 1 },
+2026-11-01T23:01:24.0276247Z   { "goal": "bytes_calculate_hash_assigns_exit_part01",
+2026-11-01T23:01:24.0276549Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0276863Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0277111Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0277342Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0277577Z     "proved": 1 },
+2026-11-01T23:01:24.0277764Z   { "goal": "bytes_calculate_hash_assigns_exit_part02",
+2026-11-01T23:01:24.0278064Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0278491Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0278725Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0279088Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0279328Z     "proved": 1 },
+2026-11-01T23:01:24.0279506Z   { "goal": "bytes_calculate_hash_assigns_exit_part03",
+2026-11-01T23:01:24.0279794Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0280099Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0280337Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0280575Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0280876Z     "proved": 1 },
+2026-11-01T23:01:24.0281096Z   { "goal": "bytes_calculate_hash_assigns_exit_part04",
+2026-11-01T23:01:24.0281392Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0281709Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0281955Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0282193Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0282436Z     "proved": 1 },
+2026-11-01T23:01:24.0282624Z   { "goal": "bytes_calculate_hash_assigns_exit_part05",
+2026-11-01T23:01:24.0282927Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0283401Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0283640Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0283873Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0284107Z     "proved": 1 },
+2026-11-01T23:01:24.0284294Z   { "goal": "bytes_calculate_hash_assigns_exit_part06",
+2026-11-01T23:01:24.0284588Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0284900Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0285142Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0285378Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0285624Z     "proved": 1 },
+2026-11-01T23:01:24.0285809Z   { "goal": "bytes_calculate_hash_assigns_exit_part07",
+2026-11-01T23:01:24.0286104Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0286420Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0286678Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0286920Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0287160Z     "proved": 1 },
+2026-11-01T23:01:24.0287347Z   { "goal": "bytes_calculate_hash_assigns_exit_part08",
+2026-11-01T23:01:24.0287654Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0287974Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0288219Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0288450Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0288684Z     "proved": 1 },
+2026-11-01T23:01:24.0288871Z   { "goal": "bytes_calculate_hash_assigns_exit_part09",
+2026-11-01T23:01:24.0289168Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0289476Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0289716Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0289947Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0290179Z     "proved": 1 },
+2026-11-01T23:01:24.0290364Z   { "goal": "bytes_calculate_hash_assigns_exit_part10",
+2026-11-01T23:01:24.0290660Z     "property": "calculate_hash_assigns", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0290968Z     "line": 339, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0291206Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0291563Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0291790Z     "proved": 1 },
+2026-11-01T23:01:24.0292077Z   { "goal": "bytes_calculate_hash_call_good_receipt_requires",
+2026-11-01T23:01:24.0292406Z     "property": "good_receipt_requires", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0292724Z     "line": 355, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0292969Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0293401Z     "provers": [ { "prover": "qed", "time": 0.00726, "success": 0 },
+2026-11-01T23:01:24.0293724Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0153, "success": 1 } ],
+2026-11-01T23:01:24.0293983Z     "proved": 1 },
+2026-11-01T23:01:24.0294196Z   { "goal": "bytes_calculate_hash_call_format_json_requires",
+2026-11-01T23:01:24.0294513Z     "property": "format_json_requires", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0294826Z     "line": 356, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0295076Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0295313Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0295559Z     "proved": 1 },
+2026-11-01T23:01:24.0295763Z   { "goal": "bytes_calculate_hash_call_format_json_requires_2",
+2026-11-01T23:01:24.0296083Z     "property": "format_json_requires_2", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0296390Z     "line": 356, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0296636Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0296872Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0297106Z     "proved": 1 },
+2026-11-01T23:01:24.0297309Z   { "goal": "bytes_calculate_hash_call_format_json_requires_3",
+2026-11-01T23:01:24.0297624Z     "property": "format_json_requires_3", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0297930Z     "line": 356, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0298172Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0298406Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0298637Z     "proved": 1 },
+2026-11-01T23:01:24.0298839Z   { "goal": "bytes_calculate_hash_call_format_json_requires_4",
+2026-11-01T23:01:24.0299156Z     "property": "format_json_requires_4", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0299463Z     "line": 356, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0299704Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0299934Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0300169Z     "proved": 1 },
+2026-11-01T23:01:24.0300365Z   { "goal": "bytes_calculate_hash_call_format_json_requires_5",
+2026-11-01T23:01:24.0300672Z     "property": "format_json_requires_5", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0300977Z     "line": 356, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0301219Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0301469Z     "provers": [ { "prover": "qed", "time": 0.0106, "success": 0 },
+2026-11-01T23:01:24.0301776Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0339, "success": 1 } ],
+2026-11-01T23:01:24.0302031Z     "proved": 1 },
+2026-11-01T23:01:24.0302228Z   { "goal": "bytes_calculate_hash_call_tb_sha256_new_requires",
+2026-11-01T23:01:24.0302540Z     "property": "tb_sha256_new_requires", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0302856Z     "line": 358, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0303096Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0303496Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0303742Z     "proved": 1 },
+2026-11-01T23:01:24.0303958Z   { "goal": "bytes_calculate_hash_call_tb_sha256_new_requires_2",
+2026-11-01T23:01:24.0304222Z     "property": "tb_sha256_new_requires_2",
+2026-11-01T23:01:24.0304464Z     "file": "/repo/phase20-receipt.c", "line": 358,
+2026-11-01T23:01:24.0304867Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0305124Z     "verdict": "valid",
+2026-11-01T23:01:24.0305433Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0305680Z     "proved": 1 },
+2026-11-01T23:01:24.0305885Z   { "goal": "bytes_calculate_hash_call_tb_sha256_new_requires_3",
+2026-11-01T23:01:24.0306145Z     "property": "tb_sha256_new_requires_3",
+2026-11-01T23:01:24.0306371Z     "file": "/repo/phase20-receipt.c", "line": 358,
+2026-11-01T23:01:24.0306645Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0306892Z     "verdict": "valid",
+2026-11-01T23:01:24.0307194Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0307437Z     "proved": 1 },
+2026-11-01T23:01:24.0307650Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_requires",
+2026-11-01T23:01:24.0307923Z     "property": "tb_sha256_update_requires",
+2026-11-01T23:01:24.0308162Z     "file": "/repo/phase20-receipt.c", "line": 360,
+2026-11-01T23:01:24.0308427Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0308680Z     "verdict": "valid",
+2026-11-01T23:01:24.0308894Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0309125Z     "proved": 1 },
+2026-11-01T23:01:24.0309339Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_requires_2",
+2026-11-01T23:01:24.0309616Z     "property": "tb_sha256_update_requires_2",
+2026-11-01T23:01:24.0309855Z     "file": "/repo/phase20-receipt.c", "line": 360,
+2026-11-01T23:01:24.0310124Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0310367Z     "verdict": "valid",
+2026-11-01T23:01:24.0310571Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0310806Z     "proved": 1 },
+2026-11-01T23:01:24.0311016Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_requires_3",
+2026-11-01T23:01:24.0311296Z     "property": "tb_sha256_update_requires_3",
+2026-11-01T23:01:24.0311526Z     "file": "/repo/phase20-receipt.c", "line": 360,
+2026-11-01T23:01:24.0311793Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0312036Z     "verdict": "valid",
+2026-11-01T23:01:24.0312249Z     "provers": [ { "prover": "qed", "time": 0.025, "success": 0 },
+2026-11-01T23:01:24.0312548Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0409, "success": 1 } ],
+2026-11-01T23:01:24.0312808Z     "proved": 1 },
+2026-11-01T23:01:24.0313014Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_2_requires",
+2026-11-01T23:01:24.0313512Z     "property": "tb_sha256_update_requires_4",
+2026-11-01T23:01:24.0313749Z     "file": "/repo/phase20-receipt.c", "line": 361,
+2026-11-01T23:01:24.0314027Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0314278Z     "verdict": "valid",
+2026-11-01T23:01:24.0314485Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0314726Z     "proved": 1 },
+2026-11-01T23:01:24.0314940Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_2_requires_2",
+2026-11-01T23:01:24.0315223Z     "property": "tb_sha256_update_requires_5",
+2026-11-01T23:01:24.0315468Z     "file": "/repo/phase20-receipt.c", "line": 361,
+2026-11-01T23:01:24.0315752Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0316015Z     "verdict": "valid",
+2026-11-01T23:01:24.0316245Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0316487Z     "proved": 1 },
+2026-11-01T23:01:24.0316708Z   { "goal": "bytes_calculate_hash_call_tb_sha256_update_2_requires_3",
+2026-11-01T23:01:24.0316993Z     "property": "tb_sha256_update_requires_6",
+2026-11-01T23:01:24.0317234Z     "file": "/repo/phase20-receipt.c", "line": 361,
+2026-11-01T23:01:24.0317508Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0317759Z     "verdict": "valid",
+2026-11-01T23:01:24.0318124Z     "provers": [ { "prover": "qed", "time": 0.0292, "success": 0 },
+2026-11-01T23:01:24.0318430Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0424, "success": 1 } ],
+2026-11-01T23:01:24.0318781Z     "proved": 1 },
+2026-11-01T23:01:24.0318996Z   { "goal": "bytes_calculate_hash_call_tb_sha256_final_requires",
+2026-11-01T23:01:24.0319257Z     "property": "tb_sha256_final_requires",
+2026-11-01T23:01:24.0319492Z     "file": "/repo/phase20-receipt.c", "line": 362,
+2026-11-01T23:01:24.0319757Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0319999Z     "verdict": "valid",
+2026-11-01T23:01:24.0320209Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0320451Z     "proved": 1 },
+2026-11-01T23:01:24.0320661Z   { "goal": "bytes_calculate_hash_call_tb_sha256_final_requires_2",
+2026-11-01T23:01:24.0320935Z     "property": "tb_sha256_final_requires_2",
+2026-11-01T23:01:24.0321178Z     "file": "/repo/phase20-receipt.c", "line": 362,
+2026-11-01T23:01:24.0321447Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0321693Z     "verdict": "valid",
+2026-11-01T23:01:24.0321908Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0322147Z     "proved": 1 },
+2026-11-01T23:01:24.0322356Z   { "goal": "bytes_calculate_hash_call_tb_sha256_final_requires_3",
+2026-11-01T23:01:24.0322623Z     "property": "tb_sha256_final_requires_3",
+2026-11-01T23:01:24.0322853Z     "file": "/repo/phase20-receipt.c", "line": 362,
+2026-11-01T23:01:24.0323244Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0323515Z     "verdict": "valid",
+2026-11-01T23:01:24.0323727Z     "provers": [ { "prover": "qed", "time": 0.0358, "success": 0 },
+2026-11-01T23:01:24.0324029Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0439, "success": 1 } ],
+2026-11-01T23:01:24.0324284Z     "proved": 1 },
+2026-11-01T23:01:24.0324517Z   { "goal": "bytes_calculate_hash_call_tb_sha256_final_requires_4",
+2026-11-01T23:01:24.0324786Z     "property": "tb_sha256_final_requires_4",
+2026-11-01T23:01:24.0325016Z     "file": "/repo/phase20-receipt.c", "line": 362,
+2026-11-01T23:01:24.0325283Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0325529Z     "verdict": "valid",
+2026-11-01T23:01:24.0325744Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0325986Z     "proved": 1 },
+2026-11-01T23:01:24.0326184Z   { "goal": "bytes_calculate_hash_call_tb_sha256_free_requires",
+2026-11-01T23:01:24.0326506Z     "property": "tb_sha256_free_requires", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0326832Z     "line": 363, "function": "calculate_hash", "smoke": false,
+2026-11-01T23:01:24.0327085Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0327324Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0327560Z     "proved": 1 },
+2026-11-01T23:01:24.0327777Z   { "goal": "bytes_calculate_hash_call_tb_sha256_free_requires_2",
+2026-11-01T23:01:24.0328047Z     "property": "tb_sha256_free_requires_2",
+2026-11-01T23:01:24.0328284Z     "file": "/repo/phase20-receipt.c", "line": 363,
+2026-11-01T23:01:24.0328548Z     "function": "calculate_hash", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0328797Z     "verdict": "valid",
+2026-11-01T23:01:24.0328999Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0329239Z     "proved": 1 } ]
+2026-11-01T23:01:24.0329398Z 32.1 (Germanium)
+2026-11-01T23:01:24.0329631Z [kernel] Parsing /repo/phase20-receipt.c (with preprocessing)
+2026-11-01T23:01:24.0329896Z [wp] Running WP plugin...
+2026-11-01T23:01:24.0330114Z [rte:annot] annotating function tb_receipt_verify_chain
+2026-11-01T23:01:24.0330361Z [wp] 62 goals scheduled
+2026-11-01T23:01:24.0330543Z [wp] Proved goals:   62 / 62
+2026-11-01T23:01:24.0330744Z   Qed:              46 (31ms-19ms-106ms)
+2026-11-01T23:01:24.0330957Z   Alt-Ergo 2.5.4:   16 (14ms-45ms-107ms)
+2026-11-01T23:01:24.0331355Z [wp:pedantic-assigns] /repo/phase20-receipt.c:611: Warning: 
+2026-11-01T23:01:24.0331672Z   No \from specification for assigned pointer 'p19_owner'.
+2026-11-01T23:01:24.0332025Z   Callers assumptions might be imprecise.
+2026-11-01T23:01:24.0332261Z [wp] /repo/phase20-receipt.c:631: Warning: 
+2026-11-01T23:01:24.0332541Z   Memory model hypotheses for function 'tb_receipt_verify_chain':
+2026-11-01T23:01:24.0332797Z   /*@
+2026-11-01T23:01:24.0332947Z      behavior wp_bytes:
+2026-11-01T23:01:24.0333253Z        requires
+2026-11-01T23:01:24.0333497Z          \separated(receipts + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0333766Z        requires
+2026-11-01T23:01:24.0333999Z          \separated(trusted_head + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0334270Z      */
+2026-11-01T23:01:24.0334482Z   tb_status tb_receipt_verify_chain(tb_receipt_v1 const *receipts,
+2026-11-01T23:01:24.0334754Z                                     size_t count,
+2026-11-01T23:01:24.0335007Z                                     unsigned char const trusted_head[32]);
+2026-11-01T23:01:24.0335303Z [wp:pedantic-assigns] /repo/phase20-receipt.c:339: Warning: 
+2026-11-01T23:01:24.0335604Z   No \from specification for assigned pointer 'p19_owner'.
+2026-11-01T23:01:24.0335863Z   Callers assumptions might be imprecise.
+2026-11-01T23:01:24.0336092Z [wp] /repo/phase20-receipt.c:349: Warning: 
+2026-11-01T23:01:24.0336355Z   Memory model hypotheses for function 'calculate_hash':
+2026-11-01T23:01:24.0336590Z   /*@
+2026-11-01T23:01:24.0336742Z      behavior wp_bytes:
+2026-11-01T23:01:24.0336987Z        requires \separated(out + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0337260Z        requires
+2026-11-01T23:01:24.0337475Z          \separated(out + (0 .. 31), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0337808Z        requires \separated(r + (..), &p19_effect, &p19_owner, &p19_phase);
+2026-11-01T23:01:24.0338082Z      */
+2026-11-01T23:01:24.0338341Z   static tb_status calculate_hash(tb_receipt_v1 const *r, unsigned char out[32]);
+2026-11-01T23:01:24.0338680Z [ { "goal": "bytes_tb_receipt_verify_chain_terminates",
+2026-11-01T23:01:24.0339007Z     "property": "tb_receipt_verify_chain_terminates", "file": "", "line": 0,
+2026-11-01T23:01:24.0339366Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0339640Z     "verdict": "valid",
+2026-11-01T23:01:24.0339862Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0340108Z     "proved": 1 },
+2026-11-01T23:01:24.0340299Z   { "goal": "bytes_tb_receipt_verify_chain_ensures",
+2026-11-01T23:01:24.0340555Z     "property": "tb_receipt_verify_chain_ensures",
+2026-11-01T23:01:24.0340807Z     "file": "/repo/phase20-receipt.c", "line": 612,
+2026-11-01T23:01:24.0341102Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0341379Z     "verdict": "valid",
+2026-11-01T23:01:24.0341602Z     "provers": [ { "prover": "qed", "time": 0.0947, "success": 0 },
+2026-11-01T23:01:24.0341915Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0264, "success": 1 } ],
+2026-11-01T23:01:24.0342182Z     "proved": 1 },
+2026-11-01T23:01:24.0342378Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_2",
+2026-11-01T23:01:24.0342635Z     "property": "tb_receipt_verify_chain_ensures_2",
+2026-11-01T23:01:24.0342878Z     "file": "/repo/phase20-receipt.c", "line": 613,
+2026-11-01T23:01:24.0343323Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0343599Z     "verdict": "valid",
+2026-11-01T23:01:24.0343826Z     "provers": [ { "prover": "qed", "time": 0.106, "success": 0 },
+2026-11-01T23:01:24.0344131Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0363, "success": 1 } ],
+2026-11-01T23:01:24.0344388Z     "proved": 1 },
+2026-11-01T23:01:24.0344573Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_3",
+2026-11-01T23:01:24.0344823Z     "property": "tb_receipt_verify_chain_ensures_3",
+2026-11-01T23:01:24.0345213Z     "file": "/repo/phase20-receipt.c", "line": 615,
+2026-11-01T23:01:24.0345496Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0345856Z     "verdict": "valid",
+2026-11-01T23:01:24.0346069Z     "provers": [ { "prover": "qed", "time": 0.1, "success": 0 },
+2026-11-01T23:01:24.0346360Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0486, "success": 1 } ],
+2026-11-01T23:01:24.0346618Z     "proved": 1 },
+2026-11-01T23:01:24.0346802Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_4",
+2026-11-01T23:01:24.0347050Z     "property": "tb_receipt_verify_chain_ensures_4",
+2026-11-01T23:01:24.0347292Z     "file": "/repo/phase20-receipt.c", "line": 619,
+2026-11-01T23:01:24.0347573Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0347833Z     "verdict": "valid",
+2026-11-01T23:01:24.0348045Z     "provers": [ { "prover": "qed", "time": 0.0641, "success": 0 },
+2026-11-01T23:01:24.0348351Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.044, "success": 1 } ],
+2026-11-01T23:01:24.0348611Z     "proved": 1 },
+2026-11-01T23:01:24.0348828Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_cleanup",
+2026-11-01T23:01:24.0349112Z     "property": "tb_receipt_verify_chain_ensures_cleanup",
+2026-11-01T23:01:24.0349370Z     "file": "/repo/phase20-receipt.c", "line": 622,
+2026-11-01T23:01:24.0349649Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0349916Z     "verdict": "valid",
+2026-11-01T23:01:24.0350126Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0350362Z     "proved": 1 },
+2026-11-01T23:01:24.0350582Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_caller_receipts",
+2026-11-01T23:01:24.0350897Z     "property": "tb_receipt_verify_chain_ensures_caller_receipts",
+2026-11-01T23:01:24.0351167Z     "file": "/repo/phase20-receipt.c", "line": 623,
+2026-11-01T23:01:24.0351440Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0351704Z     "verdict": "valid",
+2026-11-01T23:01:24.0351904Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0352138Z     "proved": 1 },
+2026-11-01T23:01:24.0352335Z   { "goal": "bytes_tb_receipt_verify_chain_ensures_caller_head",
+2026-11-01T23:01:24.0352621Z     "property": "tb_receipt_verify_chain_ensures_caller_head",
+2026-11-01T23:01:24.0352879Z     "file": "/repo/phase20-receipt.c", "line": 627,
+2026-11-01T23:01:24.0353286Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0353565Z     "verdict": "valid",
+2026-11-01T23:01:24.0353768Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0354004Z     "proved": 1 },
+2026-11-01T23:01:24.0354182Z   { "goal": "bytes_tb_receipt_verify_chain_exits",
+2026-11-01T23:01:24.0354464Z     "property": "tb_receipt_verify_chain_exits", "file": "", "line": 0,
+2026-11-01T23:01:24.0354795Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0355054Z     "verdict": "valid",
+2026-11-01T23:01:24.0355264Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0355499Z     "proved": 1 },
+2026-11-01T23:01:24.0355727Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_established",
+2026-11-01T23:01:24.0356029Z     "property": "tb_receipt_verify_chain_loop_invariant",
+2026-11-01T23:01:24.0356284Z     "file": "/repo/phase20-receipt.c", "line": 639,
+2026-11-01T23:01:24.0356591Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0356860Z     "verdict": "valid",
+2026-11-01T23:01:24.0357066Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0357298Z     "proved": 1 },
+2026-11-01T23:01:24.0357514Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_preserved",
+2026-11-01T23:01:24.0357809Z     "property": "tb_receipt_verify_chain_loop_invariant",
+2026-11-01T23:01:24.0358181Z     "file": "/repo/phase20-receipt.c", "line": 639,
+2026-11-01T23:01:24.0358467Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0358855Z     "verdict": "valid",
+2026-11-01T23:01:24.0359158Z     "provers": [ { "prover": "qed", "time": 0.103, "success": 0 },
+2026-11-01T23:01:24.0359465Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0365, "success": 1 } ],
+2026-11-01T23:01:24.0359722Z     "proved": 1 },
+2026-11-01T23:01:24.0359949Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_2_established",
+2026-11-01T23:01:24.0360259Z     "property": "tb_receipt_verify_chain_loop_invariant_2",
+2026-11-01T23:01:24.0360519Z     "file": "/repo/phase20-receipt.c", "line": 640,
+2026-11-01T23:01:24.0360797Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0361060Z     "verdict": "valid",
+2026-11-01T23:01:24.0361270Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0361508Z     "proved": 1 },
+2026-11-01T23:01:24.0361720Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_2_preserved",
+2026-11-01T23:01:24.0362025Z     "property": "tb_receipt_verify_chain_loop_invariant_2",
+2026-11-01T23:01:24.0362280Z     "file": "/repo/phase20-receipt.c", "line": 640,
+2026-11-01T23:01:24.0362555Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0362817Z     "verdict": "valid",
+2026-11-01T23:01:24.0363028Z     "provers": [ { "prover": "qed", "time": 0.0874, "success": 0 },
+2026-11-01T23:01:24.0363460Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0306, "success": 1 } ],
+2026-11-01T23:01:24.0363722Z     "proved": 1 },
+2026-11-01T23:01:24.0363943Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_3_established",
+2026-11-01T23:01:24.0364243Z     "property": "tb_receipt_verify_chain_loop_invariant_3",
+2026-11-01T23:01:24.0364498Z     "file": "/repo/phase20-receipt.c", "line": 642,
+2026-11-01T23:01:24.0364780Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0365043Z     "verdict": "valid",
+2026-11-01T23:01:24.0365252Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0365485Z     "proved": 1 },
+2026-11-01T23:01:24.0365697Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_3_preserved",
+2026-11-01T23:01:24.0365999Z     "property": "tb_receipt_verify_chain_loop_invariant_3",
+2026-11-01T23:01:24.0366252Z     "file": "/repo/phase20-receipt.c", "line": 642,
+2026-11-01T23:01:24.0366530Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0366791Z     "verdict": "valid",
+2026-11-01T23:01:24.0366996Z     "provers": [ { "prover": "qed", "time": 0.0807, "success": 0 },
+2026-11-01T23:01:24.0367287Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0419, "success": 1 } ],
+2026-11-01T23:01:24.0367535Z     "proved": 1 },
+2026-11-01T23:01:24.0367750Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_4_established",
+2026-11-01T23:01:24.0368053Z     "property": "tb_receipt_verify_chain_loop_invariant_4",
+2026-11-01T23:01:24.0368314Z     "file": "/repo/phase20-receipt.c", "line": 644,
+2026-11-01T23:01:24.0368595Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0368858Z     "verdict": "valid",
+2026-11-01T23:01:24.0369060Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0369293Z     "proved": 1 },
+2026-11-01T23:01:24.0369509Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_4_preserved",
+2026-11-01T23:01:24.0369800Z     "property": "tb_receipt_verify_chain_loop_invariant_4",
+2026-11-01T23:01:24.0370052Z     "file": "/repo/phase20-receipt.c", "line": 644,
+2026-11-01T23:01:24.0370322Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0370584Z     "verdict": "valid",
+2026-11-01T23:01:24.0370798Z     "provers": [ { "prover": "qed", "time": 0.0955, "success": 0 },
+2026-11-01T23:01:24.0371226Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.107, "success": 1 } ],
+2026-11-01T23:01:24.0371480Z     "proved": 1 },
+2026-11-01T23:01:24.0371787Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_5_established",
+2026-11-01T23:01:24.0372105Z     "property": "tb_receipt_verify_chain_loop_invariant_5",
+2026-11-01T23:01:24.0372368Z     "file": "/repo/phase20-receipt.c", "line": 647,
+2026-11-01T23:01:24.0372655Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0372932Z     "verdict": "valid",
+2026-11-01T23:01:24.0373276Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0373523Z     "proved": 1 },
+2026-11-01T23:01:24.0373745Z   { "goal": "bytes_tb_receipt_verify_chain_loop_invariant_5_preserved",
+2026-11-01T23:01:24.0374045Z     "property": "tb_receipt_verify_chain_loop_invariant_5",
+2026-11-01T23:01:24.0374299Z     "file": "/repo/phase20-receipt.c", "line": 647,
+2026-11-01T23:01:24.0374581Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0374845Z     "verdict": "valid",
+2026-11-01T23:01:24.0375056Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0375291Z     "proved": 1 },
+2026-11-01T23:01:24.0375508Z   { "goal": "bytes_tb_receipt_verify_chain_assert_rte_mem_access",
+2026-11-01T23:01:24.0375813Z     "property": "tb_receipt_verify_chain_assert_rte_mem_access",
+2026-11-01T23:01:24.0376077Z     "file": "/repo/phase20-receipt.c", "line": 653,
+2026-11-01T23:01:24.0376354Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0376616Z     "verdict": "valid",
+2026-11-01T23:01:24.0376822Z     "provers": [ { "prover": "qed", "time": 0.0307, "success": 0 },
+2026-11-01T23:01:24.0377117Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0142, "success": 1 } ],
+2026-11-01T23:01:24.0377370Z     "proved": 1 },
+2026-11-01T23:01:24.0377583Z   { "goal": "bytes_tb_receipt_verify_chain_assert_rte_mem_access_2",
+2026-11-01T23:01:24.0377930Z     "property": "tb_receipt_verify_chain_assert_rte_mem_access_2",
+2026-11-01T23:01:24.0378217Z     "file": "/repo/phase20-receipt.c", "line": 654,
+2026-11-01T23:01:24.0378494Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0378759Z     "verdict": "valid",
+2026-11-01T23:01:24.0378967Z     "provers": [ { "prover": "qed", "time": 0.0381, "success": 0 },
+2026-11-01T23:01:24.0379262Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0417, "success": 1 } ],
+2026-11-01T23:01:24.0379513Z     "proved": 1 },
+2026-11-01T23:01:24.0379732Z   { "goal": "bytes_tb_receipt_verify_chain_loop_assigns_part1",
+2026-11-01T23:01:24.0380011Z     "property": "tb_receipt_verify_chain_loop_assigns",
+2026-11-01T23:01:24.0380264Z     "file": "/repo/phase20-receipt.c", "line": 648,
+2026-11-01T23:01:24.0380548Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0380816Z     "verdict": "valid",
+2026-11-01T23:01:24.0381023Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0381264Z     "proved": 1 },
+2026-11-01T23:01:24.0381483Z   { "goal": "bytes_tb_receipt_verify_chain_loop_assigns_part2",
+2026-11-01T23:01:24.0381764Z     "property": "tb_receipt_verify_chain_loop_assigns",
+2026-11-01T23:01:24.0382012Z     "file": "/repo/phase20-receipt.c", "line": 648,
+2026-11-01T23:01:24.0382291Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0382555Z     "verdict": "valid",
+2026-11-01T23:01:24.0382757Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0382993Z     "proved": 1 },
+2026-11-01T23:01:24.0383366Z   { "goal": "bytes_tb_receipt_verify_chain_loop_assigns_part3",
+2026-11-01T23:01:24.0383647Z     "property": "tb_receipt_verify_chain_loop_assigns",
+2026-11-01T23:01:24.0383894Z     "file": "/repo/phase20-receipt.c", "line": 648,
+2026-11-01T23:01:24.0384173Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0384552Z     "verdict": "valid",
+2026-11-01T23:01:24.0384757Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0385119Z     "proved": 1 },
+2026-11-01T23:01:24.0385334Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part01",
+2026-11-01T23:01:24.0385613Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0385860Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0386136Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0386401Z     "verdict": "valid",
+2026-11-01T23:01:24.0386607Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0386841Z     "proved": 1 },
+2026-11-01T23:01:24.0387045Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part02",
+2026-11-01T23:01:24.0387315Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0387556Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0387841Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0388109Z     "verdict": "valid",
+2026-11-01T23:01:24.0388314Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0388545Z     "proved": 1 },
+2026-11-01T23:01:24.0388746Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part03",
+2026-11-01T23:01:24.0389017Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0389256Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0389534Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0389798Z     "verdict": "valid",
+2026-11-01T23:01:24.0390002Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0390246Z     "proved": 1 },
+2026-11-01T23:01:24.0390453Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part04",
+2026-11-01T23:01:24.0390727Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0390965Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0391245Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0391508Z     "verdict": "valid",
+2026-11-01T23:01:24.0391710Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0391942Z     "proved": 1 },
+2026-11-01T23:01:24.0392147Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part05",
+2026-11-01T23:01:24.0392416Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0392664Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0392942Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0393339Z     "verdict": "valid",
+2026-11-01T23:01:24.0393552Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0393792Z     "proved": 1 },
+2026-11-01T23:01:24.0394007Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part06",
+2026-11-01T23:01:24.0394285Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0394528Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0394812Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0395082Z     "verdict": "valid",
+2026-11-01T23:01:24.0395291Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0395524Z     "proved": 1 },
+2026-11-01T23:01:24.0395729Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part07",
+2026-11-01T23:01:24.0395998Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0396236Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0396511Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0396773Z     "verdict": "valid",
+2026-11-01T23:01:24.0396977Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0397337Z     "proved": 1 },
+2026-11-01T23:01:24.0397549Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part08",
+2026-11-01T23:01:24.0397912Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0398156Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0398435Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0398701Z     "verdict": "valid",
+2026-11-01T23:01:24.0398900Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0399131Z     "proved": 1 },
+2026-11-01T23:01:24.0399334Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part09",
+2026-11-01T23:01:24.0399601Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0399847Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0400128Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0400387Z     "verdict": "valid",
+2026-11-01T23:01:24.0400595Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0400831Z     "proved": 1 },
+2026-11-01T23:01:24.0401035Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part10",
+2026-11-01T23:01:24.0401304Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0401544Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0401823Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0402088Z     "verdict": "valid",
+2026-11-01T23:01:24.0402300Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0402533Z     "proved": 1 },
+2026-11-01T23:01:24.0402737Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part11",
+2026-11-01T23:01:24.0403005Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0403472Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0403807Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0404219Z     "verdict": "valid",
+2026-11-01T23:01:24.0404586Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0404969Z     "proved": 1 },
+2026-11-01T23:01:24.0405305Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part12",
+2026-11-01T23:01:24.0405772Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0406117Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0406578Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0407006Z     "verdict": "valid",
+2026-11-01T23:01:24.0407230Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0407479Z     "proved": 1 },
+2026-11-01T23:01:24.0407705Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part13",
+2026-11-01T23:01:24.0407982Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0408227Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0408522Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0408796Z     "verdict": "valid",
+2026-11-01T23:01:24.0409007Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0409243Z     "proved": 1 },
+2026-11-01T23:01:24.0409451Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part14",
+2026-11-01T23:01:24.0409724Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0409970Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0410248Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0410516Z     "verdict": "valid",
+2026-11-01T23:01:24.0410721Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0410960Z     "proved": 1 },
+2026-11-01T23:01:24.0411166Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part15",
+2026-11-01T23:01:24.0411435Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0411850Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0412143Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0412515Z     "verdict": "valid",
+2026-11-01T23:01:24.0412735Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0412977Z     "proved": 1 },
+2026-11-01T23:01:24.0413366Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part16",
+2026-11-01T23:01:24.0413772Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0414128Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0414499Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0414776Z     "verdict": "valid",
+2026-11-01T23:01:24.0414990Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0415231Z     "proved": 1 },
+2026-11-01T23:01:24.0415450Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part17",
+2026-11-01T23:01:24.0415730Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0415979Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0416537Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0416931Z     "verdict": "valid",
+2026-11-01T23:01:24.0417323Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0417731Z     "proved": 1 },
+2026-11-01T23:01:24.0418053Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_normal_part18",
+2026-11-01T23:01:24.0418477Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0418834Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0419213Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0419671Z     "verdict": "valid",
+2026-11-01T23:01:24.0419999Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0420431Z     "proved": 1 },
+2026-11-01T23:01:24.0420756Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part1",
+2026-11-01T23:01:24.0463421Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0463792Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0464120Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0464411Z     "verdict": "valid",
+2026-11-01T23:01:24.0464637Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0464883Z     "proved": 1 },
+2026-11-01T23:01:24.0465097Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part2",
+2026-11-01T23:01:24.0465385Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0465644Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0465936Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0466205Z     "verdict": "valid",
+2026-11-01T23:01:24.0466421Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0466675Z     "proved": 1 },
+2026-11-01T23:01:24.0466881Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part3",
+2026-11-01T23:01:24.0467154Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0467399Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0467687Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0467950Z     "verdict": "valid",
+2026-11-01T23:01:24.0468161Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0468396Z     "proved": 1 },
+2026-11-01T23:01:24.0468599Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part4",
+2026-11-01T23:01:24.0468865Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0469107Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0469386Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0469821Z     "verdict": "valid",
+2026-11-01T23:01:24.0470032Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0470266Z     "proved": 1 },
+2026-11-01T23:01:24.0470554Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part5",
+2026-11-01T23:01:24.0470818Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0471057Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0471333Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0471592Z     "verdict": "valid",
+2026-11-01T23:01:24.0471791Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0472022Z     "proved": 1 },
+2026-11-01T23:01:24.0472221Z   { "goal": "bytes_tb_receipt_verify_chain_assigns_exit_part6",
+2026-11-01T23:01:24.0472498Z     "property": "tb_receipt_verify_chain_assigns",
+2026-11-01T23:01:24.0472745Z     "file": "/repo/phase20-receipt.c", "line": 611,
+2026-11-01T23:01:24.0473041Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0473475Z     "verdict": "valid",
+2026-11-01T23:01:24.0473700Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0473939Z     "proved": 1 },
+2026-11-01T23:01:24.0474149Z   { "goal": "bytes_tb_receipt_verify_chain_loop_variant_positive",
+2026-11-01T23:01:24.0474430Z     "property": "tb_receipt_verify_chain_loop_variant",
+2026-11-01T23:01:24.0474683Z     "file": "/repo/phase20-receipt.c", "line": 649,
+2026-11-01T23:01:24.0474968Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0475231Z     "verdict": "valid",
+2026-11-01T23:01:24.0475431Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0475659Z     "proved": 1 },
+2026-11-01T23:01:24.0475861Z   { "goal": "bytes_tb_receipt_verify_chain_loop_variant_decrease",
+2026-11-01T23:01:24.0476134Z     "property": "tb_receipt_verify_chain_loop_variant",
+2026-11-01T23:01:24.0476383Z     "file": "/repo/phase20-receipt.c", "line": 649,
+2026-11-01T23:01:24.0476660Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0476925Z     "verdict": "valid",
+2026-11-01T23:01:24.0477131Z     "provers": [ { "prover": "qed", "time": 0.096, "success": 0 },
+2026-11-01T23:01:24.0477442Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0417, "success": 1 } ],
+2026-11-01T23:01:24.0477700Z     "proved": 1 },
+2026-11-01T23:01:24.0477908Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_requires",
+2026-11-01T23:01:24.0478222Z     "property": "equal32_requires", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0478539Z     "line": 655, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T23:01:24.0478806Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0479043Z     "provers": [ { "prover": "qed", "time": 0.037, "success": 0 },
+2026-11-01T23:01:24.0479335Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0459, "success": 1 } ],
+2026-11-01T23:01:24.0479586Z     "proved": 1 },
+2026-11-01T23:01:24.0479804Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_requires_2",
+2026-11-01T23:01:24.0480130Z     "property": "equal32_requires_2", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0480451Z     "line": 655, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T23:01:24.0480708Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0480952Z     "provers": [ { "prover": "qed", "time": 0.0358, "success": 0 },
+2026-11-01T23:01:24.0481245Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0485, "success": 1 } ],
+2026-11-01T23:01:24.0481496Z     "proved": 1 },
+2026-11-01T23:01:24.0481719Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires",
+2026-11-01T23:01:24.0482072Z     "property": "calculate_hash_requires", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0482404Z     "line": 657, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T23:01:24.0482802Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0483044Z     "provers": [ { "prover": "qed", "time": 0.0965, "success": 0 },
+2026-11-01T23:01:24.0483604Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.0733, "success": 1 } ],
+2026-11-01T23:01:24.0483857Z     "proved": 1 },
+2026-11-01T23:01:24.0484090Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_2",
+2026-11-01T23:01:24.0484386Z     "property": "calculate_hash_requires_2",
+2026-11-01T23:01:24.0484628Z     "file": "/repo/phase20-receipt.c", "line": 657,
+2026-11-01T23:01:24.0484920Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0485185Z     "verdict": "valid",
+2026-11-01T23:01:24.0485393Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0485627Z     "proved": 1 },
+2026-11-01T23:01:24.0485850Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_3",
+2026-11-01T23:01:24.0486131Z     "property": "calculate_hash_requires_3",
+2026-11-01T23:01:24.0486360Z     "file": "/repo/phase20-receipt.c", "line": 657,
+2026-11-01T23:01:24.0486635Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0487060Z     "verdict": "valid",
+2026-11-01T23:01:24.0487401Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0487797Z     "proved": 1 },
+2026-11-01T23:01:24.0488063Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_4",
+2026-11-01T23:01:24.0488358Z     "property": "calculate_hash_requires_4",
+2026-11-01T23:01:24.0488599Z     "file": "/repo/phase20-receipt.c", "line": 657,
+2026-11-01T23:01:24.0488892Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0489162Z     "verdict": "valid",
+2026-11-01T23:01:24.0489372Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0489610Z     "proved": 1 },
+2026-11-01T23:01:24.0489838Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_5",
+2026-11-01T23:01:24.0490135Z     "property": "calculate_hash_requires_5",
+2026-11-01T23:01:24.0490367Z     "file": "/repo/phase20-receipt.c", "line": 657,
+2026-11-01T23:01:24.0490648Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0490909Z     "verdict": "valid",
+2026-11-01T23:01:24.0491111Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0491342Z     "proved": 1 },
+2026-11-01T23:01:24.0491561Z   { "goal": "bytes_tb_receipt_verify_chain_call_calculate_hash_requires_6",
+2026-11-01T23:01:24.0491840Z     "property": "calculate_hash_requires_6",
+2026-11-01T23:01:24.0492059Z     "file": "/repo/phase20-receipt.c", "line": 657,
+2026-11-01T23:01:24.0492333Z     "function": "tb_receipt_verify_chain", "smoke": false, "passed": true,
+2026-11-01T23:01:24.0492603Z     "verdict": "valid",
+2026-11-01T23:01:24.0492802Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0493039Z     "proved": 1 },
+2026-11-01T23:01:24.0493386Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_2_requires",
+2026-11-01T23:01:24.0493720Z     "property": "equal32_requires_3", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0494046Z     "line": 659, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T23:01:24.0494312Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0494544Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0494777Z     "proved": 1 },
+2026-11-01T23:01:24.0494995Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_2_requires_2",
+2026-11-01T23:01:24.0495318Z     "property": "equal32_requires_4", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0495626Z     "line": 659, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T23:01:24.0495883Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0496126Z     "provers": [ { "prover": "qed", "time": 0.0915, "success": 0 },
+2026-11-01T23:01:24.0496567Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.052, "success": 1 } ],
+2026-11-01T23:01:24.0496829Z     "proved": 1 },
+2026-11-01T23:01:24.0497178Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_3_requires",
+2026-11-01T23:01:24.0497509Z     "property": "equal32_requires_5", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0497844Z     "line": 661, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T23:01:24.0498114Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0498356Z     "provers": [ { "prover": "qed", "time": 0, "success": 1 } ],
+2026-11-01T23:01:24.0498597Z     "proved": 1 },
+2026-11-01T23:01:24.0498813Z   { "goal": "bytes_tb_receipt_verify_chain_call_equal32_3_requires_2",
+2026-11-01T23:01:24.0499132Z     "property": "equal32_requires_6", "file": "/repo/phase20-receipt.c",
+2026-11-01T23:01:24.0499445Z     "line": 661, "function": "tb_receipt_verify_chain", "smoke": false,
+2026-11-01T23:01:24.0499703Z     "passed": true, "verdict": "valid",
+2026-11-01T23:01:24.0499952Z     "provers": [ { "prover": "qed", "time": 0.0385, "success": 0 },
+2026-11-01T23:01:24.0500258Z                  { "prover": "Alt-Ergo:2.5.4", "time": 0.037, "success": 1 } ],
+2026-11-01T23:01:24.0500521Z     "proved": 1 } ]
+2026-11-01T23:01:24.3918992Z ##[group]Run set -euo pipefail
+2026-11-01T23:01:24.3919269Z [36;1mset -euo pipefail[0m
+2026-11-01T23:01:24.3919503Z [36;1mfor log in phase20-results/*.log; do[0m
+2026-11-01T23:01:24.3919753Z [36;1m  target=$(basename "$log" .log)[0m
+2026-11-01T23:01:24.3920025Z [36;1m  python3 tools/check_phase20_wp.py "$target" "$log"[0m
+2026-11-01T23:01:24.3920281Z [36;1mdone[0m
+2026-11-01T23:01:24.3937187Z shell: /usr/bin/bash -e {0}
+2026-11-01T23:01:24.3937406Z ##[endgroup]
+2026-11-01T23:01:24.4240170Z FAIL: Phase 20: execution observed; exact inventory/diagnostics NOT_YET_RECORDED
+2026-11-01T23:01:24.4291021Z ##[error]Process completed with exit code 1.
+2026-11-01T23:01:24.4369031Z ##[group]Run actions/upload-artifact@v4
+2026-11-01T23:01:24.4369286Z with:
+2026-11-01T23:01:24.4369460Z   name: phase20-composition
+2026-11-01T23:01:24.4369682Z   path: phase20-results/
+phase20-*.c
+
+2026-11-01T23:01:24.4369917Z   retention-days: 30
+2026-11-01T23:01:24.4370096Z   if-no-files-found: warn
+2026-11-01T23:01:24.4370280Z   compression-level: 6
+2026-11-01T23:01:24.4370455Z   overwrite: false
+2026-11-01T23:01:24.4370642Z   include-hidden-files: false
+2026-11-01T23:01:24.4370834Z ##[endgroup]
+2026-11-01T23:01:24.5738935Z (node:2625) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-01T23:01:24.5739507Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-01T23:01:24.5803747Z With the provided path, there will be 8 files uploaded
+2026-11-01T23:01:24.5820155Z Artifact name is valid!
+2026-11-01T23:01:24.5820468Z Root directory input is valid!
+2026-11-01T23:01:25.0126772Z Beginning upload of artifact content to blob storage
+2026-11-01T23:01:25.0403731Z (node:2625) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-01T23:01:25.3079395Z Uploaded bytes 30710
+2026-11-01T23:01:25.3685407Z Finished uploading artifact content to blob storage!
+2026-11-01T23:01:25.3686076Z SHA256 digest of uploaded artifact zip is 5f21073c3812413ab12a47c3c9a76e6db9785014b7a40da0b1c27026a9be682e
+2026-11-01T23:01:25.3687461Z Finalizing artifact upload
+2026-11-01T23:01:25.7975398Z Artifact phase20-composition.zip successfully finalized. Artifact ID 13104578946
+2026-11-01T23:01:25.7976342Z Artifact phase20-composition has been successfully uploaded! Final size is 30710 bytes. Artifact ID is 13104578946
+2026-11-01T23:01:25.7981739Z Artifact download URL: https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41359769090/artifacts/13104578946
+2026-11-01T23:01:25.8186500Z Post job cleanup.
+2026-11-01T23:01:25.8858290Z [command]/usr/bin/git version
+2026-11-01T23:01:25.8890385Z git version 2.56.0
+2026-11-01T23:01:25.8917037Z Temporarily overriding HOME='/home/runner/work/_temp/5fcb5d1c-b573-4b87-b9cd-6ad630d80521' before making global git config changes
+2026-11-01T23:01:25.8917756Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T23:01:25.8921270Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T23:01:25.8951298Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T23:01:25.8979985Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T23:01:25.9178369Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T23:01:25.9201914Z http.https://github.com/.extraheader
+2026-11-01T23:01:25.9209838Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-01T23:01:25.9238500Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T23:01:25.9430072Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T23:01:25.9457157Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T23:01:25.9783807Z Cleaning up orphan processes
+2026-11-01T23:01:26.0089894Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

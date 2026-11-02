@@ -1,0 +1,210 @@
+name: Phase 20 — actual receipt validation and formatter contracts
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  model:
+    name: Corrected Bytes model — regressions and string-witness lemma
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject canary and model-gate regressions
+        run: python3 tests/formal/test_phase20_model_gate.py
+      - name: Build isolated pinned correction and reject inconsistent models
+        run: |
+          set -euo pipefail
+          mkdir phase20-model-results
+          chmod 777 phase20-model-results
+          docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-model-results:/out" \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -ec '
+              python3 /repo/tools/phase20_model.py build --output /out/model
+              python3 /repo/tests/formal/run_phase20_model_canary.py --model /out/model --output /out/regressions
+            '
+      - name: Preserve the complete toolchain tree during artifact transport
+        run: tar -czf phase20-corrected-toolchain.tar.gz -C phase20-model-results/model .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase20-corrected-toolchain
+          path: phase20-corrected-toolchain.tar.gz
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase20-model-regressions
+          path: phase20-model-results/regressions/
+          retention-days: 30
+  evidence:
+    needs: model
+    name: Retained evidence integrity and proof acceptance
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replay diagnostic-location regressions without renewing proof evidence
+        run: python3 tests/formal/test_phase20_regressions.py
+      - name: Inspect retained evidence without promoting partial results
+        run: python3 tools/check_phase20_evidence.py --inspect-incomplete
+      - name: Reject altered, incomplete and promoted proof records
+        run: python3 tests/formal/test_phase20_gates.py
+      - name: Require complete positive proofs for acceptance
+        run: python3 tools/check_phase20_evidence.py
+  native:
+    name: Actual formatter fault and byte checks — ${{ matrix.cc }} / ${{ matrix.backend }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+        backend: [openssl, hacl]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Frozen oracle, buffer boundaries and semantic mutations
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          python3 tools/check_hacl_source.py
+          python3 tests/formal/run_phase20_native.py --cc ${{ matrix.cc }} --backend ${{ matrix.backend }}
+  wp:
+    needs: model
+    name: Actual C99 prerequisites — ${{ matrix.group }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [validators, formatters, composition, hex, negative-invalid, negative-size, negative-error]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: phase20-corrected-toolchain
+          path: phase20-toolchain
+      - name: Restore and validate the complete model artifact
+        run: tar -xzf phase20-toolchain/phase20-corrected-toolchain.tar.gz -C phase20-toolchain
+      - name: Preserve previous proofs and generate exact-source units
+        env:
+          GROUP: ${{ matrix.group }}
+        run: |
+          set -euo pipefail
+          python3 tools/check_phase18_receipt.py
+          python3 tools/check_phase19_bridge_evidence.py
+          python3 tests/formal/test_phase20_overlay.py
+          mkdir phase20-results
+          chmod 777 phase20-results
+          python3 tools/phase20_receipt_overlay.py --output phase20-receipt.c
+          for backend in openssl hacl; do
+            python3 tools/phase20_receipt_overlay.py --hex-backend "$backend" --output "phase20-hex-$backend.c"
+          done
+          for mutant in accept-invalid bad-size error-size; do
+            python3 tools/phase20_receipt_overlay.py --mutant "$mutant" --output "phase20-$mutant.c"
+          done
+          for source in phase20-*.c; do
+            gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c "$source" -o /tmp/phase20-check.o
+          done
+          git rev-parse HEAD
+          sha256sum phase20-*.c
+      - name: Run every target with RTE and original structured reports
+        env:
+          GROUP: ${{ matrix.group }}
+        run: |
+          set -euo pipefail
+          docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-results:/out" -v "$PWD/phase20-toolchain:/model:ro" -e GROUP -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -c '
+              case "$GROUP" in
+                validators) targets="zero32 equal32 good_evidence good_receipt";;
+                formatters) targets="hex32 format_json";;
+                composition) targets="calculate_hash tb_receipt_verify_chain";;
+                hex) targets="hex-openssl hex-hacl";;
+                negative-invalid) targets="accept-invalid";;
+                negative-size) targets="bad-size";;
+                negative-error) targets="error-size";;
+              esac
+              frama-c -wp-detect || exit 1
+              status=0
+              for target in $targets; do
+                source=/repo/phase20-receipt.c
+                function=$target
+                timeout=35
+                provers=alt-ergo
+                split=
+                case "$target" in
+                  hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex; split="-wp-auto wp:bitshift -wp-print";;
+                  accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;
+                  bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;
+                esac
+                if [ "$function" = format_json ]; then split="-wp-literals -wp-no-callee-precond -wp-split"; fi
+                (frama-c -version && python3 /repo/tools/phase20_model.py run --output /model -- -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover "$provers" -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1
+              done
+              cat /out/*.log
+              exit "$status"
+            '
+      - name: Fail closed on partial proofs, missing inventories or unexpected diagnostics
+        run: |
+          set -euo pipefail
+          for log in phase20-results/*.log; do
+            target=$(basename "$log" .log)
+            python3 tools/check_phase20_wp.py "$target" "$log" --model phase20-toolchain
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase20-${{ matrix.group }}
+          path: |
+            phase20-results/
+            phase20-*.c
+          retention-days: 30
+  compatibility:
+    name: Original Phase 18 and 19 theorems on corrected model
+    needs: model
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: phase20-corrected-toolchain
+          path: phase20-toolchain
+      - name: Restore and validate the complete model artifact
+        run: tar -xzf phase20-toolchain/phase20-corrected-toolchain.tar.gz -C phase20-toolchain
+      - name: Replay unchanged original contracts with RTE
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          python3 tools/check_phase18_receipt.py
+          python3 tools/check_phase19_evidence.py
+          python3 tools/phase18_wp_overlay.py --output phase20-original-chain.c
+          python3 tools/phase19_equal32_overlay.py --output phase20-original-equal32.c
+          python3 tools/phase19_calculate_hash_overlay.py --output phase20-original-calculate_hash.c
+          python3 tools/phase19_hash_errors_overlay.py --output phase20-original-calculate_hash_errors.c
+          mkdir phase20-compatibility
+          chmod 777 phase20-compatibility
+          docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-compatibility:/out" -v "$PWD/phase20-toolchain:/model:ro" -w /tmp \
+            framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
+            sh -ec '
+              for target in chain equal32 calculate_hash calculate_hash_errors; do
+                function=$target
+                case "$target" in
+                  chain) function=tb_receipt_verify_chain;;
+                  calculate_hash_errors) function=calculate_hash;;
+                esac
+                (frama-c -version && python3 /repo/tools/phase20_model.py run --output /model -- -wp -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover alt-ergo -wp-timeout 35 -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args=-I/repo/include /repo/phase20-original-$target.c && cat /tmp/report.json) > /out/$target.log 2>&1
+                cat /out/$target.log
+              done
+            '
+          python3 tools/check_phase18_wp_log.py phase20-compatibility/chain.log
+          for target in equal32 calculate_hash calculate_hash_errors; do
+            python3 tools/check_phase19_wp_log.py "$target" "phase20-compatibility/$target.log"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase20-original-theorem-replay
+          path: phase20-compatibility/
+          retention-days: 30

@@ -1,0 +1,31 @@
+module CopyExtras
+  use int.Int
+  use map.Map
+  use map.Const
+  use frama_c_wp.memaddr.MemAddr
+  use frama_c_wp.membytes_le.MemBytes
+  goal signed_unsigned_copy:
+    forall m1 m2: memory, a1 a2: addr.
+      bytes m1 -> bytes m2 -> read_uint8 m1 a1 = read_uint8 m2 a2 ->
+      read_sint8 m1 a1 = read_sint8 m2 a2
+  constant empty: memory = const (const 0)
+  constant src: addr = { base = 1; offset = 3 }
+  constant dst: addr = { base = 2; offset = 7 }
+  constant before: addr = { base = 2; offset = 6 }
+  constant after: addr = { base = 2; offset = 8 }
+  constant sm: memory = write_uint8 empty src 99
+  constant dm: memory = write_uint8 (write_uint8 empty before 17) after 34
+  constant copied: memory = memcpy dm dst sm src 1
+  goal copied_nonzero_offset: read_uint8 copied dst = 99
+  goal before_untouched: read_uint8 copied before = 17
+  goal after_untouched: read_uint8 copied after = 34
+  goal copied_byte_is_not_zero: read_uint8 copied dst <> 0
+  constant same_start: addr = { base = 3; offset = 0 }
+  constant neighbour: addr = { base = 3; offset = 1 }
+  constant destination: memory = write_uint8 empty neighbour 17
+  constant source: memory = write_uint8 empty neighbour 34
+  constant same_copy: memory = memcpy destination same_start source same_start 1
+  goal wrong_value_refuted: read_uint8 same_copy neighbour <> 34
+  goal contradiction_refuted:
+    not (read_uint8 same_copy neighbour = 17 /\ read_uint8 same_copy neighbour = 34)
+end

@@ -1,0 +1,539 @@
+﻿2026-11-02T02:04:11.4348292Z Current runner version: '2.338.2'
+2026-11-02T02:04:11.4370231Z ##[group]Runner Image Provisioner
+2026-11-02T02:04:11.4370946Z Hosted Compute Agent
+2026-11-02T02:04:11.4371547Z Version: 20261021.618
+2026-11-02T02:04:11.4372108Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-02T02:04:11.4372720Z Build Date: 2026-10-21T00:45:21Z
+2026-11-02T02:04:11.4373363Z Worker ID: {df29ee85-69b9-475d-b871-0e3588b8a90f}
+2026-11-02T02:04:11.4373956Z Region: centralus
+2026-11-02T02:04:11.4374409Z Cloud: Azure
+2026-11-02T02:04:11.4374929Z ##[endgroup]
+2026-11-02T02:04:11.4376087Z ##[group]Operating System
+2026-11-02T02:04:11.4376692Z Ubuntu
+2026-11-02T02:04:11.4377168Z 24.04.5
+2026-11-02T02:04:11.4377639Z LTS
+2026-11-02T02:04:11.4378152Z ##[endgroup]
+2026-11-02T02:04:11.4378622Z ##[group]Runner Image
+2026-11-02T02:04:11.4379216Z Image: ubuntu-24.04
+2026-11-02T02:04:11.4380024Z Version: 20261025.353.1
+2026-11-02T02:04:11.4381182Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-02T02:04:11.4382577Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-02T02:04:11.4383429Z ##[endgroup]
+2026-11-02T02:04:11.4384390Z ##[group]GITHUB_TOKEN Permissions
+2026-11-02T02:04:11.4386069Z Contents: read
+2026-11-02T02:04:11.4386596Z Metadata: read
+2026-11-02T02:04:11.4387115Z ##[endgroup]
+2026-11-02T02:04:11.4388918Z Secret source: Actions
+2026-11-02T02:04:11.4390015Z Cache mode: write
+2026-11-02T02:04:11.4390689Z Prepare workflow directory
+2026-11-02T02:04:11.4694718Z Prepare all required actions
+2026-11-02T02:04:11.4733684Z Getting action download info
+2026-11-02T02:04:11.6940333Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-02T02:04:11.9430149Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-02T02:04:12.3306700Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-02T02:04:12.5737169Z Complete job name: Actual C99 prerequisites — negative-invalid
+2026-11-02T02:04:12.6413061Z ##[group]Run actions/checkout@v4
+2026-11-02T02:04:12.6413831Z with:
+2026-11-02T02:04:12.6414198Z   repository: QSOLKCB/TOMBSTONE
+2026-11-02T02:04:12.6417556Z   token: ***
+2026-11-02T02:04:12.6417915Z   ssh-strict: true
+2026-11-02T02:04:12.6418280Z   ssh-user: git
+2026-11-02T02:04:12.6418652Z   persist-credentials: true
+2026-11-02T02:04:12.6419048Z   clean: true
+2026-11-02T02:04:12.6419677Z   sparse-checkout-cone-mode: true
+2026-11-02T02:04:12.6420112Z   fetch-depth: 1
+2026-11-02T02:04:12.6420459Z   fetch-tags: false
+2026-11-02T02:04:12.6420817Z   show-progress: true
+2026-11-02T02:04:12.6421171Z   lfs: false
+2026-11-02T02:04:12.6421505Z   submodules: false
+2026-11-02T02:04:12.6421864Z   set-safe-directory: true
+2026-11-02T02:04:12.6422264Z   allow-unsafe-pr-checkout: false
+2026-11-02T02:04:12.6422887Z ##[endgroup]
+2026-11-02T02:04:12.8822543Z Syncing repository: QSOLKCB/TOMBSTONE
+2026-11-02T02:04:12.8824186Z ##[group]Getting Git version info
+2026-11-02T02:04:12.8824876Z Working directory is '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-02T02:04:12.8825748Z [command]/usr/bin/git version
+2026-11-02T02:04:12.8969768Z git version 2.56.0
+2026-11-02T02:04:12.8985394Z ##[endgroup]
+2026-11-02T02:04:12.8997382Z Temporarily overriding HOME='/home/runner/work/_temp/17d5ea07-c78f-4c20-b3f4-9586ec6d8c24' before making global git config changes
+2026-11-02T02:04:12.8998706Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-02T02:04:12.9002211Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-02T02:04:12.9043497Z Deleting the contents of '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-02T02:04:12.9047592Z ##[group]Initializing the repository
+2026-11-02T02:04:12.9051435Z [command]/usr/bin/git init /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-02T02:04:12.9201005Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-02T02:04:12.9202452Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-02T02:04:12.9203325Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-02T02:04:12.9204031Z hint: call:
+2026-11-02T02:04:12.9204440Z hint:
+2026-11-02T02:04:12.9204970Z hint: 	git config --global init.defaultBranch <name>
+2026-11-02T02:04:12.9205552Z hint:
+2026-11-02T02:04:12.9206097Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-02T02:04:12.9206930Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-02T02:04:12.9207601Z hint:
+2026-11-02T02:04:12.9208018Z hint: 	git branch -m <name>
+2026-11-02T02:04:12.9208488Z hint:
+2026-11-02T02:04:12.9209107Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-02T02:04:12.9216319Z Initialized empty Git repository in /home/runner/work/TOMBSTONE/TOMBSTONE/.git/
+2026-11-02T02:04:12.9227155Z [command]/usr/bin/git remote add origin https://github.com/QSOLKCB/TOMBSTONE
+2026-11-02T02:04:12.9336464Z ##[endgroup]
+2026-11-02T02:04:12.9337280Z ##[group]Disabling automatic garbage collection
+2026-11-02T02:04:12.9339876Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-02T02:04:12.9367357Z ##[endgroup]
+2026-11-02T02:04:12.9368021Z ##[group]Setting up auth
+2026-11-02T02:04:12.9372855Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-02T02:04:12.9487698Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-02T02:04:12.9807630Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-02T02:04:12.9835918Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-02T02:04:13.0034013Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-02T02:04:13.0062612Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-02T02:04:13.0261506Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-02T02:04:13.0297967Z ##[endgroup]
+2026-11-02T02:04:13.0298660Z ##[group]Fetching the repository
+2026-11-02T02:04:13.0311248Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4216b20c954b3957243389017a9b651b3e1bfb3b:refs/remotes/pull/30/merge
+2026-11-02T02:04:13.7681565Z From https://github.com/QSOLKCB/TOMBSTONE
+2026-11-02T02:04:13.7683261Z  * [new ref]         4216b20c954b3957243389017a9b651b3e1bfb3b -> pull/30/merge
+2026-11-02T02:04:13.7687014Z ##[endgroup]
+2026-11-02T02:04:13.7688596Z ##[group]Determining the checkout info
+2026-11-02T02:04:13.7690368Z ##[endgroup]
+2026-11-02T02:04:13.7693943Z [command]/usr/bin/git sparse-checkout disable
+2026-11-02T02:04:13.7746588Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-02T02:04:13.7773906Z ##[group]Checking out the ref
+2026-11-02T02:04:13.7776377Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/30/merge
+2026-11-02T02:04:13.8555379Z Note: switching to 'refs/remotes/pull/30/merge'.
+2026-11-02T02:04:13.8556474Z 
+2026-11-02T02:04:13.8557319Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-02T02:04:13.8559651Z changes and commit them, and you can discard any commits you make in this
+2026-11-02T02:04:13.8562051Z state without impacting any branches by switching back to a branch.
+2026-11-02T02:04:13.8563625Z 
+2026-11-02T02:04:13.8564650Z If you want to create a new branch to retain commits you create, you may
+2026-11-02T02:04:13.8566964Z do so (now or later) by using -c with the switch command. Example:
+2026-11-02T02:04:13.8568711Z 
+2026-11-02T02:04:13.8569472Z   git switch -c <new-branch-name>
+2026-11-02T02:04:13.8570461Z 
+2026-11-02T02:04:13.8571064Z Or undo this operation with:
+2026-11-02T02:04:13.8571963Z 
+2026-11-02T02:04:13.8572500Z   git switch -
+2026-11-02T02:04:13.8573176Z 
+2026-11-02T02:04:13.8574053Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-02T02:04:13.8575265Z 
+2026-11-02T02:04:13.8576957Z HEAD is now at 4216b20 Merge 6a76aaed26a642b170917db4bb55e641deb73df1 into f9140bdda31ea64f7e077115db6f0bb0622c7874
+2026-11-02T02:04:13.8581521Z ##[endgroup]
+2026-11-02T02:04:13.8617362Z [command]/usr/bin/git log -1 --format=%H
+2026-11-02T02:04:13.8694589Z 4216b20c954b3957243389017a9b651b3e1bfb3b
+2026-11-02T02:04:13.8966234Z ##[group]Run actions/download-artifact@v4
+2026-11-02T02:04:13.8967321Z with:
+2026-11-02T02:04:13.8968147Z   name: phase20-corrected-toolchain
+2026-11-02T02:04:13.8969189Z   path: phase20-toolchain
+2026-11-02T02:04:13.8970390Z   merge-multiple: false
+2026-11-02T02:04:13.8971279Z   repository: QSOLKCB/TOMBSTONE
+2026-11-02T02:04:13.8972197Z   run-id: 41375387461
+2026-11-02T02:04:13.8973036Z ##[endgroup]
+2026-11-02T02:04:14.0290190Z Downloading single artifact
+2026-11-02T02:04:14.0435028Z (node:2117) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-02T02:04:14.0436225Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-02T02:04:14.3364430Z Preparing to download the following artifacts:
+2026-11-02T02:04:14.3365711Z - phase20-corrected-toolchain (ID: 13111210848, Size: 2654019, Expected Digest: sha256:407293e21f7e274ae9e1dbf063b01a9a7517a17f60a6f5901ba6fe46a6c0c431)
+2026-11-02T02:04:14.5082821Z Redirecting to blob download url: https://productionresultssa0.blob.core.windows.net/actions-results/69052e30-9c26-8a1f-89a9-71d94c393796/workflow-job-run-ccb012f0-1c98-5186-b6ea-ecca78bce52e/artifacts/e25187af9eb4daa9c96840a453a16e98f5801e0e2094aa3fe5d64bd2b4e0afe7.zip
+2026-11-02T02:04:14.5083901Z Starting download of artifact to: /home/runner/work/TOMBSTONE/TOMBSTONE/phase20-toolchain
+2026-11-02T02:04:14.6866594Z (node:2117) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-02T02:04:14.9520064Z SHA256 digest of downloaded artifact is 407293e21f7e274ae9e1dbf063b01a9a7517a17f60a6f5901ba6fe46a6c0c431
+2026-11-02T02:04:14.9520767Z Artifact download completed successfully.
+2026-11-02T02:04:14.9521056Z Total of 1 artifact(s) downloaded
+2026-11-02T02:04:14.9524402Z Download artifact has finished successfully
+2026-11-02T02:04:14.9673519Z ##[group]Run set -euo pipefail
+2026-11-02T02:04:14.9673862Z [36;1mset -euo pipefail[0m
+2026-11-02T02:04:14.9674116Z [36;1mpython3 tools/check_phase18_receipt.py[0m
+2026-11-02T02:04:14.9674431Z [36;1mpython3 tools/check_phase19_bridge_evidence.py[0m
+2026-11-02T02:04:14.9674758Z [36;1mpython3 tests/formal/test_phase20_overlay.py[0m
+2026-11-02T02:04:14.9675019Z [36;1mmkdir phase20-results[0m
+2026-11-02T02:04:14.9675234Z [36;1mchmod 777 phase20-results[0m
+2026-11-02T02:04:14.9675552Z [36;1mpython3 tools/phase20_receipt_overlay.py --output phase20-receipt.c[0m
+2026-11-02T02:04:14.9675884Z [36;1mfor backend in openssl hacl; do[0m
+2026-11-02T02:04:14.9676315Z [36;1m  python3 tools/phase20_receipt_overlay.py --hex-backend "$backend" --output "phase20-hex-$backend.c"[0m
+2026-11-02T02:04:14.9676727Z [36;1mdone[0m
+2026-11-02T02:04:14.9676965Z [36;1mfor mutant in accept-invalid bad-size error-size; do[0m
+2026-11-02T02:04:14.9677443Z [36;1m  python3 tools/phase20_receipt_overlay.py --mutant "$mutant" --output "phase20-$mutant.c"[0m
+2026-11-02T02:04:14.9677803Z [36;1mdone[0m
+2026-11-02T02:04:14.9677985Z [36;1mfor source in phase20-*.c; do[0m
+2026-11-02T02:04:14.9678369Z [36;1m  gcc -std=c99 -Wall -Wextra -Wpedantic -Werror -Iinclude -c "$source" -o /tmp/phase20-check.o[0m
+2026-11-02T02:04:14.9678971Z [36;1mdone[0m
+2026-11-02T02:04:14.9679151Z [36;1mgit rev-parse HEAD[0m
+2026-11-02T02:04:14.9679581Z [36;1msha256sum phase20-*.c[0m
+2026-11-02T02:04:14.9700020Z shell: /usr/bin/bash -e {0}
+2026-11-02T02:04:14.9700242Z env:
+2026-11-02T02:04:14.9700422Z   GROUP: negative-invalid
+2026-11-02T02:04:14.9700626Z ##[endgroup]
+2026-11-02T02:04:14.9967671Z PASS: 54/54 conditional unbounded WP proof receipt pinned to exact source, checkers, CI job
+2026-11-02T02:04:14.9968237Z LIMIT: prior evidence does not prove a new commit or the actual SHA-256 provider
+2026-11-02T02:04:15.0422284Z PASS: retained P19-03 source, 3 complete proofs, 3 semantic controls and original failed attempt
+2026-11-02T02:04:15.0423170Z LIMIT: conditional caller-frame/protocol evidence; no current-head review or real-provider closure
+2026-11-02T02:04:15.0755098Z PASS: unchanged bodies, stronger original contracts, preserved chain theorem, distinct semantic mutants
+2026-11-02T02:04:15.1073313Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T02:04:15.1369984Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T02:04:15.1674464Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T02:04:15.1984826Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T02:04:15.2297004Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T02:04:15.2622809Z GENERATED: exact production body with explicit external libc premises
+2026-11-02T02:04:15.6812609Z 4216b20c954b3957243389017a9b651b3e1bfb3b
+2026-11-02T02:04:15.6829913Z a6c7c2dd7b0ebf9f4fe4426c1e1207d9b35a7f35d02967cf9079197b61d69708  phase20-accept-invalid.c
+2026-11-02T02:04:15.6830809Z d2913343b90dcfe84afe07b6112630dfddf02f99f6461eaade5811acd46ae045  phase20-bad-size.c
+2026-11-02T02:04:15.6840257Z 3a01ffb7ddf7438e149e2be139f77fab427b28ae1c608cb6264874da1b2103f8  phase20-error-size.c
+2026-11-02T02:04:15.6841061Z 3cc10a271b80b29cde4185140f47635404bb0a14c7174231702bbbdcc00cf427  phase20-hex-hacl.c
+2026-11-02T02:04:15.6841841Z 8b74da4865511573cba478df14b31998302790b3140027a041e45b70a315defb  phase20-hex-openssl.c
+2026-11-02T02:04:15.6842587Z 95c7e065f175518f8763d692609b55ec6db716d24b613ff373b490623463cf50  phase20-receipt.c
+2026-11-02T02:04:15.6874785Z ##[group]Run set -euo pipefail
+2026-11-02T02:04:15.6875076Z [36;1mset -euo pipefail[0m
+2026-11-02T02:04:15.6875498Z [36;1mdocker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-results:/out" -v "$PWD/phase20-toolchain:/model:ro" -e GROUP -w /tmp \[0m
+2026-11-02T02:04:15.6876093Z [36;1m  framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \[0m
+2026-11-02T02:04:15.6876479Z [36;1m  sh -c '[0m
+2026-11-02T02:04:15.6876663Z [36;1m    case "$GROUP" in[0m
+2026-11-02T02:04:15.6876956Z [36;1m      validators) targets="zero32 equal32 good_evidence good_receipt";;[0m
+2026-11-02T02:04:15.6877298Z [36;1m      formatters) targets="hex32 format_json";;[0m
+2026-11-02T02:04:15.6877654Z [36;1m      composition) targets="calculate_hash tb_receipt_verify_chain";;[0m
+2026-11-02T02:04:15.6877983Z [36;1m      hex) targets="hex-openssl hex-hacl";;[0m
+2026-11-02T02:04:15.6878267Z [36;1m      negative-invalid) targets="accept-invalid";;[0m
+2026-11-02T02:04:15.6878584Z [36;1m      negative-size) targets="bad-size";;[0m
+2026-11-02T02:04:15.6878850Z [36;1m      negative-error) targets="error-size";;[0m
+2026-11-02T02:04:15.6879083Z [36;1m    esac[0m
+2026-11-02T02:04:15.6879483Z [36;1m    frama-c -wp-detect || exit 1[0m
+2026-11-02T02:04:15.6879713Z [36;1m    status=0[0m
+2026-11-02T02:04:15.6879908Z [36;1m    for target in $targets; do[0m
+2026-11-02T02:04:15.6880149Z [36;1m      source=/repo/phase20-receipt.c[0m
+2026-11-02T02:04:15.6880380Z [36;1m      function=$target[0m
+2026-11-02T02:04:15.6880592Z [36;1m      timeout=35[0m
+2026-11-02T02:04:15.6880786Z [36;1m      provers=alt-ergo[0m
+2026-11-02T02:04:15.6880982Z [36;1m      split=[0m
+2026-11-02T02:04:15.6881309Z [36;1m      case "$target" in[0m
+2026-11-02T02:04:15.6881707Z [36;1m        hex-*) source=/repo/phase20-$target.c; function=tb_sha256_hex; split="-wp-auto wp:bitshift -wp-print";;[0m
+2026-11-02T02:04:15.6882228Z [36;1m        accept-invalid) source=/repo/phase20-$target.c; function=good_receipt; timeout=10;;[0m
+2026-11-02T02:04:15.6882713Z [36;1m        bad-size|error-size) source=/repo/phase20-$target.c; function=format_json; timeout=35;;[0m
+2026-11-02T02:04:15.6883060Z [36;1m      esac[0m
+2026-11-02T02:04:15.6883381Z [36;1m      if [ "$function" = format_json ]; then split="-wp-literals -wp-no-callee-precond -wp-split"; fi[0m
+2026-11-02T02:04:15.6884476Z [36;1m      (frama-c -version && python3 /repo/tools/phase20_model.py run --output /model -- -wp $split -wp-fct "$function" -wp-rte -wp-model Bytes -wp-prover "$provers" -wp-timeout "$timeout" -wp-par 2 -wp-report-json /tmp/report.json -cpp-extra-args="-I/repo/include" "$source" && cat /tmp/report.json) > /out/$target.log 2>&1 || status=1[0m
+2026-11-02T02:04:15.6885389Z [36;1m    done[0m
+2026-11-02T02:04:15.6885564Z [36;1m    cat /out/*.log[0m
+2026-11-02T02:04:15.6885754Z [36;1m    exit "$status"[0m
+2026-11-02T02:04:15.6885934Z [36;1m  '[0m
+2026-11-02T02:04:15.6904010Z shell: /usr/bin/bash -e {0}
+2026-11-02T02:04:15.6904231Z env:
+2026-11-02T02:04:15.6904411Z   GROUP: negative-invalid
+2026-11-02T02:04:15.6904608Z ##[endgroup]
+2026-11-02T02:04:15.7867152Z Unable to find image 'framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36' locally
+2026-11-02T02:04:16.1974433Z docker.io/framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36: Pulling from framac/frama-c
+2026-11-02T02:04:16.1975142Z 01cedcff86f8: Pulling fs layer
+2026-11-02T02:04:16.1975447Z 9bf581ba34fd: Pulling fs layer
+2026-11-02T02:04:16.1975710Z 6c4bd78e0c43: Pulling fs layer
+2026-11-02T02:04:16.1975984Z 799649323729: Pulling fs layer
+2026-11-02T02:04:16.1976235Z 1ae4fb0c8a4a: Pulling fs layer
+2026-11-02T02:04:16.1976530Z b237ecdf51a3: Pulling fs layer
+2026-11-02T02:04:16.1976785Z b16ee2e05313: Pulling fs layer
+2026-11-02T02:04:16.1977095Z adb989234928: Pulling fs layer
+2026-11-02T02:04:16.1977414Z e3a01a28a7ad: Pulling fs layer
+2026-11-02T02:04:16.1978065Z ca0e54137564: Pulling fs layer
+2026-11-02T02:04:16.1978342Z e88b1a083917: Pulling fs layer
+2026-11-02T02:04:16.1978637Z d10f17e04c11: Pulling fs layer
+2026-11-02T02:04:16.1978893Z d38ea67f8871: Pulling fs layer
+2026-11-02T02:04:16.1979151Z 8153ec1c4f57: Pulling fs layer
+2026-11-02T02:04:16.1979576Z 0546e39b6053: Pulling fs layer
+2026-11-02T02:04:16.1979870Z 5ebdad05b03e: Pulling fs layer
+2026-11-02T02:04:16.1980170Z 6435672f1863: Pulling fs layer
+2026-11-02T02:04:16.1980416Z 5c5711f4465e: Pulling fs layer
+2026-11-02T02:04:16.1980618Z 7264e6096409: Pulling fs layer
+2026-11-02T02:04:16.1980823Z 2202cd0e879d: Pulling fs layer
+2026-11-02T02:04:16.1981020Z c31277fa0297: Pulling fs layer
+2026-11-02T02:04:16.1981212Z 4f4fb700ef54: Pulling fs layer
+2026-11-02T02:04:16.1981409Z 8e159597691d: Pulling fs layer
+2026-11-02T02:04:16.1981597Z 799649323729: Waiting
+2026-11-02T02:04:16.1981795Z c0ebccf77ab9: Pulling fs layer
+2026-11-02T02:04:16.1982010Z b7093a70d5d5: Pulling fs layer
+2026-11-02T02:04:16.1982205Z 1ae4fb0c8a4a: Waiting
+2026-11-02T02:04:16.1982395Z f2a57dfa5358: Pulling fs layer
+2026-11-02T02:04:16.1982596Z 93b66eaa292a: Pulling fs layer
+2026-11-02T02:04:16.1982786Z 0aba2ee32120: Pulling fs layer
+2026-11-02T02:04:16.1982979Z 60033bb88c74: Pulling fs layer
+2026-11-02T02:04:16.1983161Z 883b72a7df53: Pulling fs layer
+2026-11-02T02:04:16.1983357Z 9aaba240d281: Pulling fs layer
+2026-11-02T02:04:16.1983545Z b237ecdf51a3: Waiting
+2026-11-02T02:04:16.1983714Z b16ee2e05313: Waiting
+2026-11-02T02:04:16.1983894Z fd24333fa18a: Pulling fs layer
+2026-11-02T02:04:16.1984079Z adb989234928: Waiting
+2026-11-02T02:04:16.1984262Z ab20f402dc6f: Pulling fs layer
+2026-11-02T02:04:16.1984449Z a3afc412b613: Pulling fs layer
+2026-11-02T02:04:16.1984639Z 0a2200cec51c: Pulling fs layer
+2026-11-02T02:04:16.1985008Z e3a01a28a7ad: Waiting
+2026-11-02T02:04:16.1985197Z f9b5b03a559e: Pulling fs layer
+2026-11-02T02:04:16.1985393Z 2becab109f47: Pulling fs layer
+2026-11-02T02:04:16.1985580Z 3b4307789f50: Pulling fs layer
+2026-11-02T02:04:16.1985765Z 58571fc518c5: Pulling fs layer
+2026-11-02T02:04:16.1985960Z e88b1a083917: Waiting
+2026-11-02T02:04:16.1986137Z b71b8622ab3f: Pulling fs layer
+2026-11-02T02:04:16.1986328Z d06dd6319b47: Pulling fs layer
+2026-11-02T02:04:16.1986515Z d10f17e04c11: Waiting
+2026-11-02T02:04:16.1986686Z 51a56fdb7118: Pulling fs layer
+2026-11-02T02:04:16.1986877Z d38ea67f8871: Waiting
+2026-11-02T02:04:16.1987049Z 8f235d762bf6: Pulling fs layer
+2026-11-02T02:04:16.1987235Z f2a57dfa5358: Waiting
+2026-11-02T02:04:16.1987399Z 8153ec1c4f57: Waiting
+2026-11-02T02:04:16.1987583Z 37173500316b: Pulling fs layer
+2026-11-02T02:04:16.1987772Z fa11cfb60409: Pulling fs layer
+2026-11-02T02:04:16.1987966Z 2fdcc8b83d1d: Pulling fs layer
+2026-11-02T02:04:16.1988149Z 0546e39b6053: Waiting
+2026-11-02T02:04:16.1988323Z 5ebdad05b03e: Waiting
+2026-11-02T02:04:16.1988501Z 8103ae60d4a2: Pulling fs layer
+2026-11-02T02:04:16.1988682Z 6435672f1863: Waiting
+2026-11-02T02:04:16.1988843Z 5c5711f4465e: Waiting
+2026-11-02T02:04:16.1989014Z 0ac2d6f63403: Pulling fs layer
+2026-11-02T02:04:16.1989215Z dca9c53526f0: Pulling fs layer
+2026-11-02T02:04:16.1989854Z d62b4203b486: Pulling fs layer
+2026-11-02T02:04:16.1990046Z a3afc412b613: Waiting
+2026-11-02T02:04:16.1990217Z 0a2200cec51c: Waiting
+2026-11-02T02:04:16.1990390Z 262d0301190b: Pulling fs layer
+2026-11-02T02:04:16.1990572Z f9b5b03a559e: Waiting
+2026-11-02T02:04:16.1990744Z ab4fd71ce45a: Pulling fs layer
+2026-11-02T02:04:16.1990938Z 2becab109f47: Waiting
+2026-11-02T02:04:16.1991120Z 3b4307789f50: Waiting
+2026-11-02T02:04:16.1991288Z 721b47947ac4: Pulling fs layer
+2026-11-02T02:04:16.1991473Z 4fe137cf5212: Pulling fs layer
+2026-11-02T02:04:16.1991651Z 58571fc518c5: Waiting
+2026-11-02T02:04:16.1991828Z d44046465503: Pulling fs layer
+2026-11-02T02:04:16.1992016Z b71b8622ab3f: Waiting
+2026-11-02T02:04:16.1992182Z d06dd6319b47: Waiting
+2026-11-02T02:04:16.1992363Z 26d82a051384: Pulling fs layer
+2026-11-02T02:04:16.1992556Z 51a56fdb7118: Waiting
+2026-11-02T02:04:16.1992718Z 8f235d762bf6: Waiting
+2026-11-02T02:04:16.1992879Z 37173500316b: Waiting
+2026-11-02T02:04:16.1993173Z fa11cfb60409: Waiting
+2026-11-02T02:04:16.1993343Z 2fdcc8b83d1d: Waiting
+2026-11-02T02:04:16.1993514Z 8103ae60d4a2: Waiting
+2026-11-02T02:04:16.1993676Z 0ac2d6f63403: Waiting
+2026-11-02T02:04:16.1993843Z dca9c53526f0: Waiting
+2026-11-02T02:04:16.1994005Z d62b4203b486: Waiting
+2026-11-02T02:04:16.1994173Z 262d0301190b: Waiting
+2026-11-02T02:04:16.1994336Z ab4fd71ce45a: Waiting
+2026-11-02T02:04:16.1994504Z 721b47947ac4: Waiting
+2026-11-02T02:04:16.1994664Z 4fe137cf5212: Waiting
+2026-11-02T02:04:16.1994827Z d44046465503: Waiting
+2026-11-02T02:04:16.1994991Z 26d82a051384: Waiting
+2026-11-02T02:04:16.1995154Z 2202cd0e879d: Waiting
+2026-11-02T02:04:16.1995315Z c31277fa0297: Waiting
+2026-11-02T02:04:16.1995487Z 4f4fb700ef54: Waiting
+2026-11-02T02:04:16.1995664Z 7264e6096409: Waiting
+2026-11-02T02:04:16.1995836Z 8e159597691d: Waiting
+2026-11-02T02:04:16.1996037Z b7093a70d5d5: Waiting
+2026-11-02T02:04:16.1996206Z 0aba2ee32120: Waiting
+2026-11-02T02:04:16.1996375Z c0ebccf77ab9: Waiting
+2026-11-02T02:04:16.1996552Z 60033bb88c74: Waiting
+2026-11-02T02:04:16.1996717Z fd24333fa18a: Waiting
+2026-11-02T02:04:16.1996879Z ab20f402dc6f: Waiting
+2026-11-02T02:04:16.1997048Z 883b72a7df53: Waiting
+2026-11-02T02:04:16.1997219Z 93b66eaa292a: Waiting
+2026-11-02T02:04:16.1997385Z 9aaba240d281: Waiting
+2026-11-02T02:04:16.3570940Z 9bf581ba34fd: Verifying Checksum
+2026-11-02T02:04:16.3571367Z 6c4bd78e0c43: Download complete
+2026-11-02T02:04:16.3571654Z 9bf581ba34fd: Download complete
+2026-11-02T02:04:16.5001472Z 1ae4fb0c8a4a: Verifying Checksum
+2026-11-02T02:04:16.5006286Z 1ae4fb0c8a4a: Download complete
+2026-11-02T02:04:16.6161647Z 01cedcff86f8: Verifying Checksum
+2026-11-02T02:04:16.6165871Z 01cedcff86f8: Download complete
+2026-11-02T02:04:16.8650581Z b16ee2e05313: Download complete
+2026-11-02T02:04:17.1302266Z adb989234928: Verifying Checksum
+2026-11-02T02:04:17.1307514Z adb989234928: Download complete
+2026-11-02T02:04:17.3727444Z e3a01a28a7ad: Verifying Checksum
+2026-11-02T02:04:17.3727873Z e3a01a28a7ad: Download complete
+2026-11-02T02:04:17.6126019Z ca0e54137564: Download complete
+2026-11-02T02:04:17.6196358Z b237ecdf51a3: Verifying Checksum
+2026-11-02T02:04:17.6196859Z b237ecdf51a3: Download complete
+2026-11-02T02:04:17.8229886Z d10f17e04c11: Verifying Checksum
+2026-11-02T02:04:17.8231108Z d10f17e04c11: Download complete
+2026-11-02T02:04:17.8282282Z e88b1a083917: Verifying Checksum
+2026-11-02T02:04:17.8283587Z e88b1a083917: Download complete
+2026-11-02T02:04:18.0326047Z 8153ec1c4f57: Verifying Checksum
+2026-11-02T02:04:18.0326539Z 8153ec1c4f57: Download complete
+2026-11-02T02:04:18.1093685Z d38ea67f8871: Verifying Checksum
+2026-11-02T02:04:18.1094031Z d38ea67f8871: Download complete
+2026-11-02T02:04:18.1150657Z 01cedcff86f8: Pull complete
+2026-11-02T02:04:18.1730350Z 0546e39b6053: Verifying Checksum
+2026-11-02T02:04:18.1730853Z 0546e39b6053: Download complete
+2026-11-02T02:04:18.2578270Z 5ebdad05b03e: Download complete
+2026-11-02T02:04:18.3070221Z 6435672f1863: Verifying Checksum
+2026-11-02T02:04:18.3070655Z 6435672f1863: Download complete
+2026-11-02T02:04:18.3818945Z 5c5711f4465e: Verifying Checksum
+2026-11-02T02:04:18.3819483Z 5c5711f4465e: Download complete
+2026-11-02T02:04:18.4727630Z 7264e6096409: Verifying Checksum
+2026-11-02T02:04:18.4728015Z 7264e6096409: Download complete
+2026-11-02T02:04:18.5372535Z 2202cd0e879d: Verifying Checksum
+2026-11-02T02:04:18.5372911Z 2202cd0e879d: Download complete
+2026-11-02T02:04:18.6367724Z c31277fa0297: Verifying Checksum
+2026-11-02T02:04:18.6368144Z c31277fa0297: Download complete
+2026-11-02T02:04:18.6638057Z 4f4fb700ef54: Verifying Checksum
+2026-11-02T02:04:18.6638986Z 4f4fb700ef54: Download complete
+2026-11-02T02:04:18.7596753Z 8e159597691d: Verifying Checksum
+2026-11-02T02:04:18.7597211Z 8e159597691d: Download complete
+2026-11-02T02:04:18.8299004Z c0ebccf77ab9: Verifying Checksum
+2026-11-02T02:04:18.8299532Z c0ebccf77ab9: Download complete
+2026-11-02T02:04:18.9253695Z b7093a70d5d5: Verifying Checksum
+2026-11-02T02:04:18.9254105Z b7093a70d5d5: Download complete
+2026-11-02T02:04:18.9749625Z f2a57dfa5358: Verifying Checksum
+2026-11-02T02:04:18.9750044Z f2a57dfa5358: Download complete
+2026-11-02T02:04:19.0786506Z 93b66eaa292a: Verifying Checksum
+2026-11-02T02:04:19.0786912Z 93b66eaa292a: Download complete
+2026-11-02T02:04:19.1176945Z 0aba2ee32120: Verifying Checksum
+2026-11-02T02:04:19.1177576Z 0aba2ee32120: Download complete
+2026-11-02T02:04:19.2278371Z 60033bb88c74: Verifying Checksum
+2026-11-02T02:04:19.2278747Z 60033bb88c74: Download complete
+2026-11-02T02:04:19.2585463Z 883b72a7df53: Verifying Checksum
+2026-11-02T02:04:19.2585840Z 883b72a7df53: Download complete
+2026-11-02T02:04:19.3652235Z 9aaba240d281: Verifying Checksum
+2026-11-02T02:04:19.3652667Z 9aaba240d281: Download complete
+2026-11-02T02:04:19.3775419Z fd24333fa18a: Verifying Checksum
+2026-11-02T02:04:19.3775795Z fd24333fa18a: Download complete
+2026-11-02T02:04:19.5221624Z a3afc412b613: Verifying Checksum
+2026-11-02T02:04:19.5222057Z a3afc412b613: Download complete
+2026-11-02T02:04:19.5242554Z ab20f402dc6f: Verifying Checksum
+2026-11-02T02:04:19.5243087Z ab20f402dc6f: Download complete
+2026-11-02T02:04:19.6504951Z f9b5b03a559e: Verifying Checksum
+2026-11-02T02:04:19.6505380Z f9b5b03a559e: Download complete
+2026-11-02T02:04:20.0687300Z 799649323729: Verifying Checksum
+2026-11-02T02:04:20.0687672Z 799649323729: Download complete
+2026-11-02T02:04:20.2105131Z 3b4307789f50: Download complete
+2026-11-02T02:04:20.3710719Z 58571fc518c5: Download complete
+2026-11-02T02:04:20.5229618Z b71b8622ab3f: Verifying Checksum
+2026-11-02T02:04:20.5230038Z b71b8622ab3f: Download complete
+2026-11-02T02:04:20.6872030Z 9bf581ba34fd: Pull complete
+2026-11-02T02:04:21.3443262Z 6c4bd78e0c43: Pull complete
+2026-11-02T02:04:21.7944795Z 799649323729: Pull complete
+2026-11-02T02:04:21.9140445Z 1ae4fb0c8a4a: Pull complete
+2026-11-02T02:04:25.1687307Z 2becab109f47: Verifying Checksum
+2026-11-02T02:04:25.1687712Z 2becab109f47: Download complete
+2026-11-02T02:04:25.1962731Z 0a2200cec51c: Verifying Checksum
+2026-11-02T02:04:25.1963201Z 0a2200cec51c: Download complete
+2026-11-02T02:04:25.3149809Z 51a56fdb7118: Verifying Checksum
+2026-11-02T02:04:25.3150177Z 51a56fdb7118: Download complete
+2026-11-02T02:04:25.3493886Z 8f235d762bf6: Verifying Checksum
+2026-11-02T02:04:25.3494287Z 8f235d762bf6: Download complete
+2026-11-02T02:04:25.4522654Z 37173500316b: Verifying Checksum
+2026-11-02T02:04:25.4524466Z 37173500316b: Download complete
+2026-11-02T02:04:25.5902616Z fa11cfb60409: Verifying Checksum
+2026-11-02T02:04:25.5903019Z fa11cfb60409: Download complete
+2026-11-02T02:04:25.6015882Z 2fdcc8b83d1d: Verifying Checksum
+2026-11-02T02:04:25.6016594Z 2fdcc8b83d1d: Download complete
+2026-11-02T02:04:25.7346702Z 8103ae60d4a2: Download complete
+2026-11-02T02:04:25.8470855Z 0ac2d6f63403: Verifying Checksum
+2026-11-02T02:04:25.8471367Z 0ac2d6f63403: Download complete
+2026-11-02T02:04:25.8806558Z dca9c53526f0: Verifying Checksum
+2026-11-02T02:04:25.8806933Z dca9c53526f0: Download complete
+2026-11-02T02:04:26.0327392Z 262d0301190b: Verifying Checksum
+2026-11-02T02:04:26.0329921Z 262d0301190b: Download complete
+2026-11-02T02:04:26.2876635Z ab4fd71ce45a: Verifying Checksum
+2026-11-02T02:04:26.2878210Z ab4fd71ce45a: Download complete
+2026-11-02T02:04:26.5279885Z 721b47947ac4: Verifying Checksum
+2026-11-02T02:04:26.5280294Z 721b47947ac4: Download complete
+2026-11-02T02:04:27.9052683Z d62b4203b486: Verifying Checksum
+2026-11-02T02:04:27.9053116Z d62b4203b486: Download complete
+2026-11-02T02:04:28.0325867Z d44046465503: Verifying Checksum
+2026-11-02T02:04:28.0326204Z d44046465503: Download complete
+2026-11-02T02:04:28.1936218Z 26d82a051384: Download complete
+2026-11-02T02:04:30.2471982Z 4fe137cf5212: Verifying Checksum
+2026-11-02T02:04:30.2472384Z 4fe137cf5212: Download complete
+2026-11-02T02:04:36.7803064Z b237ecdf51a3: Pull complete
+2026-11-02T02:04:36.9650905Z b16ee2e05313: Pull complete
+2026-11-02T02:04:37.1303849Z adb989234928: Pull complete
+2026-11-02T02:04:37.4379507Z e3a01a28a7ad: Pull complete
+2026-11-02T02:04:37.6577289Z ca0e54137564: Pull complete
+2026-11-02T02:04:37.8521736Z e88b1a083917: Pull complete
+2026-11-02T02:04:38.1130951Z d10f17e04c11: Pull complete
+2026-11-02T02:04:38.3005765Z d38ea67f8871: Pull complete
+2026-11-02T02:04:38.3923190Z 8153ec1c4f57: Pull complete
+2026-11-02T02:04:38.4003042Z 0546e39b6053: Pull complete
+2026-11-02T02:04:38.4237418Z 5ebdad05b03e: Pull complete
+2026-11-02T02:04:38.4316734Z 6435672f1863: Pull complete
+2026-11-02T02:04:38.7072115Z 5c5711f4465e: Pull complete
+2026-11-02T02:04:38.8195434Z 7264e6096409: Pull complete
+2026-11-02T02:04:38.8283011Z 2202cd0e879d: Pull complete
+2026-11-02T02:04:38.8633147Z c31277fa0297: Pull complete
+2026-11-02T02:04:38.8925098Z 4f4fb700ef54: Pull complete
+2026-11-02T02:04:38.9000050Z 8e159597691d: Pull complete
+2026-11-02T02:04:38.9269761Z c0ebccf77ab9: Pull complete
+2026-11-02T02:04:38.9335680Z b7093a70d5d5: Pull complete
+2026-11-02T02:04:38.9429921Z f2a57dfa5358: Pull complete
+2026-11-02T02:04:38.9497298Z 93b66eaa292a: Pull complete
+2026-11-02T02:04:38.9587990Z 0aba2ee32120: Pull complete
+2026-11-02T02:04:38.9651069Z 60033bb88c74: Pull complete
+2026-11-02T02:04:38.9741464Z 883b72a7df53: Pull complete
+2026-11-02T02:04:38.9811243Z 9aaba240d281: Pull complete
+2026-11-02T02:04:38.9887422Z fd24333fa18a: Pull complete
+2026-11-02T02:04:38.9957619Z ab20f402dc6f: Pull complete
+2026-11-02T02:04:39.0044094Z a3afc412b613: Pull complete
+2026-11-02T02:05:07.2152046Z d06dd6319b47: Verifying Checksum
+2026-11-02T02:05:07.2152418Z d06dd6319b47: Download complete
+2026-11-02T02:05:14.5567415Z 0a2200cec51c: Pull complete
+2026-11-02T02:05:14.5652559Z f9b5b03a559e: Pull complete
+2026-11-02T02:05:16.1763285Z 2becab109f47: Pull complete
+2026-11-02T02:05:16.1883319Z 3b4307789f50: Pull complete
+2026-11-02T02:05:16.1957758Z 58571fc518c5: Pull complete
+2026-11-02T02:05:16.2046365Z b71b8622ab3f: Pull complete
+2026-11-02T02:05:22.4890010Z d06dd6319b47: Pull complete
+2026-11-02T02:05:22.5065204Z 51a56fdb7118: Pull complete
+2026-11-02T02:05:22.5299919Z 8f235d762bf6: Pull complete
+2026-11-02T02:05:22.5396703Z 37173500316b: Pull complete
+2026-11-02T02:05:22.9083277Z fa11cfb60409: Pull complete
+2026-11-02T02:05:22.9146237Z 2fdcc8b83d1d: Pull complete
+2026-11-02T02:05:22.9457583Z 8103ae60d4a2: Pull complete
+2026-11-02T02:05:23.0917615Z 0ac2d6f63403: Pull complete
+2026-11-02T02:05:23.4774174Z dca9c53526f0: Pull complete
+2026-11-02T02:05:57.9564958Z d62b4203b486: Pull complete
+2026-11-02T02:05:57.9656455Z 262d0301190b: Pull complete
+2026-11-02T02:05:58.0445589Z ab4fd71ce45a: Pull complete
+2026-11-02T02:06:00.5729958Z 721b47947ac4: Pull complete
+2026-11-02T02:06:18.5573026Z 4fe137cf5212: Pull complete
+2026-11-02T02:06:18.5637179Z d44046465503: Pull complete
+2026-11-02T02:06:43.9456415Z 26d82a051384: Pull complete
+2026-11-02T02:06:43.9504928Z Digest: sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-02T02:06:43.9510338Z Status: Downloaded newer image for framac/frama-c@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36
+2026-11-02T02:06:44.3099513Z [wp] Prover Alt-Ergo   2.5.4  [Alt-Ergo:2.5.4] (alt-ergo) (counter-examples)
+2026-11-02T02:06:44.4019253Z 32.1 (Germanium)
+2026-11-02T02:06:44.4019788Z FAIL: Phase 20 model preparation: WP share tree changed after build
+2026-11-02T02:06:44.4792178Z ##[error]Process completed with exit code 1.
+2026-11-02T02:06:44.4881464Z ##[group]Run actions/upload-artifact@v4
+2026-11-02T02:06:44.4881707Z with:
+2026-11-02T02:06:44.4881892Z   name: phase20-negative-invalid
+2026-11-02T02:06:44.4882120Z   path: phase20-results/
+phase20-*.c
+
+2026-11-02T02:06:44.4882351Z   retention-days: 30
+2026-11-02T02:06:44.4882539Z   if-no-files-found: warn
+2026-11-02T02:06:44.4882736Z   compression-level: 6
+2026-11-02T02:06:44.4882916Z   overwrite: false
+2026-11-02T02:06:44.4883103Z   include-hidden-files: false
+2026-11-02T02:06:44.4883322Z ##[endgroup]
+2026-11-02T02:06:44.6239179Z (node:2586) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-02T02:06:44.6240290Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-02T02:06:44.6302389Z With the provided path, there will be 7 files uploaded
+2026-11-02T02:06:44.6305904Z Artifact name is valid!
+2026-11-02T02:06:44.6306553Z Root directory input is valid!
+2026-11-02T02:06:44.8669014Z Beginning upload of artifact content to blob storage
+2026-11-02T02:06:44.8908274Z (node:2586) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-02T02:06:45.0553136Z Uploaded bytes 37343
+2026-11-02T02:06:45.0955665Z Finished uploading artifact content to blob storage!
+2026-11-02T02:06:45.0956190Z SHA256 digest of uploaded artifact zip is 895a4e834518726b4dc3f11ee8dcc4dcf86aa315cc18a379bcebb9d81ab2c791
+2026-11-02T02:06:45.0957008Z Finalizing artifact upload
+2026-11-02T02:06:45.4872702Z Artifact phase20-negative-invalid.zip successfully finalized. Artifact ID 13110759145
+2026-11-02T02:06:45.4873651Z Artifact phase20-negative-invalid has been successfully uploaded! Final size is 37343 bytes. Artifact ID is 13110759145
+2026-11-02T02:06:45.4880723Z Artifact download URL: https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41375387461/artifacts/13110759145
+2026-11-02T02:06:45.5089524Z Post job cleanup.
+2026-11-02T02:06:45.5832472Z [command]/usr/bin/git version
+2026-11-02T02:06:45.5864388Z git version 2.56.0
+2026-11-02T02:06:45.5892989Z Temporarily overriding HOME='/home/runner/work/_temp/336aed85-7ea7-4218-803f-efe0c2b21e19' before making global git config changes
+2026-11-02T02:06:45.5894043Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-02T02:06:45.5897666Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-02T02:06:45.5930749Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-02T02:06:45.5959817Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-02T02:06:45.6163413Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-02T02:06:45.6187690Z http.https://github.com/.extraheader
+2026-11-02T02:06:45.6197823Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-02T02:06:45.6227621Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-02T02:06:45.6427515Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-02T02:06:45.6456954Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-02T02:06:45.6781457Z Cleaning up orphan processes
+2026-11-02T02:06:45.7139790Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/download-artifact@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

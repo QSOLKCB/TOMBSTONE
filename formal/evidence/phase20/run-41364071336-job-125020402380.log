@@ -1,0 +1,172 @@
+﻿2026-11-01T23:50:46.8165077Z Current runner version: '2.338.2'
+2026-11-01T23:50:46.8202162Z ##[group]Runner Image Provisioner
+2026-11-01T23:50:46.8204207Z Hosted Compute Agent
+2026-11-01T23:50:46.8205315Z Version: 20261021.618
+2026-11-01T23:50:46.8206605Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-01T23:50:46.8207945Z Build Date: 2026-10-21T00:45:21Z
+2026-11-01T23:50:46.8209185Z Worker ID: {2164e7e7-c426-4242-be8c-49a017485eba}
+2026-11-01T23:50:46.8210687Z Region: eastus
+2026-11-01T23:50:46.8211780Z Cloud: Azure
+2026-11-01T23:50:46.8213429Z ##[endgroup]
+2026-11-01T23:50:46.8216114Z ##[group]Operating System
+2026-11-01T23:50:46.8217323Z Ubuntu
+2026-11-01T23:50:46.8218306Z 24.04.5
+2026-11-01T23:50:46.8219308Z LTS
+2026-11-01T23:50:46.8220459Z ##[endgroup]
+2026-11-01T23:50:46.8221483Z ##[group]Runner Image
+2026-11-01T23:50:46.8222722Z Image: ubuntu-24.04
+2026-11-01T23:50:46.8224128Z Version: 20261025.353.1
+2026-11-01T23:50:46.8226551Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-01T23:50:46.8229440Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-01T23:50:46.8231420Z ##[endgroup]
+2026-11-01T23:50:46.8234083Z ##[group]GITHUB_TOKEN Permissions
+2026-11-01T23:50:46.8237399Z Contents: read
+2026-11-01T23:50:46.8238488Z Metadata: read
+2026-11-01T23:50:46.8239631Z ##[endgroup]
+2026-11-01T23:50:46.8243612Z Secret source: Actions
+2026-11-01T23:50:46.8245602Z Cache mode: write
+2026-11-01T23:50:46.8247337Z Prepare workflow directory
+2026-11-01T23:50:46.8758548Z Prepare all required actions
+2026-11-01T23:50:46.8833448Z Getting action download info
+2026-11-01T23:50:47.0389859Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-01T23:50:47.2494176Z Complete job name: Actual formatter fault and byte checks — clang / hacl
+2026-11-01T23:50:47.3457806Z ##[group]Run actions/checkout@v4
+2026-11-01T23:50:47.3458725Z with:
+2026-11-01T23:50:47.3459194Z   repository: QSOLKCB/TOMBSTONE
+2026-11-01T23:50:47.3463257Z   token: ***
+2026-11-01T23:50:47.3463723Z   ssh-strict: true
+2026-11-01T23:50:47.3464172Z   ssh-user: git
+2026-11-01T23:50:47.3464628Z   persist-credentials: true
+2026-11-01T23:50:47.3465123Z   clean: true
+2026-11-01T23:50:47.3465575Z   sparse-checkout-cone-mode: true
+2026-11-01T23:50:47.3466104Z   fetch-depth: 1
+2026-11-01T23:50:47.3466540Z   fetch-tags: false
+2026-11-01T23:50:47.3466986Z   show-progress: true
+2026-11-01T23:50:47.3467453Z   lfs: false
+2026-11-01T23:50:47.3467933Z   submodules: false
+2026-11-01T23:50:47.3468392Z   set-safe-directory: true
+2026-11-01T23:50:47.3468905Z   allow-unsafe-pr-checkout: false
+2026-11-01T23:50:47.3469714Z ##[endgroup]
+2026-11-01T23:50:47.6360120Z Syncing repository: QSOLKCB/TOMBSTONE
+2026-11-01T23:50:47.6364022Z ##[group]Getting Git version info
+2026-11-01T23:50:47.6365278Z Working directory is '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T23:50:47.6367748Z [command]/usr/bin/git version
+2026-11-01T23:50:47.6430378Z git version 2.56.0
+2026-11-01T23:50:47.6454024Z ##[endgroup]
+2026-11-01T23:50:47.6470201Z Temporarily overriding HOME='/home/runner/work/_temp/7eebe804-257d-4a88-bc81-c9c1679fc6d8' before making global git config changes
+2026-11-01T23:50:47.6473710Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T23:50:47.6477522Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T23:50:47.6532192Z Deleting the contents of '/home/runner/work/TOMBSTONE/TOMBSTONE'
+2026-11-01T23:50:47.6536487Z ##[group]Initializing the repository
+2026-11-01T23:50:47.6541557Z [command]/usr/bin/git init /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T23:50:47.6663399Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-01T23:50:47.6665856Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-01T23:50:47.6675404Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-01T23:50:47.6678692Z hint: call:
+2026-11-01T23:50:47.6680176Z hint:
+2026-11-01T23:50:47.6682084Z hint: 	git config --global init.defaultBranch <name>
+2026-11-01T23:50:47.6684761Z hint:
+2026-11-01T23:50:47.6686751Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-01T23:50:47.6690403Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-01T23:50:47.6693508Z hint:
+2026-11-01T23:50:47.6694967Z hint: 	git branch -m <name>
+2026-11-01T23:50:47.6696598Z hint:
+2026-11-01T23:50:47.6698848Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-01T23:50:47.6701995Z Initialized empty Git repository in /home/runner/work/TOMBSTONE/TOMBSTONE/.git/
+2026-11-01T23:50:47.6707192Z [command]/usr/bin/git remote add origin https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T23:50:47.6745258Z ##[endgroup]
+2026-11-01T23:50:47.6747240Z ##[group]Disabling automatic garbage collection
+2026-11-01T23:50:47.6749320Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-01T23:50:47.6784968Z ##[endgroup]
+2026-11-01T23:50:47.6787092Z ##[group]Setting up auth
+2026-11-01T23:50:47.6792039Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T23:50:47.6830281Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T23:50:47.7245237Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T23:50:47.7288556Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T23:50:47.7534512Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T23:50:47.7573697Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T23:50:47.7835625Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-01T23:50:47.7880607Z ##[endgroup]
+2026-11-01T23:50:47.7882259Z ##[group]Fetching the repository
+2026-11-01T23:50:47.7899032Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8f159b36db6755744ebbc903d7fb7fd640b49baa:refs/remotes/pull/30/merge
+2026-11-01T23:50:48.2663791Z From https://github.com/QSOLKCB/TOMBSTONE
+2026-11-01T23:50:48.2665880Z  * [new ref]         8f159b36db6755744ebbc903d7fb7fd640b49baa -> pull/30/merge
+2026-11-01T23:50:48.2670129Z ##[endgroup]
+2026-11-01T23:50:48.2671480Z ##[group]Determining the checkout info
+2026-11-01T23:50:48.2674058Z ##[endgroup]
+2026-11-01T23:50:48.2680052Z [command]/usr/bin/git sparse-checkout disable
+2026-11-01T23:50:48.2739121Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-01T23:50:48.2769550Z ##[group]Checking out the ref
+2026-11-01T23:50:48.2774042Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/30/merge
+2026-11-01T23:50:48.3142063Z Note: switching to 'refs/remotes/pull/30/merge'.
+2026-11-01T23:50:48.3142591Z 
+2026-11-01T23:50:48.3143402Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-01T23:50:48.3144610Z changes and commit them, and you can discard any commits you make in this
+2026-11-01T23:50:48.3145802Z state without impacting any branches by switching back to a branch.
+2026-11-01T23:50:48.3146439Z 
+2026-11-01T23:50:48.3146899Z If you want to create a new branch to retain commits you create, you may
+2026-11-01T23:50:48.3147928Z do so (now or later) by using -c with the switch command. Example:
+2026-11-01T23:50:48.3148571Z 
+2026-11-01T23:50:48.3148917Z   git switch -c <new-branch-name>
+2026-11-01T23:50:48.3149392Z 
+2026-11-01T23:50:48.3149778Z Or undo this operation with:
+2026-11-01T23:50:48.3150245Z 
+2026-11-01T23:50:48.3150872Z   git switch -
+2026-11-01T23:50:48.3151327Z 
+2026-11-01T23:50:48.3151974Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-01T23:50:48.3152775Z 
+2026-11-01T23:50:48.3153848Z HEAD is now at 8f159b3 Merge e8be500075ee00039a8edf88c013ad28ab9cb9a7 into f9140bdda31ea64f7e077115db6f0bb0622c7874
+2026-11-01T23:50:48.3158749Z ##[endgroup]
+2026-11-01T23:50:48.3208525Z [command]/usr/bin/git log -1 --format=%H
+2026-11-01T23:50:48.3233610Z 8f159b36db6755744ebbc903d7fb7fd640b49baa
+2026-11-01T23:50:48.3514233Z ##[group]Run set -euo pipefail
+2026-11-01T23:50:48.3514863Z [36;1mset -euo pipefail[0m
+2026-11-01T23:50:48.3515348Z [36;1mgit rev-parse HEAD[0m
+2026-11-01T23:50:48.3515862Z [36;1mpython3 tools/check_hacl_source.py[0m
+2026-11-01T23:50:48.3516581Z [36;1mpython3 tests/formal/run_phase20_native.py --cc clang --backend hacl[0m
+2026-11-01T23:50:48.3540464Z shell: /usr/bin/bash -e {0}
+2026-11-01T23:50:48.3540990Z ##[endgroup]
+2026-11-01T23:50:48.3620668Z 8f159b36db6755744ebbc903d7fb7fd640b49baa
+2026-11-01T23:50:48.4131807Z PASS: 16 immutable upstream source/header/license blob IDs match
+2026-11-01T23:50:48.4133608Z LIMIT: upstream identity does not formally verify the TOMBSTONE adapter or compiled executable
+2026-11-01T23:50:48.4953973Z mkdir -p /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang
+2026-11-01T23:50:48.4967696Z clang  -O2 -std=c99 -Wall -Wextra -Wpedantic -Werror -D_DEFAULT_SOURCE -Wno-pedantic  -D_DEFAULT_SOURCE -Ivendor/hacl-star/dist/gcc-compatible -Ivendor/hacl-star/dist/karamel/include -Ivendor/hacl-star/dist/karamel/krmllib/dist/minimal -Iinclude -c src/crypto/fingerprint_hacl.c -o /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang/fingerprint.o
+2026-11-01T23:50:50.6987187Z clang  -O2 -std=c99 -Wall -Wextra -Wpedantic -Werror  -Iinclude -c src/core/deletion.c -o /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang/deletion.o
+2026-11-01T23:50:50.7588772Z clang  -O2 -std=c99 -Wall -Wextra -Wpedantic -Werror  -Iinclude -c src/encoding/receipt.c -o /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang/receipt.o
+2026-11-01T23:50:50.9461100Z clang  -O2 -std=c99 -Wall -Wextra -Wpedantic -Werror -Wno-error -Wno-pedantic -D_DEFAULT_SOURCE -D_DEFAULT_SOURCE -Ivendor/hacl-star/dist/gcc-compatible -Ivendor/hacl-star/dist/karamel/include -Ivendor/hacl-star/dist/karamel/krmllib/dist/minimal -c vendor/hacl-star/dist/gcc-compatible/Hacl_Hash_SHA2.c -o /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang/hacl_sha2.o
+2026-11-01T23:50:50.9870649Z In file included from vendor/hacl-star/dist/gcc-compatible/Hacl_Hash_SHA2.c:30:
+2026-11-01T23:50:50.9873220Z vendor/hacl-star/dist/gcc-compatible/internal/Hacl_Streaming_Types.h:72:1: warning: redefinition of typedef 'Hacl_Streaming_MD_state_32' is a C11 feature [-Wtypedef-redefinition]
+2026-11-01T23:50:50.9875144Z    72 | Hacl_Streaming_MD_state_32;
+2026-11-01T23:50:50.9875704Z       | ^
+2026-11-01T23:50:50.9876666Z vendor/hacl-star/dist/gcc-compatible/internal/../Hacl_Streaming_Types.h:63:45: note: previous definition is here
+2026-11-01T23:50:50.9878189Z    63 | typedef struct Hacl_Streaming_MD_state_32_s Hacl_Streaming_MD_state_32;
+2026-11-01T23:50:50.9879147Z       |                                             ^
+2026-11-01T23:50:50.9880208Z In file included from vendor/hacl-star/dist/gcc-compatible/Hacl_Hash_SHA2.c:30:
+2026-11-01T23:50:50.9882553Z vendor/hacl-star/dist/gcc-compatible/internal/Hacl_Streaming_Types.h:80:1: warning: redefinition of typedef 'Hacl_Streaming_MD_state_64' is a C11 feature [-Wtypedef-redefinition]
+2026-11-01T23:50:50.9884763Z    80 | Hacl_Streaming_MD_state_64;
+2026-11-01T23:50:50.9885201Z       | ^
+2026-11-01T23:50:50.9886048Z vendor/hacl-star/dist/gcc-compatible/internal/../Hacl_Streaming_Types.h:65:45: note: previous definition is here
+2026-11-01T23:50:50.9887233Z    65 | typedef struct Hacl_Streaming_MD_state_64_s Hacl_Streaming_MD_state_64;
+2026-11-01T23:50:50.9887968Z       |                                             ^
+2026-11-01T23:50:51.7099248Z 2 warnings generated.
+2026-11-01T23:50:51.7158546Z ar rcsD /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang/libtombstone.a /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang/fingerprint.o /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang/deletion.o /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang/receipt.o /home/runner/work/TOMBSTONE/TOMBSTONE/build/phase20-hacl-clang/hacl_sha2.o
+2026-11-01T23:50:52.4820901Z PASS: 160 validator cases; 2530 formatter cases including 30 injected failures; frozen bytes, bounds and frames
+2026-11-01T23:50:52.7335032Z PASS: native accept-invalid rejected specifically by VALIDATION_REJECT
+2026-11-01T23:50:52.9827760Z PASS: native bad-size rejected specifically by FORMAT_SIZE
+2026-11-01T23:50:53.2335002Z PASS: native error-size rejected specifically by ERROR_SIZE
+2026-11-01T23:50:53.2631227Z Post job cleanup.
+2026-11-01T23:50:53.3511024Z [command]/usr/bin/git version
+2026-11-01T23:50:53.3588384Z git version 2.56.0
+2026-11-01T23:50:53.3629943Z Temporarily overriding HOME='/home/runner/work/_temp/a27835e2-3c42-494d-856b-20dc3c4beb32' before making global git config changes
+2026-11-01T23:50:53.3631083Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-01T23:50:53.3636586Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/TOMBSTONE/TOMBSTONE
+2026-11-01T23:50:53.3678874Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-01T23:50:53.3718441Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-01T23:50:53.3965596Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-01T23:50:53.3994345Z http.https://github.com/.extraheader
+2026-11-01T23:50:53.4005978Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-01T23:50:53.4040249Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-01T23:50:53.4278286Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-01T23:50:53.4312560Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-01T23:50:53.4717632Z Cleaning up orphan processes
+2026-11-01T23:50:53.5118432Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
