@@ -68,10 +68,12 @@ jobs:
         run: |
           set -euo pipefail
           test ! -e phase20-model-results/regressions
-          docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-model-results:/out" \
+          mkdir phase20-model-results/regressions
+          chmod 777 phase20-model-results/regressions
+          docker run --rm -v "$PWD:/repo:ro" -v "$PWD/phase20-model-results/regressions:/out" \
             -v "$PWD/phase20-model-results/model:/model:ro" \
             framac/frama-c:32.1@sha256:4f0b7a2bd600c4daabfdcdfa393a3c18301e0db18f3b2739f1d9650193462d36 \
-            python3 /repo/tests/formal/run_phase20_model_canary.py --model /model --output /out/regressions
+            python3 /repo/tests/formal/run_phase20_model_canary.py --model /model --output /out
           python3 tools/phase20_toolchain_reuse.py complete --output phase20-model-results/model \
             --canary phase20-model-results/regressions/result.json
       - name: Publish only an approved archive after fresh canaries on main

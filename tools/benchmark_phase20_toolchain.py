@@ -70,10 +70,13 @@ def main():
                 build_seconds = command(["docker", "run", "--rm", "-v", f"{source}:/repo:ro",
                     "-v", f"{trial}:/out", reuse.IMAGE, "python3", "/repo/tools/phase20_model.py",
                     "build", "--output", "/out/model"], trial / "build.log")
+            regressions = trial / "regressions"
+            regressions.mkdir()
+            regressions.chmod(0o777)
             canary_seconds = command(["docker", "run", "--rm", "-v", f"{source}:/repo:ro",
-                "-v", f"{trial}:/out", "-v", f"{trial / 'model'}:/model:ro", reuse.IMAGE,
+                "-v", f"{regressions}:/out", "-v", f"{trial / 'model'}:/model:ro", reuse.IMAGE,
                 "python3", "/repo/tests/formal/run_phase20_model_canary.py", "--model", "/model",
-                "--output", "/out/regressions"], trial / "canary.log")
+                "--output", "/out"], trial / "canary.log")
             report = reuse.complete(report, trial / "model", trial / "regressions/result.json")
             elapsed = time.monotonic() - started
             write(trial / "preparation.json", report)
