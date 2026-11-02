@@ -1,0 +1,45 @@
+name: Phase 20 — cold versus verified toolchain reuse
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/phase20-toolchain-reuse-benchmark.yml
+      - .github/workflows/phase20-receipt-prerequisites.yml
+      - tools/phase20_toolchain_reuse.py
+      - tools/benchmark_phase20_toolchain.py
+      - tests/formal/test_phase20_toolchain_reuse.py
+      - machine/formal/phase20-toolchain-reuse-v1.json
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  compare:
+    name: Three cold and three reuse preparations with fresh canaries
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject reuse and evidence-binding regressions
+        run: |
+          set -euo pipefail
+          python3 tests/formal/test_phase20_toolchain_reuse.py
+          python3 tests/formal/test_phase20_replay_binding.py
+      - name: Measure preparation and compare independently executed canaries
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: python3 tools/benchmark_phase20_toolchain.py --output phase20-benchmark
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase20-toolchain-benchmark
+          path: |
+            phase20-benchmark/result.json
+            phase20-benchmark/image-*.log
+            phase20-benchmark/image-inspect.json
+            phase20-benchmark/*/preparation.json
+            phase20-benchmark/*/build.log
+            phase20-benchmark/*/canary.log
+            phase20-benchmark/*/regressions/
+          retention-days: 30

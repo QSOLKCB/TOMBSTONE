@@ -30,7 +30,8 @@
 
 - Check actual `good_receipt` and `format_json`, their internal validators and both actual hex encoders, while preserving the shared Phase 19 composition contracts.
 - Require exact-source WP with RTE, explicit libc format/string/frame premises, semantic controls, full execution evidence and fresh exact-head review. Canonical-byte meaning and actual streaming SHA-provider refinement remain separate obligations.
-- See [Phase 20 scope](docs/PHASE20_RECEIPT_PREREQUISITES.md). Draft PR #30 records the explicit Bytes correction, 1,392/1,392 positive WP/RTE obligations, all three designated semantic mutations, and unchanged Phase 18/19 theorem replays. The v2 evidence preserves the original-model failures and reconciles executed model, source and inventory identities. Require fresh final-head CI and independent review before closing this gate; canonical JSON meaning and actual streaming SHA refinement remain open.
+- See [Phase 20 scope](docs/PHASE20_RECEIPT_PREREQUISITES.md). PR #30 merged as `1bced8a1cf768a40a26d13eb0f33483a426f106f`, with green [post-merge run 41381936801](https://github.com/QSOLKCB/TOMBSTONE/actions/runs/41381936801). It records the explicit Bytes correction, 1,392/1,392 positive WP/RTE obligations, all three designated semantic mutations, and unchanged Phase 18/19 theorem replays. The v2 evidence preserves the original-model failures and reconciles executed model, source and inventory identities. Canonical JSON meaning and actual streaming SHA refinement remain open.
+- The first [OPT CI reuse stage](docs/PHASE20_TOOLCHAIN_REUSE.md) adds independently pinned toolchain restoration, fresh canaries and proofs, a forced-cold path, adversarial regressions and three cold/reuse benchmark pairs. Promotion requires exact-head executed measurements, green proofs and independent review. Proof-result caching remains a separate future change; issue #28 remains open.
 
 ## Phase 19 — Actual C99 helper refinement
 
